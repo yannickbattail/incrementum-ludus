@@ -31,14 +31,19 @@
     </head>
     <body id="body">
         incr<br />
+        storage
         <div id="storage"></div>
+        sources
         <div id="sources"></div>
+        triggers
+        <div id="triggers"></div>
         <script>
             engine.run();
             var gui = new IncrGui(engine);
             function updateGui() {
                 document.getElementById('storage').innerHTML = gui.displayStorage();
                 document.getElementById('sources').innerHTML = gui.displaySources();
+                document.getElementById('triggers').innerHTML = gui.displayTriggers();
             }
             window.setInterval(updateGui, 1000);
         </script>

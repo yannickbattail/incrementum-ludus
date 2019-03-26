@@ -8,17 +8,29 @@ class ResourceQuantity {
     }
 }
 
-class Source {
+abstract class Source {
+    constructor(public Name: string, public Resource: ResourceQuantity) {
+
+    }
+}
+
+class TimedSource extends Source {
     public LastTime: Date = new Date(1970, 0, 1);
-    constructor(public Name: string, public Resource: ResourceQuantity,
-        public SourceType: string, public Interval: number) {
+    constructor(Name: string, Resource: ResourceQuantity, public Interval: number) {
+        super(Name, Resource);
+    }
+}
+
+class ManualSource extends Source {
+    constructor(Name: string, Resource: ResourceQuantity) {
+        super(Name, Resource);
     }
 }
 
 class Trigger {
     constructor(public Name: string,
         public ResourcesTrigger: Array<ResourceQuantity> = [],
-        public TriggeredSource: Source/*,
+        public SpawnSource: Source/*,
                 public TriggeredNewTriggers: Array<Trigger> = [],
                 public TriggeredResources: Array<ResourceQuantity> = []*/) {
 
@@ -77,21 +89,45 @@ class Engine {
     }
     private runTick() {
         this.Sources.forEach(
-            source => this.collectSource(source)
+            source => {
+                 if (source instanceof TimedSource) {
+                   this.collectTimedSource(source);
+                 }
+            }
         );
         this.Triggers.forEach(
             trigger => this.checkTriggers(trigger)
         );
     }
-    private collectSource(source: Source) {
+    private collectTimedSource(source: TimedSource) {
         if (source.LastTime.getTime() + source.Interval < new Date().getTime()) {
             source.LastTime = new Date();
             this.Player.changeStorage(source.Resource);
         }
     }
+    public collectManualSource(source: ManualSource) {
+        this.Player.changeStorage(source.Resource);
+    }
+    public collectSource(sourceName: string) {
+        let source = this.getSourceByName(sourceName);
+        if (source != null) {
+            if (source instanceof ManualSource) {
+                this.collectManualSource(source);
+            }
+        }
+    }
+    public getSourceByName(sourceName : string) : Source | null {
+        let sources : Source[] =  this.Sources.filter(
+            src => src.Name == sourceName
+        );
+        if (sources.length == 0) {
+            return null;
+        }
+        return sources[0];
+    }
     private checkTriggers(trigger: Trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
-            this.Sources.push(trigger.TriggeredSource);
+            this.Sources.push(trigger.SpawnSource);
             //add TriggeredNewTriggers
             //add TriggeredResources
             // remove the trigger
