@@ -3,21 +3,21 @@ var IncrGui = (function () {
         this.Engine = engine;
     }
     IncrGui.prototype.displayStorage = function () {
-        var h = "<table>";
+        var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
         this.Engine.Player.Storage.forEach(function (res) { return h += "<tr><td>" + res.Quantity + "</td><td>" + res.Resource.Name + "</td></tr>"; });
         h += "</table>";
         return h;
     };
     IncrGui.prototype.displaySources = function () {
-        var h = "<table>";
-        h += "<tr><th>source name</th><th>quantity</th><th>resource</th><th>when</th></tr>";
+        var h = '<table border="1">';
+        h += "<tr><th>source name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Sources.forEach(function (source) {
             if (source instanceof TimedSource) {
                 h += "<tr><td>" + source.Name + "</td><td>" + source.Resource.Quantity + " " + source.Resource.Resource.Name + "</td><td>every " + source.Interval + " ms</td></tr>";
             }
-            else if (source instanceof TimedSource) {
-                h += "<tr><td>" + source.Name + "</td><td>" + source.Resource.Quantity + " " + source.Resource.Resource.Name + '</td><td><button onclic="engine.collectSource(\'" + source.Name + "\');">Collect</button></td></tr>';
+            else if (source instanceof ManualSource) {
+                h += "<tr><td>" + source.Name + "</td><td>" + source.Resource.Quantity + " " + source.Resource.Resource.Name + '</td><td><button onclick="engine.collectSource(\'' + source.Name + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";
@@ -25,7 +25,7 @@ var IncrGui = (function () {
     };
     IncrGui.prototype.displayTriggers = function () {
         var _this = this;
-        var h = "<table>";
+        var h = '<table border="1">';
         h += "<tr><th>name</th><th>triggerd when</th><th>resource</th><th>spwan</th></tr>";
         this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
         h += "</table>";

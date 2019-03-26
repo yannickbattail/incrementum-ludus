@@ -45,7 +45,8 @@
                 document.getElementById('sources').innerHTML = gui.displaySources();
                 document.getElementById('triggers').innerHTML = gui.displayTriggers();
             }
-            window.setInterval(updateGui, 1000);
+            var interval = window.setInterval(updateGui, 1000);
         </script>
+        <div onclick="window.clearInterval(interval)">@</div>
     </body>
 </html>

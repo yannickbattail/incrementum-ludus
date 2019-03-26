@@ -5,7 +5,7 @@ class IncrGui {
     }
 
     displayStorage(): string {
-        var h = "<table>";
+        var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
         this.Engine.Player.Storage.forEach(
             res => h += "<tr><td>" + res.Quantity + "</td><td>" + res.Resource.Name + "</td></tr>"
@@ -15,14 +15,14 @@ class IncrGui {
     }
 
     displaySources(): string {
-        var h = "<table>";
-        h += "<tr><th>source name</th><th>quantity</th><th>resource</th><th>when</th></tr>";
+        var h = '<table border="1">';
+        h += "<tr><th>source name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Sources.forEach(
             source => {
                 if (source instanceof TimedSource) {
                     h += "<tr><td>" + source.Name + "</td><td>" + source.Resource.Quantity + " " + source.Resource.Resource.Name + "</td><td>every " + source.Interval + " ms</td></tr>"
-                } else if (source instanceof TimedSource) {
-                    h += "<tr><td>" + source.Name + "</td><td>" + source.Resource.Quantity + " " + source.Resource.Resource.Name + '</td><td><button onclic="engine.collectSource(\'" + source.Name + "\');">Collect</button></td></tr>'
+                } else if (source instanceof ManualSource) {
+                    h += "<tr><td>" + source.Name + "</td><td>" + source.Resource.Quantity + " " + source.Resource.Resource.Name + '</td><td><button onclick="engine.collectSource(\'' + source.Name + '\');">Collect</button></td></tr>'
                 }
             }
         );
@@ -31,7 +31,7 @@ class IncrGui {
     }
 
     displayTriggers(): string {
-        var h = "<table>";
+        var h = '<table border="1">';
         h += "<tr><th>name</th><th>triggerd when</th><th>resource</th><th>spwan</th></tr>";
         this.Engine.Triggers.forEach(
             trigger => h += this.displayTrigger(trigger)
