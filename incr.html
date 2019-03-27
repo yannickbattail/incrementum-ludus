@@ -1,52 +1,62 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-    <head>
-        <!--
-          ----------------------------------------------------------------------------
-          "THE BEER-WARE LICENSE" (Revision 42):
-          <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
-          can do whatever you want with this stuff. If we meet some day, and you think
-          this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
-          ----------------------------------------------------------------------------
-        -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" type="image/png" href="data:image/png;base64,"/>
-        <style>
-            body {
-                font-family: "Open Sans", sans-serif;
-            }
-            #console {
-                width: 100%;
-                min-height: 100px;
-                border-style: inset;
-                border-width: 1px;
-                font-family: Times;
-            }
-        </style>
-        <title>incr</title>
-        <script src="incrEngine.js"></script>
-        <script src="incr.js"></script>
-        <script src="gui.js"></script>
-    </head>
-    <body id="body">
-        incr<br />
-        storage
-        <div id="storage"></div>
-        sources
-        <div id="sources"></div>
-        triggers
-        <div id="triggers"></div>
-        <script>
-            engine.run();
-            var gui = new IncrGui(engine);
-            function updateGui() {
-                document.getElementById('storage').innerHTML = gui.displayStorage();
-                document.getElementById('sources').innerHTML = gui.displaySources();
-                document.getElementById('triggers').innerHTML = gui.displayTriggers();
-            }
-            var interval = window.setInterval(updateGui, 1000);
-        </script>
-        <div onclick="window.clearInterval(interval)">@</div>
-    </body>
+<head>
+    <!--
+      ----------------------------------------------------------------------------
+      "THE BEER-WARE LICENSE" (Revision 42):
+      <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
+      can do whatever you want with this stuff. If we meet some day, and you think
+      this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+      ----------------------------------------------------------------------------
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/png" href="data:image/png;base64," />
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        #console {
+            width: 100%;
+            min-height: 100px;
+            border-style: inset;
+            border-width: 1px;
+            font-family: Times;
+        }
+    </style>
+    <title>incr</title>
+    <script src="Engine/Resource.js"></script>
+    <script src="Engine/ResourceQuantity.js"></script>
+    <script src="Engine/Producer.js"></script>
+    <script src="Engine/TimedProducer.js"></script>
+    <script src="Engine/ManualProducer.js"></script>
+    <script src="Engine/Trigger.js"></script>
+    <script src="Engine/Crafter.js"></script>
+    <script src="Engine/Player.js"></script>
+    <script src="Engine/Engine.js"></script>
+    <script src="incr.js"></script>
+    <script src="gui.js"></script>
+</head>
+<body id="body">
+    incr<br />
+    storage
+    <div id="storage"></div>
+    sources
+    <div id="sources"></div>
+    triggers
+    <div id="triggers"></div>
+    <script>
+        engine.run();
+        var gui = new IncrGui(engine);
+        function updateGui() {
+            document.getElementById('storage').innerHTML = gui.displayStorage();
+            document.getElementById('sources').innerHTML = gui.displaySources();
+            document.getElementById('triggers').innerHTML = gui.displayTriggers();
+        }
+        var interval = window.setInterval(updateGui, 1000);
+
+/**/</script>
+    <div onclick="window.clearInterval(interval)">@</div>
+</body>
 </html>

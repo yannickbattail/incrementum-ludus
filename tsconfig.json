@@ -8,8 +8,16 @@
     "sourceMap": true
   },
   "files": [
-    "incrEngine.ts",
-    "incr.ts",
-    "gui.ts"
+    "Engine/Crafter.ts",
+    "Engine/Engine.ts",
+    "Engine/ManualProducer.ts",
+    "Engine/Player.ts",
+    "Engine/Producer.ts",
+    "Engine/Resource.ts",
+    "Engine/ResourceQuantity.ts",
+    "Engine/TimedProducer.ts",
+    "Engine/Trigger.ts",
+    "gui.ts",
+    "incr.ts"
   ]
 }
