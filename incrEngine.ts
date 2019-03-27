@@ -8,20 +8,20 @@ class ResourceQuantity {
     }
 }
 
-abstract class Source {
+abstract class Producer {
     constructor(public Name: string, public Resource: ResourceQuantity) {
 
     }
 }
 
-class TimedSource extends Source {
+class TimedProducer extends Producer {
     public LastTime: Date = new Date(1970, 0, 1);
     constructor(Name: string, Resource: ResourceQuantity, public Interval: number) {
         super(Name, Resource);
     }
 }
 
-class ManualSource extends Source {
+class ManualProducer extends Producer {
     constructor(Name: string, Resource: ResourceQuantity) {
         super(Name, Resource);
     }
@@ -30,7 +30,7 @@ class ManualSource extends Source {
 class Trigger {
     constructor(public Name: string,
         public ResourcesTrigger: Array<ResourceQuantity> = [],
-        public SpawnSource: Source/*,
+        public SpawnProducer: Producer/*,
                 public TriggeredNewTriggers: Array<Trigger> = [],
                 public TriggeredResources: Array<ResourceQuantity> = []*/) {
 
@@ -81,17 +81,17 @@ class Player {
 class Engine {
     tick: number = 1000;
     Player: Player;
-    Sources: Array<Source> = [];
+    Producers: Array<Producer> = [];
     Triggers: Array<Trigger> = [];
     Crafters: Array<Crafter> = [];
     run() {
         window.setInterval(() => this.runTick(), 1000);
     }
     private runTick() {
-        this.Sources.forEach(
-            source => {
-                 if (source instanceof TimedSource) {
-                   this.collectTimedSource(source);
+        this.Producers.forEach(
+            producer => {
+                 if (producer instanceof TimedProducer) {
+                   this.collectTimedProducer(producer);
                  }
             }
         );
@@ -99,35 +99,35 @@ class Engine {
             trigger => this.checkTriggers(trigger)
         );
     }
-    private collectTimedSource(source: TimedSource) {
-        if (source.LastTime.getTime() + source.Interval < new Date().getTime()) {
-            source.LastTime = new Date();
-            this.Player.changeStorage(source.Resource);
+    private collectTimedProducer(producer: TimedProducer) {
+        if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
+            producer.LastTime = new Date();
+            this.Player.changeStorage(producer.Resource);
         }
     }
-    public collectManualSource(source: ManualSource) {
-        this.Player.changeStorage(source.Resource);
+    public collectManualProducer(producer: ManualProducer) {
+        this.Player.changeStorage(producer.Resource);
     }
-    public collectSource(sourceName: string) {
-        let source = this.getSourceByName(sourceName);
-        if (source != null) {
-            if (source instanceof ManualSource) {
-                this.collectManualSource(source);
+    public collectProducer(producerName: string) {
+        let producer = this.getProducerByName(producerName);
+        if (producer != null) {
+            if (producer instanceof ManualProducer) {
+                this.collectManualProducer(producer);
             }
         }
     }
-    public getSourceByName(sourceName : string) : Source | null {
-        let sources : Source[] =  this.Sources.filter(
-            src => src.Name == sourceName
+    public getProducerByName(producerName : string) : Producer | null {
+        let producers : Producer[] =  this.Producers.filter(
+            src => src.Name == producerName
         );
-        if (sources.length == 0) {
+        if (producers.length == 0) {
             return null;
         }
-        return sources[0];
+        return producers[0];
     }
     private checkTriggers(trigger: Trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
-            this.Sources.push(trigger.SpawnSource);
+            this.Producers.push(trigger.SpawnProducer);
             //add TriggeredNewTriggers
             //add TriggeredResources
             // remove the trigger

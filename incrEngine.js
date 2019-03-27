@@ -24,36 +24,36 @@ var ResourceQuantity = (function () {
     }
     return ResourceQuantity;
 }());
-var Source = (function () {
-    function Source(Name, Resource) {
+var Producer = (function () {
+    function Producer(Name, Resource) {
         this.Name = Name;
         this.Resource = Resource;
     }
-    return Source;
+    return Producer;
 }());
-var TimedSource = (function (_super) {
-    __extends(TimedSource, _super);
-    function TimedSource(Name, Resource, Interval) {
+var TimedProducer = (function (_super) {
+    __extends(TimedProducer, _super);
+    function TimedProducer(Name, Resource, Interval) {
         var _this = _super.call(this, Name, Resource) || this;
         _this.Interval = Interval;
         _this.LastTime = new Date(1970, 0, 1);
         return _this;
     }
-    return TimedSource;
-}(Source));
-var ManualSource = (function (_super) {
-    __extends(ManualSource, _super);
-    function ManualSource(Name, Resource) {
+    return TimedProducer;
+}(Producer));
+var ManualProducer = (function (_super) {
+    __extends(ManualProducer, _super);
+    function ManualProducer(Name, Resource) {
         return _super.call(this, Name, Resource) || this;
     }
-    return ManualSource;
-}(Source));
+    return ManualProducer;
+}(Producer));
 var Trigger = (function () {
-    function Trigger(Name, ResourcesTrigger, SpawnSource) {
+    function Trigger(Name, ResourcesTrigger, SpawnProducer) {
         if (ResourcesTrigger === void 0) { ResourcesTrigger = []; }
         this.Name = Name;
         this.ResourcesTrigger = ResourcesTrigger;
-        this.SpawnSource = SpawnSource;
+        this.SpawnProducer = SpawnProducer;
     }
     return Trigger;
 }());
@@ -101,7 +101,7 @@ var Player = (function () {
 var Engine = (function () {
     function Engine() {
         this.tick = 1000;
-        this.Sources = [];
+        this.Producers = [];
         this.Triggers = [];
         this.Crafters = [];
     }
@@ -111,40 +111,40 @@ var Engine = (function () {
     };
     Engine.prototype.runTick = function () {
         var _this = this;
-        this.Sources.forEach(function (source) {
-            if (source instanceof TimedSource) {
-                _this.collectTimedSource(source);
+        this.Producers.forEach(function (producer) {
+            if (producer instanceof TimedProducer) {
+                _this.collectTimedProducer(producer);
             }
         });
         this.Triggers.forEach(function (trigger) { return _this.checkTriggers(trigger); });
     };
-    Engine.prototype.collectTimedSource = function (source) {
-        if (source.LastTime.getTime() + source.Interval < new Date().getTime()) {
-            source.LastTime = new Date();
-            this.Player.changeStorage(source.Resource);
+    Engine.prototype.collectTimedProducer = function (producer) {
+        if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
+            producer.LastTime = new Date();
+            this.Player.changeStorage(producer.Resource);
         }
     };
-    Engine.prototype.collectManualSource = function (source) {
-        this.Player.changeStorage(source.Resource);
+    Engine.prototype.collectManualProducer = function (producer) {
+        this.Player.changeStorage(producer.Resource);
     };
-    Engine.prototype.collectSource = function (sourceName) {
-        var source = this.getSourceByName(sourceName);
-        if (source != null) {
-            if (source instanceof ManualSource) {
-                this.collectManualSource(source);
+    Engine.prototype.collectProducer = function (producerName) {
+        var producer = this.getProducerByName(producerName);
+        if (producer != null) {
+            if (producer instanceof ManualProducer) {
+                this.collectManualProducer(producer);
             }
         }
     };
-    Engine.prototype.getSourceByName = function (sourceName) {
-        var sources = this.Sources.filter(function (src) { return src.Name == sourceName; });
-        if (sources.length == 0) {
+    Engine.prototype.getProducerByName = function (producerName) {
+        var producers = this.Producers.filter(function (src) { return src.Name == producerName; });
+        if (producers.length == 0) {
             return null;
         }
-        return sources[0];
+        return producers[0];
     };
     Engine.prototype.checkTriggers = function (trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
-            this.Sources.push(trigger.SpawnSource);
+            this.Producers.push(trigger.SpawnProducer);
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
     };
