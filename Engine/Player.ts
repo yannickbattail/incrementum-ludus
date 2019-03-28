@@ -18,6 +18,16 @@ class Player {
             resQ.Quantity += resourceQuantity.Quantity;
         }
     }
+    public decreaseStorage(resourceQuantity: ResourceQuantity) {
+        let resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
+        if (resQ == null) {
+            this.Storage.push(new ResourceQuantity(resourceQuantity.Resource, -1 * resourceQuantity.Quantity));
+        } else {
+            resQ.Quantity += -1 * resourceQuantity.Quantity;
+        }
+    }
+
+    
     public getResourceInStorage(resourceName: string): ResourceQuantity | null {
         let res = this.Storage.filter((res: ResourceQuantity) => res.Resource.Name == resourceName);
         if (res.length) {

@@ -46,13 +46,16 @@
     <div id="sources"></div>
     triggers
     <div id="triggers"></div>
+    crafters
+    <div id="crafters"></div>
     <script>
         engine.run();
         var gui = new IncrGui(engine);
         function updateGui() {
             document.getElementById('storage').innerHTML = gui.displayStorage();
-            document.getElementById('sources').innerHTML = gui.displaySources();
+            document.getElementById('sources').innerHTML = gui.displayProducers();
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
+            document.getElementById('crafters').innerHTML = gui.displayCrafters();
         }
         var interval = window.setInterval(updateGui, 1000);
 

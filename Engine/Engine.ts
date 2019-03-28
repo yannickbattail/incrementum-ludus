@@ -25,7 +25,10 @@ class Engine {
             }
         );
         this.Triggers.forEach(
-            trigger => this.checkTriggers(trigger)
+            trigger => this.checkTrigger(trigger)
+        );
+        this.Crafters.forEach(
+            crafter => this.checkCrafter(crafter)
         );
     }
     private collectTimedProducer(producer: TimedProducer) {
@@ -54,13 +57,40 @@ class Engine {
         }
         return producers[0];
     }
-    private checkTriggers(trigger: Trigger) {
+    private checkTrigger(trigger: Trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
             this.Producers.push(trigger.SpawnProducer);
-            //add TriggeredNewTriggers
-            //add TriggeredResources
             // remove the trigger
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
     }
+    private checkCrafter(crafter: Crafter) {
+        this.checkFinishedCrafting(crafter);
+        this.checkStartCrafting(crafter);
+    }
+    private checkFinishedCrafting(crafter: Crafter) {
+        if (crafter.StartTime != null && (crafter.StartTime.getTime() + crafter.Duration < new Date().getTime())) {
+            crafter.StartTime = null;
+            this.Player.changeStorage(crafter.CraftedResource);
+        }
+    }
+    private checkStartCrafting(crafter: Crafter) {
+        if (crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
+            crafter.StartTime = new Date();
+            crafter.Cost.forEach(
+                resourceQty =>  this.Player.decreaseStorage(resourceQty)
+            );
+        }
+    }
+    public startManualCrafting(crafter: Crafter) : boolean {
+        if (!crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
+            crafter.StartTime = new Date();
+            crafter.Cost.forEach(
+                resourceQty =>  this.Player.decreaseStorage(resourceQty)
+            );
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -12,6 +12,15 @@ var Player = (function () {
             resQ.Quantity += resourceQuantity.Quantity;
         }
     };
+    Player.prototype.decreaseStorage = function (resourceQuantity) {
+        var resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
+        if (resQ == null) {
+            this.Storage.push(new ResourceQuantity(resourceQuantity.Resource, -1 * resourceQuantity.Quantity));
+        }
+        else {
+            resQ.Quantity += -1 * resourceQuantity.Quantity;
+        }
+    };
     Player.prototype.getResourceInStorage = function (resourceName) {
         var res = this.Storage.filter(function (res) { return res.Resource.Name == resourceName; });
         if (res.length) {

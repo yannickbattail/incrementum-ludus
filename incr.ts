@@ -12,6 +12,7 @@ const IRON = new Resource("iron");
 const COPPER = new Resource("coper");
 const LEAD = new Resource("lead");
 const TIN = new Resource("tin");
+const AXE = new Resource("AXE");
 
 var engine = new Engine();
 engine.Player = new Player("platypus");
@@ -27,4 +28,9 @@ engine.Triggers = [
         [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)],
         // and then spwan source
         new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000))
+];
+engine.Crafters = [
+    new Crafter("axe forge", 20000,
+    [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)],
+    new ResourceQuantity(AXE, 1), true)
 ];

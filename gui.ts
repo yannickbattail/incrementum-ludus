@@ -66,4 +66,38 @@ class IncrGui {
         h += '</tr>';
         return h;
     }
+    displayCrafters(): string {
+        var h = '<table border="1">';
+        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>crafted</th></tr>";
+        this.Engine.Crafters.forEach(
+            trigger => h += this.displayCrafter(trigger)
+        );
+        h += "</table>";
+        return h;
+    }
+
+    private displayCrafter(crafter : Crafter) : string {
+        let h = "<tr>";
+        h += '<td>' + crafter.Name + '</td>';
+        h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
+        h += "<td><ul>"
+        crafter.Cost.forEach(
+            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        );
+        h += "</ul></td>"
+        h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += '</tr>';
+        return h;
+    }
+
+    private displayTime(miliSeconds : number) : string {
+        return "" + Math.round(miliSeconds / 1000) + "s";
+
+    }
+    private displayRemainingTime(startTime : Date | null) : string {
+        if (startTime == null) {
+            return ' - ';
+        }
+        return this.displayTime(new Date().getTime() - startTime.getTime())
+    }
 }

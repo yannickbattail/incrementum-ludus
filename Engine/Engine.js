@@ -16,7 +16,8 @@ var Engine = (function () {
                 _this.collectTimedProducer(producer);
             }
         });
-        this.Triggers.forEach(function (trigger) { return _this.checkTriggers(trigger); });
+        this.Triggers.forEach(function (trigger) { return _this.checkTrigger(trigger); });
+        this.Crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
     };
     Engine.prototype.collectTimedProducer = function (producer) {
         if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
@@ -42,11 +43,37 @@ var Engine = (function () {
         }
         return producers[0];
     };
-    Engine.prototype.checkTriggers = function (trigger) {
+    Engine.prototype.checkTrigger = function (trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
             this.Producers.push(trigger.SpawnProducer);
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
+    };
+    Engine.prototype.checkCrafter = function (crafter) {
+        this.checkFinishedCrafting(crafter);
+        this.checkStartCrafting(crafter);
+    };
+    Engine.prototype.checkFinishedCrafting = function (crafter) {
+        if (crafter.StartTime != null && (crafter.StartTime.getTime() + crafter.Duration < new Date().getTime())) {
+            crafter.StartTime = null;
+            this.Player.changeStorage(crafter.CraftedResource);
+        }
+    };
+    Engine.prototype.checkStartCrafting = function (crafter) {
+        var _this = this;
+        if (crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
+            crafter.StartTime = new Date();
+            crafter.Cost.forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
+        }
+    };
+    Engine.prototype.startManualCrafting = function (crafter) {
+        var _this = this;
+        if (!crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
+            crafter.StartTime = new Date();
+            crafter.Cost.forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
+            return true;
+        }
+        return false;
     };
     return Engine;
 }());

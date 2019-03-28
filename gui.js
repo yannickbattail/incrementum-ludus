@@ -46,6 +46,34 @@ var IncrGui = (function () {
         h += '</tr>';
         return h;
     };
+    IncrGui.prototype.displayCrafters = function () {
+        var _this = this;
+        var h = '<table border="1">';
+        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>crafted</th></tr>";
+        this.Engine.Crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
+        h += "</table>";
+        return h;
+    };
+    IncrGui.prototype.displayCrafter = function (crafter) {
+        var h = "<tr>";
+        h += '<td>' + crafter.Name + '</td>';
+        h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
+        h += "<td><ul>";
+        crafter.Cost.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        h += "</ul></td>";
+        h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += '</tr>';
+        return h;
+    };
+    IncrGui.prototype.displayTime = function (miliSeconds) {
+        return "" + Math.round(miliSeconds / 1000) + "s";
+    };
+    IncrGui.prototype.displayRemainingTime = function (startTime) {
+        if (startTime == null) {
+            return ' - ';
+        }
+        return this.displayTime(new Date().getTime() - startTime.getTime());
+    };
     return IncrGui;
 }());
 //# sourceMappingURL=gui.js.map
