@@ -66,14 +66,27 @@ var Engine = (function () {
             crafter.Cost.forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
         }
     };
+    Engine.prototype.startCrafting = function (crafterName) {
+        var crafter = this.getCrafterByName(crafterName);
+        if (crafter != null) {
+            this.startManualCrafting(crafter);
+        }
+    };
     Engine.prototype.startManualCrafting = function (crafter) {
         var _this = this;
-        if (!crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
+        if (!crafter.AutoCrafting && !crafter.isCrafting() && this.Player.hasResources(crafter.Cost)) {
             crafter.StartTime = new Date();
             crafter.Cost.forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
             return true;
         }
         return false;
+    };
+    Engine.prototype.getCrafterByName = function (crafterName) {
+        var crafters = this.Crafters.filter(function (src) { return src.Name == crafterName; });
+        if (crafters.length == 0) {
+            return null;
+        }
+        return crafters[0];
     };
     return Engine;
 }());

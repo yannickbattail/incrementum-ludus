@@ -49,7 +49,7 @@ var IncrGui = (function () {
     IncrGui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>crafted</th></tr>";
+        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
         this.Engine.Crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
@@ -62,8 +62,21 @@ var IncrGui = (function () {
         crafter.Cost.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
         h += "</ul></td>";
         h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
+    };
+    IncrGui.prototype.displayCraftButton = function (crafter) {
+        if (crafter.AutoCrafting) {
+            return 'Auto Crafting';
+        }
+        if (crafter.isCrafting()) {
+            return '<button disabled="disabled">craft</button> Crafting in progress';
+        }
+        if (!this.Engine.Player.hasResources(crafter.Cost)) {
+            return '<button disabled="disabled">craft</button> not enough resources';
+        }
+        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
     };
     IncrGui.prototype.displayTime = function (miliSeconds) {
         return "" + Math.round(miliSeconds / 1000) + "s";

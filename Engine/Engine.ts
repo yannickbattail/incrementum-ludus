@@ -57,6 +57,7 @@ class Engine {
         }
         return producers[0];
     }
+
     private checkTrigger(trigger: Trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
             this.Producers.push(trigger.SpawnProducer);
@@ -64,6 +65,7 @@ class Engine {
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
     }
+
     private checkCrafter(crafter: Crafter) {
         this.checkFinishedCrafting(crafter);
         this.checkStartCrafting(crafter);
@@ -82,8 +84,14 @@ class Engine {
             );
         }
     }
+    public startCrafting(crafterName: string) {
+        let crafter = this.getCrafterByName(crafterName);
+        if (crafter != null) {
+            this.startManualCrafting(crafter);
+        }
+    }
     public startManualCrafting(crafter: Crafter) : boolean {
-        if (!crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
+        if (!crafter.AutoCrafting && !crafter.isCrafting() && this.Player.hasResources(crafter.Cost)) {
             crafter.StartTime = new Date();
             crafter.Cost.forEach(
                 resourceQty =>  this.Player.decreaseStorage(resourceQty)
@@ -93,4 +101,13 @@ class Engine {
         return false;
     }
 
+    public getCrafterByName(crafterName : string) : Crafter | null {
+        let crafters: Crafter[] =  this.Crafters.filter(
+            src => src.Name == crafterName
+        );
+        if (crafters.length == 0) {
+            return null;
+        }
+        return crafters[0];
+    }
 }

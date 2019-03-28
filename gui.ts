@@ -68,7 +68,7 @@ class IncrGui {
     }
     displayCrafters(): string {
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>crafted</th></tr>";
+        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
         this.Engine.Crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
@@ -86,8 +86,23 @@ class IncrGui {
         );
         h += "</ul></td>"
         h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
+    }
+
+
+    private displayCraftButton(crafter : Crafter) : string {
+        if (crafter.AutoCrafting) {
+            return 'Auto Crafting';
+        }
+        if (crafter.isCrafting()) {
+            return '<button disabled="disabled">craft</button> Crafting in progress';
+        }
+        if (!this.Engine.Player.hasResources(crafter.Cost)) {
+            return '<button disabled="disabled">craft</button> not enough resources';
+        }
+        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
     }
 
     private displayTime(miliSeconds : number) : string {
