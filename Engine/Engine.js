@@ -22,11 +22,11 @@ var Engine = (function () {
     Engine.prototype.collectTimedProducer = function (producer) {
         if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
             producer.LastTime = new Date();
-            this.Player.changeStorage(producer.Resource);
+            this.Player.changeStorage(producer.ResourceQuantity);
         }
     };
     Engine.prototype.collectManualProducer = function (producer) {
-        this.Player.changeStorage(producer.Resource);
+        this.Player.changeStorage(producer.ResourceQuantity);
     };
     Engine.prototype.collectProducer = function (producerName) {
         var producer = this.getProducerByName(producerName);

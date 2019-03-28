@@ -34,11 +34,11 @@ class Engine {
     private collectTimedProducer(producer: TimedProducer) {
         if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
             producer.LastTime = new Date();
-            this.Player.changeStorage(producer.Resource);
+            this.Player.changeStorage(producer.ResourceQuantity);
         }
     }
     public collectManualProducer(producer: ManualProducer) {
-        this.Player.changeStorage(producer.Resource);
+        this.Player.changeStorage(producer.ResourceQuantity);
     }
     public collectProducer(producerName: string) {
         let producer = this.getProducerByName(producerName);

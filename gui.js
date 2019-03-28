@@ -14,10 +14,10 @@ var IncrGui = (function () {
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
-                h += "<tr><td>" + producer.Name + "</td><td>" + producer.Resource.Quantity + " " + producer.Resource.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>";
+                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>";
             }
             else if (producer instanceof ManualProducer) {
-                h += "<tr><td>" + producer.Name + "</td><td>" + producer.Resource.Quantity + " " + producer.Resource.Resource.Name + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>';
+                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";
@@ -35,14 +35,14 @@ var IncrGui = (function () {
         var h = "<tr>";
         h += '<td>' + trigger.Name + '</td>';
         h += "<td><ul>";
-        trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource + '</li>'; });
+        trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
         h += "</ul></td>";
         trigger.SpawnProducers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
-                h += "<td>" + producer.Name + ": " + producer.Resource.Quantity + " " + producer.Resource.Resource.Name + " every " + producer.Interval + " ms</td>";
+                h += "<td>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</td>";
             }
             else if (trigger.SpawnProducers instanceof TimedProducer) {
-                h += "<td>" + producer.Name + ": " + producer.Resource.Quantity + " " + producer.Resource.Resource.Name + " manualy</td>";
+                h += "<td>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</td>";
             }
         });
         h += '</tr>';

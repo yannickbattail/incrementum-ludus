@@ -1,7 +1,7 @@
 var Producer = (function () {
-    function Producer(Name, Resource) {
+    function Producer(Name, ResourceQuantity) {
         this.Name = Name;
-        this.Resource = Resource;
+        this.ResourceQuantity = ResourceQuantity;
     }
     return Producer;
 }());

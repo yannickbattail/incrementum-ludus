@@ -1,5 +1,5 @@
 abstract class Producer {
-    constructor(public Name: string, public Resource: ResourceQuantity) {
+    constructor(public Name: string, public ResourceQuantity: ResourceQuantity) {
 
     }
 }
