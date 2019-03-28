@@ -7,9 +7,9 @@ var Engine = (function () {
     }
     Engine.prototype.run = function () {
         var _this = this;
-        window.setInterval(function () { return _this.runTick(); }, 1000);
+        window.setInterval(function () { return _this.onTick(); }, 1000);
     };
-    Engine.prototype.runTick = function () {
+    Engine.prototype.onTick = function () {
         var _this = this;
         this.Producers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
@@ -47,6 +47,9 @@ var Engine = (function () {
         var _this = this;
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
             trigger.SpawnProducers.forEach(function (pawnProducer) { return _this.Producers.push(pawnProducer); });
+            trigger.SpawnResources.forEach(function (res) { return _this.Player.changeStorage(res); });
+            trigger.SpawnCrafters.forEach(function (crafter) { return _this.Crafters.push(crafter); });
+            trigger.SpawnNewTriggers.forEach(function (newTrigger) { return _this.Triggers.push(newTrigger); });
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
     };

@@ -53,22 +53,22 @@
     <div id="storage"></div>
     sources
     <div id="sources"></div>
-    triggers
-    <div id="triggers"></div>
     crafters
     <div id="crafters"></div>
+    triggers
+    <div id="triggers"></div>
     <script>
         engine.run();
         var gui = new IncrGui(engine);
         function updateGui() {
             document.getElementById('storage').innerHTML = gui.displayStorage();
             document.getElementById('sources').innerHTML = gui.displayProducers();
-            document.getElementById('triggers').innerHTML = gui.displayTriggers();
             document.getElementById('crafters').innerHTML = gui.displayCrafters();
+            document.getElementById('triggers').innerHTML = gui.displayTriggers();
         }
         var interval = window.setInterval(updateGui, 1000);
 
-/**/</script>
-    <div onclick="window.clearInterval(interval)">@</div>
+    </script>
+    <div onclick="window.clearInterval(interval)">stop</div>
 </body>
 </html>

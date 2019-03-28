@@ -14,9 +14,9 @@ class Engine {
     Triggers: Array<Trigger> = [];
     Crafters: Array<Crafter> = [];
     run() {
-        window.setInterval(() => this.runTick(), 1000);
+        window.setInterval(() => this.onTick(), 1000);
     }
-    private runTick() {
+    private onTick() {
         this.Producers.forEach(
             producer => {
                  if (producer instanceof TimedProducer) {
@@ -62,6 +62,15 @@ class Engine {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
             trigger.SpawnProducers.forEach(
                 pawnProducer => this.Producers.push(pawnProducer)
+            );
+            trigger.SpawnResources.forEach(
+                res => this.Player.changeStorage(res)
+            );
+            trigger.SpawnCrafters.forEach(
+                crafter => this.Crafters.push(crafter)
+            );
+            trigger.SpawnNewTriggers.forEach(
+                newTrigger => this.Triggers.push(newTrigger)
             );
             // remove the trigger
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);

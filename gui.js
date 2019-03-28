@@ -26,25 +26,40 @@ var IncrGui = (function () {
     IncrGui.prototype.displayTriggers = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>triggerd when</th><th>resource</th><th>spwan</th></tr>";
+        h += '<tr><th>name</th><th>triggered when resources</th>';
+        h += '<th>spwan producers</th><th>spwan resources</th>';
+        h += '<th>spwan crafters</th><th>spwan triggers</th></tr>';
         this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
         h += "</table>";
         return h;
     };
     IncrGui.prototype.displayTrigger = function (trigger) {
+        var _this = this;
         var h = "<tr>";
         h += '<td>' + trigger.Name + '</td>';
         h += "<td><ul>";
         trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
         h += "</ul></td>";
+        h += "<td><ul>";
         trigger.SpawnProducers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
-                h += "<td>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</td>";
+                h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</li>";
             }
             else if (trigger.SpawnProducers instanceof TimedProducer) {
-                h += "<td>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</td>";
+                h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</li>";
             }
         });
+        h += "</ul></td>";
+        h += "<td><ul>";
+        trigger.SpawnResources.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        h += "</ul></td>";
+        h += "<td><ul>";
+        trigger.SpawnCrafters.forEach(function (crafter) { return h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name
+            + ' in ' + _this.displayTime(crafter.Duration) + ' ' + (crafter.AutoCrafting ? 'automaticly' : 'mannualy') + '</li>'; });
+        h += "</ul></td>";
+        h += "<td><ul>";
+        trigger.SpawnNewTriggers.forEach(function (trig) { return h += '<li>' + trig.Name + '</li>'; });
+        h += "</ul></td>";
         h += '</tr>';
         return h;
     };

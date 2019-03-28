@@ -9,11 +9,13 @@
 /// <reference path="Engine/Engine.ts" />
 
 const IRON = new Resource("iron");
-const COPPER = new Resource("coper");
+const COPPER = new Resource("copper");
 const LEAD = new Resource("lead");
 const TIN = new Resource("tin");
+const WATER = new Resource("water");
 const AXE = new Resource("axe");
 const KNIFE = new Resource("knife");
+const BEER = new Resource("beer");
 
 var engine = new Engine();
 engine.Player = new Player("platypus");
@@ -27,14 +29,45 @@ engine.Triggers = [
     new Trigger("lead mine exploitation",
         // trigger when reach these resources quantity
         [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)],
-        // and then spwan source
-        [new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000)])
+        // and then spwan Producer
+        [new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000)]),
+    new Trigger("water source",
+        //trigger when resources
+        [new ResourceQuantity(TIN, 10)],
+        //spwan Producer
+        [new ManualProducer("water source", new ResourceQuantity(WATER, 1))],
+        //spwan resources
+        [new ResourceQuantity(WATER, 10)],
+        //spwan Crafter
+        [],
+        //spwan Trigger
+        [new Trigger("beer brewering",
+            //trigger when resources
+            [new ResourceQuantity(WATER, 20)], // trigger when resources
+            //spwan Producer
+            [],
+            //spwan resources
+            [],
+            //spwan Crafter
+            [new Crafter("brewery", 20000,//duration
+                //cost
+                [new ResourceQuantity(WATER, 20), new ResourceQuantity(TIN, 1)],
+                //spawn
+                new ResourceQuantity(BEER, 1), false)],
+            //spwan Trigger 
+            []
+        )]
+        )
 ];
 engine.Crafters = [
-    new Crafter("forge axe", 20000,
+    new Crafter("forge axe", 20000,//duration
+        //cost
         [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)],
-        new ResourceQuantity(AXE, 1), true),
-    new Crafter("forge knife", 20000,
+        //spawn
+        new ResourceQuantity(AXE, 1), true/*auto*/),
+    new Crafter("forge knife", 20000,//duration
+        //cost
         [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)],
-        new ResourceQuantity(KNIFE, 1), false),
+        //spawn
+        new ResourceQuantity(KNIFE, 1), false/*auto*/),
 ];

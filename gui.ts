@@ -42,7 +42,9 @@ class IncrGui {
 
     displayTriggers(): string {
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>triggerd when</th><th>resource</th><th>spwan</th></tr>";
+        h += '<tr><th>name</th><th>triggered when resources</th>';
+        h += '<th>spwan producers</th><th>spwan resources</th>';
+        h += '<th>spwan crafters</th><th>spwan triggers</th></tr>';
         this.Engine.Triggers.forEach(
             trigger => h += this.displayTrigger(trigger)
         );
@@ -53,20 +55,38 @@ class IncrGui {
     private displayTrigger(trigger : Trigger) : string {
         let h = "<tr>";
         h += '<td>' + trigger.Name + '</td>';
-        h += "<td><ul>"
+        h += "<td><ul>";
         trigger.ResourcesTrigger.forEach(
             res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
         );
-        h += "</ul></td>"
+        h += "</ul></td>";
+        h += "<td><ul>";
         trigger.SpawnProducers.forEach(
             producer => {
                 if (producer instanceof TimedProducer) {
-                    h += "<td>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</td>"
+                    h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</li>"
                 } else if (trigger.SpawnProducers instanceof TimedProducer) {
-                    h += "<td>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</td>"
+                    h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</li>"
                 }
             }
         );
+        h += "</ul></td>";
+        h += "<td><ul>";
+        trigger.SpawnResources.forEach(
+            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        );
+        h += "</ul></td>";
+        h += "<td><ul>";
+        trigger.SpawnCrafters.forEach(
+            crafter => h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.Quantity +' '+ crafter.CraftedResource.Resource.Name
+             + ' in '+this.displayTime(crafter.Duration)+' '+(crafter.AutoCrafting?'automaticly':'mannualy')+'</li>'
+        );
+        h += "</ul></td>";
+        h += "<td><ul>";
+        trigger.SpawnNewTriggers.forEach(
+            trig => h += '<li>' + trig.Name +'</li>'
+        );
+        h += "</ul></td>";
         h += '</tr>';
         return h;
     }
