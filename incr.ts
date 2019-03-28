@@ -28,7 +28,7 @@ engine.Triggers = [
         // trigger when reach these resources quantity
         [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)],
         // and then spwan source
-        new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000))
+        [new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000)])
 ];
 engine.Crafters = [
     new Crafter("forge axe", 20000,

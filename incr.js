@@ -12,7 +12,7 @@ engine.Producers = [
     new ManualProducer("tin", new ResourceQuantity(TIN, 1))
 ];
 engine.Triggers = [
-    new Trigger("lead mine exploitation", [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)], new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000))
+    new Trigger("lead mine exploitation", [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)], [new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000)])
 ];
 engine.Crafters = [
     new Crafter("forge axe", 20000, [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)], new ResourceQuantity(AXE, 1), true),

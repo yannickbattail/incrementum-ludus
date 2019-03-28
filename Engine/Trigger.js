@@ -1,9 +1,9 @@
 var Trigger = (function () {
-    function Trigger(Name, ResourcesTrigger, SpawnProducer) {
+    function Trigger(Name, ResourcesTrigger, SpawnProducers) {
         if (ResourcesTrigger === void 0) { ResourcesTrigger = []; }
         this.Name = Name;
         this.ResourcesTrigger = ResourcesTrigger;
-        this.SpawnProducer = SpawnProducer;
+        this.SpawnProducers = SpawnProducers;
     }
     return Trigger;
 }());

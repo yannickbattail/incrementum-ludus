@@ -44,8 +44,9 @@ var Engine = (function () {
         return producers[0];
     };
     Engine.prototype.checkTrigger = function (trigger) {
+        var _this = this;
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
-            this.Producers.push(trigger.SpawnProducer);
+            trigger.SpawnProducers.forEach(function (pawnProducer) { return _this.Producers.push(pawnProducer); });
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
     };

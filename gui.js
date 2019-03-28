@@ -37,12 +37,14 @@ var IncrGui = (function () {
         h += "<td><ul>";
         trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource + '</li>'; });
         h += "</ul></td>";
-        if (trigger.SpawnProducer instanceof TimedProducer) {
-            h += "<td>" + trigger.SpawnProducer.Name + ": " + trigger.SpawnProducer.Resource.Quantity + " " + trigger.SpawnProducer.Resource.Resource.Name + " every " + trigger.SpawnProducer.Interval + " ms</td>";
-        }
-        else if (trigger.SpawnProducer instanceof TimedProducer) {
-            "<td>" + trigger.SpawnProducer.Name + ": " + trigger.SpawnProducer.Resource.Quantity + " " + trigger.SpawnProducer.Resource.Resource.Name + " manualy</td>";
-        }
+        trigger.SpawnProducers.forEach(function (producer) {
+            if (producer instanceof TimedProducer) {
+                h += "<td>" + producer.Name + ": " + producer.Resource.Quantity + " " + producer.Resource.Resource.Name + " every " + producer.Interval + " ms</td>";
+            }
+            else if (trigger.SpawnProducers instanceof TimedProducer) {
+                h += "<td>" + producer.Name + ": " + producer.Resource.Quantity + " " + producer.Resource.Resource.Name + " manualy</td>";
+            }
+        });
         h += '</tr>';
         return h;
     };

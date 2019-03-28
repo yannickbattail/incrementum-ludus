@@ -60,7 +60,9 @@ class Engine {
 
     private checkTrigger(trigger: Trigger) {
         if (this.Player.hasResources(trigger.ResourcesTrigger)) {
-            this.Producers.push(trigger.SpawnProducer);
+            trigger.SpawnProducers.forEach(
+                pawnProducer => this.Producers.push(pawnProducer)
+            );
             // remove the trigger
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
