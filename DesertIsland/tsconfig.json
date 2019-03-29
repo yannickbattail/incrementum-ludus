@@ -19,6 +19,7 @@
     "../Engine/Trigger.ts",
     "Level.ts",
     "Material.ts",
+    "DesertIslandGui.ts",
     "DesertIsland.ts"
   ]
 }

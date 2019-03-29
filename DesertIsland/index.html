@@ -36,30 +36,34 @@
         }
     </style>
     <title>incr</title>
-    <script src="Engine/Resource.js"></script>
-    <script src="Engine/ResourceQuantity.js"></script>
-    <script src="Engine/Producer.js"></script>
-    <script src="Engine/TimedProducer.js"></script>
-    <script src="Engine/ManualProducer.js"></script>
-    <script src="Engine/Trigger.js"></script>
-    <script src="Engine/Crafter.js"></script>
-    <script src="Engine/Player.js"></script>
-    <script src="Engine/Engine.js"></script>
-    <script src="incr.js"></script>
-    <script src="gui.js"></script>
+    <script src="../Engine/Resource.js"></script>
+    <script src="../Engine/ResourceQuantity.js"></script>
+    <script src="../Engine/Producer.js"></script>
+    <script src="../Engine/TimedProducer.js"></script>
+    <script src="../Engine/ManualProducer.js"></script>
+    <script src="../Engine/Trigger.js"></script>
+    <script src="../Engine/Crafter.js"></script>
+    <script src="../Engine/Player.js"></script>
+    <script src="../Engine/Engine.js"></script>
+
+    <script src="Level.js"></script>
+    <script src="Item.js"></script>
+    <script src="Material.js"></script>
+    <script src="DesertIsland.js"></script>
+    <script src="DesertIslandGui.js"></script>
 </head>
 <body id="body">
-    storage
+    Storage
     <div id="storage"></div>
-    sources
+    Producers
     <div id="sources"></div>
-    crafters
+    Crafters
     <div id="crafters"></div>
-    triggers
+    Triggers
     <div id="triggers"></div>
     <script>
         engine.run();
-        var gui = new IncrGui(engine);
+        var gui = new DesertIslandGui(engine);
         function updateGui() {
             document.getElementById('storage').innerHTML = gui.displayStorage();
             document.getElementById('sources').innerHTML = gui.displayProducers();
