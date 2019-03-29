@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+      ----------------------------------------------------------------------------
+      "THE BEER-WARE LICENSE" (Revision 42):
+      <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
+      can do whatever you want with this stuff. If we meet some day, and you think
+      this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+      ----------------------------------------------------------------------------
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/png" href="data:image/png;base64," />
+    <style>
+        body {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 8pt; 
+
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
+    <title>incrementum-ludus : an incremental game engine</title>
+
+</head>
+<body id="body">
+    <h1>Incrementum-ludus : an incremental game engine</h1>
+    <p>Sources on github: <a href="https://github.com/yannickbattail/incrementum-ludus">https://github.com/yannickbattail/incrementum-ludus</a></p>
+    
+    <p>Test it! incr: a small proof of concepts game <a href="incr.html">GO!</a></p>
+
+    <p>Desert Island : <i>developement in progress</i> <a href="DesertIsland/index.html">GO!</a></p>
+    
+    <p>ex: the structure of the incr</p>
+    
+    <pre>
+    <code class="language-typescript">
+var engine = new Engine();
+engine.Player = new Player("platypus");
+engine.Producers = [
+    // initals producers
+    new TimedProducer("iron mine", new ResourceQuantity(IRON, 2), 500/*mili sec*/),
+    new TimedProducer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
+    new ManualProducer("tin", new ResourceQuantity(TIN, 1))
+];
+engine.Triggers = [
+    new Trigger("lead mine exploitation",
+        // trigger when reach these resources quantity
+        [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)],
+        // and then spwan Producer
+        [new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000)]),
+    new Trigger("water source",
+        //trigger when resources
+        [new ResourceQuantity(TIN, 10)],
+        //spwan Producer
+        [new ManualProducer("water source", new ResourceQuantity(WATER, 1))],
+        //spwan resources
+        [new ResourceQuantity(WATER, 10)],
+        //spwan Crafter
+        [],
+        //spwan Trigger
+        [new Trigger("beer brewering",
+            //trigger when resources
+            [new ResourceQuantity(WATER, 20)], // trigger when resources
+            //spwan Producer
+            [],
+            //spwan resources
+            [],
+            //spwan Crafter
+            [new Crafter("brewery", 20000,//duration
+                //cost
+                [new ResourceQuantity(WATER, 20), new ResourceQuantity(TIN, 1)],
+                //spawn
+                new ResourceQuantity(BEER, 1), false)],
+            //spwan Trigger 
+            []
+        )]
+        )
+];
+engine.Crafters = [
+    new Crafter("forge axe", 20000,//duration
+        //cost
+        [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)],
+        //spawn
+        new ResourceQuantity(AXE, 1), true/*auto*/),
+    new Crafter("forge knife", 20000,//duration
+        //cost
+        [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)],
+        //spawn
+        new ResourceQuantity(KNIFE, 1), false/*auto*/),
+];
+</code>
+</pre>
+
+    <h2>Licence</h2>
+    <pre>
+----------------------------------------------------------------------------
+"THE BEER-WARE LICENSE" (Revision 42):
+<phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
+can do whatever you want with this stuff. If we meet some day, and you think
+this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+----------------------------------------------------------------------------
+    </pre>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js" integrity="sha256-jc6y1s/Y+F+78EgCT/lI2lyU7ys+PFYrRSJ6q8/R8+o=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-typescript.js" integrity="sha256-t+2TInrmgym2ZxVaR7WvlpLAlIlXb3D6eoevqdSateg=" crossorigin="anonymous"></script>
+</body>
+</html>
