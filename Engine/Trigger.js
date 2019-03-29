@@ -23,6 +23,10 @@ var Trigger = (function () {
         this.SpawnProducers.push(producer);
         return this;
     };
+    Trigger.prototype.spawnResource = function (quantity, resource) {
+        this.SpawnResources.push(new ResourceQuantity(resource, quantity));
+        return this;
+    };
     Trigger.prototype.spawnCrafter = function (crafter) {
         this.SpawnCrafters.push(crafter);
         return this;

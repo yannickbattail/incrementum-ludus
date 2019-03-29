@@ -26,38 +26,29 @@ engine.Producers = [
     new ManualProducer("tin", new ResourceQuantity(TIN, 1))
 ];
 engine.Triggers = [
-    new Trigger("lead mine exploitation",
-        // trigger when reach these resources quantity
-        [new ResourceQuantity(IRON, 20), new ResourceQuantity(COPPER, 2)],
-        // and then spwan Producer
-        [new TimedProducer("lead mine", new ResourceQuantity(LEAD, 1), 5000)]),
-    new Trigger("water source",
-        //trigger when resources
-        [new ResourceQuantity(TIN, 10)],
-        //spwan Producer
-        [new ManualProducer("water source", new ResourceQuantity(WATER, 1))],
-        //spwan resources
-        [new ResourceQuantity(WATER, 10)],
-        //spwan Crafter
-        [],
-        //spwan Trigger
-        [new Trigger("beer brewering",
-            //trigger when resources
-            [new ResourceQuantity(WATER, 20)], // trigger when resources
-            //spwan Producer
-            [],
-            //spwan resources
-            [],
-            //spwan Crafter
-            [new Crafter("brewery", 20000,//duration
-                //cost
-                [new ResourceQuantity(WATER, 20), new ResourceQuantity(TIN, 1)],
-                //spawn
-                new ResourceQuantity(BEER, 1), false)],
-            //spwan Trigger 
-            []
-        )]
+    new Trigger("lead mine exploitation")
+        .whenReached(20, IRON).and(2, COPPER)
+        .spawnProducer(
+            new TimedProducer("lead mine")
+                .thatProduce(1, LEAD).every(5).seconds()
+        ),
+    new Trigger("water source")
+        .whenReached(10, TIN)
+        .spawnProducer(
+            new ManualProducer("lead mine")
+                .thatProduce(1, WATER)
         )
+        .spawnResource(10, WATER)
+        .appendTrigger(
+            new Trigger("beer brewering")
+                .whenReached(20, WATER)
+                .spawnCrafter(
+                    new Crafter("brewery")
+                        .thatCraft(1, BEER)
+                        .in(20).seconds()
+                        .atCostOf(20, WATER).and(1, TIN)
+            )
+        )    
 ];
 engine.Crafters = [
     new Crafter("forge axe", 20000,//duration
