@@ -30,7 +30,7 @@ class DesertIslandGui {
 
     displayProducers(): string {
         var h = '<table border="1">';
-        h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
+        h += "<tr><th>name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(
             producer => {
                 if (producer instanceof TimedProducer) {

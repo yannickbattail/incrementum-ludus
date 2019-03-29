@@ -18,6 +18,7 @@ const WATER = new Material("water", "cl", "water");
 const WOOD = new Material("wood", "g", "wood");
 const CHARCOAL = new Material("charcoal", "g", "CHARCOAL");
 const CLAY_POT = new Item("clay pot", "clay_pot");
+const BRICK = new Item("brick", "brick");
 
 var engine = new Engine();
 engine.Player = new Player("Chuck Noland");
@@ -55,12 +56,24 @@ engine.Triggers = [
                     .thatCraft(1000, CHARCOAL)
                     .in(20).seconds()
                     .atCostOf(3000, WOOD).and(1000, CLAY)
+                ).appendTrigger(
+                    new Trigger("charcoal craf")
+                        .whenReached(1000, CHARCOAL)
+                        .spawnResource(1, LEVEL) // level 4
+                ).appendTrigger(
+                    new Trigger("charcoal craf")
+                        .whenReached(3000, CHARCOAL).and(5000, WOOD).and(3000, CLAY)
+                        .spawnCrafter(
+                            new Crafter("Brik oven")
+                            .thatCraft(10, BRICK)
+                            .in(20).seconds()
+                            .atCostOf(5000, WOOD).and(3000, CLAY)
+                        )
+                ).appendTrigger(
+                    new Trigger("charcoal craf")
+                        .whenReached(20, BRICK)
+                        .spawnResource(1, LEVEL) // level 5
                 ),
-        )
-        .appendTrigger(
-            new Trigger("charcoal craf")
-                .whenReached(1000, CHARCOAL)
-                .spawnResource(1, LEVEL) // level 4
         ),
 ];
 

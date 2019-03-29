@@ -11,7 +11,7 @@ var DesertIslandGui = (function () {
     };
     DesertIslandGui.prototype.displayProducers = function () {
         var h = '<table border="1">';
-        h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
+        h += "<tr><th>name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
                 h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>";
