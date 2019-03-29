@@ -5,4 +5,5 @@ var ResourceQuantity = (function () {
     }
     return ResourceQuantity;
 }());
+var EMPTY_RQ = new ResourceQuantity(new Resource("nothing"), 0);
 //# sourceMappingURL=ResourceQuantity.js.map

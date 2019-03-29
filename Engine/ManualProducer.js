@@ -14,8 +14,13 @@ var __extends = (this && this.__extends) || (function () {
 var ManualProducer = (function (_super) {
     __extends(ManualProducer, _super);
     function ManualProducer(Name, Resource) {
+        if (Resource === void 0) { Resource = EMPTY_RQ; }
         return _super.call(this, Name, Resource) || this;
     }
+    ManualProducer.prototype.thatProduce = function (quantity, resource) {
+        this.ResourceQuantity = new ResourceQuantity(resource, quantity);
+        return this;
+    };
     return ManualProducer;
 }(Producer));
 //# sourceMappingURL=ManualProducer.js.map
