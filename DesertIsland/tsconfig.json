@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
+  },
+  "files": [
+    "../Engine/Crafter.ts",
+    "../Engine/Engine.ts",
+    "../Engine/ManualProducer.ts",
+    "../Engine/Player.ts",
+    "../Engine/Producer.ts",
+    "../Engine/Resource.ts",
+    "../Engine/ResourceQuantity.ts",
+    "../Engine/TimedProducer.ts",
+    "../Engine/Trigger.ts",
+    "Level.ts",
+    "Material.ts",
+    "DesertIsland.ts"
+  ]
+}
