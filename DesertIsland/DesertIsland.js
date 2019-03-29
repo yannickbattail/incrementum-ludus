@@ -8,16 +8,32 @@ var engine = new Engine();
 engine.Player = new Player("Chuck Noland");
 engine.Player.Storage = [new ResourceQuantity(LEVEL, 1)];
 engine.Producers = [
-    new ManualProducer("take water", new ResourceQuantity(WATER, 10)),
-    new ManualProducer("bare hands dig clay", new ResourceQuantity(CLAY, 10))
-];
-engine.Triggers = [
-    new Trigger("carry water in clay pot", [new ResourceQuantity(CLAY_POT, 1)], [new ManualProducer("carry water", new ResourceQuantity(WATER, 100))], [new ResourceQuantity(LEVEL, 1), new ResourceQuantity(CLAY_POT, -1)]),
-    new Trigger("carry clay in clay pot", [new ResourceQuantity(CLAY_POT, 1), new ResourceQuantity(LEVEL, 2)], [new ManualProducer("carry clay", new ResourceQuantity(CLAY, 100)),
-        new ManualProducer("collect branches", new ResourceQuantity(WOOD, 100))], [new ResourceQuantity(LEVEL, 1)], [], [new Trigger("charcoal crafting", [new ResourceQuantity(WOOD, 200)], [], [], [new Crafter("craft charcoal", 20000, [new ResourceQuantity(WOOD, 3000), new ResourceQuantity(CLAY, 1000)], new ResourceQuantity(CHARCOAL, 1000), false)]),
-    ]),
+    new ManualProducer("take water").thatProduce(10, WATER),
+    new ManualProducer("bare hands dig clay").thatProduce(10, CLAY)
 ];
 engine.Crafters = [
-    new Crafter("craft clay pot", 20000, [new ResourceQuantity(CLAY, 100), new ResourceQuantity(WATER, 10)], new ResourceQuantity(CLAY_POT, 1), false)
+    new Crafter("craft clay pot")
+        .thatCraft(1, CLAY_POT)["in"](20).seconds()
+        .atCostOf(100, CLAY).and(10, WATER)
+];
+engine.Triggers = [
+    new Trigger("carry water in clay pot")
+        .whenReached(1, CLAY_POT)
+        .spawnProducer(new ManualProducer("carry water").thatProduce(100, WATER))
+        .spawnResource(1, LEVEL)
+        .spawnResource(-1, CLAY_POT),
+    new Trigger("carry clay in clay pot")
+        .whenReached(1, CLAY_POT).and(2, LEVEL)
+        .spawnProducer(new ManualProducer("carry clay").thatProduce(100, CLAY))
+        .spawnProducer(new ManualProducer("collect branches").thatProduce(100, WOOD))
+        .spawnResource(1, LEVEL)
+        .appendTrigger(new Trigger("charcoal crafting")
+        .whenReached(200, WOOD)
+        .spawnCrafter(new Crafter("craft charcoal")
+        .thatCraft(1000, CHARCOAL)["in"](20).seconds()
+        .atCostOf(3000, WOOD).and(1000, CLAY)))
+        .appendTrigger(new Trigger("charcoal craf")
+        .whenReached(1000, CHARCOAL)
+        .spawnResource(1, LEVEL)),
 ];
 //# sourceMappingURL=DesertIsland.js.map

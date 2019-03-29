@@ -48,17 +48,17 @@ var DesertIslandGui = (function () {
             return 'Auto Crafting';
         }
         if (crafter.isCrafting()) {
-            return '<button disabled="disabled">craft</button> Crafting in progress';
+            return '<button disabled="disabled">craft</button><br/>Crafting in progress';
         }
         if (!this.Engine.Player.hasResources(crafter.Cost)) {
-            return '<button disabled="disabled">craft</button> not enough resources';
+            return '<button disabled="disabled">craft</button><br/>not enough resources';
         }
         return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
     };
     DesertIslandGui.prototype.displayTriggers = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += '<tr><th>name</th><th>triggered when resources</th></tr>';
+        h += '<tr><th>Goal</th><th>needed resources</th></tr>';
         this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
         h += "</table>";
         return h;
