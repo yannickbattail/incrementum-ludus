@@ -5,6 +5,7 @@ var WOOD = new Material("wood", "g", "wood");
 var CHARCOAL = new Material("charcoal", "g", "CHARCOAL");
 var CLAY_POT = new Item("clay pot", "clay_pot");
 var BRICK = new Item("brick", "brick");
+var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
 var engine = new Engine();
 engine.Player = new Player("Chuck Noland");
 engine.Player.Storage = [new ResourceQuantity(LEVEL, 1)];
@@ -32,14 +33,27 @@ engine.Triggers = [
         .whenReached(200, WOOD)
         .spawnCrafter(new Crafter("craft charcoal")
         .thatCraft(1000, CHARCOAL)["in"](20).seconds()
-        .atCostOf(3000, WOOD).and(1000, CLAY)).appendTrigger(new Trigger("charcoal craf")
+        .atCostOf(3000, WOOD).and(1000, CLAY)).appendTrigger(new Trigger("charcoal level")
         .whenReached(1000, CHARCOAL)
-        .spawnResource(1, LEVEL)).appendTrigger(new Trigger("charcoal craf")
-        .whenReached(3000, CHARCOAL).and(5000, WOOD).and(3000, CLAY)
+        .spawnResource(1, LEVEL)).appendTrigger(new Trigger("brick crafting")
+        .whenReached(3000, CHARCOAL).and(5000, WOOD).and(3000, CLAY).and(500, WATER)
         .spawnCrafter(new Crafter("Brik oven")
         .thatCraft(10, BRICK)["in"](20).seconds()
-        .atCostOf(5000, WOOD).and(3000, CLAY))).appendTrigger(new Trigger("charcoal craf")
+        .atCostOf(3000, WOOD).and(1000, CLAY))
+        .appendTrigger(new Trigger("pottery")
         .whenReached(20, BRICK)
-        .spawnResource(1, LEVEL))),
+        .spawnResource(1, LEVEL)
+        .spawnCrafter(new Crafter("pottery oven")
+        .thatCraft(1, TERRACOTTA_POT)["in"](20).seconds()
+        .atCostOf(800, WOOD).and(500, CLAY))
+        .appendTrigger(new Trigger("wood choping")
+        .whenReached(1, TERRACOTTA_POT)
+        .spawnResource(1, LEVEL)
+        .spawnResource(-1, TERRACOTTA_POT)
+        .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds()))
+        .appendTrigger(new Trigger("clay digging")
+        .whenReached(2, TERRACOTTA_POT).and(6, LEVEL)
+        .spawnResource(-2, TERRACOTTA_POT)
+        .spawnProducer(new TimedProducer("dig clay").thatProduce(500, CLAY).every(5).seconds()))))),
 ];
 //# sourceMappingURL=DesertIsland.js.map
