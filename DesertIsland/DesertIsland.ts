@@ -62,7 +62,7 @@ engine.Triggers = [
                         .spawnResource(1, LEVEL) // level 4
                 ).appendTrigger(
                     new Trigger("charcoal craf")
-                        .whenReached(3000, CHARCOAL).and(5000, WOOD).and(3000, CLAY)
+                        .whenReached(3000, CHARCOAL).and(5000, WOOD).and(3000, CLAY).and(500, WATER)
                         .spawnCrafter(
                             new Crafter("Brik oven")
                             .thatCraft(10, BRICK)
