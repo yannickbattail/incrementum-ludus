@@ -25,6 +25,10 @@ class Trigger {
         this.SpawnProducers.push(producer);
         return this;
     }
+    public spawnResource(quantity : number, resource : Resource) {
+        this.SpawnResources.push(new ResourceQuantity(resource, quantity));
+        return this;
+    }
     public spawnCrafter(crafter : Crafter) {
         this.SpawnCrafters.push(crafter);
         return this;
