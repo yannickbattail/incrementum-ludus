@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+      ----------------------------------------------------------------------------
+      "THE BEER-WARE LICENSE" (Revision 42):
+      <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
+      can do whatever you want with this stuff. If we meet some day, and you think
+      this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+      ----------------------------------------------------------------------------
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/png" href="data:image/png;base64," />
+    <style>
+        body {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 8pt; 
+            background-color: #222222;
+            color: #dd6600;
+        }
+        table {
+            border-color: #b37c4d;
+            border-style: none;
+        }
+        td {
+            border: none;
+            background-color: #402000;
+        }
+        #console {
+            width: 100%;
+            min-height: 100px;
+            border-style: inset;
+            border-width: 1px;
+            font-family: Times;
+        }
+    </style>
+    <title>incr</title>
+    <script src="Engine/Resource.js"></script>
+    <script src="Engine/ResourceQuantity.js"></script>
+    <script src="Engine/Producer.js"></script>
+    <script src="Engine/TimedProducer.js"></script>
+    <script src="Engine/ManualProducer.js"></script>
+    <script src="Engine/Trigger.js"></script>
+    <script src="Engine/Crafter.js"></script>
+    <script src="Engine/Player.js"></script>
+    <script src="Engine/Engine.js"></script>
+    <script src="incr.js"></script>
+    <script src="gui.js"></script>
+</head>
+<body id="body">
+    storage
+    <div id="storage"></div>
+    sources
+    <div id="sources"></div>
+    crafters
+    <div id="crafters"></div>
+    triggers
+    <div id="triggers"></div>
+    <script>
+        engine.run();
+        var gui = new IncrGui(engine);
+        function updateGui() {
+            document.getElementById('storage').innerHTML = gui.displayStorage();
+            document.getElementById('sources').innerHTML = gui.displayProducers();
+            document.getElementById('crafters').innerHTML = gui.displayCrafters();
+            document.getElementById('triggers').innerHTML = gui.displayTriggers();
+        }
+        var interval = window.setInterval(updateGui, 1000);
+
+    </script>
+    <div onclick="window.clearInterval(interval)">stop</div>
+</body>
+</html>
