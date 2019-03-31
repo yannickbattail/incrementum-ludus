@@ -38,6 +38,49 @@ engine.Crafters = [
         .in(20).seconds()
         .atCostOf(100, CLAY).and(10, WATER)
 ];
+
+var triggerLevel5 = new Trigger("pottery")
+    .whenReached(20, BRICK)
+    .spawnResource(1, LEVEL) // level 5
+    .spawnCrafter(
+        new Crafter("pottery oven")
+            .thatCraft(1, TERRACOTTA_POT)
+            .in(20).seconds()
+            .atCostOf(800, WOOD).and(500, CLAY)
+    )
+    .appendTrigger(
+        new Trigger("wood choping")
+            .whenReached(1, TERRACOTTA_POT)
+            .spawnResource(1, LEVEL) // level 6
+            .spawnResource(-1, TERRACOTTA_POT)
+            .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds())
+    )
+    .appendTrigger(
+        new Trigger("clay digging")
+            .whenReached(2, TERRACOTTA_POT).and(6, LEVEL) // level 7
+            .spawnResource(-2, TERRACOTTA_POT)
+            .spawnProducer(new TimedProducer("dig clay").thatProduce(500, CLAY).every(5).seconds())
+            .appendTrigger(
+                new Trigger("water canal digging")
+                    .whenReached(30, BRICK).and(7, LEVEL) // level 8
+                    .spawnProducer(new TimedProducer("water canal").thatProduce(500, WATER).every(5).seconds())
+                    .spawnCrafter(
+                        new Crafter("plant tree")
+                            .thatCraft(10000, WOOD)
+                            .in(1).minutes()
+                            .atCostOf(4000, WATER)
+                    )/*
+                    .appendTrigger(
+                        new Trigger("wood choping")
+                            .whenReached(1, TERRACOTTA_POT)
+                            .spawnResource(1, LEVEL) // level 7
+                            .spawnResource(-1, TERRACOTTA_POT)
+                            .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds())
+                    )*/
+            )
+    );
+
+
 engine.Triggers = [
     new Trigger("carry water in clay pot")
         .whenReached(1, CLAY_POT)
@@ -71,31 +114,7 @@ engine.Triggers = [
                             .in(20).seconds()
                             .atCostOf(3000, WOOD).and(1000, CLAY)
                         )
-                        .appendTrigger(
-                            new Trigger("pottery")
-                                .whenReached(20, BRICK)
-                                .spawnResource(1, LEVEL) // level 5
-                                .spawnCrafter(
-                                    new Crafter("pottery oven")
-                                        .thatCraft(1, TERRACOTTA_POT)
-                                        .in(20).seconds()
-                                        .atCostOf(800, WOOD).and(500, CLAY)
-                                )
-                                .appendTrigger(
-                                    new Trigger("wood choping")
-                                        .whenReached(1, TERRACOTTA_POT)
-                                        .spawnResource(1, LEVEL) // level 6
-                                        .spawnResource(-1, TERRACOTTA_POT)
-                                        .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds())
-                                )
-                                .appendTrigger(
-                                    new Trigger("clay digging")
-                                        .whenReached(2, TERRACOTTA_POT).and(6, LEVEL)
-                                        .spawnResource(-2, TERRACOTTA_POT)
-                                        .spawnProducer(new TimedProducer("dig clay").thatProduce(500, CLAY).every(5).seconds())
-                                )
-                        ),
+                        .appendTrigger(triggerLevel5),
                 ),
         ),
 ];
-
