@@ -94,7 +94,7 @@ class DesertIslandGui {
 
     displayTriggers(): string {
         if (this.Engine.Triggers.length == 0){
-            return '...No more goal for now. Wait for next version of the game. PERDU!';
+            return '...No more goal for now. Wait for next version of the game.';
         }
         var h = '<table border="1">';
         h += '<tr><th>Goal</th><th>needed resources</th></tr>';
