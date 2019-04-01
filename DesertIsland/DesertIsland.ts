@@ -58,7 +58,7 @@ var triggerLevel5 = new Trigger("pottery")
             .appendTrigger(
                 new Trigger("water canal digging")
                     .whenReached(30, BRICK).and(6, LEVEL)
-                    .spawnProducer(new TimedProducer("water canal").thatProduce(500, WATER).every(5).seconds())
+                    .spawnProducer(new TimedProducer("water canal").thatProduce(100, WATER).every(1).seconds())
                     .spawnCrafter(
                         new Crafter("plant tree")
                             .thatCraft(10000, WOOD)
