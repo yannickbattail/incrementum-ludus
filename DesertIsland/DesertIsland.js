@@ -3,6 +3,7 @@ var CLAY = new Material("clay", "g", "clay");
 var WATER = new Material("water", "cl", "water");
 var WOOD = new Material("wood", "g", "wood");
 var CHARCOAL = new Material("charcoal", "g", "charcoal");
+var IRON_ORE = new Material("iron ore", "g", "iron_ore");
 var CLAY_POT = new Item("clay pot", "clay_pot");
 var BRICK = new Item("brick", "brick");
 var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
@@ -24,21 +25,23 @@ var triggerLevel5 = new Trigger("pottery")
     .spawnCrafter(new Crafter("pottery oven")
     .thatCraft(1, TERRACOTTA_POT)["in"](20).seconds()
     .atCostOf(800, WOOD).and(500, CLAY))
-    .appendTrigger(new Trigger("wood choping")
-    .whenReached(1, TERRACOTTA_POT)
-    .spawnResource(1, LEVEL)
-    .spawnResource(-1, TERRACOTTA_POT)
-    .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds()))
     .appendTrigger(new Trigger("clay digging")
-    .whenReached(2, TERRACOTTA_POT).and(6, LEVEL)
+    .whenReached(2, TERRACOTTA_POT)
     .spawnResource(-2, TERRACOTTA_POT)
+    .spawnResource(1, LEVEL)
     .spawnProducer(new TimedProducer("dig clay").thatProduce(500, CLAY).every(5).seconds())
     .appendTrigger(new Trigger("water canal digging")
     .whenReached(30, BRICK).and(6, LEVEL)
     .spawnProducer(new TimedProducer("water canal").thatProduce(500, WATER).every(5).seconds())
     .spawnCrafter(new Crafter("plant tree")
     .thatCraft(10000, WOOD)["in"](1).minutes()
-    .atCostOf(4000, WATER))));
+    .atCostOf(4000, WATER))
+    .appendTrigger(new Trigger("mining iron-ore choping")
+    .whenReached(4000, WATER)
+    .spawnProducer(new TimedProducer("mine iron-ore").thatProduce(5, IRON_ORE).every(10).seconds()))
+    .appendTrigger(new Trigger("mining iron-ore choping")
+    .whenReached(10, IRON_ORE)
+    .spawnResource(1, LEVEL))));
 engine.Triggers = [
     new Trigger("carry water in clay pot")
         .whenReached(1, CLAY_POT)

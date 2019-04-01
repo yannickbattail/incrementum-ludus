@@ -17,6 +17,7 @@ const CLAY = new Material("clay", "g", "clay");
 const WATER = new Material("water", "cl", "water");
 const WOOD = new Material("wood", "g", "wood");
 const CHARCOAL = new Material("charcoal", "g", "charcoal");
+const IRON_ORE = new Material("iron ore", "g", "iron_ore");
 const CLAY_POT = new Item("clay pot", "clay_pot");
 const BRICK = new Item("brick", "brick");
 const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
@@ -49,34 +50,31 @@ var triggerLevel5 = new Trigger("pottery")
             .atCostOf(800, WOOD).and(500, CLAY)
     )
     .appendTrigger(
-        new Trigger("wood choping")
-            .whenReached(1, TERRACOTTA_POT)
-            .spawnResource(1, LEVEL) // level 6
-            .spawnResource(-1, TERRACOTTA_POT)
-            .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds())
-    )
-    .appendTrigger(
         new Trigger("clay digging")
-            .whenReached(2, TERRACOTTA_POT).and(6, LEVEL) // level 7
+            .whenReached(2, TERRACOTTA_POT)
             .spawnResource(-2, TERRACOTTA_POT)
+            .spawnResource(1, LEVEL) // level 6
             .spawnProducer(new TimedProducer("dig clay").thatProduce(500, CLAY).every(5).seconds())
             .appendTrigger(
                 new Trigger("water canal digging")
-                    .whenReached(30, BRICK).and(6, LEVEL) // level 8
+                    .whenReached(30, BRICK).and(6, LEVEL)
                     .spawnProducer(new TimedProducer("water canal").thatProduce(500, WATER).every(5).seconds())
                     .spawnCrafter(
                         new Crafter("plant tree")
                             .thatCraft(10000, WOOD)
                             .in(1).minutes()
                             .atCostOf(4000, WATER)
-                    )/*
+                    )
                     .appendTrigger(
-                        new Trigger("wood choping")
-                            .whenReached(1, TERRACOTTA_POT)
+                        new Trigger("mining iron-ore choping")
+                            .whenReached(4000, WATER)
+                            .spawnProducer(new TimedProducer("mine iron-ore").thatProduce(5, IRON_ORE).every(10).seconds())
+                    )
+                    .appendTrigger(
+                        new Trigger("mining iron-ore choping")
+                            .whenReached(10, IRON_ORE)
                             .spawnResource(1, LEVEL) // level 7
-                            .spawnResource(-1, TERRACOTTA_POT)
-                            .spawnProducer(new TimedProducer("chop wood").thatProduce(500, WOOD).every(5).seconds())
-                    )*/
+                    )
             )
     );
 
