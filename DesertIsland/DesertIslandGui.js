@@ -5,34 +5,26 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayLevel = function () {
         var level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
-            return "";
-        if (level.Resource instanceof Level)
-            return '' + level.Quantity + ' <img src="images/' + level.Resource.image + '.svg" title="' + level.Resource.Name + '" class="resource_img"></td></tr>';
-        return "g";
+            return "XXX level";
+        return level.Resource.show(level.Quantity);
     };
     DesertIslandGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
-        h += "<tr><th>quantity</th><th>resource</th></tr>";
-        this.Engine.Player.Storage.forEach(function (res) {
-            if (res.Resource instanceof Material) {
-                h += '<tr><td>' + res.Quantity + res.Resource.unit + '</td><td><img src="images/' + res.Resource.image + '.svg" title="' + res.Resource.Name + '" class="resource_img"></td></tr>';
-            }
-            else if (res.Resource instanceof Item) {
-                h += '<tr><td>' + res.Quantity + '</td><td><img src="images/' + res.Resource.image + '.svg" title="' + res.Resource.Name + '" class="resource_img"></td></tr>';
-            }
-        });
+        h += "<tr><th>resource</th></tr>";
+        this.Engine.Player.Storage.forEach(function (res) { return h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>'; });
         h += "</table>";
         return h;
     };
     DesertIslandGui.prototype.displayProducers = function () {
+        var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
-                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>";
+                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + "</td><td>every " + _this.displayTime(producer.Interval) + "</td></tr>";
             }
             else if (producer instanceof ManualProducer) {
-                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>';
+                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";
@@ -51,9 +43,9 @@ var DesertIslandGui = (function () {
         h += '<td>' + crafter.Name + '</td>';
         h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
         h += "<td><ul>";
-        crafter.Cost.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        crafter.Cost.forEach(function (res) { return h += '<li>' + res.Resource.show(res.Quantity) + '</li>'; });
         h += "</ul></td>";
-        h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
@@ -85,13 +77,21 @@ var DesertIslandGui = (function () {
         var h = "<tr>";
         h += '<td>' + trigger.Name + '</td>';
         h += "<td><ul>";
-        trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Resource.show(res.Quantity) + '</li>'; });
         h += "</ul></td>";
         h += '</tr>';
         return h;
     };
     DesertIslandGui.prototype.displayTime = function (miliSeconds) {
-        return "" + Math.round(miliSeconds / 1000) + "s";
+        if (miliSeconds < 1000) {
+            return "" + Math.round(miliSeconds / 1000) + "ms";
+        }
+        else if (miliSeconds < 60000) {
+            return "" + (Math.round(miliSeconds / 100) / 10) + "s";
+        }
+        var sec = Math.round(miliSeconds / 1000);
+        var min = Math.round(sec / 60);
+        return "" + min + "min " + this.displayTime(sec % 60);
     };
     DesertIslandGui.prototype.displayRemainingTime = function (startTime) {
         if (startTime == null) {

@@ -18,6 +18,9 @@ var Level = (function (_super) {
         _this.image = image;
         return _this;
     }
+    Level.prototype.show = function (quantity) {
+        return quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img">';
+    };
     return Level;
 }(Resource));
 //# sourceMappingURL=Level.js.map

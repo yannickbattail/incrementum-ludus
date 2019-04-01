@@ -19,6 +19,23 @@ var Material = (function (_super) {
         _this.image = image;
         return _this;
     }
+    Material.prototype.show = function (quantity) {
+        var u = this.unit;
+        var q = quantity;
+        if (u == 'g') {
+            if (quantity >= 1000) {
+                u = 'kg';
+                q = Math.round(q / 100) / 10;
+            }
+        }
+        if (u == 'cl') {
+            if (quantity >= 100) {
+                u = 'l';
+                q = Math.round(q / 10) / 10;
+            }
+        }
+        return q + u + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img">';
+    };
     return Material;
 }(Resource));
 //# sourceMappingURL=Material.js.map

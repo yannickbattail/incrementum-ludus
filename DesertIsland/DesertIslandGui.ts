@@ -21,23 +21,15 @@ class DesertIslandGui {
     displayLevel(): string {
         let level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
-            return "";
-        if (level.Resource instanceof Level)
-           return ''+level.Quantity+' <img src="images/'+level.Resource.image+'.svg" title="'+level.Resource.Name+'" class="resource_img"></td></tr>';
-        return "g";
+            return "XXX level";
+        return level.Resource.show(level.Quantity);
     }
 
     displayStorage(): string {
         var h = '<table border="1">';
-        h += "<tr><th>quantity</th><th>resource</th></tr>";
+        h += "<tr><th>resource</th></tr>";
         this.Engine.Player.Storage.forEach(
-            res => {
-                if (res.Resource instanceof Material) {
-                    h += '<tr><td>' + res.Quantity + res.Resource.unit+ '</td><td><img src="images/'+res.Resource.image+'.svg" title="'+res.Resource.Name+'" class="resource_img"></td></tr>';
-                } else if (res.Resource instanceof Item) {
-                    h += '<tr><td>' + res.Quantity + '</td><td><img src="images/'+res.Resource.image+'.svg" title="'+res.Resource.Name+'" class="resource_img"></td></tr>';
-                }
-            }
+            res => h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>'
         );
         h += "</table>";
         return h;
@@ -49,9 +41,9 @@ class DesertIslandGui {
         this.Engine.Producers.forEach(
             producer => {
                 if (producer instanceof TimedProducer) {
-                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>"
+                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + "</td><td>every " + this.displayTime(producer.Interval) + "</td></tr>"
                 } else if (producer instanceof ManualProducer) {
-                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>'
+                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>'
                 }
             }
         );
@@ -74,10 +66,10 @@ class DesertIslandGui {
         h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
         h += "<td><ul>"
         crafter.Cost.forEach(
-            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+            res => h += '<li>' + res.Resource.show(res.Quantity) + '</li>'
         );
         h += "</ul></td>"
-        h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
@@ -114,7 +106,7 @@ class DesertIslandGui {
         h += '<td>' + trigger.Name + '</td>';
         h += "<td><ul>";
         trigger.ResourcesTrigger.forEach(
-            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+            res => h += '<li>' + res.Resource.show(res.Quantity) + '</li>'
         );
         h += "</ul></td>";
         h += '</tr>';
@@ -122,8 +114,14 @@ class DesertIslandGui {
     }
 
     private displayTime(miliSeconds : number) : string {
-        return "" + Math.round(miliSeconds / 1000) + "s";
-
+        if (miliSeconds < 1000) {
+            return "" + Math.round(miliSeconds / 1000) + "ms";
+        } else if (miliSeconds < 60000) {
+            return "" + (Math.round(miliSeconds / 100) / 10) + "s";
+        }
+        let sec = Math.round(miliSeconds / 1000);
+        let min = Math.round(sec / 60);
+        return "" + min + "min " + this.displayTime(sec % 60);
     }
     private displayRemainingTime(startTime : Date | null) : string {
         if (startTime == null) {

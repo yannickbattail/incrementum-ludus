@@ -18,6 +18,9 @@ var Item = (function (_super) {
         _this.image = image;
         return _this;
     }
+    Item.prototype.show = function (quantity) {
+        return quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img">';
+    };
     return Item;
 }(Resource));
 //# sourceMappingURL=Item.js.map
