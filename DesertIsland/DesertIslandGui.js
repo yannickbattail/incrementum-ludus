@@ -5,7 +5,14 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
-        this.Engine.Player.Storage.forEach(function (res) { return h += "<tr><td>" + res.Quantity + "</td><td>" + res.Resource.Name + "</td></tr>"; });
+        this.Engine.Player.Storage.forEach(function (res) {
+            if (res.Resource instanceof Material) {
+                h += '<tr><td>' + res.Quantity + res.Resource.unit + '</td><td><img src="images/' + res.Resource.image + '.svg" title="' + res.Resource.Name + '" class="resource_img"></td></tr>';
+            }
+            else if (res.Resource instanceof Item) {
+                h += '<tr><td>' + res.Quantity + '</td><td><img src="images/' + res.Resource.image + '.svg" title="' + res.Resource.Name + '" class="resource_img"></td></tr>';
+            }
+        });
         h += "</table>";
         return h;
     };
