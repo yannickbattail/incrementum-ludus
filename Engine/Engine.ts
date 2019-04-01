@@ -13,6 +13,7 @@ class Engine {
     Producers: Array<Producer> = [];
     Triggers: Array<Trigger> = [];
     Crafters: Array<Crafter> = [];
+    FastMode : number = 0;
     run() {
         window.setInterval(() => this.onTick(), 1000);
     }
@@ -32,7 +33,8 @@ class Engine {
         );
     }
     private collectTimedProducer(producer: TimedProducer) {
-        if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
+        let interval = this.FastMode ? this.FastMode :  producer.Interval;
+        if (producer.LastTime.getTime() + interval < new Date().getTime()) {
             producer.LastTime = new Date();
             this.Player.changeStorage(producer.ResourceQuantity);
         }
@@ -82,7 +84,8 @@ class Engine {
         this.checkStartCrafting(crafter);
     }
     private checkFinishedCrafting(crafter: Crafter) {
-        if (crafter.StartTime != null && (crafter.StartTime.getTime() + crafter.Duration < new Date().getTime())) {
+        let duration = this.FastMode ? this.FastMode : crafter.Duration;
+        if (crafter.StartTime != null && (crafter.StartTime.getTime() + duration < new Date().getTime())) {
             crafter.StartTime = null;
             this.Player.changeStorage(crafter.CraftedResource);
         }

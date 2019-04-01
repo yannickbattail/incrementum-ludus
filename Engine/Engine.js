@@ -4,6 +4,7 @@ var Engine = (function () {
         this.Producers = [];
         this.Triggers = [];
         this.Crafters = [];
+        this.FastMode = 0;
     }
     Engine.prototype.run = function () {
         var _this = this;
@@ -20,7 +21,8 @@ var Engine = (function () {
         this.Crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
     };
     Engine.prototype.collectTimedProducer = function (producer) {
-        if (producer.LastTime.getTime() + producer.Interval < new Date().getTime()) {
+        var interval = this.FastMode ? this.FastMode : producer.Interval;
+        if (producer.LastTime.getTime() + interval < new Date().getTime()) {
             producer.LastTime = new Date();
             this.Player.changeStorage(producer.ResourceQuantity);
         }
@@ -58,7 +60,8 @@ var Engine = (function () {
         this.checkStartCrafting(crafter);
     };
     Engine.prototype.checkFinishedCrafting = function (crafter) {
-        if (crafter.StartTime != null && (crafter.StartTime.getTime() + crafter.Duration < new Date().getTime())) {
+        var duration = this.FastMode ? this.FastMode : crafter.Duration;
+        if (crafter.StartTime != null && (crafter.StartTime.getTime() + duration < new Date().getTime())) {
             crafter.StartTime = null;
             this.Player.changeStorage(crafter.CraftedResource);
         }
