@@ -1,4 +1,4 @@
-var LEVEL = new Level("Level", "level");
+var LEVEL = new Level("level", "level");
 var CLAY = new Material("clay", "g", "clay");
 var WATER = new Material("water", "cl", "water");
 var WOOD = new Material("wood", "g", "wood");

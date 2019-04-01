@@ -2,6 +2,14 @@ var DesertIslandGui = (function () {
     function DesertIslandGui(engine) {
         this.Engine = engine;
     }
+    DesertIslandGui.prototype.displayLevel = function () {
+        var level = this.Engine.Player.getResourceInStorage("level");
+        if (level == null)
+            return "";
+        if (level.Resource instanceof Level)
+            return '' + level.Quantity + ' <img src="images/' + level.Resource.image + '.svg" title="' + level.Resource.Name + '" class="resource_img"></td></tr>';
+        return "g";
+    };
     DesertIslandGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";

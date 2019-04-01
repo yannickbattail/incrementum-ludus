@@ -18,6 +18,15 @@ class DesertIslandGui {
         this.Engine = engine;
     }
 
+    displayLevel(): string {
+        let level = this.Engine.Player.getResourceInStorage("level");
+        if (level == null)
+            return "";
+        if (level.Resource instanceof Level)
+           return ''+level.Quantity+' <img src="images/'+level.Resource.image+'.svg" title="'+level.Resource.Name+'" class="resource_img"></td></tr>';
+        return "g";
+    }
+
     displayStorage(): string {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";

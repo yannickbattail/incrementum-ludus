@@ -12,7 +12,7 @@
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
 
-const LEVEL = new Level("Level", "level");
+const LEVEL = new Level("level", "level");
 const CLAY = new Material("clay", "g", "clay");
 const WATER = new Material("water", "cl", "water");
 const WOOD = new Material("wood", "g", "wood");
