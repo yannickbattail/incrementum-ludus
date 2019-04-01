@@ -36,7 +36,7 @@ engine.Crafters = [
     // inital Crafters
     new Crafter("craft clay pot")
         .thatCraft(1, CLAY_POT)
-        .in(20).seconds()
+        .in(10).seconds()
         .atCostOf(100, CLAY).and(10, WATER)
 ];
 
@@ -47,7 +47,7 @@ var triggerLevel5 = new Trigger("pottery")
         new Crafter("pottery oven")
             .thatCraft(1, TERRACOTTA_POT)
             .in(20).seconds()
-            .atCostOf(800, WOOD).and(500, CLAY)
+            .atCostOf(800, WOOD).and(1, CLAY_POT)
     )
     .appendTrigger(
         new Trigger("clay digging")

@@ -16,7 +16,7 @@ engine.Producers = [
 ];
 engine.Crafters = [
     new Crafter("craft clay pot")
-        .thatCraft(1, CLAY_POT)["in"](20).seconds()
+        .thatCraft(1, CLAY_POT)["in"](10).seconds()
         .atCostOf(100, CLAY).and(10, WATER)
 ];
 var triggerLevel5 = new Trigger("pottery")
@@ -24,7 +24,7 @@ var triggerLevel5 = new Trigger("pottery")
     .spawnResource(1, LEVEL)
     .spawnCrafter(new Crafter("pottery oven")
     .thatCraft(1, TERRACOTTA_POT)["in"](20).seconds()
-    .atCostOf(800, WOOD).and(500, CLAY))
+    .atCostOf(800, WOOD).and(1, CLAY_POT))
     .appendTrigger(new Trigger("clay digging")
     .whenReached(2, TERRACOTTA_POT)
     .spawnResource(-2, TERRACOTTA_POT)
