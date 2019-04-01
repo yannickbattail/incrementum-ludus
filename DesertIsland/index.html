@@ -15,7 +15,7 @@
     <style>
         body {
             font-family: Verdana, Arial, Helvetica, sans-serif;
-            font-size: 8pt;
+            font-size: 10pt;
             background-color: #222222;
             color: #0099cc;
         }
@@ -28,10 +28,40 @@
             background-color: #333333;
         }
 
+        .resource {
+            display: inline;
+        }
+        .Level {
+            
+        }
+        .Material {
+            
+        }
+        .Item {
+            
+        }
+
         .resource_img {
             width : 24px;
             height: 24px;
             vertical-align: middle;
+        }
+
+        .progressBar {
+            border-style: solid;
+            border-width: 1px;
+            border-color: gray;
+            border-radius: 3px;
+            color: black;
+            width: 100px;
+            background-color: #eee;
+            box-shadow: 0 2px 3px rgba(0,0,0,.2) inset;
+        }
+        .progressBarIn {
+            border-style: none;
+            border-width: 0px;
+            border-radius: 3px;
+            background-color: #0099cc;
         }
     </style>
     <title>incr</title>
@@ -84,8 +114,11 @@
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
         }
         var interval = window.setInterval(updateGui, 1000);
-
     </script>
-    v1.5<div onclick="window.clearInterval(interval)">.</div>
+    <div onclick="document.getElementById('debugMode').style.display='block';">v1.5</div>
+    <div id="debugMode" style="display: none;">
+        <div onclick="window.clearInterval(interval)">stop</div>
+        <div onclick="engine.FastMode=1000;">fast mode</div>
+    </div>
 </body>
 </html>

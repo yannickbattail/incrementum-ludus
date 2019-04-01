@@ -19,6 +19,6 @@ class Material extends Resource {
                 q = Math.round(q / 10) / 10;
             }
         }
-        return q + u + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img">';
+        return '<div class="resource Material">' + q + u + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
     }
 }

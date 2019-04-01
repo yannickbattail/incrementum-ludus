@@ -19,7 +19,7 @@ var Level = (function (_super) {
         return _this;
     }
     Level.prototype.show = function (quantity) {
-        return quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img">';
+        return '<div class="resource Level">' + quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
     };
     return Level;
 }(Resource));

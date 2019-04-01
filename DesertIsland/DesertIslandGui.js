@@ -11,7 +11,11 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
         h += "<tr><th>resource</th></tr>";
-        this.Engine.Player.Storage.forEach(function (res) { return h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>'; });
+        this.Engine.Player.Storage.forEach(function (res) {
+            if (!(res.Resource instanceof Level)) {
+                h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>';
+            }
+        });
         h += "</table>";
         return h;
     };
@@ -33,7 +37,7 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
+        h += "<tr><th>name</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
         this.Engine.Crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
@@ -41,12 +45,12 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayCrafter = function (crafter) {
         var h = "<tr>";
         h += '<td>' + crafter.Name + '</td>';
-        h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
         h += "<td><ul>";
         crafter.Cost.forEach(function (res) { return h += '<li>' + res.Resource.show(res.Quantity) + '</li>'; });
         h += "</ul></td>";
         h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
-        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + '<br />'
+            + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
         h += '</tr>';
         return h;
     };
@@ -55,10 +59,10 @@ var DesertIslandGui = (function () {
             return 'Auto Crafting';
         }
         if (crafter.isCrafting()) {
-            return '<button disabled="disabled">craft</button><br/>Crafting in progress';
+            return this.displayProgress(crafter.StartTime, crafter.Duration);
         }
         if (!this.Engine.Player.hasResources(crafter.Cost)) {
-            return '<button disabled="disabled">craft</button><br/>not enough resources';
+            return 'Not enough resources';
         }
         return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
     };
@@ -87,7 +91,7 @@ var DesertIslandGui = (function () {
             return "" + Math.round(miliSeconds / 1000) + "ms";
         }
         else if (miliSeconds < 60000) {
-            return "" + (Math.round(miliSeconds / 100) / 10) + "s";
+            return "" + Math.round(miliSeconds / 1000) + "s";
         }
         var sec = Math.round(miliSeconds / 1000);
         var min = Math.round(sec / 60);
@@ -98,6 +102,21 @@ var DesertIslandGui = (function () {
             return ' - ';
         }
         return this.displayTime(new Date().getTime() - startTime.getTime());
+    };
+    DesertIslandGui.prototype.displayProgress = function (startTime, duration) {
+        return this.formatProgress(this.calculateProgress(startTime, duration));
+    };
+    DesertIslandGui.prototype.calculateProgress = function (startTime, duration) {
+        if (startTime == null) {
+            return 0;
+        }
+        return (new Date().getTime() - startTime.getTime()) / duration;
+    };
+    DesertIslandGui.prototype.formatProgress = function (percent01) {
+        var percent100 = Math.round(percent01 * 100);
+        return '<div class="progressBar">' +
+            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + percent100 + '&nbsp;%</div>' +
+            '</div>';
     };
     return DesertIslandGui;
 }());

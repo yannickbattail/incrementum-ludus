@@ -19,7 +19,7 @@ var Item = (function (_super) {
         return _this;
     }
     Item.prototype.show = function (quantity) {
-        return quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img">';
+        return '<div class="resource Item">' + quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
     };
     return Item;
 }(Resource));
