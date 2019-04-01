@@ -66,12 +66,12 @@ var triggerLevel5 = new Trigger("pottery")
                             .atCostOf(4000, WATER)
                     )
                     .appendTrigger(
-                        new Trigger("mining iron-ore choping")
+                        new Trigger("wood choping")
                             .whenReached(4000, WATER)
                             .spawnProducer(new TimedProducer("mine iron-ore").thatProduce(5, IRON_ORE).every(10).seconds())
                     )
                     .appendTrigger(
-                        new Trigger("mining iron-ore choping")
+                        new Trigger("iron-ore mining")
                             .whenReached(10, IRON_ORE)
                             .spawnResource(1, LEVEL) // level 7
                     )

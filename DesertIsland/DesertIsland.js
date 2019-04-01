@@ -36,10 +36,10 @@ var triggerLevel5 = new Trigger("pottery")
     .spawnCrafter(new Crafter("plant tree")
     .thatCraft(10000, WOOD)["in"](1).minutes()
     .atCostOf(4000, WATER))
-    .appendTrigger(new Trigger("mining iron-ore choping")
+    .appendTrigger(new Trigger("wood choping")
     .whenReached(4000, WATER)
     .spawnProducer(new TimedProducer("mine iron-ore").thatProduce(5, IRON_ORE).every(10).seconds()))
-    .appendTrigger(new Trigger("mining iron-ore choping")
+    .appendTrigger(new Trigger("iron-ore mining")
     .whenReached(10, IRON_ORE)
     .spawnResource(1, LEVEL))));
 engine.Triggers = [

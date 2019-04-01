@@ -72,6 +72,9 @@ var DesertIslandGui = (function () {
     };
     DesertIslandGui.prototype.displayTriggers = function () {
         var _this = this;
+        if (this.Engine.Triggers.length == 0) {
+            return '...No more objectives for now. Wait for next version of the game. PERDU!';
+        }
         var h = '<table border="1">';
         h += '<tr><th>Goal</th><th>needed resources</th></tr>';
         this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
