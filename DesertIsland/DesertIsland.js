@@ -56,14 +56,14 @@ engine.Triggers = [
         .appendTrigger(new Trigger("charcoal crafting")
         .whenReached(200, WOOD)
         .spawnCrafter(new Crafter("craft charcoal")
-        .thatCraft(1000, CHARCOAL)["in"](20).seconds()
-        .atCostOf(3000, WOOD).and(1000, CLAY)).appendTrigger(new Trigger("charcoal level")
-        .whenReached(1000, CHARCOAL)
+        .thatCraft(200, CHARCOAL)["in"](20).seconds()
+        .atCostOf(600, WOOD).and(200, CLAY)).appendTrigger(new Trigger("charcoal level")
+        .whenReached(200, CHARCOAL)
         .spawnResource(1, LEVEL)).appendTrigger(new Trigger("brick crafting")
-        .whenReached(3000, CHARCOAL).and(5000, WOOD).and(3000, CLAY).and(500, WATER)
+        .whenReached(400, CHARCOAL).and(500, WOOD).and(300, CLAY).and(200, WATER)
         .spawnCrafter(new Crafter("Brik oven")
         .thatCraft(10, BRICK)["in"](20).seconds()
-        .atCostOf(3000, WOOD).and(1000, CLAY))
+        .atCostOf(500, WOOD).and(200, CLAY))
         .appendTrigger(triggerLevel5))),
 ];
 //# sourceMappingURL=DesertIsland.js.map
