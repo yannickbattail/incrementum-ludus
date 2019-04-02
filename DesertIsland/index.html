@@ -27,6 +27,19 @@
             border: none;
             background-color: #333333;
         }
+        ul {
+            margin: 2px;
+            margin-left: 20px;
+            padding: 2px;
+        }
+        
+        #storage {
+            display: inline-block;
+        }
+
+        #producers {
+            display: inline-block;
+        }
 
         .resource {
             display: inline;
@@ -62,6 +75,7 @@
             border-width: 0px;
             border-radius: 3px;
             background-color: #0099cc;
+            text-align: center;
         }
     </style>
     <title>incr</title>
@@ -84,32 +98,18 @@
 <body id="body">
     <h1>Desert island</h1>
     <p><i>(inspired by the youtube channel: primitive technology)</i></p>
-    <div>
-        Level: <span id="level"></span>
-    </div>
-    <div>
-        Storage
-        <div id="storage"></div>
-    </div>
-    <div>
-        Producers
-        <div id="sources"></div>
-    </div>
-    <div>
-        Crafters
-        <div id="crafters"></div>
-    </div>
-    <div>
-        Next goals
-        <div id="triggers"></div>
-    </div>
+    <div id="level"></div>
+    <div id="storage"></div>
+    <div id="producers"></div>
+    <div id="crafters"></div>
+    <div id="triggers"></div>
     <script>
         engine.run();
         var gui = new DesertIslandGui(engine);
         function updateGui() {
             document.getElementById('level').innerHTML = gui.displayLevel();
             document.getElementById('storage').innerHTML = gui.displayStorage();
-            document.getElementById('sources').innerHTML = gui.displayProducers();
+            document.getElementById('producers').innerHTML = gui.displayProducers();
             document.getElementById('crafters').innerHTML = gui.displayCrafters();
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
         }

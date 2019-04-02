@@ -6,7 +6,7 @@ var DesertIslandGui = (function () {
         var level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
             return "XXX level";
-        return level.Resource.show(level.Quantity);
+        return 'Level: ' + level.Resource.show(level.Quantity);
     };
     DesertIslandGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
@@ -22,7 +22,7 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayProducers = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>resource</th><th>when</th></tr>";
+        h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer instanceof TimedProducer) {
                 h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + "</td><td>every " + _this.displayTime(producer.Interval) + "</td></tr>";
@@ -37,7 +37,7 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
+        h += "<tr><th>Crafter</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
         this.Engine.Crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
@@ -49,8 +49,7 @@ var DesertIslandGui = (function () {
         crafter.Cost.forEach(function (res) { return h += '<li>' + res.Resource.show(res.Quantity) + '</li>'; });
         h += "</ul></td>";
         h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
-        h += '<td>' + this.displayCraftButton(crafter) + '<br />'
-            + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
     };
@@ -64,7 +63,7 @@ var DesertIslandGui = (function () {
         if (!this.Engine.Player.hasResources(crafter.Cost)) {
             return 'Not enough resources';
         }
-        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
+        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft (' + this.displayTime(crafter.Duration) + ')</button>';
     };
     DesertIslandGui.prototype.displayTriggers = function () {
         var _this = this;
@@ -72,7 +71,7 @@ var DesertIslandGui = (function () {
             return '...No more goal for now. Wait for next version of the game.';
         }
         var h = '<table border="1">';
-        h += '<tr><th>Goal</th><th>needed resources</th></tr>';
+        h += '<tr><th>Next goal</th><th>needed resources</th></tr>';
         this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
         h += "</table>";
         return h;
@@ -104,18 +103,19 @@ var DesertIslandGui = (function () {
         return this.displayTime(new Date().getTime() - startTime.getTime());
     };
     DesertIslandGui.prototype.displayProgress = function (startTime, duration) {
-        return this.formatProgress(this.calculateProgress(startTime, duration));
+        var progress = this.calculateProgress(startTime);
+        return this.formatProgress(progress / duration, this.displayTime(duration - progress));
     };
-    DesertIslandGui.prototype.calculateProgress = function (startTime, duration) {
+    DesertIslandGui.prototype.calculateProgress = function (startTime) {
         if (startTime == null) {
             return 0;
         }
-        return (new Date().getTime() - startTime.getTime()) / duration;
+        return (new Date().getTime() - startTime.getTime());
     };
-    DesertIslandGui.prototype.formatProgress = function (percent01) {
+    DesertIslandGui.prototype.formatProgress = function (percent01, text) {
         var percent100 = Math.round(percent01 * 100);
         return '<div class="progressBar">' +
-            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + percent100 + '&nbsp;%</div>' +
+            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + text + '</div>' +
             '</div>';
     };
     return DesertIslandGui;

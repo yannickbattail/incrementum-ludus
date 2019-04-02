@@ -22,7 +22,7 @@ class DesertIslandGui {
         let level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
             return "XXX level";
-        return level.Resource.show(level.Quantity);
+        return 'Level: '+level.Resource.show(level.Quantity);
     }
 
     displayStorage(): string {
@@ -41,7 +41,7 @@ class DesertIslandGui {
 
     displayProducers(): string {
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>resource</th><th>when</th></tr>";
+        h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(
             producer => {
                 if (producer instanceof TimedProducer) {
@@ -56,7 +56,7 @@ class DesertIslandGui {
     }
     displayCrafters(): string {
         var h = '<table border="1">';
-        h += "<tr><th>name</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
+        h += "<tr><th>Crafter</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
         this.Engine.Crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
@@ -73,8 +73,7 @@ class DesertIslandGui {
         );
         h += "</ul></td>"
         h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
-        h += '<td>' + this.displayCraftButton(crafter) + '<br />' 
-            + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
     }
@@ -89,7 +88,7 @@ class DesertIslandGui {
         if (!this.Engine.Player.hasResources(crafter.Cost)) {
             return 'Not enough resources';
         }
-        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
+        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft ('+this.displayTime(crafter.Duration)+')</button>';
     }
 
     displayTriggers(): string {
@@ -97,7 +96,7 @@ class DesertIslandGui {
             return '...No more goal for now. Wait for next version of the game.';
         }
         var h = '<table border="1">';
-        h += '<tr><th>Goal</th><th>needed resources</th></tr>';
+        h += '<tr><th>Next goal</th><th>needed resources</th></tr>';
         this.Engine.Triggers.forEach(
             trigger => h += this.displayTrigger(trigger)
         );
@@ -135,20 +134,21 @@ class DesertIslandGui {
     }
 
     private displayProgress(startTime : Date | null, duration : number) : string {
-        return this.formatProgress(this.calculateProgress(startTime, duration));
+        let progress = this.calculateProgress(startTime)
+        return this.formatProgress(progress / duration, this.displayTime(duration - progress));
     }
 
-    private calculateProgress(startTime : Date | null, duration : number) : number {
+    private calculateProgress(startTime : Date | null) : number {
         if (startTime == null) {
             return 0;
         }
-        return (new Date().getTime() - startTime.getTime()) / duration;
+        return (new Date().getTime() - startTime.getTime());
     }
 
-    private formatProgress(percent01 : number) : string {
+    private formatProgress(percent01 : number, text : string) : string {
         var percent100 = Math.round(percent01 * 100);
         return '<div class="progressBar">' +
-            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + percent100 + '&nbsp;%</div>' +
+            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + text + '</div>' +
             '</div>';
     }
 }
