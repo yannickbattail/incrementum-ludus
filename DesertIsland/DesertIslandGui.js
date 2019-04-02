@@ -50,9 +50,9 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayCrafter = function (crafter) {
         var h = "<tr>";
         h += '<td>' + crafter.Name + '</td>';
-        h += "<td><ul>";
-        crafter.Cost.forEach(function (res) { return h += '<li>' + res.Resource.show(res.Quantity) + '</li>'; });
-        h += "</ul></td>";
+        h += "<td>";
+        crafter.Cost.forEach(function (res) { return h += res.Resource.show(res.Quantity); });
+        h += "</td>";
         h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
@@ -84,9 +84,9 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayTrigger = function (trigger) {
         var h = "<tr>";
         h += '<td>' + trigger.Name + '</td>';
-        h += "<td><ul>";
-        trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Resource.show(res.Quantity) + '</li>'; });
-        h += "</ul></td>";
+        h += "<td>";
+        trigger.ResourcesTrigger.forEach(function (res) { return h += res.Resource.show(res.Quantity); });
+        h += "</td>";
         h += '</tr>';
         return h;
     };

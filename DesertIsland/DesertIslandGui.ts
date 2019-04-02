@@ -71,11 +71,11 @@ class DesertIslandGui {
     private displayCrafter(crafter : Crafter) : string {
         let h = "<tr>";
         h += '<td>' + crafter.Name + '</td>';
-        h += "<td><ul>"
+        h += "<td>"
         crafter.Cost.forEach(
-            res => h += '<li>' + res.Resource.show(res.Quantity) + '</li>'
+            res => h += res.Resource.show(res.Quantity)
         );
-        h += "</ul></td>"
+        h += "</td>"
         h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
@@ -111,11 +111,11 @@ class DesertIslandGui {
     private displayTrigger(trigger : Trigger) : string {
         let h = "<tr>";
         h += '<td>' + trigger.Name + '</td>';
-        h += "<td><ul>";
+        h += "<td>";
         trigger.ResourcesTrigger.forEach(
-            res => h += '<li>' + res.Resource.show(res.Quantity) + '</li>'
+            res => h += res.Resource.show(res.Quantity)
         );
-        h += "</ul></td>";
+        h += "</td>";
         h += '</tr>';
         return h;
     }
