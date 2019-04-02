@@ -28,13 +28,17 @@ class DesertIslandGui {
     displayStorage(): string {
         var h = '<table border="1">';
         h += "<tr><th>resource</th></tr>";
-        this.Engine.Player.Storage.forEach(
-            res => {
-                if (!(res.Resource instanceof Level)) {
-                    h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>';
+        if (this.Engine.Player.Storage.length <= 1) {
+            h += "<tr><td>no resource</td></tr>";
+        } else {
+            this.Engine.Player.Storage.forEach(
+                res => {
+                    if (!(res.Resource instanceof Level)) {
+                        h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>';
+                    }
                 }
-            }
-        );
+            );
+        }
         h += "</table>";
         return h;
     }

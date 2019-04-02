@@ -32,7 +32,12 @@
             margin-left: 20px;
             padding: 2px;
         }
-        
+        .titleIcon {
+            width: 24px;
+            height: 24px;
+        }
+
+
         #storage {
             display: inline-block;
         }
@@ -96,8 +101,10 @@
     <script src="DesertIslandGui.js"></script>
 </head>
 <body id="body">
-    <h1>Desert island</h1>
+    <h1><img src="images/DesertIsland.svg" title="Desert island" alt="Desert island" class="titleIcon"/>
+    Desert island</h1>
     <p><i>(inspired by the youtube channel: primitive technology)</i></p>
+    <p>Your are alone in desert island. You need to survive. Start <b>collecting</b> some resources.</p>
     <div id="level"></div>
     <div id="storage"></div>
     <div id="producers"></div>
@@ -115,7 +122,7 @@
         }
         var interval = window.setInterval(updateGui, 1000);
     </script>
-    <div onclick="document.getElementById('debugMode').style.display='block';">v1.5</div>
+    <div onclick="document.getElementById('debugMode').style.display='block';">v1.6</div>
     <div id="debugMode" style="display: none;">
         <div onclick="window.clearInterval(interval)">stop</div>
         <div onclick="engine.FastMode=1000;">fast mode</div>
