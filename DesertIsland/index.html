@@ -23,9 +23,15 @@
             border-color: #0099cc;
             border-style: none;
         }
+        th {
+            padding: 2px;
+        }
         td {
             border: none;
             background-color: #333333;
+            padding: 2px;
+            text-align: center;
+            height: 32px;
         }
         ul {
             margin: 2px;
@@ -37,9 +43,14 @@
             height: 24px;
         }
 
-
         #storage {
             display: inline-block;
+        }
+        #storage > table > tbody > tr > td,
+        #crafters > table > tbody > tr > th:nth-child(4),
+        #producers > table > tbody > tr > th:nth-child(3) {
+            width: 110px;
+            max-width: 110px;
         }
 
         #producers {
@@ -47,10 +58,13 @@
         }
 
         .resource {
-            display: inline;
+            float: right;
+            display: block;
         }
+
         .Level {
-            
+            float: initial;
+            display: inline-block;
         }
         .Material {
             
