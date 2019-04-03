@@ -14,6 +14,8 @@
     <link rel="shortcut icon" type="image/png" href="images/DesertIsland.svg" />
     <link rel="stylesheet" href="styles/DesertIsland.css">
     <title>Desert Island : Incremental game</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js" integrity="sha256-fD5k74TlKQ/u8+bmlDxGGM07YJmVtte95uiYsGu/XVo=" crossorigin="anonymous"></script>
     <script src="../Engine/Resource.js"></script>
     <script src="../Engine/ResourceQuantity.js"></script>
     <script src="../Engine/Producer.js"></script>
@@ -27,6 +29,7 @@
     <script src="Level.js"></script>
     <script src="Item.js"></script>
     <script src="Material.js"></script>
+    <script src="Scenario.js"></script>
     <script src="DesertIsland.js"></script>
     <script src="DesertIslandGui.js"></script>
 </head>
@@ -43,16 +46,17 @@
     <script>
         engine.run();
         var gui = new DesertIslandGui(engine);
-        function updateGui() {
+        var updateGui = function () {
             document.getElementById('level').innerHTML = gui.displayLevel();
             document.getElementById('storage').innerHTML = gui.displayStorage();
             document.getElementById('producers').innerHTML = gui.displayProducers();
             document.getElementById('crafters').innerHTML = gui.displayCrafters();
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
+            saveEngine(engine);
         }
         var interval = window.setInterval(updateGui, 1000);
     </script>
-    <div onclick="document.getElementById('debugMode').style.display='block';">v1.6</div>
+    <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">
         <div onclick="window.clearInterval(interval)">stop</div>
         <div onclick="engine.FastMode=1000;">fast mode</div>
