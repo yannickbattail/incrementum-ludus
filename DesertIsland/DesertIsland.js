@@ -17,7 +17,7 @@ function loadEngine() {
             var obj = JSON.parse(json);
             return obj;
         }
-        console.log('wong version');
+        console.log('wrong version');
     }
     console.log('no engine');
     return null;

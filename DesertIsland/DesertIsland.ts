@@ -32,10 +32,10 @@ function loadEngine() : Engine | null {
         if ((window.localStorage.getItem('DesertIslandVersion') != null)
             || (window.localStorage.getItem('DesertIslandVersion') == VERSION)) {
             console.log('load engine');
-            let obj = JSON.parse(json);
+            let obj : Engine = JSON.parse(json);
             return obj;
         }
-        console.log('wong version');
+        console.log('wrong version');
     }
     console.log('no engine');
     return null;
