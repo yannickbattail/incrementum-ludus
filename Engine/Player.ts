@@ -7,9 +7,17 @@
 /// <reference path="Crafter.ts" />
 
 class Player {
-    Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
+    $type : string = 'Player';
+    public Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
     constructor(public Name: string) {
     }
+    public static load(data : any) : Player {
+        let curContext : any = window;
+        let player : Player = new Player(data.Name);
+        player.Storage = (data.Storage as Array<any>).map(p => curContext[p.$type].load(p));
+        return player;
+    }
+
     public changeStorage(resourceQuantity: ResourceQuantity) {
         let resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
         if (resQ == null) {
@@ -27,7 +35,7 @@ class Player {
         }
     }
 
-    
+
     public getResourceInStorage(resourceName: string): ResourceQuantity | null {
         let res = this.Storage.filter((res: ResourceQuantity) => res.Resource.Name == resourceName);
         if (res.length) {

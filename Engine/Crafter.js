@@ -9,7 +9,17 @@ var Crafter = (function () {
         this.Cost = Cost;
         this.CraftedResource = CraftedResource;
         this.AutoCrafting = AutoCrafting;
+        this.$type = 'Crafter';
     }
+    Crafter.load = function (data) {
+        var curContext = window;
+        var newObj = new Crafter(data.Name);
+        newObj.Duration = data.Duration;
+        newObj.Cost = data.Cost.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.CraftedResource = curContext[data.CraftedResource.$type].load(data.CraftedResource);
+        newObj.AutoCrafting = data.AutoCrafting;
+        return newObj;
+    };
     Crafter.prototype.thatCraft = function (quantity, resource) {
         this.CraftedResource = new ResourceQuantity(resource, quantity);
         return this;

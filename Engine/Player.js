@@ -1,8 +1,15 @@
 var Player = (function () {
     function Player(Name) {
         this.Name = Name;
+        this.$type = 'Player';
         this.Storage = new Array();
     }
+    Player.load = function (data) {
+        var curContext = window;
+        var player = new Player(data.Name);
+        player.Storage = data.Storage.map(function (p) { return curContext[p.$type].load(p); });
+        return player;
+    };
     Player.prototype.changeStorage = function (resourceQuantity) {
         var resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
         if (resQ == null) {

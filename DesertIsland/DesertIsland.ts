@@ -41,8 +41,8 @@ function loadEngine() : Engine | null {
     return null;
 }
 function saveEngine(engine : Engine) {
-    window.localStorage.SetItem('DesertIsland', JSON.stringify(engine));
-    window.localStorage.SetItem('DesertIslandVersion', VERSION);
+    window.localStorage.setItem('DesertIsland', JSON.stringify(engine));
+    window.localStorage.setItem('DesertIslandVersion', VERSION);
 }
 
 var engine : Engine;

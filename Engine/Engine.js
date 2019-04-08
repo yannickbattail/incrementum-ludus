@@ -1,14 +1,26 @@
 var Engine = (function () {
     function Engine() {
-        this.tick = 1000;
+        this.$type = 'Engine';
+        this.tickInterval = 1000;
         this.Producers = [];
         this.Triggers = [];
         this.Crafters = [];
         this.FastMode = 0;
     }
+    Engine.load = function (data) {
+        var curContext = window;
+        var newObj = new Engine();
+        newObj.tickInterval = data.tickInterval;
+        newObj.Player = curContext[data.Player.$type].load(data.Player);
+        newObj.Producers = data.Producers.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.Triggers = data.Triggers.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.Crafters = data.Crafters.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.FastMode = data.FastMode;
+        return newObj;
+    };
     Engine.prototype.run = function () {
         var _this = this;
-        window.setInterval(function () { return _this.onTick(); }, 1000);
+        window.setInterval(function () { return _this.onTick(); }, this.tickInterval);
     };
     Engine.prototype.onTick = function () {
         var _this = this;

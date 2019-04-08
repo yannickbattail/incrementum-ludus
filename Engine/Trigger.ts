@@ -6,6 +6,7 @@
 /// <reference path="Crafter.ts" />
 
 class Trigger {
+    $type : string = 'Trigger';
     constructor(public Name: string,
         public ResourcesTrigger: Array<ResourceQuantity> = [],
         public SpawnProducers:  Array<Producer> = [],
@@ -14,6 +15,17 @@ class Trigger {
         public SpawnNewTriggers: Array<Trigger> = []) {
 
     }
+    public static load(data : any) : Trigger {
+        let curContext : any = window;
+        let newObj : Trigger = new Trigger(data.Name);
+        newObj.ResourcesTrigger = (data.ResourcesTrigger as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.SpawnProducers = (data.SpawnProducers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.SpawnResources = (data.SpawnResources as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.SpawnCrafters = (data.SpawnCrafters as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.SpawnNewTriggers = (data.SpawnNewTriggers as Array<any>).map(p => curContext[p.$type].load(p));
+        return newObj;
+    }
+
     public whenReached(quantity : number, resource : Resource) : Trigger {
         this.ResourcesTrigger.push(new ResourceQuantity(resource, quantity));
         return this;
@@ -37,5 +49,5 @@ class Trigger {
         this.SpawnNewTriggers.push(trigger);
         return this;
     }
-    
+
 }

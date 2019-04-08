@@ -11,7 +11,18 @@ var Trigger = (function () {
         this.SpawnResources = SpawnResources;
         this.SpawnCrafters = SpawnCrafters;
         this.SpawnNewTriggers = SpawnNewTriggers;
+        this.$type = 'Trigger';
     }
+    Trigger.load = function (data) {
+        var curContext = window;
+        var newObj = new Trigger(data.Name);
+        newObj.ResourcesTrigger = data.ResourcesTrigger.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.SpawnProducers = data.SpawnProducers.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.SpawnResources = data.SpawnResources.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.SpawnCrafters = data.SpawnCrafters.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.SpawnNewTriggers = data.SpawnNewTriggers.map(function (p) { return curContext[p.$type].load(p); });
+        return newObj;
+    };
     Trigger.prototype.whenReached = function (quantity, resource) {
         this.ResourcesTrigger.push(new ResourceQuantity(resource, quantity));
         return this;
