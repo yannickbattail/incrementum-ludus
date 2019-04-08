@@ -13,18 +13,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var ManualProducer = (function (_super) {
     __extends(ManualProducer, _super);
-    function ManualProducer(Name, Resource) {
-        if (Resource === void 0) { Resource = EMPTY_RQ; }
-        var _this = _super.call(this, Name, Resource) || this;
+    function ManualProducer(Name, ResourceQuantity) {
+        if (ResourceQuantity === void 0) { ResourceQuantity = EMPTY_RQ; }
+        var _this = _super.call(this, Name, ResourceQuantity) || this;
         _this.Name = Name;
-        _this.Resource = Resource;
+        _this.ResourceQuantity = ResourceQuantity;
         _this.$type = 'ManualProducer';
         return _this;
     }
     ManualProducer.load = function (data) {
         var curContext = window;
         var newObj = new ManualProducer(data.Name);
-        newObj.Resource = curContext[data.Resource.$type].load(data.Resource);
+        newObj.ResourceQuantity = curContext[data.ResourceQuantity.$type].load(data.ResourceQuantity);
         return newObj;
     };
     ManualProducer.prototype.thatProduce = function (quantity, resource) {

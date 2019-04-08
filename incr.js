@@ -20,7 +20,7 @@ engine.Triggers = [
         .thatProduce(1, LEAD).every(5).seconds()),
     new Trigger("water source")
         .whenReached(10, TIN)
-        .spawnProducer(new ManualProducer("lead mine")
+        .spawnProducer(new ManualProducer("water source")
         .thatProduce(1, WATER))
         .spawnResource(10, WATER)
         .appendTrigger(new Trigger("beer brewering")
@@ -52,7 +52,6 @@ function saveEngine(engine) {
     window.localStorage.setItem('incr', JSON.stringify(engine));
     window.localStorage.setItem('incrVersion', VERSION);
 }
-saveEngine(engine);
 var engine2 = loadEngine();
 if (engine2) {
     engine = engine2;

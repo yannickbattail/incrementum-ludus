@@ -35,7 +35,7 @@ engine.Triggers = [
     new Trigger("water source")
         .whenReached(10, TIN)
         .spawnProducer(
-            new ManualProducer("lead mine")
+            new ManualProducer("water source")
                 .thatProduce(1, WATER)
         )
         .spawnResource(10, WATER)
@@ -83,7 +83,7 @@ function saveEngine(engine : Engine) {
     window.localStorage.setItem('incr', JSON.stringify(engine));
     window.localStorage.setItem('incrVersion', VERSION);
 }
-saveEngine(engine);
+
 var engine2 = loadEngine();
 if (engine2) {
     engine = engine2;

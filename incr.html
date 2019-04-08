@@ -65,10 +65,12 @@
             document.getElementById('sources').innerHTML = gui.displayProducers();
             document.getElementById('crafters').innerHTML = gui.displayCrafters();
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
+            saveEngine(engine);
         }
         var interval = window.setInterval(updateGui, 1000);
 
     </script>
     <div onclick="window.clearInterval(interval)">stop</div>
+    <div onclick="engine.FastMode=1000;">fast mode</div>
 </body>
 </html>

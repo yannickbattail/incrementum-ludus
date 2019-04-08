@@ -8,7 +8,7 @@
 
 class Player {
     $type : string = 'Player';
-    Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
+    public Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
     constructor(public Name: string) {
     }
     public static load(data : any) : Player {
