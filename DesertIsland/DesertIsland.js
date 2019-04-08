@@ -23,8 +23,8 @@ function loadEngine() {
     return null;
 }
 function saveEngine(engine) {
-    window.localStorage.SetItem('DesertIsland', JSON.stringify(engine));
-    window.localStorage.SetItem('DesertIslandVersion', VERSION);
+    window.localStorage.setItem('DesertIsland', JSON.stringify(engine));
+    window.localStorage.setItem('DesertIslandVersion', VERSION);
 }
 var engine;
 engine = Scenario.initEngine();

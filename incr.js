@@ -33,4 +33,28 @@ engine.Crafters = [
     new Crafter("forge axe", 20000, [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)], new ResourceQuantity(AXE, 1), true),
     new Crafter("forge knife", 20000, [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)], new ResourceQuantity(KNIFE, 1), false),
 ];
+var VERSION = "1";
+function loadEngine() {
+    var json = window.localStorage.getItem('incr');
+    if (json != null) {
+        if ((window.localStorage.getItem('incrVersion') != null)
+            || (window.localStorage.getItem('incrVersion') == VERSION)) {
+            console.log('load engine');
+            var obj = JSON.parse(json);
+            return Engine.load(obj);
+        }
+        console.log('wrong version');
+    }
+    console.log('no engine');
+    return null;
+}
+function saveEngine(engine) {
+    window.localStorage.setItem('incr', JSON.stringify(engine));
+    window.localStorage.setItem('incrVersion', VERSION);
+}
+saveEngine(engine);
+var engine2 = loadEngine();
+if (engine2) {
+    engine = engine2;
+}
 //# sourceMappingURL=incr.js.map

@@ -17,10 +17,20 @@ var TimedProducer = (function (_super) {
         if (Resource === void 0) { Resource = EMPTY_RQ; }
         if (Interval === void 0) { Interval = 0; }
         var _this = _super.call(this, Name, Resource) || this;
+        _this.Name = Name;
+        _this.Resource = Resource;
         _this.Interval = Interval;
+        _this.$type = 'TimedProducer';
         _this.LastTime = new Date(1970, 0, 1);
         return _this;
     }
+    TimedProducer.load = function (data) {
+        var curContext = window;
+        var newObj = new TimedProducer(data.Name);
+        newObj.Interval = data.Interval;
+        newObj.Resource = curContext[data.Resource.$type].load(data.Resource);
+        return newObj;
+    };
     TimedProducer.prototype.thatProduce = function (quantity, resource) {
         this.ResourceQuantity = new ResourceQuantity(resource, quantity);
         return this;

@@ -2,10 +2,23 @@
 /// <reference path="ResourceQuantity.ts" />
 
 class Crafter {
+    $type : string = 'Crafter';
     public StartTime: Date | null;
-    constructor(public Name: string, public Duration: number = 0, public Cost: Array<ResourceQuantity> = [],
-                public CraftedResource: ResourceQuantity = EMPTY_RQ, public AutoCrafting: boolean = false) {
+    constructor(public Name: string,
+                public Duration: number = 0,
+                public Cost: Array<ResourceQuantity> = [],
+                public CraftedResource: ResourceQuantity = EMPTY_RQ,
+                public AutoCrafting: boolean = false) {
 
+    }
+    public static load(data : any) : Crafter {
+        let curContext : any = window;
+        let newObj : Crafter = new Crafter(data.Name);
+        newObj.Duration = data.Duration;
+        newObj.Cost = (data.Cost as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.CraftedResource = curContext[data.CraftedResource.$type].load(data.CraftedResource);
+        newObj.AutoCrafting = data.AutoCrafting;
+        return newObj;
     }
 
     public thatCraft(quantity : number, resource : Resource) : Crafter {

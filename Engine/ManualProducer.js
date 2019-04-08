@@ -15,8 +15,18 @@ var ManualProducer = (function (_super) {
     __extends(ManualProducer, _super);
     function ManualProducer(Name, Resource) {
         if (Resource === void 0) { Resource = EMPTY_RQ; }
-        return _super.call(this, Name, Resource) || this;
+        var _this = _super.call(this, Name, Resource) || this;
+        _this.Name = Name;
+        _this.Resource = Resource;
+        _this.$type = 'ManualProducer';
+        return _this;
     }
+    ManualProducer.load = function (data) {
+        var curContext = window;
+        var newObj = new ManualProducer(data.Name);
+        newObj.Resource = curContext[data.Resource.$type].load(data.Resource);
+        return newObj;
+    };
     ManualProducer.prototype.thatProduce = function (quantity, resource) {
         this.ResourceQuantity = new ResourceQuantity(resource, quantity);
         return this;

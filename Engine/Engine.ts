@@ -8,14 +8,26 @@
 /// <reference path="Player.ts" />
 
 class Engine {
-    tick: number = 1000;
+    $type : string = 'Engine';
+    tickInterval: number = 1000;
     Player: Player;
     Producers: Array<Producer> = [];
     Triggers: Array<Trigger> = [];
     Crafters: Array<Crafter> = [];
     FastMode : number = 0;
+    public static load(data : any) : Engine {
+        let curContext : any = window;
+        let newObj : Engine = new Engine();
+        newObj.tickInterval = data.tickInterval;
+        newObj.Player = curContext[data.Player.$type].load(data.Player);
+        newObj.Producers = (data.Producers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.Triggers = (data.Triggers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.Crafters = (data.Crafters as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.FastMode = data.FastMode;
+        return newObj;
+    }
     run() {
-        window.setInterval(() => this.onTick(), 1000);
+        window.setInterval(() => this.onTick(), this.tickInterval);
     }
     private onTick() {
         this.Producers.forEach(

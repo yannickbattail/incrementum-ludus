@@ -48,7 +48,7 @@ engine.Triggers = [
                         .in(20).seconds()
                         .atCostOf(20, WATER).and(1, TIN)
             )
-        )    
+        )
 ];
 engine.Crafters = [
     new Crafter("forge axe", 20000,//duration
@@ -62,3 +62,29 @@ engine.Crafters = [
         //spawn
         new ResourceQuantity(KNIFE, 1), false/*auto*/),
 ];
+
+const VERSION = "1";
+function loadEngine() : Engine | null {
+
+    let json = window.localStorage.getItem('incr');
+    if (json != null) {
+        if ((window.localStorage.getItem('incrVersion') != null)
+            || (window.localStorage.getItem('incrVersion') == VERSION)) {
+            console.log('load engine');
+            let obj : Engine = JSON.parse(json);
+            return Engine.load(obj);
+        }
+        console.log('wrong version');
+    }
+    console.log('no engine');
+    return null;
+}
+function saveEngine(engine : Engine) {
+    window.localStorage.setItem('incr', JSON.stringify(engine));
+    window.localStorage.setItem('incrVersion', VERSION);
+}
+saveEngine(engine);
+var engine2 = loadEngine();
+if (engine2) {
+    engine = engine2;
+}
