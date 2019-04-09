@@ -4,7 +4,9 @@ class ResourceQuantity {
     constructor(public Resource: Resource, public Quantity: number) {
     }
     public static load(data : any) : ResourceQuantity {
-        let rq : ResourceQuantity = new ResourceQuantity(Resource.load(data.Resource), data.Quantity);
+        let curContext : any = window;
+        let res = curContext[data.Resource.$type].load(data.Resource);
+        let rq : ResourceQuantity = new ResourceQuantity(res, data.Quantity);
         return rq;
     }
 }

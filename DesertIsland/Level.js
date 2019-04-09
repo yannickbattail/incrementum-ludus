@@ -13,13 +13,19 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Level = (function (_super) {
     __extends(Level, _super);
-    function Level(name, image) {
-        var _this = _super.call(this, name) || this;
-        _this.image = image;
+    function Level(Name, Image) {
+        var _this = _super.call(this, Name) || this;
+        _this.Name = Name;
+        _this.Image = Image;
+        _this.$type = 'Level';
         return _this;
     }
+    Level.load = function (data) {
+        var r = new Level(data.Name, data.Image);
+        return r;
+    };
     Level.prototype.show = function (quantity) {
-        return '<div class="resource Level">' + quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return '<div class="resource Level">' + quantity + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
     };
     return Level;
 }(Resource));

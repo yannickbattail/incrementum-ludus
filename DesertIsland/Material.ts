@@ -1,11 +1,16 @@
 /// <reference path="../Engine/Resource.ts" />
 
 class Material extends Resource {
-    constructor(name : string, public unit : string, public image : string){
+    public $type : string = 'Material';
+    constructor(public Name : string, public Unit : string, public Image : string){
         super(name);
     }
+    public static load(data : any) : Material {
+        let r : Material = new Material(data.Name, data.Unit, data.Image);
+        return r;
+    }
     public show(quantity : number) : string {
-        let u = this.unit;
+        let u = this.Unit;
         let q = quantity;
         if (u == 'g') {
             if (quantity >= 1000) {
@@ -19,6 +24,6 @@ class Material extends Resource {
                 q = Math.round(q / 10) / 10;
             }
         }
-        return '<div class="resource Material">' + q + u + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return '<div class="resource Material">' + q + u + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
     }
 }

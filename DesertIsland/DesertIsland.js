@@ -1,4 +1,4 @@
-var VERSION = "1.7";
+var VERSION = "1.8";
 var LEVEL = new Level("level", "level");
 var CLAY = new Material("clay", "g", "clay");
 var WATER = new Material("water", "cl", "water");
@@ -13,9 +13,10 @@ function loadEngine() {
     if (json != null) {
         if ((window.localStorage.getItem('DesertIslandVersion') != null)
             || (window.localStorage.getItem('DesertIslandVersion') == VERSION)) {
-            console.log('load engine');
             var obj = JSON.parse(json);
-            return obj;
+            console.log('load engine');
+            var curContext = window;
+            return curContext[obj.$type].load(obj);
         }
         console.log('wrong version');
     }
@@ -27,5 +28,11 @@ function saveEngine(engine) {
     window.localStorage.setItem('DesertIslandVersion', VERSION);
 }
 var engine;
-engine = Scenario.initEngine();
+var e = loadEngine();
+if (!e) {
+    engine = Scenario.initEngine();
+}
+else {
+    engine = e;
+}
 //# sourceMappingURL=DesertIsland.js.map

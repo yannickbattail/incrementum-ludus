@@ -1,5 +1,5 @@
 class Resource {
-    $type : string = 'Resource';
+    public $type : string = 'Resource';
     constructor(public Name: string) {
     }
     public static load(data : any) : Resource {

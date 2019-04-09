@@ -5,7 +5,9 @@ var ResourceQuantity = (function () {
         this.$type = 'ResourceQuantity';
     }
     ResourceQuantity.load = function (data) {
-        var rq = new ResourceQuantity(Resource.load(data.Resource), data.Quantity);
+        var curContext = window;
+        var res = curContext[data.Resource.$type].load(data.Resource);
+        var rq = new ResourceQuantity(res, data.Quantity);
         return rq;
     };
     return ResourceQuantity;

@@ -13,13 +13,19 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Item = (function (_super) {
     __extends(Item, _super);
-    function Item(name, image) {
+    function Item(Name, Image) {
         var _this = _super.call(this, name) || this;
-        _this.image = image;
+        _this.Name = Name;
+        _this.Image = Image;
+        _this.$type = 'Item';
         return _this;
     }
+    Item.load = function (data) {
+        var r = new Item(data.Name, data.Image);
+        return r;
+    };
     Item.prototype.show = function (quantity) {
-        return '<div class="resource Item">' + quantity + ' <img src="images/' + this.image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return '<div class="resource Item">' + quantity + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
     };
     return Item;
 }(Resource));

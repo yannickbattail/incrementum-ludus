@@ -13,7 +13,7 @@
 /// <reference path="./Level.ts" />
 /// <reference path="./Scenario.ts" />
 
-const VERSION = "1.7";
+const VERSION = "1.8";
 
 const LEVEL = new Level("level", "level");
 const CLAY = new Material("clay", "g", "clay");
@@ -31,9 +31,10 @@ function loadEngine() : Engine | null {
     if (json != null) {
         if ((window.localStorage.getItem('DesertIslandVersion') != null)
             || (window.localStorage.getItem('DesertIslandVersion') == VERSION)) {
-            console.log('load engine');
             let obj : Engine = JSON.parse(json);
-            return obj;
+            console.log('load engine');
+            let curContext : any = window;
+            return curContext[obj.$type].load(obj);
         }
         console.log('wrong version');
     }
@@ -46,9 +47,9 @@ function saveEngine(engine : Engine) {
 }
 
 var engine : Engine;
-//let e = loadEngine();
-//if (!e) {
+let e = loadEngine();
+if (!e) {
     engine = Scenario.initEngine();
-//} else {
-//    engine = e;
-//}
+} else {
+    engine = e;
+}

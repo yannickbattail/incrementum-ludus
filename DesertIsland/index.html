@@ -54,12 +54,29 @@
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
             saveEngine(engine);
         }
+        function stop() {
+            window.clearInterval(interval);
+        }
+        function clearStorage() {
+            window.localStorage.removeItem('DesertIsland');
+            window.localStorage.removeItem('DesertIslandVersion');
+        }
+        function restart() {
+            stop();
+            clearStorage();
+            window.location.reload();
+        }
+        function fastMode() {
+            engine.FastMode=1000;
+        }
         var interval = window.setInterval(updateGui, 1000);
     </script>
+    <div onclick="restart()">Restart</div>
     <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">
-        <div onclick="window.clearInterval(interval)">stop</div>
-        <div onclick="engine.FastMode=1000;">fast mode</div>
+        <div onclick="stop()">stop</div>
+        <div onclick="clearStorage()">clear</div>
+        <div onclick="fastMode()">fast mode</div>
         PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
     </div>
 </body>

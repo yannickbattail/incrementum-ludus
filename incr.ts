@@ -70,9 +70,10 @@ function loadEngine() : Engine | null {
     if (json != null) {
         if ((window.localStorage.getItem('incrVersion') != null)
             || (window.localStorage.getItem('incrVersion') == VERSION)) {
-            console.log('load engine');
             let obj : Engine = JSON.parse(json);
-            return Engine.load(obj);
+            console.log('load engine');
+            let curContext : any = window;
+            return curContext[obj.$type].load(obj);
         }
         console.log('wrong version');
     }
