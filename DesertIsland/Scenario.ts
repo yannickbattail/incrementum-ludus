@@ -18,7 +18,18 @@ class Scenario {
                 .atCostOf(100, CLAY).and(10, WATER)
         ];
 
-        var triggerLevel5 = new Trigger("pottery")
+
+        let triggerLevel7 = new Trigger("iron age")
+            .whenReached(100, IRON_ORE).and(40, BRICK).and(400, CHARCOAL)
+            .spawnResource(-40, BRICK)
+            .spawnCrafter(
+                new Crafter("iron forge")
+                    .thatCraft(10, IRON)
+                    .in(1).minutes()
+                    .atCostOf(100, IRON_ORE).and(400, CHARCOAL)
+            );
+
+        let triggerLevel5 = new Trigger("pottery")
             .whenReached(20, BRICK)
             .spawnResource(1, LEVEL) // level 5
             .spawnCrafter(
@@ -52,6 +63,7 @@ class Scenario {
                                 new Trigger("iron-ore mining")
                                     .whenReached(10, IRON_ORE)
                                     .spawnResource(1, LEVEL) // level 7
+                                    .appendTrigger(triggerLevel7)
                             )
                     )
             );
@@ -68,6 +80,7 @@ class Scenario {
                 .whenReached(1, CLAY_POT).and(2, LEVEL)
                 .spawnProducer(new ManualProducer("carry clay").thatProduce(100, CLAY))
                 .spawnProducer(new ManualProducer("collect branches").thatProduce(100, WOOD))
+                .spawnResource(-1, CLAY_POT)
                 .spawnResource(1, LEVEL) // level 3
                 .appendTrigger(
                     new Trigger("charcoal crafting")

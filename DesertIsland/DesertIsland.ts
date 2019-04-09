@@ -21,6 +21,7 @@ const WATER = new Material("water", "cl", "water");
 const WOOD = new Material("wood", "g", "wood");
 const CHARCOAL = new Material("charcoal", "g", "charcoal");
 const IRON_ORE = new Material("iron ore", "g", "iron_ore");
+const IRON = new Material("iron", "g", "iron");
 const CLAY_POT = new Item("clay pot", "clay_pot");
 const BRICK = new Item("brick", "brick");
 const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");

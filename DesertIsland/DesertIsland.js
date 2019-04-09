@@ -5,6 +5,7 @@ var WATER = new Material("water", "cl", "water");
 var WOOD = new Material("wood", "g", "wood");
 var CHARCOAL = new Material("charcoal", "g", "charcoal");
 var IRON_ORE = new Material("iron ore", "g", "iron_ore");
+var IRON = new Material("iron", "g", "iron");
 var CLAY_POT = new Item("clay pot", "clay_pot");
 var BRICK = new Item("brick", "brick");
 var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
