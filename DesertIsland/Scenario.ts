@@ -41,7 +41,7 @@ class Scenario {
                             .atCostOf(1, TERRACOTTA_POT).and(100, WATER)
                     )
                     .appendTrigger(
-                        new Trigger("tools forge")
+                        new Trigger("tools forging")
                             .whenReached(40, IRON).and(100, BRICK).and(8, LEVEL)
                             .spawnResource(-100, BRICK)
                             .spawnCrafter(

@@ -92,7 +92,7 @@ var DesertIslandGui = (function () {
     };
     DesertIslandGui.prototype.displayTree = function () {
         var h = '<table border="1">';
-        h += "<tr><th>next goal</th><th>Evolutions</th><th>needed resources</th><th>unlock producer</th><th>unlock crafter</th></tr>";
+        h += "<tr><th>next goal</th><th>Evolutions</th><th>needed resources</th><th>unlock</th></tr>";
         h += this.displayBranch(engine.Triggers);
         h += "</table>";
         return h;
@@ -109,8 +109,8 @@ var DesertIslandGui = (function () {
                 + "<td>" + nextGoal + "</td>"
                 + "<td>" + trig.Name + "</td>"
                 + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
-                + "<td>" + trig.SpawnProducers.map(function (p) { return p.Name; }).join(', ') + "</td>"
-                + "<td>" + trig.SpawnCrafters.map(function (p) { return p.Name; }).join(', ') + "</td>"
+                + "<td>" + ((trig.SpawnProducers.length) ? '<b>Producers</b>:' + trig.SpawnProducers.map(function (p) { return p.Name; }).join(', ') : '')
+                + ((trig.SpawnCrafters.length) ? ' <b>crafters</b>:' + trig.SpawnCrafters.map(function (p) { return p.Name; }).join(', ') : '') + "</td>"
                 + "</tr>";
             if (trig.SpawnNewTriggers.length) {
                 h += _this.displayBranch(trig.SpawnNewTriggers);

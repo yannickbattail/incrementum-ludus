@@ -28,7 +28,7 @@ var Scenario = (function () {
             .spawnCrafter(new Crafter("waste recycling")
             .thatCraft(1, EMPTY_TRASH)["in"](1).minutes()
             .atCostOf(1, TERRACOTTA_POT).and(100, WATER))
-            .appendTrigger(new Trigger("tools forge")
+            .appendTrigger(new Trigger("tools forging")
             .whenReached(40, IRON).and(100, BRICK).and(8, LEVEL)
             .spawnResource(-100, BRICK)
             .spawnCrafter(new Crafter("forge knife")
