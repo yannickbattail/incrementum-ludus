@@ -101,8 +101,12 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '';
         triggers.forEach(function (trig) {
+            var css = '';
+            if (engine.Triggers.indexOf(trig) != -1) {
+                css = ' style="background-color: #6d0404;"';
+            }
             h += "<tr>"
-                + "<td>" + trig.Name + "</td>"
+                + "<td " + css + ">" + trig.Name + "</td>"
                 + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
                 + "<td>" + trig.SpawnProducers.map(function (p) { return p.Name; }).join(', ') + "</td>"
                 + "<td>" + trig.SpawnCrafters.map(function (p) { return p.Name; }).join(', ') + "</td>"
@@ -111,7 +115,6 @@ var DesertIslandGui = (function () {
                 h += _this.displayBranch(trig.SpawnNewTriggers);
             }
         });
-        h += "</table>";
         return h;
     };
     DesertIslandGui.prototype.displayResources = function (resourceQuantity) {

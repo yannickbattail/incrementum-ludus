@@ -132,8 +132,12 @@ class DesertIslandGui {
         let h = '';
         triggers.forEach(
             trig => {
+                let css = '';
+                if (engine.Triggers.indexOf(trig) != -1) {
+                    css = ' style="background-color: #6d0404;"';
+                }
                 h += "<tr>"
-                    + "<td>" + trig.Name + "</td>"
+                    + "<td "+css+">" + trig.Name + "</td>"
                     + "<td>" + this.displayResources(trig.ResourcesTrigger) + "</td>"
                     + "<td>" + trig.SpawnProducers.map(p => p.Name).join(', ') + "</td>"
                     + "<td>" + trig.SpawnCrafters.map(p => p.Name).join(', ') + "</td>"
@@ -143,7 +147,6 @@ class DesertIslandGui {
                 }
             }
         );
-        h += "</table>";
         return h;
     }
 
