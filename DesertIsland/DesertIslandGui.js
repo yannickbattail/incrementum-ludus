@@ -90,6 +90,26 @@ var DesertIslandGui = (function () {
         h += '</tr>';
         return h;
     };
+    DesertIslandGui.prototype.displayTree = function () {
+        return this.displayBranch(engine.Triggers);
+    };
+    DesertIslandGui.prototype.displayBranch = function (triggers) {
+        var _this = this;
+        var h = '<table border="1">';
+        h += "<tr><th>Evolution</th><th>needed resources</th><th>Next evolution</th></tr>";
+        triggers.forEach(function (trig) { return h += "<tr><td>" + trig.Name + "</td>"
+            + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
+            + "<td>" + (trig.SpawnNewTriggers.length ? _this.displayBranch(trig.SpawnNewTriggers) : '') + "</td>"
+            + "</tr>"; });
+        h += "</table>";
+        return h;
+    };
+    DesertIslandGui.prototype.displayResources = function (resourceQuantity) {
+        var h = '';
+        resourceQuantity.forEach(function (resQ) { return h += resQ.Resource.show(resQ.Quantity); });
+        h += '';
+        return h;
+    };
     DesertIslandGui.prototype.displayTime = function (miliSeconds) {
         if (miliSeconds < 1000) {
             return "" + Math.round(miliSeconds / 1000) + "ms";

@@ -120,6 +120,32 @@ class DesertIslandGui {
         return h;
     }
 
+    displayTree(): string {
+        return this.displayBranch(engine.Triggers);
+    }
+
+    private displayBranch(triggers : Array<Trigger>) : string {
+        var h = '<table border="1">';
+        h += "<tr><th>Evolution</th><th>needed resources</th><th>Next evolution</th></tr>";
+        triggers.forEach(
+            trig => h += "<tr><td>" + trig.Name + "</td>"
+                    + "<td>" + this.displayResources(trig.ResourcesTrigger) + "</td>"
+                    + "<td>" + (trig.SpawnNewTriggers.length?this.displayBranch(trig.SpawnNewTriggers):'') + "</td>"
+                    + "</tr>"
+        );
+        h += "</table>";
+        return h;
+    }
+
+    private displayResources(resourceQuantity : Array<ResourceQuantity>) : string {
+        var h = '';
+        resourceQuantity.forEach(
+            resQ => h += resQ.Resource.show(resQ.Quantity)
+        );
+        h += '';
+        return h;
+    }
+
     private displayTime(miliSeconds : number) : string {
         if (miliSeconds < 1000) {
             return "" + Math.round(miliSeconds / 1000) + "ms";
