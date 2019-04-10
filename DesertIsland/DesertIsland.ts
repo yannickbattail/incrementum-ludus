@@ -13,7 +13,7 @@
 /// <reference path="./Level.ts" />
 /// <reference path="./Scenario.ts" />
 
-const VERSION = "1.8";
+const VERSION = "1.9";
 
 const LEVEL = new Level("level", "level");
 const CLAY = new Material("clay", "g", "clay");
@@ -27,6 +27,8 @@ const BRICK = new Item("brick", "brick");
 const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
 const EMPTY_TRASH = new Item("empty trash", "empty_trash");
 const FULL_TRASH = new Item("full trash", "full_trash");
+const KNIFE = new Item("knife", "knife");
+const AXE = new Item("axe", "axe");
 
 function loadEngine() : Engine | null {
 

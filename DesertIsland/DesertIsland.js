@@ -1,4 +1,4 @@
-var VERSION = "1.8";
+var VERSION = "1.9";
 var LEVEL = new Level("level", "level");
 var CLAY = new Material("clay", "g", "clay");
 var WATER = new Material("water", "cl", "water");
@@ -11,6 +11,8 @@ var BRICK = new Item("brick", "brick");
 var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
 var EMPTY_TRASH = new Item("empty trash", "empty_trash");
 var FULL_TRASH = new Item("full trash", "full_trash");
+var KNIFE = new Item("knife", "knife");
+var AXE = new Item("axe", "axe");
 function loadEngine() {
     var json = window.localStorage.getItem('DesertIsland');
     if (json != null) {
