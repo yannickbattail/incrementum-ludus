@@ -92,7 +92,7 @@ var DesertIslandGui = (function () {
     };
     DesertIslandGui.prototype.displayTree = function () {
         var h = '<table border="1">';
-        h += "<tr><th>Evolutions</th><th>needed resources</th><th>unlock producer</th><th>unlock crafter</th></tr>";
+        h += "<tr><th>next goal</th><th>Evolutions</th><th>needed resources</th><th>unlock producer</th><th>unlock crafter</th></tr>";
         h += this.displayBranch(engine.Triggers);
         h += "</table>";
         return h;
@@ -101,12 +101,13 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '';
         triggers.forEach(function (trig) {
-            var css = '';
+            var nextGoal = '';
             if (engine.Triggers.indexOf(trig) != -1) {
-                css = ' style="background-color: #6d0404;"';
+                nextGoal = '<img src="images/arrow_right.svg" alt="arrow right" title="arrow right" widht="40px" height="40px"  />';
             }
             h += "<tr>"
-                + "<td " + css + ">" + trig.Name + "</td>"
+                + "<td>" + nextGoal + "</td>"
+                + "<td>" + trig.Name + "</td>"
                 + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
                 + "<td>" + trig.SpawnProducers.map(function (p) { return p.Name; }).join(', ') + "</td>"
                 + "<td>" + trig.SpawnCrafters.map(function (p) { return p.Name; }).join(', ') + "</td>"
