@@ -25,6 +25,8 @@ const IRON = new Material("iron", "g", "iron");
 const CLAY_POT = new Item("clay pot", "clay_pot");
 const BRICK = new Item("brick", "brick");
 const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
+const EMPTY_TRASH = new Item("empty trash", "empty_trash");
+const FULL_TRASH = new Item("full trash", "full_trash");
 
 function loadEngine() : Engine | null {
 
