@@ -57,7 +57,7 @@ class Scenario {
                                     .atCostOf(100, IRON).and(1000, WATER).and(2000, WOOD).and(1000, CLAY).and(2000, CHARCOAL).and(3, EMPTY_TRASH)
                             )
                             .appendTrigger(
-                                new Trigger("iron-ore mining")
+                                new Trigger("viking age")
                                     .whenReached(1, AXE)
                                     .spawnResource(1, LEVEL) // level 9
                             )

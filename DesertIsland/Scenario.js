@@ -37,7 +37,7 @@ var Scenario = (function () {
             .spawnCrafter(new Crafter("forge axe")
             .thatCraft(1, AXE)["in"](4).minutes()
             .atCostOf(100, IRON).and(1000, WATER).and(2000, WOOD).and(1000, CLAY).and(2000, CHARCOAL).and(3, EMPTY_TRASH))
-            .appendTrigger(new Trigger("iron-ore mining")
+            .appendTrigger(new Trigger("viking age")
             .whenReached(1, AXE)
             .spawnResource(1, LEVEL))));
         var triggerLevel5 = new Trigger("pottery")
