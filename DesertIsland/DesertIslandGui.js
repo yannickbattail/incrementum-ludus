@@ -91,16 +91,26 @@ var DesertIslandGui = (function () {
         return h;
     };
     DesertIslandGui.prototype.displayTree = function () {
-        return this.displayBranch(engine.Triggers);
+        var h = '<table border="1">';
+        h += "<tr><th>Evolutions</th><th>needed resources</th><th>unlock producer</th><th>unlock crafter</th></tr>";
+        h += this.displayBranch(engine.Triggers);
+        h += "</table>";
+        return h;
     };
     DesertIslandGui.prototype.displayBranch = function (triggers) {
         var _this = this;
-        var h = '<table border="1">';
-        h += "<tr><th>Evolution</th><th>needed resources</th><th>Next evolution</th></tr>";
-        triggers.forEach(function (trig) { return h += "<tr><td>" + trig.Name + "</td>"
-            + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
-            + "<td>" + (trig.SpawnNewTriggers.length ? _this.displayBranch(trig.SpawnNewTriggers) : '') + "</td>"
-            + "</tr>"; });
+        var h = '';
+        triggers.forEach(function (trig) {
+            h += "<tr>"
+                + "<td>" + trig.Name + "</td>"
+                + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
+                + "<td>" + trig.SpawnProducers.map(function (p) { return p.Name; }).join(', ') + "</td>"
+                + "<td>" + trig.SpawnCrafters.map(function (p) { return p.Name; }).join(', ') + "</td>"
+                + "</tr>";
+            if (trig.SpawnNewTriggers.length) {
+                h += _this.displayBranch(trig.SpawnNewTriggers);
+            }
+        });
         h += "</table>";
         return h;
     };

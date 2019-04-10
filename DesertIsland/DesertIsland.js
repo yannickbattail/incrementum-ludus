@@ -9,6 +9,8 @@ var IRON = new Material("iron", "g", "iron");
 var CLAY_POT = new Item("clay pot", "clay_pot");
 var BRICK = new Item("brick", "brick");
 var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
+var EMPTY_TRASH = new Item("empty trash", "empty_trash");
+var FULL_TRASH = new Item("full trash", "full_trash");
 function loadEngine() {
     var json = window.localStorage.getItem('DesertIsland');
     if (json != null) {

@@ -121,17 +121,27 @@ class DesertIslandGui {
     }
 
     displayTree(): string {
-        return this.displayBranch(engine.Triggers);
+        let h = '<table border="1">';
+        h += "<tr><th>Evolutions</th><th>needed resources</th><th>unlock producer</th><th>unlock crafter</th></tr>";
+        h += this.displayBranch(engine.Triggers);
+        h += "</table>";
+        return h;
     }
 
     private displayBranch(triggers : Array<Trigger>) : string {
-        var h = '<table border="1">';
-        h += "<tr><th>Evolution</th><th>needed resources</th><th>Next evolution</th></tr>";
+        let h = '';
         triggers.forEach(
-            trig => h += "<tr><td>" + trig.Name + "</td>"
+            trig => {
+                h += "<tr>"
+                    + "<td>" + trig.Name + "</td>"
                     + "<td>" + this.displayResources(trig.ResourcesTrigger) + "</td>"
-                    + "<td>" + (trig.SpawnNewTriggers.length?this.displayBranch(trig.SpawnNewTriggers):'') + "</td>"
-                    + "</tr>"
+                    + "<td>" + trig.SpawnProducers.map(p => p.Name).join(', ') + "</td>"
+                    + "<td>" + trig.SpawnCrafters.map(p => p.Name).join(', ') + "</td>"
+                + "</tr>";
+                if (trig.SpawnNewTriggers.length) {
+                    h += this.displayBranch(trig.SpawnNewTriggers);
+                }
+            }
         );
         h += "</table>";
         return h;
