@@ -60,7 +60,7 @@ class DesertIslandGui {
     }
     displayCrafters(): string {
         var h = '<table border="1">';
-        h += "<tr><th>Crafter</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
+        h += "<tr><th>Crafter</th><th>cost</th><th>it will make</th><th></th></tr>";
         this.Engine.Crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
@@ -160,9 +160,10 @@ class DesertIslandGui {
     }
 
     private displayTime(miliSeconds : number) : string {
-        if (miliSeconds < 1000) {
-            return "" + Math.round(miliSeconds / 1000) + "ms";
-        } else if (miliSeconds < 60000) {
+        if (miliSeconds < 500) {
+            return "";
+        }
+        if (miliSeconds < 60000) {
             return "" + Math.round(miliSeconds / 1000) + "s";
         }
         let sec = Math.round(miliSeconds / 1000);

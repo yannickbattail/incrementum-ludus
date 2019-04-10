@@ -42,7 +42,7 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>Crafter</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
+        h += "<tr><th>Crafter</th><th>cost</th><th>it will make</th><th></th></tr>";
         this.Engine.Crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
@@ -124,10 +124,10 @@ var DesertIslandGui = (function () {
         return h;
     };
     DesertIslandGui.prototype.displayTime = function (miliSeconds) {
-        if (miliSeconds < 1000) {
-            return "" + Math.round(miliSeconds / 1000) + "ms";
+        if (miliSeconds < 500) {
+            return "";
         }
-        else if (miliSeconds < 60000) {
+        if (miliSeconds < 60000) {
             return "" + Math.round(miliSeconds / 1000) + "s";
         }
         var sec = Math.round(miliSeconds / 1000);

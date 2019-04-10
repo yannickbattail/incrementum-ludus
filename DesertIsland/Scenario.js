@@ -26,7 +26,7 @@ var Scenario = (function () {
             .spawnResource(1, LEVEL)
             .spawnResource(3, EMPTY_TRASH)
             .spawnCrafter(new Crafter("waste recycling")
-            .thatCraft(1, EMPTY_TRASH)["in"](2).minutes()
+            .thatCraft(1, EMPTY_TRASH)["in"](1).minutes()
             .atCostOf(1, TERRACOTTA_POT).and(100, WATER))
             .appendTrigger(new Trigger("tools forge")
             .whenReached(40, IRON).and(100, BRICK).and(8, LEVEL)
@@ -36,7 +36,10 @@ var Scenario = (function () {
             .atCostOf(50, IRON).and(1000, WATER).and(1000, WOOD).and(500, CLAY).and(1000, CHARCOAL).and(2, EMPTY_TRASH))
             .spawnCrafter(new Crafter("forge axe")
             .thatCraft(1, AXE)["in"](4).minutes()
-            .atCostOf(100, IRON).and(1000, WATER).and(2000, WOOD).and(1000, CLAY).and(2000, CHARCOAL).and(3, EMPTY_TRASH))));
+            .atCostOf(100, IRON).and(1000, WATER).and(2000, WOOD).and(1000, CLAY).and(2000, CHARCOAL).and(3, EMPTY_TRASH))
+            .appendTrigger(new Trigger("iron-ore mining")
+            .whenReached(1, AXE)
+            .spawnResource(1, LEVEL))));
         var triggerLevel5 = new Trigger("pottery")
             .whenReached(20, BRICK)
             .spawnResource(1, LEVEL)
