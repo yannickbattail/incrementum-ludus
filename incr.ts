@@ -16,6 +16,7 @@ const WATER = new Resource("water");
 const AXE = new Resource("axe");
 const KNIFE = new Resource("knife");
 const BEER = new Resource("beer");
+const WASTE = new Resource("waste");
 
 var engine = new Engine();
 engine.Player = new Player("platypus");
@@ -55,12 +56,12 @@ engine.Crafters = [
         //cost
         [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)],
         //spawn
-        new ResourceQuantity(AXE, 1), true/*auto*/),
+        [new ResourceQuantity(AXE, 1)], true/*auto*/),
     new Crafter("forge knife", 20000,//duration
         //cost
         [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)],
         //spawn
-        new ResourceQuantity(KNIFE, 1), false/*auto*/),
+        [new ResourceQuantity(KNIFE, 1), new ResourceQuantity(WASTE, 2)], false/*auto*/),
 ];
 
 const VERSION = "1";

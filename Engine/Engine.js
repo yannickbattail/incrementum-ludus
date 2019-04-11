@@ -1,7 +1,7 @@
 var Engine = (function () {
     function Engine() {
         this.$type = 'Engine';
-        this.tickInterval = 1000;
+        this.tickInterval = 500;
         this.Producers = [];
         this.Triggers = [];
         this.Crafters = [];
@@ -72,10 +72,11 @@ var Engine = (function () {
         this.checkStartCrafting(crafter);
     };
     Engine.prototype.checkFinishedCrafting = function (crafter) {
+        var _this = this;
         var duration = this.FastMode ? this.FastMode : crafter.Duration;
         if (crafter.StartTime != null && (crafter.StartTime.getTime() + duration < new Date().getTime())) {
             crafter.StartTime = null;
-            this.Player.changeStorage(crafter.CraftedResource);
+            crafter.CraftedResource.forEach(function (resourceQty) { return _this.Player.changeStorage(resourceQty); });
         }
     };
     Engine.prototype.checkStartCrafting = function (crafter) {

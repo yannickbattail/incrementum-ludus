@@ -54,7 +54,7 @@ var IncrGui = (function () {
         trigger.SpawnResources.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnCrafters.forEach(function (crafter) { return h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name
+        trigger.SpawnCrafters.forEach(function (crafter) { return h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.map(function (r) { return r.Quantity + ' ' + r.Resource.Name; }).join(', ')
             + ' in ' + _this.displayTime(crafter.Duration) + ' ' + (crafter.AutoCrafting ? 'automaticly' : 'mannualy') + '</li>'; });
         h += "</ul></td>";
         h += "<td><ul>";
@@ -78,7 +78,9 @@ var IncrGui = (function () {
         h += "<td><ul>";
         crafter.Cost.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
         h += "</ul></td>";
-        h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += "<td><ul>";
+        crafter.CraftedResource.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        h += "</ul></td>";
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;

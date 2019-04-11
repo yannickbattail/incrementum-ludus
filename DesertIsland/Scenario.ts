@@ -23,9 +23,10 @@ class Scenario {
             .whenReached(100, IRON_ORE).and(40, BRICK).and(400, CHARCOAL)
             .spawnResource(-40, BRICK)
             .spawnResource(1, EMPTY_TRASH)
+            .spawnResource(0, FULL_TRASH)
             .spawnCrafter(
                 new Crafter("iron smelter")
-                    .thatCraft(10, IRON)
+                    .thatCraft(10, IRON).thatCraft(1, FULL_TRASH)
                     .in(1).minutes()
                     .atCostOf(50, IRON_ORE).and(400, CHARCOAL).and(1, EMPTY_TRASH)
             )
@@ -33,12 +34,12 @@ class Scenario {
                 new Trigger("waste managment")
                     .whenReached(10, IRON).and(7, LEVEL)
                     .spawnResource(1, LEVEL) // level 8
-                    .spawnResource(3, EMPTY_TRASH)
+                    .spawnResource(1, EMPTY_TRASH)
                     .spawnCrafter(
                         new Crafter("waste recycling")
                             .thatCraft(1, EMPTY_TRASH)
-                            .in(1).minutes()
-                            .atCostOf(1, TERRACOTTA_POT).and(100, WATER)
+                            .in(40).seconds()
+                            .atCostOf(1, TERRACOTTA_POT).and(100, WATER).and(1, FULL_TRASH)
                     )
                     .appendTrigger(
                         new Trigger("tools forging")
@@ -46,15 +47,20 @@ class Scenario {
                             .spawnResource(-100, BRICK)
                             .spawnCrafter(
                                 new Crafter("forge knife")
-                                    .thatCraft(1, KNIFE)
+                                    .thatCraft(1, KNIFE).thatCraft(2, FULL_TRASH)
                                     .in(4).minutes()
                                     .atCostOf(50, IRON).and(1000, WATER).and(1000, WOOD).and(500, CLAY).and(1000, CHARCOAL).and(2, EMPTY_TRASH)
                             )
                             .spawnCrafter(
                                 new Crafter("forge axe")
-                                    .thatCraft(1, AXE)
+                                    .thatCraft(1, AXE).thatCraft(3, FULL_TRASH)
                                     .in(4).minutes()
                                     .atCostOf(100, IRON).and(1000, WATER).and(2000, WOOD).and(1000, CLAY).and(2000, CHARCOAL).and(3, EMPTY_TRASH)
+                            )
+                            .appendTrigger(
+                                new Trigger("craft with knife")
+                                    .whenReached(1, KNIFE)
+                                    .spawnResource(1, EMPTY_TRASH)
                             )
                             .appendTrigger(
                                 new Trigger("viking age")

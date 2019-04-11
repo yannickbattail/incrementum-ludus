@@ -7,7 +7,7 @@ class Crafter {
     constructor(public Name: string,
                 public Duration: number = 0,
                 public Cost: Array<ResourceQuantity> = [],
-                public CraftedResource: ResourceQuantity = EMPTY_RQ,
+                public CraftedResource: Array<ResourceQuantity> = [],
                 public AutoCrafting: boolean = false) {
 
     }
@@ -16,13 +16,13 @@ class Crafter {
         let newObj : Crafter = new Crafter(data.Name);
         newObj.Duration = data.Duration;
         newObj.Cost = (data.Cost as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.CraftedResource = curContext[data.CraftedResource.$type].load(data.CraftedResource);
+        newObj.CraftedResource = (data.CraftedResource as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.AutoCrafting = data.AutoCrafting;
         return newObj;
     }
 
     public thatCraft(quantity : number, resource : Resource) : Crafter {
-        this.CraftedResource = new ResourceQuantity(resource, quantity);
+        this.CraftedResource.push(new ResourceQuantity(resource, quantity));
         return this;
     }
     public in(interval: number) : Crafter {
