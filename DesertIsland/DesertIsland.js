@@ -1,4 +1,4 @@
-var VERSION = "1.9";
+var VERSION = "1.20";
 var LEVEL = new Level("level", "level");
 var CLAY = new Material("clay", "g", "clay");
 var WATER = new Material("water", "cl", "water");
