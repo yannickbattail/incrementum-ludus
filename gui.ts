@@ -78,7 +78,7 @@ class IncrGui {
         h += "</ul></td>";
         h += "<td><ul>";
         trigger.SpawnCrafters.forEach(
-            crafter => h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.Quantity +' '+ crafter.CraftedResource.Resource.Name
+            crafter => h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.map(r=>r.Quantity+' '+r.Resource.Name).join(', ') 
              + ' in '+this.displayTime(crafter.Duration)+' '+(crafter.AutoCrafting?'automaticly':'mannualy')+'</li>'
         );
         h += "</ul></td>";
@@ -109,7 +109,11 @@ class IncrGui {
             res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
         );
         h += "</ul></td>"
-        h += '<td>' + crafter.CraftedResource.Quantity + ' ' + crafter.CraftedResource.Resource.Name + '</td>';
+        h += "<td><ul>"
+        crafter.CraftedResource.forEach(
+            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        );
+        h += "</ul></td>"
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;

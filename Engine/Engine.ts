@@ -99,7 +99,9 @@ class Engine {
         let duration = this.FastMode ? this.FastMode : crafter.Duration;
         if (crafter.StartTime != null && (crafter.StartTime.getTime() + duration < new Date().getTime())) {
             crafter.StartTime = null;
-            this.Player.changeStorage(crafter.CraftedResource);
+            crafter.CraftedResource.forEach(
+                resourceQty =>  this.Player.changeStorage(resourceQty)
+            );
         }
     }
     private checkStartCrafting(crafter: Crafter) {

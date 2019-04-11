@@ -2,7 +2,7 @@ var Crafter = (function () {
     function Crafter(Name, Duration, Cost, CraftedResource, AutoCrafting) {
         if (Duration === void 0) { Duration = 0; }
         if (Cost === void 0) { Cost = []; }
-        if (CraftedResource === void 0) { CraftedResource = EMPTY_RQ; }
+        if (CraftedResource === void 0) { CraftedResource = []; }
         if (AutoCrafting === void 0) { AutoCrafting = false; }
         this.Name = Name;
         this.Duration = Duration;
@@ -21,7 +21,7 @@ var Crafter = (function () {
         return newObj;
     };
     Crafter.prototype.thatCraft = function (quantity, resource) {
-        this.CraftedResource = new ResourceQuantity(resource, quantity);
+        this.CraftedResource.push(new ResourceQuantity(resource, quantity));
         return this;
     };
     Crafter.prototype["in"] = function (interval) {

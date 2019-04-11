@@ -6,6 +6,7 @@ var WATER = new Resource("water");
 var AXE = new Resource("axe");
 var KNIFE = new Resource("knife");
 var BEER = new Resource("beer");
+var WASTE = new Resource("waste");
 var engine = new Engine();
 engine.Player = new Player("platypus");
 engine.Producers = [
@@ -30,8 +31,8 @@ engine.Triggers = [
         .atCostOf(20, WATER).and(1, TIN)))
 ];
 engine.Crafters = [
-    new Crafter("forge axe", 20000, [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)], new ResourceQuantity(AXE, 1), true),
-    new Crafter("forge knife", 20000, [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)], new ResourceQuantity(KNIFE, 1), false),
+    new Crafter("forge axe", 20000, [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)], [new ResourceQuantity(AXE, 1)], true),
+    new Crafter("forge knife", 20000, [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)], [new ResourceQuantity(KNIFE, 1), new ResourceQuantity(WASTE, 2)], false),
 ];
 var VERSION = "1";
 function loadEngine() {

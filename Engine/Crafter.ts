@@ -7,7 +7,7 @@ class Crafter {
     constructor(public Name: string,
                 public Duration: number = 0,
                 public Cost: Array<ResourceQuantity> = [],
-                public CraftedResource: ResourceQuantity = EMPTY_RQ,
+                public CraftedResource: Array<ResourceQuantity> = [],
                 public AutoCrafting: boolean = false) {
 
     }
@@ -22,7 +22,7 @@ class Crafter {
     }
 
     public thatCraft(quantity : number, resource : Resource) : Crafter {
-        this.CraftedResource = new ResourceQuantity(resource, quantity);
+        this.CraftedResource.push(new ResourceQuantity(resource, quantity));
         return this;
     }
     public in(interval: number) : Crafter {
