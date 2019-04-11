@@ -9,7 +9,7 @@
 
 class Engine {
     $type : string = 'Engine';
-    tickInterval: number = 1000;
+    tickInterval: number = 500;
     Player: Player;
     Producers: Array<Producer> = [];
     Triggers: Array<Trigger> = [];
