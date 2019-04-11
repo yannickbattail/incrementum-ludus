@@ -130,6 +130,9 @@ var DesertIslandGui = (function () {
             time += Math.round(miliSeconds / 60000) + 'min';
             miliSeconds = miliSeconds % 60000;
         }
+        if (miliSeconds < 500 && time != "") {
+            return time;
+        }
         time += Math.round(miliSeconds / 1000) + 's';
         return time;
     };
