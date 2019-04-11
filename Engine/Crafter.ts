@@ -16,7 +16,7 @@ class Crafter {
         let newObj : Crafter = new Crafter(data.Name);
         newObj.Duration = data.Duration;
         newObj.Cost = (data.Cost as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.CraftedResource = curContext[data.CraftedResource.$type].load(data.CraftedResource);
+        newObj.CraftedResource = (data.CraftedResource as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.AutoCrafting = data.AutoCrafting;
         return newObj;
     }
