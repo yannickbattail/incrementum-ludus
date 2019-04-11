@@ -76,7 +76,7 @@ class DesertIslandGui {
             res => h += res.Resource.show(res.Quantity)
         );
         h += "</td>"
-        h += '<td>' + crafter.CraftedResource.Resource.show(crafter.CraftedResource.Quantity) + '</td>';
+        h += '<td>' + crafter.CraftedResource.map(r => r.Resource.show(r.Quantity)).join(' ') + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
@@ -161,21 +161,13 @@ class DesertIslandGui {
     }
 
     private displayTime(miliSeconds : number) : string {
-        if (miliSeconds < 500) {
-            return "";
+        let time = '';
+        if (miliSeconds >= 60000) {
+            time += Math.round(miliSeconds / 60000) + 'min';
+            miliSeconds = miliSeconds % 60000;
         }
-        if (miliSeconds < 60000) {
-            return "" + Math.round(miliSeconds / 1000) + "s";
-        }
-        let sec = Math.round(miliSeconds / 1000);
-        let min = Math.round(sec / 60);
-        return "" + min + "min " + this.displayTime(sec % 60);
-    }
-    private displayRemainingTime(startTime : Date | null) : string {
-        if (startTime == null) {
-            return ' - ';
-        }
-        return this.displayTime(new Date().getTime() - startTime.getTime())
+        time += Math.round(miliSeconds / 1000) + 's';
+        return time;
     }
 
     private displayProgress(startTime : Date | null, duration : number) : string {
