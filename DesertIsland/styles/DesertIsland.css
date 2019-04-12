@@ -47,6 +47,12 @@ ul {
     display: block;
     margin: 2px;
 }
+.availableResource {
+    color: chartreuse;
+}
+.notAvailableResource {
+    color: red;
+}
 
 .Level {
     float: initial;

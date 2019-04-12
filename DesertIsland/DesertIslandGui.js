@@ -51,9 +51,9 @@ var DesertIslandGui = (function () {
         var h = "<tr>";
         h += '<td>' + crafter.Name + '</td>';
         h += "<td>";
-        crafter.Cost.forEach(function (res) { return h += res.Resource.show(res.Quantity); });
+        h += this.displayAvailableResources(crafter.Cost);
         h += "</td>";
-        h += '<td>' + crafter.CraftedResource.map(function (r) { return r.Resource.show(r.Quantity); }).join(' ') + '</td>';
+        h += '<td>' + this.displayResources(crafter.CraftedResource) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
@@ -108,7 +108,7 @@ var DesertIslandGui = (function () {
             h += "<tr>"
                 + "<td>" + nextGoal + "</td>"
                 + "<td>" + trig.Name + "</td>"
-                + "<td>" + _this.displayResources(trig.ResourcesTrigger) + "</td>"
+                + "<td>" + _this.displayAvailableResources(trig.ResourcesTrigger) + "</td>"
                 + "<td>" + ((trig.SpawnProducers.length) ? '<b>Producers</b>:' + trig.SpawnProducers.map(function (p) { return p.Name; }).join(', ') : '')
                 + ((trig.SpawnCrafters.length) ? ' <b>crafters</b>:' + trig.SpawnCrafters.map(function (p) { return p.Name; }).join(', ') : '') + "</td>"
                 + "</tr>";
@@ -121,6 +121,19 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayResources = function (resourceQuantity) {
         var h = '';
         resourceQuantity.forEach(function (resQ) { return h += resQ.Resource.show(resQ.Quantity); });
+        h += '';
+        return h;
+    };
+    DesertIslandGui.prototype.displayAvailableResources = function (resourceQuantity) {
+        var h = '';
+        resourceQuantity.forEach(function (resQ) {
+            var storageRes = engine.Player.getResourceInStorage(resQ.Resource.Name);
+            var cssClass = 'notAvailableResource';
+            if (storageRes != null && storageRes.Quantity >= resQ.Quantity) {
+                cssClass = 'availableResource';
+            }
+            h += '<span class="' + cssClass + '">' + resQ.Resource.show(resQ.Quantity) + '</span>';
+        });
         h += '';
         return h;
     };

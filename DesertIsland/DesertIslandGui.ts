@@ -72,11 +72,9 @@ class DesertIslandGui {
         let h = "<tr>";
         h += '<td>' + crafter.Name + '</td>';
         h += "<td>"
-        crafter.Cost.forEach(
-            res => h += res.Resource.show(res.Quantity)
-        );
+        h += this.displayAvailableResources(crafter.Cost);
         h += "</td>"
-        h += '<td>' + crafter.CraftedResource.map(r => r.Resource.show(r.Quantity)).join(' ') + '</td>';
+        h += '<td>' + this.displayResources(crafter.CraftedResource) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
@@ -139,7 +137,7 @@ class DesertIslandGui {
                 h += "<tr>"
                     + "<td>" + nextGoal + "</td>"
                     + "<td>" + trig.Name + "</td>"
-                    + "<td>" + this.displayResources(trig.ResourcesTrigger) + "</td>"
+                    + "<td>" + this.displayAvailableResources(trig.ResourcesTrigger) + "</td>"
                     + "<td>" + ((trig.SpawnProducers.length)?'<b>Producers</b>:'+trig.SpawnProducers.map(p => p.Name).join(', '):'')
                     + ((trig.SpawnCrafters.length)?' <b>crafters</b>:'+trig.SpawnCrafters.map(p => p.Name).join(', '):'') + "</td>"
                 + "</tr>";
@@ -155,6 +153,21 @@ class DesertIslandGui {
         var h = '';
         resourceQuantity.forEach(
             resQ => h += resQ.Resource.show(resQ.Quantity)
+        );
+        h += '';
+        return h;
+    }
+    private displayAvailableResources(resourceQuantity : Array<ResourceQuantity>) : string {
+        var h = '';
+        resourceQuantity.forEach(
+            resQ => {
+                let storageRes = engine.Player.getResourceInStorage(resQ.Resource.Name);
+                let cssClass = 'notAvailableResource';
+                if (storageRes != null && storageRes.Quantity >= resQ.Quantity) {
+                    cssClass = 'availableResource';
+                }
+                h += '<span class="'+cssClass+'">'+resQ.Resource.show(resQ.Quantity)+'</span>'
+            }
         );
         h += '';
         return h;
