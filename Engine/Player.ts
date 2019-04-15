@@ -7,14 +7,20 @@
 
 class Player implements IPlayer{
     $type : string = 'Player';
-    private Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
-    constructor(private Name: string) {
+    protected Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
+    constructor(protected Name: string) {
     }
     public static load(data : any) : Player {
         let curContext : any = window;
         let player : Player = new Player(data.Name);
         player.Storage = (data.Storage as Array<any>).map(p => curContext[p.$type].load(p));
         return player;
+    }
+    public getName() : string {
+        return this.Name;
+    }
+    public getStorage() : Array<IResourceAmount>{
+        return this.Storage;
     }
 
     public changeStorage(resourceQuantity: IResourceAmount) {

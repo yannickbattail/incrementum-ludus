@@ -13,6 +13,9 @@ var Trigger = (function () {
         this.SpawnNewTriggers = SpawnNewTriggers;
         this.$type = 'Trigger';
     }
+    Trigger.prototype.getName = function () {
+        return this.Name;
+    };
     Trigger.prototype.getResourcesTrigger = function () {
         return this.ResourcesTrigger;
     };

@@ -10,6 +10,12 @@ var Player = (function () {
         player.Storage = data.Storage.map(function (p) { return curContext[p.$type].load(p); });
         return player;
     };
+    Player.prototype.getName = function () {
+        return this.Name;
+    };
+    Player.prototype.getStorage = function () {
+        return this.Storage;
+    };
     Player.prototype.changeStorage = function (resourceQuantity) {
         var resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {

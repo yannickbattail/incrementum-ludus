@@ -16,6 +16,9 @@ class Trigger implements ITrigger {
         protected SpawnNewTriggers: Array<ITrigger> = []) {
 
     }
+    getName() : string {
+        return this.Name;
+    }
     getResourcesTrigger() : Array<IResourceAmount> {
         return this.ResourcesTrigger;
     }

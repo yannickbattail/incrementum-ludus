@@ -1,7 +1,7 @@
 var Producer = (function () {
     function Producer(Name, resourceAmount, Interval) {
         if (resourceAmount === void 0) { resourceAmount = EMPTY_RQ; }
-        if (Interval === void 0) { Interval = 0; }
+        if (Interval === void 0) { Interval = null; }
         this.Name = Name;
         this.resourceAmount = resourceAmount;
         this.Interval = Interval;
@@ -45,11 +45,15 @@ var Producer = (function () {
         return this;
     };
     Producer.prototype.seconds = function () {
-        this.Interval *= 1000;
+        if (this.Interval != null) {
+            this.Interval *= 1000;
+        }
         return this;
     };
     Producer.prototype.minutes = function () {
-        this.Interval *= 60 * 1000;
+        if (this.Interval != null) {
+            this.Interval *= 60 * 1000;
+        }
         return this;
     };
     return Producer;

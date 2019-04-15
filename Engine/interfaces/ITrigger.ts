@@ -6,6 +6,7 @@
 interface ITrigger {
     $type : string;
     //getters
+    getName() : string;
     getResourcesTrigger() : Array<IResourceAmount>;
     getSpawnProducers() :  Array<IProducer>;
     getSpawnResources(): Array<IResourceAmount>;

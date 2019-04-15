@@ -53,12 +53,16 @@ class Producer implements IProducer {
     }
 
     public seconds() : IProducer {
-        this.Interval *= 1000;
+        if (this.Interval != null) {
+            this.Interval *= 1000;
+        }
         return this;
     }
 
     public minutes() : IProducer {
-        this.Interval *= 60 * 1000;
+        if (this.Interval != null) {
+            this.Interval *= 60 * 1000;
+        }
         return this;
     }
 }
