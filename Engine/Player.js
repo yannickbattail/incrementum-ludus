@@ -11,25 +11,25 @@ var Player = (function () {
         return player;
     };
     Player.prototype.changeStorage = function (resourceQuantity) {
-        var resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
+        var resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new ResourceQuantity(resourceQuantity.Resource, resourceQuantity.Quantity));
+            this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), resourceQuantity.getQuantity()));
         }
         else {
-            resQ.Quantity += resourceQuantity.Quantity;
+            resQ.setQuantity(resQ.getQuantity() + resourceQuantity.getQuantity());
         }
     };
     Player.prototype.decreaseStorage = function (resourceQuantity) {
-        var resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
+        var resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new ResourceQuantity(resourceQuantity.Resource, -1 * resourceQuantity.Quantity));
+            this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), -1 * resourceQuantity.getQuantity()));
         }
         else {
-            resQ.Quantity += -1 * resourceQuantity.Quantity;
+            resQ.setQuantity(resQ.getQuantity() + -1 * resourceQuantity.getQuantity());
         }
     };
     Player.prototype.getResourceInStorage = function (resourceName) {
-        var res = this.Storage.filter(function (res) { return res.Resource.Name == resourceName; });
+        var res = this.Storage.filter(function (res) { return res.getResource().getName() == resourceName; });
         if (res.length) {
             return res[0];
         }
@@ -39,8 +39,8 @@ var Player = (function () {
         var _this = this;
         var hasRes = true;
         resourcesQuantity.forEach(function (resQ) {
-            var playerRes = _this.getResourceInStorage(resQ.Resource.Name);
-            if (playerRes == null || playerRes.Quantity < resQ.Quantity) {
+            var playerRes = _this.getResourceInStorage(resQ.getResource().getName());
+            if (playerRes == null || playerRes.getQuantity() < resQ.getQuantity()) {
                 hasRes = false;
             }
         });

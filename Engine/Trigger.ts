@@ -1,19 +1,35 @@
-/// <reference path="Resource.ts" />
-/// <reference path="ResourceQuantity.ts" />
-/// <reference path="Producer.ts" />
-/// <reference path="TimedProducer.ts" />
-/// <reference path="ManualProducer.ts" />
-/// <reference path="Crafter.ts" />
+/// <reference path="interfaces/IResource.ts" />
+/// <reference path="interfaces/IResourceAmount.ts" />
+/// <reference path="interfaces/IProducer.ts" />
+/// <reference path="interfaces/ITrigger.ts" />
+/// <reference path="interfaces/ICrafter.ts" />
+/// <reference path="interfaces/IPlayer.ts" />
 
-class Trigger {
+
+class Trigger implements ITrigger {
     $type : string = 'Trigger';
-    constructor(public Name: string,
-        public ResourcesTrigger: Array<ResourceQuantity> = [],
-        public SpawnProducers:  Array<Producer> = [],
-        public SpawnResources: Array<ResourceQuantity> = [],
-        public SpawnCrafters: Array<Crafter> = [],
-        public SpawnNewTriggers: Array<Trigger> = []) {
+    constructor(protected Name: string,
+        protected ResourcesTrigger: Array<IResourceAmount> = [],
+        protected SpawnProducers:  Array<IProducer> = [],
+        protected SpawnResources: Array<IResourceAmount> = [],
+        protected SpawnCrafters: Array<ICrafter> = [],
+        protected SpawnNewTriggers: Array<ITrigger> = []) {
 
+    }
+    getResourcesTrigger() : Array<IResourceAmount> {
+        return this.ResourcesTrigger;
+    }
+    getSpawnProducers() :  Array<IProducer> {
+        return this.SpawnProducers;
+    }
+    getSpawnResources(): Array<IResourceAmount> {
+        return this.SpawnResources;
+    }
+    getSpawnCrafters(): Array<ICrafter> {
+        return this.SpawnCrafters;
+    }
+    getSpawnNewTriggers(): Array<ITrigger> {
+        return this.SpawnNewTriggers;
     }
     public static load(data : any) : Trigger {
         let curContext : any = window;
@@ -26,26 +42,26 @@ class Trigger {
         return newObj;
     }
 
-    public whenReached(quantity : number, resource : Resource) : Trigger {
+    public whenReached(quantity : number, resource : IResource) : ITrigger {
         this.ResourcesTrigger.push(new ResourceQuantity(resource, quantity));
         return this;
     }
-    public and(quantity : number, resource : Resource) : Trigger {
+    public and(quantity : number, resource : IResource) : ITrigger {
         return this.whenReached(quantity, resource);
     }
-    public spawnProducer(producer : Producer) {
+    public spawnProducer(producer : IProducer) : ITrigger {
         this.SpawnProducers.push(producer);
         return this;
     }
-    public spawnResource(quantity : number, resource : Resource) {
+    public spawnResource(quantity : number, resource : IResource) : ITrigger {
         this.SpawnResources.push(new ResourceQuantity(resource, quantity));
         return this;
     }
-    public spawnCrafter(crafter : Crafter) {
+    public spawnCrafter(crafter : ICrafter) : ITrigger {
         this.SpawnCrafters.push(crafter);
         return this;
     }
-    public appendTrigger(trigger : Trigger) {
+    public appendTrigger(trigger : ITrigger) : ITrigger {
         this.SpawnNewTriggers.push(trigger);
         return this;
     }

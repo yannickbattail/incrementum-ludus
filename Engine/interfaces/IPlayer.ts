@@ -2,6 +2,7 @@
 /// <reference path="IResourceAmount.ts" />
 
 interface IPlayer {
+    $type : string;
     changeStorage(resourceQuantity: IResourceAmount) : void;
     decreaseStorage(resourceQuantity: IResourceAmount) : void;
     getResourceInStorage(resourceName: string): IResourceAmount | null ;

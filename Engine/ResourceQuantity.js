@@ -10,6 +10,18 @@ var ResourceQuantity = (function () {
         var rq = new ResourceQuantity(res, data.Quantity);
         return rq;
     };
+    ResourceQuantity.prototype.getQuantity = function () {
+        return this.Quantity;
+    };
+    ResourceQuantity.prototype.setQuantity = function (quantity) {
+        this.Quantity = quantity;
+    };
+    ResourceQuantity.prototype.getResource = function () {
+        return this.Resource;
+    };
+    ResourceQuantity.prototype.show = function () {
+        return this.Resource.show(this.Quantity);
+    };
     return ResourceQuantity;
 }());
 var EMPTY_RQ = new ResourceQuantity(new Resource("nothing"), 0);

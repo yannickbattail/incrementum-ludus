@@ -1,15 +1,14 @@
-/// <reference path="Resource.ts" />
-/// <reference path="ResourceQuantity.ts" />
-/// <reference path="Producer.ts" />
-/// <reference path="TimedProducer.ts" />
-/// <reference path="ManualProducer.ts" />
-/// <reference path="Trigger.ts" />
-/// <reference path="Crafter.ts" />
+/// <reference path="interfaces/IResource.ts" />
+/// <reference path="interfaces/IResourceAmount.ts" />
+/// <reference path="interfaces/IProducer.ts" />
+/// <reference path="interfaces/ITrigger.ts" />
+/// <reference path="interfaces/ICrafter.ts" />
+/// <reference path="interfaces/IPlayer.ts" />
 
-class Player {
+class Player implements IPlayer{
     $type : string = 'Player';
-    public Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
-    constructor(public Name: string) {
+    private Storage: Array<ResourceQuantity> = new Array<ResourceQuantity>();
+    constructor(private Name: string) {
     }
     public static load(data : any) : Player {
         let curContext : any = window;
@@ -18,26 +17,26 @@ class Player {
         return player;
     }
 
-    public changeStorage(resourceQuantity: ResourceQuantity) {
-        let resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
+    public changeStorage(resourceQuantity: IResourceAmount) {
+        let resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new ResourceQuantity(resourceQuantity.Resource, resourceQuantity.Quantity));
+            this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), resourceQuantity.getQuantity()));
         } else {
-            resQ.Quantity += resourceQuantity.Quantity;
+            resQ.setQuantity(resQ.getQuantity() + resourceQuantity.getQuantity());
         }
     }
-    public decreaseStorage(resourceQuantity: ResourceQuantity) {
-        let resQ = this.getResourceInStorage(resourceQuantity.Resource.Name);
+    public decreaseStorage(resourceQuantity: IResourceAmount) {
+        let resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new ResourceQuantity(resourceQuantity.Resource, -1 * resourceQuantity.Quantity));
+            this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), -1 * resourceQuantity.getQuantity()));
         } else {
-            resQ.Quantity += -1 * resourceQuantity.Quantity;
+            resQ.setQuantity(resQ.getQuantity() + -1 * resourceQuantity.getQuantity());
         }
     }
 
 
     public getResourceInStorage(resourceName: string): ResourceQuantity | null {
-        let res = this.Storage.filter((res: ResourceQuantity) => res.Resource.Name == resourceName);
+        let res = this.Storage.filter((res: ResourceQuantity) => res.getResource().getName() == resourceName);
         if (res.length) {
             return res[0];
         }
@@ -47,8 +46,8 @@ class Player {
         let hasRes = true;
         resourcesQuantity.forEach(
             resQ => {
-                let playerRes = this.getResourceInStorage(resQ.Resource.Name);
-                if (playerRes == null || playerRes.Quantity < resQ.Quantity) {
+                let playerRes = this.getResourceInStorage(resQ.getResource().getName());
+                if (playerRes == null || playerRes.getQuantity() < resQ.getQuantity()) {
                     hasRes = false;
                 }
             }

@@ -25,7 +25,7 @@ var Engine = (function () {
     Engine.prototype.onTick = function () {
         var _this = this;
         this.Producers.forEach(function (producer) {
-            if (producer instanceof TimedProducer) {
+            if (producer.isAuto) {
                 _this.collectTimedProducer(producer);
             }
         });
@@ -33,25 +33,32 @@ var Engine = (function () {
         this.Crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
     };
     Engine.prototype.collectTimedProducer = function (producer) {
-        var interval = this.FastMode ? this.FastMode : producer.Interval;
-        if (producer.LastTime.getTime() + interval < new Date().getTime()) {
-            producer.LastTime = new Date();
-            this.Player.changeStorage(producer.ResourceQuantity);
+        if (producer.isAuto()) {
+            var interval = 666000;
+            if (producer.getInterval() != null) {
+                producer.getInterval();
+            }
+            interval = this.FastMode ? this.FastMode : interval;
+            var startTime = producer.getStartTime();
+            if (startTime != null && startTime.getTime() + interval < new Date().getTime()) {
+                producer.initStartTime();
+                this.Player.changeStorage(producer.getResourceAmount());
+            }
         }
     };
     Engine.prototype.collectManualProducer = function (producer) {
-        this.Player.changeStorage(producer.ResourceQuantity);
+        this.Player.changeStorage(producer.getResourceAmount());
     };
     Engine.prototype.collectProducer = function (producerName) {
         var producer = this.getProducerByName(producerName);
         if (producer != null) {
-            if (producer instanceof ManualProducer) {
+            if (!producer.isAuto()) {
                 this.collectManualProducer(producer);
             }
         }
     };
     Engine.prototype.getProducerByName = function (producerName) {
-        var producers = this.Producers.filter(function (src) { return src.Name == producerName; });
+        var producers = this.Producers.filter(function (src) { return src.getName() == producerName; });
         if (producers.length == 0) {
             return null;
         }
@@ -59,11 +66,11 @@ var Engine = (function () {
     };
     Engine.prototype.checkTrigger = function (trigger) {
         var _this = this;
-        if (this.Player.hasResources(trigger.ResourcesTrigger)) {
-            trigger.SpawnProducers.forEach(function (pawnProducer) { return _this.Producers.push(pawnProducer); });
-            trigger.SpawnResources.forEach(function (res) { return _this.Player.changeStorage(res); });
-            trigger.SpawnCrafters.forEach(function (crafter) { return _this.Crafters.push(crafter); });
-            trigger.SpawnNewTriggers.forEach(function (newTrigger) { return _this.Triggers.push(newTrigger); });
+        if (this.Player.hasResources(trigger.getResourcesTrigger())) {
+            trigger.getSpawnProducers().forEach(function (pawnProducer) { return _this.Producers.push(pawnProducer); });
+            trigger.getSpawnResources().forEach(function (res) { return _this.Player.changeStorage(res); });
+            trigger.getSpawnCrafters().forEach(function (crafter) { return _this.Crafters.push(crafter); });
+            trigger.getSpawnNewTriggers().forEach(function (newTrigger) { return _this.Triggers.push(newTrigger); });
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
         }
     };
@@ -73,17 +80,18 @@ var Engine = (function () {
     };
     Engine.prototype.checkFinishedCrafting = function (crafter) {
         var _this = this;
-        var duration = this.FastMode ? this.FastMode : crafter.Duration;
-        if (crafter.StartTime != null && (crafter.StartTime.getTime() + duration < new Date().getTime())) {
-            crafter.StartTime = null;
-            crafter.CraftedResource.forEach(function (resourceQty) { return _this.Player.changeStorage(resourceQty); });
+        var duration = this.FastMode ? this.FastMode : crafter.getDuration();
+        var startTime = crafter.getStartTime();
+        if (startTime != null && (startTime.getTime() + duration < new Date().getTime())) {
+            crafter.resetStartTime();
+            crafter.getCraftedResources().forEach(function (resourceQty) { return _this.Player.changeStorage(resourceQty); });
         }
     };
     Engine.prototype.checkStartCrafting = function (crafter) {
         var _this = this;
-        if (crafter.AutoCrafting && this.Player.hasResources(crafter.Cost)) {
-            crafter.StartTime = new Date();
-            crafter.Cost.forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
+        if (crafter.isAuto() && this.Player.hasResources(crafter.getCost())) {
+            crafter.initStartTime();
+            crafter.getCost().forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
         }
     };
     Engine.prototype.startCrafting = function (crafterName) {
@@ -94,15 +102,15 @@ var Engine = (function () {
     };
     Engine.prototype.startManualCrafting = function (crafter) {
         var _this = this;
-        if (!crafter.AutoCrafting && !crafter.isCrafting() && this.Player.hasResources(crafter.Cost)) {
-            crafter.StartTime = new Date();
-            crafter.Cost.forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
+        if (!crafter.isAuto() && !crafter.isCrafting() && this.Player.hasResources(crafter.getCost())) {
+            crafter.initStartTime();
+            crafter.getCost().forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
             return true;
         }
         return false;
     };
     Engine.prototype.getCrafterByName = function (crafterName) {
-        var crafters = this.Crafters.filter(function (src) { return src.Name == crafterName; });
+        var crafters = this.Crafters.filter(function (src) { return src.getName() == crafterName; });
         if (crafters.length == 0) {
             return null;
         }

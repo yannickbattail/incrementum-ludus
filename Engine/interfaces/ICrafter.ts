@@ -4,15 +4,18 @@
 
 interface ICrafter {
     //getters
-    getStartTime: Date | null;
-    getName: string;
-    getDuration: number;
-    getCost: Array<IResourceAmount>;
-    getCraftedResource: Array<IResourceAmount>;
-    getAutoCrafting: boolean;
+    getStartTime(): Date | null;
+    resetStartTime(): void;
+    initStartTime(): void;
+    getName(): string;
+    getDuration(): number;
+    getCost(): Array<IResourceAmount>;
+    getCraftedResources(): Array<IResourceAmount>;
+    isAuto(): boolean;
 
     // builder inferface
     thatCraft(quantity : number, resource : IResource) : ICrafter
+    andCraft(quantity : number, resource : IResource) : ICrafter
     in(interval: number) : ICrafter;
     seconds() : ICrafter;
     minutes() : ICrafter;

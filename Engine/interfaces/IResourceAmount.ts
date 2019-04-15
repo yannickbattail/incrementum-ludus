@@ -1,6 +1,7 @@
 
 interface IResourceAmount {
+    $type : string;
     getQuantity() : number ;
-    getResource() : Resource;
+    getResource() : IResource;
     show() : string;
 }

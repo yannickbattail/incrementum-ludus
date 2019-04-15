@@ -4,6 +4,7 @@
 /// <reference path="ICrafter.ts" />
 
 interface ITrigger {
+    $type : string;
     //getters
     getResourcesTrigger() : Array<IResourceAmount>;
     getSpawnProducers() :  Array<IProducer>;
@@ -14,8 +15,8 @@ interface ITrigger {
     // builder inferface
     whenReached(quantity : number, resource : IResource) : ITrigger;
     and(quantity : number, resource : IResource) : ITrigger;
-    spawnProducer(producer : IProducer) : void;
-    spawnResource(quantity : number, resource : IResource) : void;
-    spawnCrafter(crafter : ICrafter) : void;
-    appendTrigger(trigger : ITrigger) : void;
+    spawnProducer(producer : IProducer) : ITrigger;
+    spawnResource(quantity : number, resource : IResource) : ITrigger;
+    spawnCrafter(crafter : ICrafter) : ITrigger;
+    appendTrigger(trigger : ITrigger) : ITrigger;
 }

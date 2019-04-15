@@ -13,6 +13,21 @@ var Trigger = (function () {
         this.SpawnNewTriggers = SpawnNewTriggers;
         this.$type = 'Trigger';
     }
+    Trigger.prototype.getResourcesTrigger = function () {
+        return this.ResourcesTrigger;
+    };
+    Trigger.prototype.getSpawnProducers = function () {
+        return this.SpawnProducers;
+    };
+    Trigger.prototype.getSpawnResources = function () {
+        return this.SpawnResources;
+    };
+    Trigger.prototype.getSpawnCrafters = function () {
+        return this.SpawnCrafters;
+    };
+    Trigger.prototype.getSpawnNewTriggers = function () {
+        return this.SpawnNewTriggers;
+    };
     Trigger.load = function (data) {
         var curContext = window;
         var newObj = new Trigger(data.Name);

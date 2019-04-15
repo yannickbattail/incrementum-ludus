@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
+  },
+  "files": [
+    "interfaces/ICrafter.ts",
+    "interfaces/IPlayer.ts",
+    "interfaces/IProducer.ts",
+    "interfaces/IResource.ts",
+    "interfaces/IResourceAmount.ts",
+    "interfaces/ITrigger.ts",
+    "Resource.ts",
+    "ResourceQuantity.ts",
+    "Crafter.ts",
+    "Producer.ts",
+    "Trigger.ts",
+    "Player.ts",
+    "Engine.ts"
+  ]
+}
