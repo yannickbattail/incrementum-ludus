@@ -36,15 +36,14 @@
         }
     </style>
     <title>incr</title>
-    <script src="Engine/Resource.js"></script>
-    <script src="Engine/ResourceQuantity.js"></script>
-    <script src="Engine/Producer.js"></script>
-    <script src="Engine/TimedProducer.js"></script>
-    <script src="Engine/ManualProducer.js"></script>
-    <script src="Engine/Trigger.js"></script>
-    <script src="Engine/Crafter.js"></script>
-    <script src="Engine/Player.js"></script>
-    <script src="Engine/Engine.js"></script>
+    <script src="../Engine/Resource.js"></script>
+    <script src="../Engine/ResourceQuantity.js"></script>
+    <script src="../Engine/Producer.js"></script>
+    <script src="../Engine/Producer.js"></script>
+    <script src="../Engine/Trigger.js"></script>
+    <script src="../Engine/Crafter.js"></script>
+    <script src="../Engine/Player.js"></script>
+    <script src="../Engine/Engine.js"></script>
     <script src="incr.js"></script>
     <script src="gui.js"></script>
 </head>
@@ -67,10 +66,27 @@
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
             saveEngine(engine);
         }
+        function stop() {
+            window.clearInterval(interval);
+        }
+        function clearStorage() {
+            window.localStorage.removeItem('incr');
+            window.localStorage.removeItem('incrVersion');
+        }
+        function restart() {
+            stop();
+            clearStorage();
+            window.location.reload();
+        }
+        function fastMode() {
+            engine.FastMode=1000;
+        }
         var interval = window.setInterval(updateGui, 1000);
 
     </script>
-    <div onclick="window.clearInterval(interval)">stop</div>
-    <div onclick="engine.FastMode=1000;">fast mode</div>
+    <button onclick="restart()">Restart</button>
+    <div onclick="stop()">stop</div>
+    <div onclick="clearStorage()">clear</div>
+    <div onclick="fastMode()">fast mode</div>
 </body>
 </html>

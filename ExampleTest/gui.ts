@@ -1,12 +1,10 @@
-/// <reference path="Engine/Resource.ts" />
-/// <reference path="Engine/ResourceQuantity.ts" />
-/// <reference path="Engine/Producer.ts" />
-/// <reference path="Engine/TimedProducer.ts" />
-/// <reference path="Engine/ManualProducer.ts" />
-/// <reference path="Engine/Trigger.ts" />
-/// <reference path="Engine/Crafter.ts" />
-/// <reference path="Engine/Player.ts" />
-/// <reference path="Engine/Engine.ts" />
+/// <reference path="../Engine/interfaces/IResource.ts" />
+/// <reference path="../Engine/interfaces/IResourceAmount.ts" />
+/// <reference path="../Engine/interfaces/IProducer.ts" />
+/// <reference path="../Engine/interfaces/ITrigger.ts" />
+/// <reference path="../Engine/interfaces/ICrafter.ts" />
+/// <reference path="../Engine/interfaces/IPlayer.ts" />
+/// <reference path="../Engine/Engine.ts" />
 
 class IncrGui {
     Engine: Engine;
@@ -17,8 +15,8 @@ class IncrGui {
     displayStorage(): string {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
-        this.Engine.Player.Storage.forEach(
-            res => h += "<tr><td>" + res.Quantity + "</td><td>" + res.Resource.Name + "</td></tr>"
+        this.Engine.Player.getStorage().forEach(
+            res => h += "<tr><td>" + res.show() + "</td></tr>"
         );
         h += "</table>";
         return h;
@@ -29,10 +27,10 @@ class IncrGui {
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(
             producer => {
-                if (producer instanceof TimedProducer) {
-                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>"
-                } else if (producer instanceof ManualProducer) {
-                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>'
+                if (producer.isAuto()) {
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + producer.getInterval() + " ms</td></tr>"
+                } else {
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
                 }
             }
         );
@@ -52,39 +50,39 @@ class IncrGui {
         return h;
     }
 
-    private displayTrigger(trigger : Trigger) : string {
+    private displayTrigger(trigger : ITrigger) : string {
         let h = "<tr>";
-        h += '<td>' + trigger.Name + '</td>';
+        h += '<td>' + trigger.getName() + '</td>';
         h += "<td><ul>";
-        trigger.ResourcesTrigger.forEach(
-            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        trigger.getResourcesTrigger().forEach(
+            res => h += '<li>' + res.show() + '</li>'
         );
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnProducers.forEach(
+        trigger.getSpawnProducers().forEach(
             producer => {
-                if (producer instanceof TimedProducer) {
-                    h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</li>"
-                } else if (trigger.SpawnProducers instanceof TimedProducer) {
-                    h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</li>"
+                if (producer.isAuto()) {
+                    h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " every " + producer.getInterval() + " ms</li>"
+                } else {
+                    h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " manualy</li>"
                 }
             }
         );
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnResources.forEach(
-            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        trigger.getSpawnResources().forEach(
+            res => h += '<li>' + res.show() + '</li>'
         );
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnCrafters.forEach(
-            crafter => h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.map(r=>r.Quantity+' '+r.Resource.Name).join(', ') 
-             + ' in '+this.displayTime(crafter.Duration)+' '+(crafter.AutoCrafting?'automaticly':'mannualy')+'</li>'
+        trigger.getSpawnCrafters().forEach(
+            crafter => h += '<li>' + crafter.getName() + ' craft: ' + crafter.getCraftedResources().map(r=>r.show()).join(', ') 
+             + ' in '+this.displayTime(crafter.getDuration())+' '+(crafter.isAuto?'automaticly':'mannualy')+'</li>'
         );
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnNewTriggers.forEach(
-            trig => h += '<li>' + trig.Name +'</li>'
+        trigger.getSpawnNewTriggers().forEach(
+            trig => h += '<li>' + trig.getName() +'</li>'
         );
         h += "</ul></td>";
         h += '</tr>';
@@ -100,18 +98,18 @@ class IncrGui {
         return h;
     }
 
-    private displayCrafter(crafter : Crafter) : string {
+    private displayCrafter(crafter : ICrafter) : string {
         let h = "<tr>";
-        h += '<td>' + crafter.Name + '</td>';
-        h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
+        h += '<td>' + crafter.getName() + '</td>';
+        h += '<td>' + this.displayRemainingTime(crafter.getStartTime()) + "/" + this.displayTime(crafter.getDuration()) + '</td>';
         h += "<td><ul>"
-        crafter.Cost.forEach(
-            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        crafter.getCost().forEach(
+            res => h += '<li>' + res.show() + '</li>'
         );
         h += "</ul></td>"
         h += "<td><ul>"
-        crafter.CraftedResource.forEach(
-            res => h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'
+        crafter.getCraftedResources().forEach(
+            res => h += '<li>' + res.show() + '</li>'
         );
         h += "</ul></td>"
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
@@ -120,17 +118,17 @@ class IncrGui {
     }
 
 
-    private displayCraftButton(crafter : Crafter) : string {
-        if (crafter.AutoCrafting) {
+    private displayCraftButton(crafter : ICrafter) : string {
+        if (crafter.isAuto()) {
             return 'Auto Crafting';
         }
         if (crafter.isCrafting()) {
             return '<button disabled="disabled">craft</button> Crafting in progress';
         }
-        if (!this.Engine.Player.hasResources(crafter.Cost)) {
+        if (!this.Engine.Player.hasResources(crafter.getCost())) {
             return '<button disabled="disabled">craft</button> not enough resources';
         }
-        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
+        return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft</button>';
     }
 
     private displayTime(miliSeconds : number) : string {

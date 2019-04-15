@@ -5,7 +5,7 @@ var IncrGui = (function () {
     IncrGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
-        this.Engine.Player.Storage.forEach(function (res) { return h += "<tr><td>" + res.Quantity + "</td><td>" + res.Resource.Name + "</td></tr>"; });
+        this.Engine.Player.getStorage().forEach(function (res) { return h += "<tr><td>" + res.show() + "</td></tr>"; });
         h += "</table>";
         return h;
     };
@@ -13,11 +13,11 @@ var IncrGui = (function () {
         var h = '<table border="1">';
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
-            if (producer instanceof TimedProducer) {
-                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + "</td><td>every " + producer.Interval + " ms</td></tr>";
+            if (producer.isAuto()) {
+                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + producer.getInterval() + " ms</td></tr>";
             }
-            else if (producer instanceof ManualProducer) {
-                h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>';
+            else {
+                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";
@@ -36,29 +36,29 @@ var IncrGui = (function () {
     IncrGui.prototype.displayTrigger = function (trigger) {
         var _this = this;
         var h = "<tr>";
-        h += '<td>' + trigger.Name + '</td>';
+        h += '<td>' + trigger.getName() + '</td>';
         h += "<td><ul>";
-        trigger.ResourcesTrigger.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        trigger.getResourcesTrigger().forEach(function (res) { return h += '<li>' + res.show() + '</li>'; });
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnProducers.forEach(function (producer) {
-            if (producer instanceof TimedProducer) {
-                h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " every " + producer.Interval + " ms</li>";
+        trigger.getSpawnProducers().forEach(function (producer) {
+            if (producer.isAuto()) {
+                h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " every " + producer.getInterval() + " ms</li>";
             }
-            else if (trigger.SpawnProducers instanceof TimedProducer) {
-                h += "<li>" + producer.Name + ": " + producer.ResourceQuantity.Quantity + " " + producer.ResourceQuantity.Resource.Name + " manualy</li>";
+            else {
+                h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " manualy</li>";
             }
         });
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnResources.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        trigger.getSpawnResources().forEach(function (res) { return h += '<li>' + res.show() + '</li>'; });
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnCrafters.forEach(function (crafter) { return h += '<li>' + crafter.Name + ' craft: ' + crafter.CraftedResource.map(function (r) { return r.Quantity + ' ' + r.Resource.Name; }).join(', ')
-            + ' in ' + _this.displayTime(crafter.Duration) + ' ' + (crafter.AutoCrafting ? 'automaticly' : 'mannualy') + '</li>'; });
+        trigger.getSpawnCrafters().forEach(function (crafter) { return h += '<li>' + crafter.getName() + ' craft: ' + crafter.getCraftedResources().map(function (r) { return r.show(); }).join(', ')
+            + ' in ' + _this.displayTime(crafter.getDuration()) + ' ' + (crafter.isAuto ? 'automaticly' : 'mannualy') + '</li>'; });
         h += "</ul></td>";
         h += "<td><ul>";
-        trigger.SpawnNewTriggers.forEach(function (trig) { return h += '<li>' + trig.Name + '</li>'; });
+        trigger.getSpawnNewTriggers().forEach(function (trig) { return h += '<li>' + trig.getName() + '</li>'; });
         h += "</ul></td>";
         h += '</tr>';
         return h;
@@ -73,29 +73,29 @@ var IncrGui = (function () {
     };
     IncrGui.prototype.displayCrafter = function (crafter) {
         var h = "<tr>";
-        h += '<td>' + crafter.Name + '</td>';
-        h += '<td>' + this.displayRemainingTime(crafter.StartTime) + "/" + this.displayTime(crafter.Duration) + '</td>';
+        h += '<td>' + crafter.getName() + '</td>';
+        h += '<td>' + this.displayRemainingTime(crafter.getStartTime()) + "/" + this.displayTime(crafter.getDuration()) + '</td>';
         h += "<td><ul>";
-        crafter.Cost.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        crafter.getCost().forEach(function (res) { return h += '<li>' + res.show() + '</li>'; });
         h += "</ul></td>";
         h += "<td><ul>";
-        crafter.CraftedResource.forEach(function (res) { return h += '<li>' + res.Quantity + ' ' + res.Resource.Name + '</li>'; });
+        crafter.getCraftedResources().forEach(function (res) { return h += '<li>' + res.show() + '</li>'; });
         h += "</ul></td>";
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
     };
     IncrGui.prototype.displayCraftButton = function (crafter) {
-        if (crafter.AutoCrafting) {
+        if (crafter.isAuto()) {
             return 'Auto Crafting';
         }
         if (crafter.isCrafting()) {
             return '<button disabled="disabled">craft</button> Crafting in progress';
         }
-        if (!this.Engine.Player.hasResources(crafter.Cost)) {
+        if (!this.Engine.Player.hasResources(crafter.getCost())) {
             return '<button disabled="disabled">craft</button> not enough resources';
         }
-        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft</button>';
+        return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft</button>';
     };
     IncrGui.prototype.displayTime = function (miliSeconds) {
         return "" + Math.round(miliSeconds / 1000) + "s";

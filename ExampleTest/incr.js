@@ -10,18 +10,18 @@ var WASTE = new Resource("waste");
 var engine = new Engine();
 engine.Player = new Player("platypus");
 engine.Producers = [
-    new TimedProducer("iron mine", new ResourceQuantity(IRON, 2), 500),
-    new TimedProducer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
-    new ManualProducer("tin", new ResourceQuantity(TIN, 1))
+    new Producer("iron mine", new ResourceQuantity(IRON, 2), 500),
+    new Producer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
+    new Producer("tin", new ResourceQuantity(TIN, 1))
 ];
 engine.Triggers = [
     new Trigger("lead mine exploitation")
         .whenReached(20, IRON).and(2, COPPER)
-        .spawnProducer(new TimedProducer("lead mine")
+        .spawnProducer(new Producer("lead mine")
         .thatProduce(1, LEAD).every(5).seconds()),
     new Trigger("water source")
         .whenReached(10, TIN)
-        .spawnProducer(new ManualProducer("water source")
+        .spawnProducer(new Producer("water source")
         .thatProduce(1, WATER))
         .spawnResource(10, WATER)
         .appendTrigger(new Trigger("beer brewering")
@@ -34,7 +34,7 @@ engine.Crafters = [
     new Crafter("forge axe", 20000, [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)], [new ResourceQuantity(AXE, 1)], true),
     new Crafter("forge knife", 20000, [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)], [new ResourceQuantity(KNIFE, 1), new ResourceQuantity(WASTE, 2)], false),
 ];
-var VERSION = "1";
+var VERSION = "1.1";
 function loadEngine() {
     var json = window.localStorage.getItem('incr');
     if (json != null) {

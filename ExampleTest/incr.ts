@@ -1,12 +1,10 @@
-/// <reference path="Engine/Resource.ts" />
-/// <reference path="Engine/ResourceQuantity.ts" />
-/// <reference path="Engine/Producer.ts" />
-/// <reference path="Engine/TimedProducer.ts" />
-/// <reference path="Engine/ManualProducer.ts" />
-/// <reference path="Engine/Trigger.ts" />
-/// <reference path="Engine/Crafter.ts" />
-/// <reference path="Engine/Player.ts" />
-/// <reference path="Engine/Engine.ts" />
+/// <reference path="../Engine/interfaces/IResource.ts" />
+/// <reference path="../Engine/interfaces/IResourceAmount.ts" />
+/// <reference path="../Engine/interfaces/IProducer.ts" />
+/// <reference path="../Engine/interfaces/ITrigger.ts" />
+/// <reference path="../Engine/interfaces/ICrafter.ts" />
+/// <reference path="../Engine/interfaces/IPlayer.ts" />
+/// <reference path="../Engine/Engine.ts" />
 
 const IRON = new Resource("iron");
 const COPPER = new Resource("copper");
@@ -22,21 +20,21 @@ var engine = new Engine();
 engine.Player = new Player("platypus");
 engine.Producers = [
     // initals producers
-    new TimedProducer("iron mine", new ResourceQuantity(IRON, 2), 500/*mili sec*/),
-    new TimedProducer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
-    new ManualProducer("tin", new ResourceQuantity(TIN, 1))
+    new Producer("iron mine", new ResourceQuantity(IRON, 2), 500/*mili sec*/),
+    new Producer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
+    new Producer("tin", new ResourceQuantity(TIN, 1))
 ];
 engine.Triggers = [
     new Trigger("lead mine exploitation")
         .whenReached(20, IRON).and(2, COPPER)
         .spawnProducer(
-            new TimedProducer("lead mine")
+            new Producer("lead mine")
                 .thatProduce(1, LEAD).every(5).seconds()
         ),
     new Trigger("water source")
         .whenReached(10, TIN)
         .spawnProducer(
-            new ManualProducer("water source")
+            new Producer("water source")
                 .thatProduce(1, WATER)
         )
         .spawnResource(10, WATER)
@@ -64,7 +62,7 @@ engine.Crafters = [
         [new ResourceQuantity(KNIFE, 1), new ResourceQuantity(WASTE, 2)], false/*auto*/),
 ];
 
-const VERSION = "1";
+const VERSION = "1.1";
 function loadEngine() : Engine | null {
 
     let json = window.localStorage.getItem('incr');
