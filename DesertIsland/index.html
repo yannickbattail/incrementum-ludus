@@ -64,9 +64,11 @@
             window.localStorage.removeItem('DesertIslandVersion');
         }
         function restart() {
-            stop();
-            clearStorage();
-            window.location.reload();
+            if (window.confirm('It will restart the game from zero. Are you sure?')) {
+                stop();
+                clearStorage();
+                window.location.reload();
+            }
         }
         function fastMode() {
             engine.FastMode=1000;
