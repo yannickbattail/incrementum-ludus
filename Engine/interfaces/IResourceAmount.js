@@ -1,0 +1,1 @@
+//# sourceMappingURL=IResourceAmount.js.map

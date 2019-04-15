@@ -8,6 +8,12 @@
     "sourceMap": true
   },
   "files": [
+    "Engine/interfaces/ICrafter.ts",
+    "Engine/interfaces/IPlayer.ts",
+    "Engine/interfaces/IProducer.ts",
+    "Engine/interfaces/IResource.ts",
+    "Engine/interfaces/IResourceAmount.ts",
+    "Engine/interfaces/ITrigger.ts",    
     "Engine/Crafter.ts",
     "Engine/Engine.ts",
     "Engine/ManualProducer.ts",
