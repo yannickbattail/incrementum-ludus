@@ -1,4 +1,10 @@
-/// <reference path="../Engine/Resource.ts" />
+/// <reference path="../Engine/interfaces/IResource.ts" />
+/// <reference path="../Engine/interfaces/IResourceAmount.ts" />
+/// <reference path="../Engine/interfaces/IProducer.ts" />
+/// <reference path="../Engine/interfaces/ITrigger.ts" />
+/// <reference path="../Engine/interfaces/ICrafter.ts" />
+/// <reference path="../Engine/interfaces/IPlayer.ts" />
+/// <reference path="../Engine/Engine.ts" />
 
 class Level extends Resource {
     public $type : string = 'Level';

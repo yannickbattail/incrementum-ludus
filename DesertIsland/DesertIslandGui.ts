@@ -1,11 +1,9 @@
-/// <reference path="../Engine/Resource.ts" />
-/// <reference path="../Engine/ResourceQuantity.ts" />
-/// <reference path="../Engine/Producer.ts" />
-/// <reference path="../Engine/TimedProducer.ts" />
-/// <reference path="../Engine/ManualProducer.ts" />
-/// <reference path="../Engine/Trigger.ts" />
-/// <reference path="../Engine/Crafter.ts" />
-/// <reference path="../Engine/Player.ts" />
+/// <reference path="../Engine/interfaces/IResource.ts" />
+/// <reference path="../Engine/interfaces/IResourceAmount.ts" />
+/// <reference path="../Engine/interfaces/IProducer.ts" />
+/// <reference path="../Engine/interfaces/ITrigger.ts" />
+/// <reference path="../Engine/interfaces/ICrafter.ts" />
+/// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
 /// <reference path="./Material.ts" />
@@ -22,19 +20,19 @@ class DesertIslandGui {
         let level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
             return "XXX level";
-        return 'Level: '+level.Resource.show(level.Quantity);
+        return 'Level: '+level.show();
     }
 
     displayStorage(): string {
         var h = '<table border="1">';
         h += "<tr><th>resource</th></tr>";
-        if (this.Engine.Player.Storage.length <= 1) {
+        if (this.Engine.Player.getStorage().length <= 1) {
             h += "<tr><td>no resource</td></tr>";
         } else {
-            this.Engine.Player.Storage.forEach(
+            this.Engine.Player.getStorage().forEach(
                 res => {
-                    if (!(res.Resource instanceof Level)) {
-                        h += '<tr><td>' + res.Resource.show(res.Quantity) + '</td></tr>';
+                    if (!(res.getResource() instanceof Level)) {
+                        h += '<tr><td>' + res.show() + '</td></tr>';
                     }
                 }
             );
@@ -48,10 +46,10 @@ class DesertIslandGui {
         h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(
             producer => {
-                if (producer instanceof TimedProducer) {
-                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + "</td><td>every " + this.displayTime(producer.Interval) + "</td></tr>"
-                } else if (producer instanceof ManualProducer) {
-                    h += "<tr><td>" + producer.Name + "</td><td>" + producer.ResourceQuantity.Resource.show(producer.ResourceQuantity.Quantity) + '</td><td><button onclick="engine.collectProducer(\'' + producer.Name + '\');">Collect</button></td></tr>'
+                if (producer.isAuto()) {
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + this.displayTime(producer.getInterval()) + "</td></tr>"
+                } else {
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
                 }
             }
         );
@@ -68,29 +66,29 @@ class DesertIslandGui {
         return h;
     }
 
-    private displayCrafter(crafter : Crafter) : string {
+    private displayCrafter(crafter : ICrafter) : string {
         let h = "<tr>";
-        h += '<td>' + crafter.Name + '</td>';
+        h += '<td>' + crafter.getName() + '</td>';
         h += "<td>"
-        h += this.displayAvailableResources(crafter.Cost);
+        h += this.displayAvailableResources(crafter.getCost());
         h += "</td>"
-        h += '<td>' + this.displayResources(crafter.CraftedResource) + '</td>';
+        h += '<td>' + this.displayResources(crafter.getCraftedResources()) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
     }
 
-    private displayCraftButton(crafter : Crafter) : string {
-        if (crafter.AutoCrafting) {
+    private displayCraftButton(crafter : ICrafter) : string {
+        if (crafter.isAuto()) {
             return 'Auto Crafting';
         }
         if (crafter.isCrafting()) {
-            return this.displayProgress(crafter.StartTime, crafter.Duration);
+            return this.displayProgress(crafter.getStartTime(), crafter.getDuration());
         }
-        if (!this.Engine.Player.hasResources(crafter.Cost)) {
+        if (!this.Engine.Player.hasResources(crafter.getCost())) {
             return 'Not enough resources';
         }
-        return '<button onclick="engine.startCrafting(\'' + crafter.Name + '\');">craft ('+this.displayTime(crafter.Duration)+')</button>';
+        return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft ('+this.displayTime(crafter.getDuration())+')</button>';
     }
 
     displayTriggers(): string {
@@ -106,12 +104,12 @@ class DesertIslandGui {
         return h;
     }
 
-    private displayTrigger(trigger : Trigger) : string {
+    private displayTrigger(trigger : ITrigger) : string {
         let h = "<tr>";
-        h += '<td>' + trigger.Name + '</td>';
+        h += '<td>' + trigger.getName() + '</td>';
         h += "<td>";
-        trigger.ResourcesTrigger.forEach(
-            res => h += res.Resource.show(res.Quantity)
+        trigger.getResourcesTrigger().forEach(
+            res => h += res.show()
         );
         h += "</td>";
         h += '</tr>';
@@ -126,7 +124,7 @@ class DesertIslandGui {
         return h;
     }
 
-    private displayBranch(triggers : Array<Trigger>) : string {
+    private displayBranch(triggers : Array<ITrigger>) : string {
         let h = '';
         triggers.forEach(
             trig => {
@@ -136,44 +134,47 @@ class DesertIslandGui {
                 }
                 h += "<tr>"
                     + "<td>" + nextGoal + "</td>"
-                    + "<td>" + trig.Name + "</td>"
-                    + "<td>" + this.displayAvailableResources(trig.ResourcesTrigger) + "</td>"
-                    + "<td>" + ((trig.SpawnProducers.length)?'<b>Producers</b>:'+trig.SpawnProducers.map(p => p.Name).join(', '):'')
-                    + ((trig.SpawnCrafters.length)?' <b>crafters</b>:'+trig.SpawnCrafters.map(p => p.Name).join(', '):'') + "</td>"
+                    + "<td>" + trig.getName() + "</td>"
+                    + "<td>" + this.displayAvailableResources(trig.getResourcesTrigger()) + "</td>"
+                    + "<td>" + ((trig.getSpawnProducers().length)?'<b>Producers</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
+                    + ((trig.getSpawnCrafters().length)?' <b>crafters</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'') + "</td>"
                 + "</tr>";
-                if (trig.SpawnNewTriggers.length) {
-                    h += this.displayBranch(trig.SpawnNewTriggers);
+                if (trig.getSpawnNewTriggers().length) {
+                    h += this.displayBranch(trig.getSpawnNewTriggers());
                 }
             }
         );
         return h;
     }
 
-    private displayResources(resourceQuantity : Array<ResourceQuantity>) : string {
+    private displayResources(resourceQuantity : Array<IResourceAmount>) : string {
         var h = '';
         resourceQuantity.forEach(
-            resQ => h += resQ.Resource.show(resQ.Quantity)
+            resQ => h += resQ.show()
         );
         h += '';
         return h;
     }
-    private displayAvailableResources(resourceQuantity : Array<ResourceQuantity>) : string {
+    private displayAvailableResources(resourceQuantity : Array<IResourceAmount>) : string {
         var h = '';
         resourceQuantity.forEach(
             resQ => {
-                let storageRes = engine.Player.getResourceInStorage(resQ.Resource.Name);
+                let storageRes = engine.Player.getResourceInStorage(resQ.getResource().getName());
                 let cssClass = 'notAvailableResource';
-                if (storageRes != null && storageRes.Quantity >= resQ.Quantity) {
+                if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                     cssClass = 'availableResource';
                 }
-                h += '<span class="'+cssClass+'">'+resQ.Resource.show(resQ.Quantity)+'</span>'
+                h += '<span class="'+cssClass+'">'+resQ.show()+'</span>'
             }
         );
         h += '';
         return h;
     }
 
-    private displayTime(miliSeconds : number) : string {
+    private displayTime(miliSeconds : number | null) : string {
+        if (miliSeconds == null) {
+            return '';
+        }
         let time = '';
         if (miliSeconds >= 60000) {
             time += Math.round(miliSeconds / 60000) + 'min';

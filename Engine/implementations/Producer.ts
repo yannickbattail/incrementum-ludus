@@ -48,6 +48,11 @@ class Producer implements IProducer {
         return this;
     }
 
+    public manualy() : IProducer {
+        this.Interval = null;
+        return this;
+    }
+
     public every(interval: number) : IProducer {
         this.Interval = interval;
         return this;

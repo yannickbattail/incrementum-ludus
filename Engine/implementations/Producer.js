@@ -40,6 +40,10 @@ var Producer = (function () {
         this.resourceAmount = new ResourceQuantity(resource, quantity);
         return this;
     };
+    Producer.prototype.manualy = function () {
+        this.Interval = null;
+        return this;
+    };
     Producer.prototype.every = function (interval) {
         this.Interval = interval;
         return this;

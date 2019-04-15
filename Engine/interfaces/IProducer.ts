@@ -13,6 +13,7 @@ interface IProducer {
     initStartTime(): void;
     // builder inferface
     thatProduce(quantity : number, resource : IResource) : IProducer;
+    manualy() : IProducer;
     every(interval: number) : IProducer ;
     seconds() : IProducer ;
     minutes() : IProducer ;
