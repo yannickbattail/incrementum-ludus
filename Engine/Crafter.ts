@@ -5,7 +5,6 @@
 /// <reference path="interfaces/ICrafter.ts" />
 /// <reference path="interfaces/IPlayer.ts" />
 
-
 class Crafter implements ICrafter {
     $type : string = 'Crafter';
     public StartTime: Date | null;
@@ -21,7 +20,7 @@ class Crafter implements ICrafter {
         let newObj : Crafter = new Crafter(data.Name);
         newObj.Duration = data.Duration;
         newObj.Cost = (data.Cost as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.CraftedResources = (data.CraftedResource as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.CraftedResources = (data.CraftedResources as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.AutoCrafting = data.AutoCrafting;
         return newObj;
     }

@@ -33,7 +33,7 @@ var Producer = (function () {
         var curContext = window;
         var newObj = new Producer(data.Name);
         newObj.Interval = data.Interval;
-        newObj.resourceAmount = curContext[data.ResourceQuantity.$type].load(data.ResourceQuantity);
+        newObj.resourceAmount = curContext[data.resourceAmount.$type].load(data.resourceAmount);
         return newObj;
     };
     Producer.prototype.thatProduce = function (quantity, resource) {

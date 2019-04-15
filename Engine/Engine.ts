@@ -31,7 +31,7 @@ class Engine {
         this.Producers.forEach(
             producer => {
                  if (producer.isAuto) {
-                   this.collectTimedProducer(producer);
+                   this.autoCollectProducer(producer);
                  }
             }
         );
@@ -42,9 +42,9 @@ class Engine {
             crafter => this.checkCrafter(crafter)
         );
     }
-    private collectTimedProducer(producer: IProducer) {
+    private autoCollectProducer(producer: IProducer) {
         if (producer.isAuto()) {
-            let interval : number = 666000;
+            let interval : number = 0;
             if (producer.getInterval() != null) {
                 producer.getInterval();
             }
@@ -98,7 +98,7 @@ class Engine {
 
     private checkCrafter(crafter: ICrafter) {
         this.checkFinishedCrafting(crafter);
-        this.checkStartCrafting(crafter);
+        this.checkStartAutoCrafting(crafter);
     }
     private checkFinishedCrafting(crafter: ICrafter) {
         let duration = this.FastMode ? this.FastMode : crafter.getDuration();
@@ -110,8 +110,8 @@ class Engine {
             );
         }
     }
-    private checkStartCrafting(crafter: ICrafter) {
-        if (crafter.isAuto() && this.Player.hasResources(crafter.getCost())) {
+    private checkStartAutoCrafting(crafter: ICrafter) {
+        if (crafter.isAuto() && crafter.getStartTime() == null && this.Player.hasResources(crafter.getCost())) {
             crafter.initStartTime();
             crafter.getCost().forEach(
                 resourceQty =>  this.Player.decreaseStorage(resourceQty)

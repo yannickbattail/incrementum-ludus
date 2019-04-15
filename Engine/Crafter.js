@@ -16,7 +16,7 @@ var Crafter = (function () {
         var newObj = new Crafter(data.Name);
         newObj.Duration = data.Duration;
         newObj.Cost = data.Cost.map(function (p) { return curContext[p.$type].load(p); });
-        newObj.CraftedResources = data.CraftedResource.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.CraftedResources = data.CraftedResources.map(function (p) { return curContext[p.$type].load(p); });
         newObj.AutoCrafting = data.AutoCrafting;
         return newObj;
     };

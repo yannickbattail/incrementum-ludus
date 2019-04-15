@@ -26,15 +26,15 @@ var Engine = (function () {
         var _this = this;
         this.Producers.forEach(function (producer) {
             if (producer.isAuto) {
-                _this.collectTimedProducer(producer);
+                _this.autoCollectProducer(producer);
             }
         });
         this.Triggers.forEach(function (trigger) { return _this.checkTrigger(trigger); });
         this.Crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
     };
-    Engine.prototype.collectTimedProducer = function (producer) {
+    Engine.prototype.autoCollectProducer = function (producer) {
         if (producer.isAuto()) {
-            var interval = 666000;
+            var interval = 0;
             if (producer.getInterval() != null) {
                 producer.getInterval();
             }
@@ -76,7 +76,7 @@ var Engine = (function () {
     };
     Engine.prototype.checkCrafter = function (crafter) {
         this.checkFinishedCrafting(crafter);
-        this.checkStartCrafting(crafter);
+        this.checkStartAutoCrafting(crafter);
     };
     Engine.prototype.checkFinishedCrafting = function (crafter) {
         var _this = this;
@@ -87,9 +87,9 @@ var Engine = (function () {
             crafter.getCraftedResources().forEach(function (resourceQty) { return _this.Player.changeStorage(resourceQty); });
         }
     };
-    Engine.prototype.checkStartCrafting = function (crafter) {
+    Engine.prototype.checkStartAutoCrafting = function (crafter) {
         var _this = this;
-        if (crafter.isAuto() && this.Player.hasResources(crafter.getCost())) {
+        if (crafter.isAuto() && crafter.getStartTime() == null && this.Player.hasResources(crafter.getCost())) {
             crafter.initStartTime();
             crafter.getCost().forEach(function (resourceQty) { return _this.Player.decreaseStorage(resourceQty); });
         }
