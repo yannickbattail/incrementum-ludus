@@ -14,12 +14,12 @@
     "interfaces/IResource.ts",
     "interfaces/IResourceAmount.ts",
     "interfaces/ITrigger.ts",
-    "Resource.ts",
-    "ResourceQuantity.ts",
-    "Crafter.ts",
-    "Producer.ts",
-    "Trigger.ts",
-    "Player.ts",
+    "implementations/Resource.ts",
+    "implementations/ResourceQuantity.ts",
+    "implementations/Crafter.ts",
+    "implementations/Producer.ts",
+    "implementations/Trigger.ts",
+    "implementations/Player.ts",
     "Engine.ts"
   ]
 }

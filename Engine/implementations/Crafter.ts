@@ -1,9 +1,9 @@
-/// <reference path="interfaces/IResource.ts" />
-/// <reference path="interfaces/IResourceAmount.ts" />
-/// <reference path="interfaces/IProducer.ts" />
-/// <reference path="interfaces/ITrigger.ts" />
-/// <reference path="interfaces/ICrafter.ts" />
-/// <reference path="interfaces/IPlayer.ts" />
+/// <reference path="../interfaces/IResource.ts" />
+/// <reference path="../interfaces/IResourceAmount.ts" />
+/// <reference path="../interfaces/IProducer.ts" />
+/// <reference path="../interfaces/ITrigger.ts" />
+/// <reference path="../interfaces/ICrafter.ts" />
+/// <reference path="../interfaces/IPlayer.ts" />
 
 class Crafter implements ICrafter {
     $type : string = 'Crafter';
