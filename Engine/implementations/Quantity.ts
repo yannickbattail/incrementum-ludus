@@ -4,29 +4,29 @@
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
 /// <reference path="../interfaces/IPlayer.ts" />
+/// <reference path="Resource.ts" />
 
-
-class ResourceQuantity implements IQuantity{
-    $type : string = 'ResourceQuantity';
-    constructor(protected Resource: IResource, protected Quantity: number) {
+class Quantity implements IQuantity{
+    $type : string = 'Quantity';
+    constructor(protected quantity: number, protected resource: IResource) {
     }
-    public static load(data : any) : ResourceQuantity {
+    public static load(data : any) : Quantity {
         let curContext : any = window;
         let res = curContext[data.Resource.$type].load(data.Resource);
-        let rq : ResourceQuantity = new ResourceQuantity(res, data.Quantity);
+        let rq : Quantity = new Quantity(data.quantity, res);
         return rq;
     }
     getQuantity() : number {
-        return this.Quantity;
+        return this.quantity;
     }
     setQuantity(quantity : number) : void {
-        this.Quantity = quantity;
+        this.quantity = quantity;
     }
     getResource() : IResource{
-        return this.Resource;
+        return this.resource;
     }
     show() : string{
-        return this.Resource.show(this.Quantity);
+        return this.resource.show(this.quantity);
     }
 }
-const EMPTY_RQ : IQuantity = new ResourceQuantity(new Resource("nothing"), 0);
+const EMPTY_QUANTITY : IQuantity = new Quantity(0, new Resource("nothing"));

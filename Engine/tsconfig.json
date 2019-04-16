@@ -15,7 +15,7 @@
     "interfaces/IQuantity.ts",
     "interfaces/ITrigger.ts",
     "implementations/Resource.ts",
-    "implementations/ResourceQuantity.ts",
+    "implementations/Quantity.ts",
     "implementations/Crafter.ts",
     "implementations/Producer.ts",
     "implementations/Trigger.ts",

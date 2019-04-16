@@ -10,8 +10,8 @@ class Crafter implements ICrafter {
     public StartTime: Date | null;
     constructor(protected Name: string,
                 protected Duration: number = 0,
-                protected Cost: Array<ResourceQuantity> = [],
-                protected CraftedResources: Array<ResourceQuantity> = [],
+                protected Cost: Array<Quantity> = [],
+                protected CraftedResources: Array<Quantity> = [],
                 protected AutoCrafting: boolean = false) {
 
     }
@@ -51,7 +51,7 @@ class Crafter implements ICrafter {
     }
 
     public thatCraft(quantity : number, resource : IResource) : ICrafter {
-        this.CraftedResources.push(new ResourceQuantity(resource, quantity));
+        this.CraftedResources.push(new Quantity(quantity, resource));
         return this;
     }
     public andCraft(quantity : number, resource : IResource) : ICrafter {
@@ -74,7 +74,7 @@ class Crafter implements ICrafter {
         return this;
     }
     public atCostOf(quantity : number, resource : IResource) : ICrafter {
-        this.Cost.push(new ResourceQuantity(resource, quantity));
+        this.Cost.push(new Quantity(quantity, resource));
         return this;
     }
     public and(quantity : number, resource : IResource) : ICrafter {

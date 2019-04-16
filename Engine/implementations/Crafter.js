@@ -45,7 +45,7 @@ var Crafter = (function () {
         return this.AutoCrafting;
     };
     Crafter.prototype.thatCraft = function (quantity, resource) {
-        this.CraftedResources.push(new ResourceQuantity(resource, quantity));
+        this.CraftedResources.push(new Quantity(quantity, resource));
         return this;
     };
     Crafter.prototype.andCraft = function (quantity, resource) {
@@ -68,7 +68,7 @@ var Crafter = (function () {
         return this;
     };
     Crafter.prototype.atCostOf = function (quantity, resource) {
-        this.Cost.push(new ResourceQuantity(resource, quantity));
+        this.Cost.push(new Quantity(quantity, resource));
         return this;
     };
     Crafter.prototype.and = function (quantity, resource) {

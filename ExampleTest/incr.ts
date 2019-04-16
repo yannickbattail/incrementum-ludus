@@ -4,6 +4,12 @@
 /// <reference path="../Engine/interfaces/ITrigger.ts" />
 /// <reference path="../Engine/interfaces/ICrafter.ts" />
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
+/// <reference path="../Engine/implementations/Resource.ts" />
+/// <reference path="../Engine/implementations/Quantity.ts" />
+/// <reference path="../Engine/implementations/Crafter.ts" />
+/// <reference path="../Engine/implementations/Producer.ts" />
+/// <reference path="../Engine/implementations/Trigger.ts" />
+/// <reference path="../Engine/implementations/Player.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
 const IRON = new Resource("iron");
@@ -20,9 +26,9 @@ var engine = new Engine();
 engine.Player = new Player("platypus");
 engine.Producers = [
     // initals producers
-    new Producer("iron mine", new ResourceQuantity(IRON, 2), 500/*mili sec*/),
-    new Producer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
-    new Producer("tin", new ResourceQuantity(TIN, 1))
+    new Producer("iron mine", new Quantity(2, IRON), 500/*mili sec*/),
+    new Producer("copper mine", new Quantity(1, COPPER), 3000),
+    new Producer("tin", new Quantity(1, TIN))
 ];
 engine.Triggers = [
     new Trigger("lead mine exploitation")
@@ -52,14 +58,14 @@ engine.Triggers = [
 engine.Crafters = [
     new Crafter("forge axe", 20000,//duration
         //cost
-        [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)],
+        [new Quantity(30, IRON), new Quantity(10, COPPER)],
         //spawn
-        [new ResourceQuantity(AXE, 1)], true/*auto*/),
+        [new Quantity(1, AXE)], true/*auto*/),
     new Crafter("forge knife", 20000,//duration
         //cost
-        [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)],
+        [new Quantity(10, IRON), new Quantity(6, COPPER)],
         //spawn
-        [new ResourceQuantity(KNIFE, 1), new ResourceQuantity(WASTE, 2)], false/*auto*/),
+        [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false/*auto*/),
 ];
 
 const VERSION = "1.1";

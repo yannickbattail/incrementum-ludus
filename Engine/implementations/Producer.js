@@ -1,6 +1,6 @@
 var Producer = (function () {
     function Producer(Name, resourceAmount, Interval) {
-        if (resourceAmount === void 0) { resourceAmount = EMPTY_RQ; }
+        if (resourceAmount === void 0) { resourceAmount = EMPTY_QUANTITY; }
         if (Interval === void 0) { Interval = null; }
         this.Name = Name;
         this.resourceAmount = resourceAmount;
@@ -37,7 +37,7 @@ var Producer = (function () {
         return newObj;
     };
     Producer.prototype.thatProduce = function (quantity, resource) {
-        this.resourceAmount = new ResourceQuantity(resource, quantity);
+        this.resourceAmount = new Quantity(quantity, resource);
         return this;
     };
     Producer.prototype.manualy = function () {

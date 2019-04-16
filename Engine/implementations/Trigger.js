@@ -42,7 +42,7 @@ var Trigger = (function () {
         return newObj;
     };
     Trigger.prototype.whenReached = function (quantity, resource) {
-        this.ResourcesTrigger.push(new ResourceQuantity(resource, quantity));
+        this.ResourcesTrigger.push(new Quantity(quantity, resource));
         return this;
     };
     Trigger.prototype.and = function (quantity, resource) {
@@ -53,7 +53,7 @@ var Trigger = (function () {
         return this;
     };
     Trigger.prototype.spawnResource = function (quantity, resource) {
-        this.SpawnResources.push(new ResourceQuantity(resource, quantity));
+        this.SpawnResources.push(new Quantity(quantity, resource));
         return this;
     };
     Trigger.prototype.spawnCrafter = function (crafter) {

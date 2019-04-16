@@ -16,22 +16,22 @@ var Player = (function () {
     Player.prototype.getStorage = function () {
         return this.Storage;
     };
-    Player.prototype.changeStorage = function (resourceQuantity) {
-        var resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
+    Player.prototype.changeStorage = function (quantity) {
+        var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), resourceQuantity.getQuantity()));
+            this.Storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
         }
         else {
-            resQ.setQuantity(resQ.getQuantity() + resourceQuantity.getQuantity());
+            resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
         }
     };
-    Player.prototype.decreaseStorage = function (resourceQuantity) {
-        var resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
+    Player.prototype.decreaseStorage = function (quantity) {
+        var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), -1 * resourceQuantity.getQuantity()));
+            this.Storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
         }
         else {
-            resQ.setQuantity(resQ.getQuantity() + -1 * resourceQuantity.getQuantity());
+            resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
         }
     };
     Player.prototype.getResourceInStorage = function (resourceName) {

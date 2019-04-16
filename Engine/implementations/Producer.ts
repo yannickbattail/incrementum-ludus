@@ -11,7 +11,7 @@ class Producer implements IProducer {
     $type : string = 'Producer';
     protected StartTime: Date | null = new Date(1970, 0, 1);
     constructor(protected Name: string,
-                protected resourceAmount: IQuantity = EMPTY_RQ,
+                protected resourceAmount: IQuantity = EMPTY_QUANTITY,
                 protected Interval: number | null = null) {
                     
     }
@@ -44,7 +44,7 @@ class Producer implements IProducer {
         return newObj;
     }
     public thatProduce(quantity : number, resource : IResource) : IProducer {
-        this.resourceAmount = new ResourceQuantity(resource, quantity);
+        this.resourceAmount = new Quantity(quantity, resource);
         return this;
     }
 

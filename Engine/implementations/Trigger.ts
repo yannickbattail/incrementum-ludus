@@ -46,7 +46,7 @@ class Trigger implements ITrigger {
     }
 
     public whenReached(quantity : number, resource : IResource) : ITrigger {
-        this.ResourcesTrigger.push(new ResourceQuantity(resource, quantity));
+        this.ResourcesTrigger.push(new Quantity(quantity, resource));
         return this;
     }
     public and(quantity : number, resource : IResource) : ITrigger {
@@ -57,7 +57,7 @@ class Trigger implements ITrigger {
         return this;
     }
     public spawnResource(quantity : number, resource : IResource) : ITrigger {
-        this.SpawnResources.push(new ResourceQuantity(resource, quantity));
+        this.SpawnResources.push(new Quantity(quantity, resource));
         return this;
     }
     public spawnCrafter(crafter : ICrafter) : ITrigger {

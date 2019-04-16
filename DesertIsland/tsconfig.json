@@ -15,7 +15,7 @@
     "../Engine/interfaces/IQuantity.ts",
     "../Engine/interfaces/ITrigger.ts",
     "../Engine/implementations/Resource.ts",
-    "../Engine/implementations/ResourceQuantity.ts",
+    "../Engine/implementations/Quantity.ts",
     "../Engine/implementations/Crafter.ts",
     "../Engine/implementations/Producer.ts",
     "../Engine/implementations/Trigger.ts",

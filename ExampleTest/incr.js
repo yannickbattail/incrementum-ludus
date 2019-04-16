@@ -10,9 +10,9 @@ var WASTE = new Resource("waste");
 var engine = new Engine();
 engine.Player = new Player("platypus");
 engine.Producers = [
-    new Producer("iron mine", new ResourceQuantity(IRON, 2), 500),
-    new Producer("copper mine", new ResourceQuantity(COPPER, 1), 3000),
-    new Producer("tin", new ResourceQuantity(TIN, 1))
+    new Producer("iron mine", new Quantity(2, IRON), 500),
+    new Producer("copper mine", new Quantity(1, COPPER), 3000),
+    new Producer("tin", new Quantity(1, TIN))
 ];
 engine.Triggers = [
     new Trigger("lead mine exploitation")
@@ -31,8 +31,8 @@ engine.Triggers = [
         .atCostOf(20, WATER).and(1, TIN)))
 ];
 engine.Crafters = [
-    new Crafter("forge axe", 20000, [new ResourceQuantity(IRON, 30), new ResourceQuantity(COPPER, 10)], [new ResourceQuantity(AXE, 1)], true),
-    new Crafter("forge knife", 20000, [new ResourceQuantity(IRON, 10), new ResourceQuantity(COPPER, 6)], [new ResourceQuantity(KNIFE, 1), new ResourceQuantity(WASTE, 2)], false),
+    new Crafter("forge axe", 20000, [new Quantity(30, IRON), new Quantity(10, COPPER)], [new Quantity(1, AXE)], true),
+    new Crafter("forge knife", 20000, [new Quantity(10, IRON), new Quantity(6, COPPER)], [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false),
 ];
 var VERSION = "1.1";
 function loadEngine() {
