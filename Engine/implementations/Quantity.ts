@@ -12,7 +12,7 @@ class Quantity implements IQuantity{
     }
     public static load(data : any) : Quantity {
         let curContext : any = window;
-        let res = curContext[data.Resource.$type].load(data.Resource);
+        let res = curContext[data.resource.$type].load(data.resource);
         let rq : Quantity = new Quantity(data.quantity, res);
         return rq;
     }

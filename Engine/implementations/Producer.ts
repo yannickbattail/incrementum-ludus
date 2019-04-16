@@ -38,7 +38,7 @@ class Producer implements IProducer {
         let curContext : any = window;
         let newObj : Producer = new Producer(data.Name);
         newObj.Interval = data.Interval;
-        newObj.resourcesQuantity = curContext[data.resourceAmount.$type].load(data.resourceAmount);
+        newObj.resourcesQuantity = (data.resourcesQuantity as Array<any>).map(p => curContext[p.$type].load(p));
         return newObj;
     }
 

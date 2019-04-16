@@ -6,6 +6,8 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
+/// <reference path="./RandomResource.ts" />
+/// <reference path="./RandomRangeQuantity.ts" />
 /// <reference path="./Material.ts" />
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
@@ -21,7 +23,9 @@ class Scenario {
         engine.Player.increaseStorage(Q(1, LEVEL));
         engine.Producers = [
             // inital producers
-            new Producer("take water").thatProduce(Q(10, WATER)).manualy(),
+            new Producer("take water")
+            .thatProduce(Q(10, WATER))
+            .andProduce(new RandomResource(1, IRON_ORE, 0.02)).manualy(),
             new Producer("bare hands dig clay").thatProduce(Q(10, CLAY)).manualy()
         ];
         engine.Crafters = [
@@ -137,7 +141,7 @@ class Scenario {
         engine.Triggers = [
             new Trigger("carry water in clay pot")
                 .whenReached(Q(1, CLAY_POT))
-                .spawnProducer(new Producer("carry water").thatProduce(Q(100, WATER)).manualy())
+                .spawnProducer(new Producer("carry water").thatProduce(new RandomRangeQuantity(60, 110, WATER)).manualy())
                 .spawnResource(Q(1, LEVEL)) // level 2
                 .spawnResource(Q(-1, CLAY_POT))
             ,

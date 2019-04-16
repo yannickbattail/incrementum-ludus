@@ -8,11 +8,11 @@
 
 class RandomResource implements IQuantity {
     $type : string = 'RandomResource';
-    constructor(protected quantity: number, protected resource: IResource, protected probability: number, ) {
+    constructor(protected quantity: number, protected resource: IResource, protected probability: number) {
     }
     public static load(data : any) : RandomResource {
         let curContext : any = window;
-        let res = curContext[data.Resource.$type].load(data.Resource);
+        let res = curContext[data.resource.$type].load(data.resource);
         let rq : RandomResource = new RandomResource(data.quantity, res, data.probability);
         return rq;
     }

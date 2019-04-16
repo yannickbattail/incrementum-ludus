@@ -7,7 +7,7 @@ var RandomResource = (function () {
     }
     RandomResource.load = function (data) {
         var curContext = window;
-        var res = curContext[data.Resource.$type].load(data.Resource);
+        var res = curContext[data.resource.$type].load(data.resource);
         var rq = new RandomResource(data.quantity, res, data.probability);
         return rq;
     };

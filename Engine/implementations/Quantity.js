@@ -6,7 +6,7 @@ var Quantity = (function () {
     }
     Quantity.load = function (data) {
         var curContext = window;
-        var res = curContext[data.Resource.$type].load(data.Resource);
+        var res = curContext[data.resource.$type].load(data.resource);
         var rq = new Quantity(data.quantity, res);
         return rq;
     };

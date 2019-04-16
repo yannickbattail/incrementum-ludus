@@ -12,7 +12,7 @@ class RandomRangeQuantity implements IQuantity {
     }
     public static load(data : any) : RandomRangeQuantity {
         let curContext : any = window;
-        let res = curContext[data.Resource.$type].load(data.Resource);
+        let res = curContext[data.resource.$type].load(data.resource);
         let rq : RandomRangeQuantity = new RandomRangeQuantity(data.minQuantity, data.maxQuantity, res);
         return rq;
     }
@@ -27,6 +27,6 @@ class RandomRangeQuantity implements IQuantity {
         return this.resource;
     }
     show() : string{
-        return '' +  this.minQuantity + ' ' + this.resource.show(this.maxQuantity);
+        return '' +  this.minQuantity + ' to ' + this.resource.show(this.maxQuantity);
     }
 }

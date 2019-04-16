@@ -7,7 +7,7 @@ var RandomRangeQuantity = (function () {
     }
     RandomRangeQuantity.load = function (data) {
         var curContext = window;
-        var res = curContext[data.Resource.$type].load(data.Resource);
+        var res = curContext[data.resource.$type].load(data.resource);
         var rq = new RandomRangeQuantity(data.minQuantity, data.maxQuantity, res);
         return rq;
     };
@@ -22,7 +22,7 @@ var RandomRangeQuantity = (function () {
         return this.resource;
     };
     RandomRangeQuantity.prototype.show = function () {
-        return '' + this.minQuantity + ' ' + this.resource.show(this.maxQuantity);
+        return '' + this.minQuantity + ' to ' + this.resource.show(this.maxQuantity);
     };
     return RandomRangeQuantity;
 }());
