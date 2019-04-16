@@ -36,12 +36,12 @@ var Producer = (function () {
         newObj.resourcesQuantity = curContext[data.resourceAmount.$type].load(data.resourceAmount);
         return newObj;
     };
-    Producer.prototype.thatProduce = function (quantity, resource) {
-        this.resourcesQuantity.push(new Quantity(quantity, resource));
+    Producer.prototype.thatProduce = function (quantity) {
+        this.resourcesQuantity.push(quantity);
         return this;
     };
-    Producer.prototype.andProduce = function (quantity, resource) {
-        return this.thatProduce(quantity, resource);
+    Producer.prototype.andProduce = function (quantity) {
+        return this.thatProduce(quantity);
     };
     Producer.prototype.manualy = function () {
         this.Interval = null;

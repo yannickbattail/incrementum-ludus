@@ -10,8 +10,8 @@ class Crafter implements ICrafter {
     public StartTime: Date | null;
     constructor(protected Name: string,
                 protected Duration: number = 0,
-                protected Cost: Array<Quantity> = [],
-                protected CraftedResources: Array<Quantity> = [],
+                protected Cost: Array<IQuantity> = [],
+                protected CraftedResources: Array<IQuantity> = [],
                 protected AutoCrafting: boolean = false) {
 
     }
@@ -50,12 +50,12 @@ class Crafter implements ICrafter {
         return this.AutoCrafting;
     }
 
-    public thatCraft(quantity : number, resource : IResource) : ICrafter {
-        this.CraftedResources.push(new Quantity(quantity, resource));
+    public thatCraft(quantity : IQuantity) : ICrafter {
+        this.CraftedResources.push(quantity);
         return this;
     }
-    public andCraft(quantity : number, resource : IResource) : ICrafter {
-        return this.thatCraft(quantity, resource);
+    public andCraft(quantity : IQuantity) : ICrafter {
+        return this.thatCraft(quantity);
     }
     public in(interval: number) : ICrafter {
         this.Duration = interval;
@@ -73,12 +73,12 @@ class Crafter implements ICrafter {
         this.AutoCrafting = true;
         return this;
     }
-    public atCostOf(quantity : number, resource : IResource) : ICrafter {
-        this.Cost.push(new Quantity(quantity, resource));
+    public atCostOf(quantity : IQuantity) : ICrafter {
+        this.Cost.push(quantity);
         return this;
     }
-    public and(quantity : number, resource : IResource) : ICrafter {
-        return this.atCostOf(quantity, resource);
+    public and(quantity : IQuantity) : ICrafter {
+        return this.atCostOf(quantity);
     }
 
     public isCrafting() : boolean {

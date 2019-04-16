@@ -41,19 +41,19 @@ var Trigger = (function () {
         newObj.SpawnNewTriggers = data.SpawnNewTriggers.map(function (p) { return curContext[p.$type].load(p); });
         return newObj;
     };
-    Trigger.prototype.whenReached = function (quantity, resource) {
-        this.ResourcesTrigger.push(new Quantity(quantity, resource));
+    Trigger.prototype.whenReached = function (quantity) {
+        this.ResourcesTrigger.push(quantity);
         return this;
     };
-    Trigger.prototype.and = function (quantity, resource) {
-        return this.whenReached(quantity, resource);
+    Trigger.prototype.and = function (quantity) {
+        return this.whenReached(quantity);
     };
     Trigger.prototype.spawnProducer = function (producer) {
         this.SpawnProducers.push(producer);
         return this;
     };
-    Trigger.prototype.spawnResource = function (quantity, resource) {
-        this.SpawnResources.push(new Quantity(quantity, resource));
+    Trigger.prototype.spawnResource = function (quantity) {
+        this.SpawnResources.push(quantity);
         return this;
     };
     Trigger.prototype.spawnCrafter = function (crafter) {

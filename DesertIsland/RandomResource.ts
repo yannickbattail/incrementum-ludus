@@ -29,6 +29,6 @@ class RandomResource implements IQuantity {
         return this.resource;
     }
     show() : string{
-        return this.resource.show(this.quantity);
+        return this.probability + ' chance of ' + this.resource.show(this.quantity);
     }
 }

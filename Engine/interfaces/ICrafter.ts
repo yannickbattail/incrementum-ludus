@@ -14,13 +14,13 @@ interface ICrafter {
     isAuto(): boolean;
 
     // builder inferface
-    thatCraft(quantity : number, resource : IResource) : ICrafter
-    andCraft(quantity : number, resource : IResource) : ICrafter
+    thatCraft(quantity : IQuantity) : ICrafter
+    andCraft(quantity : IQuantity) : ICrafter
     in(interval: number) : ICrafter;
     seconds() : ICrafter;
     minutes() : ICrafter;
     automaticaly() : ICrafter;
-    atCostOf(quantity : number, resource : IResource) : ICrafter;
-    and(quantity : number, resource : IResource) : ICrafter;
+    atCostOf(quantity : IQuantity) : ICrafter;
+    and(quantity : IQuantity) : ICrafter;
     isCrafting() : boolean;
 }

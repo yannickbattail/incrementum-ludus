@@ -12,8 +12,8 @@ interface IProducer {
     resetStartTime(): void;
     initStartTime(): void;
     // builder inferface
-    thatProduce(quantity : number, resource : IResource) : IProducer;
-    andProduce(quantity : number, resource : IResource) : IProducer;
+    thatProduce(quantity : IQuantity) : IProducer;
+    andProduce(quantity : IQuantity) : IProducer;
     manualy() : IProducer;
     every(interval: number) : IProducer ;
     seconds() : IProducer ;

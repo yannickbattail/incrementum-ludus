@@ -45,19 +45,19 @@ class Trigger implements ITrigger {
         return newObj;
     }
 
-    public whenReached(quantity : number, resource : IResource) : ITrigger {
-        this.ResourcesTrigger.push(new Quantity(quantity, resource));
+    public whenReached(quantity : IQuantity) : ITrigger {
+        this.ResourcesTrigger.push(quantity);
         return this;
     }
-    public and(quantity : number, resource : IResource) : ITrigger {
-        return this.whenReached(quantity, resource);
+    public and(quantity : IQuantity) : ITrigger {
+        return this.whenReached(quantity);
     }
     public spawnProducer(producer : IProducer) : ITrigger {
         this.SpawnProducers.push(producer);
         return this;
     }
-    public spawnResource(quantity : number, resource : IResource) : ITrigger {
-        this.SpawnResources.push(new Quantity(quantity, resource));
+    public spawnResource(quantity : IQuantity) : ITrigger {
+        this.SpawnResources.push(quantity);
         return this;
     }
     public spawnCrafter(crafter : ICrafter) : ITrigger {

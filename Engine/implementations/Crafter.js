@@ -44,12 +44,12 @@ var Crafter = (function () {
     Crafter.prototype.isAuto = function () {
         return this.AutoCrafting;
     };
-    Crafter.prototype.thatCraft = function (quantity, resource) {
-        this.CraftedResources.push(new Quantity(quantity, resource));
+    Crafter.prototype.thatCraft = function (quantity) {
+        this.CraftedResources.push(quantity);
         return this;
     };
-    Crafter.prototype.andCraft = function (quantity, resource) {
-        return this.thatCraft(quantity, resource);
+    Crafter.prototype.andCraft = function (quantity) {
+        return this.thatCraft(quantity);
     };
     Crafter.prototype["in"] = function (interval) {
         this.Duration = interval;
@@ -67,12 +67,12 @@ var Crafter = (function () {
         this.AutoCrafting = true;
         return this;
     };
-    Crafter.prototype.atCostOf = function (quantity, resource) {
-        this.Cost.push(new Quantity(quantity, resource));
+    Crafter.prototype.atCostOf = function (quantity) {
+        this.Cost.push(quantity);
         return this;
     };
-    Crafter.prototype.and = function (quantity, resource) {
-        return this.atCostOf(quantity, resource);
+    Crafter.prototype.and = function (quantity) {
+        return this.atCostOf(quantity);
     };
     Crafter.prototype.isCrafting = function () {
         return this.StartTime != null;

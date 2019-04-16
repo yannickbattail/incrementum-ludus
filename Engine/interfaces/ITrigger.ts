@@ -14,10 +14,10 @@ interface ITrigger {
     getSpawnNewTriggers(): Array<ITrigger>;
 
     // builder inferface
-    whenReached(quantity : number, resource : IResource) : ITrigger;
-    and(quantity : number, resource : IResource) : ITrigger;
+    whenReached(quantity : IQuantity) : ITrigger;
+    and(quantity : IQuantity) : ITrigger;
     spawnProducer(producer : IProducer) : ITrigger;
-    spawnResource(quantity : number, resource : IResource) : ITrigger;
+    spawnResource(quantity : IQuantity) : ITrigger;
     spawnCrafter(crafter : ICrafter) : ITrigger;
     appendTrigger(trigger : ITrigger) : ITrigger;
 }

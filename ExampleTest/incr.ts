@@ -32,26 +32,26 @@ engine.Producers = [
 ];
 engine.Triggers = [
     new Trigger("lead mine exploitation")
-        .whenReached(20, IRON).and(2, COPPER)
+        .whenReached(new Quantity(20, IRON)).and(new Quantity(2, COPPER))
         .spawnProducer(
             new Producer("lead mine")
-                .thatProduce(1, LEAD).every(5).seconds()
+                .thatProduce(new Quantity(1, LEAD)).every(5).seconds()
         ),
     new Trigger("water source")
-        .whenReached(10, TIN)
+        .whenReached(new Quantity(10, TIN))
         .spawnProducer(
             new Producer("water source")
-                .thatProduce(1, WATER)
+                .thatProduce(new Quantity(1, WATER))
         )
-        .spawnResource(10, WATER)
+        .spawnResource(new Quantity(10, WATER))
         .appendTrigger(
             new Trigger("beer brewering")
-                .whenReached(20, WATER)
+                .whenReached(new Quantity(20, WATER))
                 .spawnCrafter(
                     new Crafter("brewery")
-                        .thatCraft(1, BEER)
+                        .thatCraft(new Quantity(1, BEER))
                         .in(20).seconds()
-                        .atCostOf(20, WATER).and(1, TIN)
+                        .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
             )
         )
 ];

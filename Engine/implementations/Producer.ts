@@ -42,13 +42,13 @@ class Producer implements IProducer {
         return newObj;
     }
 
-    public thatProduce(quantity : number, resource : IResource) : IProducer {
-        this.resourcesQuantity.push(new Quantity(quantity, resource));
+    public thatProduce(quantity : IQuantity) : IProducer {
+        this.resourcesQuantity.push(quantity);
         return this;
     }
 
-    public andProduce(quantity : number, resource : IResource) : IProducer {
-        return this.thatProduce(quantity, resource);
+    public andProduce(quantity : IQuantity) : IProducer {
+        return this.thatProduce(quantity);
     }
 
     public manualy() : IProducer {
