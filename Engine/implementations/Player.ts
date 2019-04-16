@@ -1,5 +1,5 @@
 /// <reference path="../interfaces/IResource.ts" />
-/// <reference path="../interfaces/IResourceAmount.ts" />
+/// <reference path="../interfaces/IQuantity.ts" />
 /// <reference path="../interfaces/IProducer.ts" />
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
@@ -19,11 +19,11 @@ class Player implements IPlayer{
     public getName() : string {
         return this.Name;
     }
-    public getStorage() : Array<IResourceAmount>{
+    public getStorage() : Array<IQuantity>{
         return this.Storage;
     }
 
-    public changeStorage(resourceQuantity: IResourceAmount) {
+    public changeStorage(resourceQuantity: IQuantity) {
         let resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {
             this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), resourceQuantity.getQuantity()));
@@ -31,7 +31,7 @@ class Player implements IPlayer{
             resQ.setQuantity(resQ.getQuantity() + resourceQuantity.getQuantity());
         }
     }
-    public decreaseStorage(resourceQuantity: IResourceAmount) {
+    public decreaseStorage(resourceQuantity: IQuantity) {
         let resQ = this.getResourceInStorage(resourceQuantity.getResource().getName());
         if (resQ == null) {
             this.Storage.push(new ResourceQuantity(resourceQuantity.getResource(), -1 * resourceQuantity.getQuantity()));

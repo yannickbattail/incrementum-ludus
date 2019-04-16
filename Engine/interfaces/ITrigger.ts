@@ -1,4 +1,4 @@
-/// <reference path="IResourceAmount.ts" />
+/// <reference path="IQuantity.ts" />
 /// <reference path="IResource.ts" />
 /// <reference path="IProducer.ts" />
 /// <reference path="ICrafter.ts" />
@@ -7,9 +7,9 @@ interface ITrigger {
     $type : string;
     //getters
     getName() : string;
-    getResourcesTrigger() : Array<IResourceAmount>;
+    getResourcesTrigger() : Array<IQuantity>;
     getSpawnProducers() :  Array<IProducer>;
-    getSpawnResources(): Array<IResourceAmount>;
+    getSpawnResources(): Array<IQuantity>;
     getSpawnCrafters(): Array<ICrafter>;
     getSpawnNewTriggers(): Array<ITrigger>;
 

@@ -1,5 +1,5 @@
 
-interface IResourceAmount {
+interface IQuantity {
     $type : string;
     getQuantity() : number ;
     getResource() : IResource;

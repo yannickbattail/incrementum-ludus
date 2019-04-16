@@ -1,14 +1,14 @@
 /// <reference path="IResource.ts" />
-/// <reference path="IResourceAmount.ts" />
+/// <reference path="IQuantity.ts" />
 
 interface IPlayer {
     $type : string;
     // getters
     getName() : string;
-    getStorage() : Array<IResourceAmount>;
+    getStorage() : Array<IQuantity>;
     // storage management
-    changeStorage(resourceQuantity: IResourceAmount) : void;
-    decreaseStorage(resourceQuantity: IResourceAmount) : void;
-    getResourceInStorage(resourceName: string): IResourceAmount | null ;
-    hasResources(resourcesQuantity: Array<IResourceAmount>): boolean ;
+    changeStorage(resourceQuantity: IQuantity) : void;
+    decreaseStorage(resourceQuantity: IQuantity) : void;
+    getResourceInStorage(resourceName: string): IQuantity | null ;
+    hasResources(resourcesQuantity: Array<IQuantity>): boolean ;
 }

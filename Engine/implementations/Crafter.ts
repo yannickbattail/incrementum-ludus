@@ -1,5 +1,5 @@
 /// <reference path="../interfaces/IResource.ts" />
-/// <reference path="../interfaces/IResourceAmount.ts" />
+/// <reference path="../interfaces/IQuantity.ts" />
 /// <reference path="../interfaces/IProducer.ts" />
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
@@ -40,10 +40,10 @@ class Crafter implements ICrafter {
     getDuration(): number {
         return this.Duration;
     }
-    getCost(): Array<IResourceAmount> {
+    getCost(): Array<IQuantity> {
         return this.Cost;
     }
-    getCraftedResources(): Array<IResourceAmount> {
+    getCraftedResources(): Array<IQuantity> {
         return this.CraftedResources;
     }
     isAuto(): boolean {

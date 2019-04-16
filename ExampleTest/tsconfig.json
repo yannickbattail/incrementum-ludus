@@ -12,7 +12,7 @@
     "../Engine/interfaces/IPlayer.ts",
     "../Engine/interfaces/IProducer.ts",
     "../Engine/interfaces/IResource.ts",
-    "../Engine/interfaces/IResourceAmount.ts",
+    "../Engine/interfaces/IQuantity.ts",
     "../Engine/interfaces/ITrigger.ts",
     "../Engine/implementations/Resource.ts",
     "../Engine/implementations/ResourceQuantity.ts",

@@ -1,5 +1,5 @@
 /// <reference path="../interfaces/IResource.ts" />
-/// <reference path="../interfaces/IResourceAmount.ts" />
+/// <reference path="../interfaces/IQuantity.ts" />
 /// <reference path="../interfaces/IProducer.ts" />
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
@@ -9,9 +9,9 @@
 class Trigger implements ITrigger {
     $type : string = 'Trigger';
     constructor(protected Name: string,
-        protected ResourcesTrigger: Array<IResourceAmount> = [],
+        protected ResourcesTrigger: Array<IQuantity> = [],
         protected SpawnProducers:  Array<IProducer> = [],
-        protected SpawnResources: Array<IResourceAmount> = [],
+        protected SpawnResources: Array<IQuantity> = [],
         protected SpawnCrafters: Array<ICrafter> = [],
         protected SpawnNewTriggers: Array<ITrigger> = []) {
 
@@ -19,13 +19,13 @@ class Trigger implements ITrigger {
     getName() : string {
         return this.Name;
     }
-    getResourcesTrigger() : Array<IResourceAmount> {
+    getResourcesTrigger() : Array<IQuantity> {
         return this.ResourcesTrigger;
     }
     getSpawnProducers() :  Array<IProducer> {
         return this.SpawnProducers;
     }
-    getSpawnResources(): Array<IResourceAmount> {
+    getSpawnResources(): Array<IQuantity> {
         return this.SpawnResources;
     }
     getSpawnCrafters(): Array<ICrafter> {

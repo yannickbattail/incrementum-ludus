@@ -1,5 +1,5 @@
 /// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IResourceAmount.ts" />
+/// <reference path="../Engine/interfaces/IQuantity.ts" />
 /// <reference path="../Engine/interfaces/IProducer.ts" />
 /// <reference path="../Engine/interfaces/ITrigger.ts" />
 /// <reference path="../Engine/interfaces/ICrafter.ts" />

@@ -1,4 +1,4 @@
-/// <reference path="IResourceAmount.ts" />
+/// <reference path="IQuantity.ts" />
 /// <reference path="IResource.ts" />
 /// <reference path="IProducer.ts" />
 
@@ -9,8 +9,8 @@ interface ICrafter {
     initStartTime(): void;
     getName(): string;
     getDuration(): number;
-    getCost(): Array<IResourceAmount>;
-    getCraftedResources(): Array<IResourceAmount>;
+    getCost(): Array<IQuantity>;
+    getCraftedResources(): Array<IQuantity>;
     isAuto(): boolean;
 
     // builder inferface

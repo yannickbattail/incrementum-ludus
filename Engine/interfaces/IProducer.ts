@@ -1,11 +1,11 @@
-/// <reference path="IResourceAmount.ts" />
+/// <reference path="IQuantity.ts" />
 /// <reference path="IResource.ts" />
 
 interface IProducer {
     $type : string;
     //getters
     getName() : string;
-    getResourceAmount() : IResourceAmount;
+    getResourceAmount() : IQuantity;
     getInterval() : number | null;
     isAuto() : boolean;
     getStartTime(): Date | null;

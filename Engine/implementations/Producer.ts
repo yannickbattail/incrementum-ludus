@@ -1,5 +1,5 @@
 /// <reference path="../interfaces/IResource.ts" />
-/// <reference path="../interfaces/IResourceAmount.ts" />
+/// <reference path="../interfaces/IQuantity.ts" />
 /// <reference path="../interfaces/IProducer.ts" />
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
@@ -11,14 +11,14 @@ class Producer implements IProducer {
     $type : string = 'Producer';
     protected StartTime: Date | null = new Date(1970, 0, 1);
     constructor(protected Name: string,
-                protected resourceAmount: IResourceAmount = EMPTY_RQ,
+                protected resourceAmount: IQuantity = EMPTY_RQ,
                 protected Interval: number | null = null) {
                     
     }
     getName() : string {
         return this.Name;
     }
-    getResourceAmount() : IResourceAmount {
+    getResourceAmount() : IQuantity {
         return this.resourceAmount;
     }
     getInterval() : number | null {

@@ -1,5 +1,5 @@
 /// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IResourceAmount.ts" />
+/// <reference path="../Engine/interfaces/IQuantity.ts" />
 /// <reference path="../Engine/interfaces/IProducer.ts" />
 /// <reference path="../Engine/interfaces/ITrigger.ts" />
 /// <reference path="../Engine/interfaces/ICrafter.ts" />
@@ -147,7 +147,7 @@ class DesertIslandGui {
         return h;
     }
 
-    private displayResources(resourceQuantity : Array<IResourceAmount>) : string {
+    private displayResources(resourceQuantity : Array<IQuantity>) : string {
         var h = '';
         resourceQuantity.forEach(
             resQ => h += resQ.show()
@@ -155,7 +155,7 @@ class DesertIslandGui {
         h += '';
         return h;
     }
-    private displayAvailableResources(resourceQuantity : Array<IResourceAmount>) : string {
+    private displayAvailableResources(resourceQuantity : Array<IQuantity>) : string {
         var h = '';
         resourceQuantity.forEach(
             resQ => {

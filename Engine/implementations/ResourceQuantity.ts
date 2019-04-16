@@ -1,12 +1,12 @@
 /// <reference path="../interfaces/IResource.ts" />
-/// <reference path="../interfaces/IResourceAmount.ts" />
+/// <reference path="../interfaces/IQuantity.ts" />
 /// <reference path="../interfaces/IProducer.ts" />
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
 /// <reference path="../interfaces/IPlayer.ts" />
 
 
-class ResourceQuantity implements IResourceAmount{
+class ResourceQuantity implements IQuantity{
     $type : string = 'ResourceQuantity';
     constructor(protected Resource: IResource, protected Quantity: number) {
     }
@@ -29,4 +29,4 @@ class ResourceQuantity implements IResourceAmount{
         return this.Resource.show(this.Quantity);
     }
 }
-const EMPTY_RQ : IResourceAmount = new ResourceQuantity(new Resource("nothing"), 0);
+const EMPTY_RQ : IQuantity = new ResourceQuantity(new Resource("nothing"), 0);
