@@ -15,7 +15,7 @@ class Scenario {
         var engine = new Engine();
         engine.Player = new Player("Chuck Noland");
         // inital storage
-        engine.Player.changeStorage(new Quantity(1, LEVEL));
+        engine.Player.increaseStorage(new Quantity(1, LEVEL));
         engine.Producers = [
             // inital producers
             new Producer("take water").thatProduce(10, WATER).manualy(),

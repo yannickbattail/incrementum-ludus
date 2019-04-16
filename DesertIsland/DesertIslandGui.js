@@ -30,10 +30,10 @@ var DesertIslandGui = (function () {
         h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer.isAuto()) {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + _this.displayTime(producer.getInterval()) + "</td></tr>";
+                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + "</td><td>every " + _this.displayTime(producer.getInterval()) + "</td></tr>";
             }
             else {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
+                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";

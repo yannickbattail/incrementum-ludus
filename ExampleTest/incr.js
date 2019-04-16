@@ -10,9 +10,9 @@ var WASTE = new Resource("waste");
 var engine = new Engine();
 engine.Player = new Player("platypus");
 engine.Producers = [
-    new Producer("iron mine", new Quantity(2, IRON), 500),
-    new Producer("copper mine", new Quantity(1, COPPER), 3000),
-    new Producer("tin", new Quantity(1, TIN))
+    new Producer("iron mine", [new Quantity(2, IRON)], 500),
+    new Producer("copper mine", [new Quantity(1, COPPER)], 3000),
+    new Producer("tin", [new Quantity(1, TIN)])
 ];
 engine.Triggers = [
     new Trigger("lead mine exploitation")

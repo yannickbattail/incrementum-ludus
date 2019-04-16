@@ -28,9 +28,9 @@ class IncrGui {
         this.Engine.Producers.forEach(
             producer => {
                 if (producer.isAuto()) {
-                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + producer.getInterval() + " ms</td></tr>"
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + "</td><td>every " + producer.getInterval() + " ms</td></tr>"
                 } else {
-                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
                 }
             }
         );
@@ -62,9 +62,9 @@ class IncrGui {
         trigger.getSpawnProducers().forEach(
             producer => {
                 if (producer.isAuto()) {
-                    h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " every " + producer.getInterval() + " ms</li>"
+                    h += "<li>" + producer.getName() + ": " + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + " every " + producer.getInterval() + " ms</li>"
                 } else {
-                    h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " manualy</li>"
+                    h += "<li>" + producer.getName() + ": " + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + " manualy</li>"
                 }
             }
         );

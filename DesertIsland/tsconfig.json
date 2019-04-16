@@ -23,6 +23,8 @@
     "../Engine/Engine.ts",
     "Level.ts",
     "Material.ts",
+    "RandomRangeQuantity.ts",
+    "RandomResource.ts",
     "DesertIslandGui.ts",
     "Scenario.ts",
     "DesertIsland.ts"

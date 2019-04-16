@@ -5,21 +5,19 @@
 /// <reference path="../interfaces/ICrafter.ts" />
 /// <reference path="../interfaces/IPlayer.ts" />
 
-
-
 class Producer implements IProducer {
     $type : string = 'Producer';
     protected StartTime: Date | null = new Date(1970, 0, 1);
     constructor(protected Name: string,
-                protected resourceAmount: IQuantity = EMPTY_QUANTITY,
+                protected resourcesQuantity: Array<IQuantity> = [],
                 protected Interval: number | null = null) {
                     
     }
     getName() : string {
         return this.Name;
     }
-    getResourceAmount() : IQuantity {
-        return this.resourceAmount;
+    getResourcesQuantity() : Array<IQuantity> {
+        return this.resourcesQuantity;
     }
     getInterval() : number | null {
         return this.Interval;
@@ -40,12 +38,17 @@ class Producer implements IProducer {
         let curContext : any = window;
         let newObj : Producer = new Producer(data.Name);
         newObj.Interval = data.Interval;
-        newObj.resourceAmount = curContext[data.resourceAmount.$type].load(data.resourceAmount);
+        newObj.resourcesQuantity = curContext[data.resourceAmount.$type].load(data.resourceAmount);
         return newObj;
     }
+
     public thatProduce(quantity : number, resource : IResource) : IProducer {
-        this.resourceAmount = new Quantity(quantity, resource);
+        this.resourcesQuantity.push(new Quantity(quantity, resource));
         return this;
+    }
+
+    public andProduce(quantity : number, resource : IResource) : IProducer {
+        return this.thatProduce(quantity, resource);
     }
 
     public manualy() : IProducer {

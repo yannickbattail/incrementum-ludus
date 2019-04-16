@@ -5,7 +5,7 @@ interface IProducer {
     $type : string;
     //getters
     getName() : string;
-    getResourceAmount() : IQuantity;
+    getResourcesQuantity() : Array<IQuantity>;
     getInterval() : number | null;
     isAuto() : boolean;
     getStartTime(): Date | null;
@@ -13,6 +13,7 @@ interface IProducer {
     initStartTime(): void;
     // builder inferface
     thatProduce(quantity : number, resource : IResource) : IProducer;
+    andProduce(quantity : number, resource : IResource) : IProducer;
     manualy() : IProducer;
     every(interval: number) : IProducer ;
     seconds() : IProducer ;

@@ -52,12 +52,16 @@ class Engine {
             let startTime = producer.getStartTime();
             if (startTime != null && startTime.getTime() + interval < new Date().getTime()) {
                 producer.initStartTime();
-                this.Player.changeStorage(producer.getResourceAmount());
+                producer.getResourcesQuantity().forEach(
+                    res => this.Player.increaseStorage(res)
+                );
             }
         }
     }
     public collectManualProducer(producer: IProducer) {
-        this.Player.changeStorage(producer.getResourceAmount());
+        producer.getResourcesQuantity().forEach(
+            res => this.Player.increaseStorage(res)
+        );
     }
     public collectProducer(producerName: string) {
         let producer = this.getProducerByName(producerName);
@@ -83,7 +87,7 @@ class Engine {
                 pawnProducer => this.Producers.push(pawnProducer)
             );
             trigger.getSpawnResources().forEach(
-                res => this.Player.changeStorage(res)
+                res => this.Player.increaseStorage(res)
             );
             trigger.getSpawnCrafters().forEach(
                 crafter => this.Crafters.push(crafter)
@@ -106,7 +110,7 @@ class Engine {
         if (startTime != null && (startTime.getTime() + duration < new Date().getTime())) {
             crafter.resetStartTime();
             crafter.getCraftedResources().forEach(
-                resourceQty =>  this.Player.changeStorage(resourceQty)
+                resourceQty =>  this.Player.increaseStorage(resourceQty)
             );
         }
     }

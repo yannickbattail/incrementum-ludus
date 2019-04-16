@@ -14,10 +14,10 @@ var IncrGui = (function () {
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer.isAuto()) {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + producer.getInterval() + " ms</td></tr>";
+                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + "</td><td>every " + producer.getInterval() + " ms</td></tr>";
             }
             else {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
+                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";
@@ -43,10 +43,10 @@ var IncrGui = (function () {
         h += "<td><ul>";
         trigger.getSpawnProducers().forEach(function (producer) {
             if (producer.isAuto()) {
-                h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " every " + producer.getInterval() + " ms</li>";
+                h += "<li>" + producer.getName() + ": " + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + " every " + producer.getInterval() + " ms</li>";
             }
             else {
-                h += "<li>" + producer.getName() + ": " + producer.getResourceAmount().show() + " manualy</li>";
+                h += "<li>" + producer.getName() + ": " + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + " manualy</li>";
             }
         });
         h += "</ul></td>";

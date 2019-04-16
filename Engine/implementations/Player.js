@@ -16,7 +16,7 @@ var Player = (function () {
     Player.prototype.getStorage = function () {
         return this.Storage;
     };
-    Player.prototype.changeStorage = function (quantity) {
+    Player.prototype.increaseStorage = function (quantity) {
         var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
             this.Storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));

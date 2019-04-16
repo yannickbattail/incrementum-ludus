@@ -7,7 +7,7 @@ interface IPlayer {
     getName() : string;
     getStorage() : Array<IQuantity>;
     // storage management
-    changeStorage(resourceQuantity: IQuantity) : void;
+    increaseStorage(resourceQuantity: IQuantity) : void;
     decreaseStorage(resourceQuantity: IQuantity) : void;
     getResourceInStorage(resourceName: string): IQuantity | null ;
     hasResources(resourcesQuantity: Array<IQuantity>): boolean ;

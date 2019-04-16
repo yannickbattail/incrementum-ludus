@@ -1,9 +1,9 @@
 var Producer = (function () {
-    function Producer(Name, resourceAmount, Interval) {
-        if (resourceAmount === void 0) { resourceAmount = EMPTY_QUANTITY; }
+    function Producer(Name, resourcesQuantity, Interval) {
+        if (resourcesQuantity === void 0) { resourcesQuantity = []; }
         if (Interval === void 0) { Interval = null; }
         this.Name = Name;
-        this.resourceAmount = resourceAmount;
+        this.resourcesQuantity = resourcesQuantity;
         this.Interval = Interval;
         this.$type = 'Producer';
         this.StartTime = new Date(1970, 0, 1);
@@ -11,8 +11,8 @@ var Producer = (function () {
     Producer.prototype.getName = function () {
         return this.Name;
     };
-    Producer.prototype.getResourceAmount = function () {
-        return this.resourceAmount;
+    Producer.prototype.getResourcesQuantity = function () {
+        return this.resourcesQuantity;
     };
     Producer.prototype.getInterval = function () {
         return this.Interval;
@@ -33,12 +33,15 @@ var Producer = (function () {
         var curContext = window;
         var newObj = new Producer(data.Name);
         newObj.Interval = data.Interval;
-        newObj.resourceAmount = curContext[data.resourceAmount.$type].load(data.resourceAmount);
+        newObj.resourcesQuantity = curContext[data.resourceAmount.$type].load(data.resourceAmount);
         return newObj;
     };
     Producer.prototype.thatProduce = function (quantity, resource) {
-        this.resourceAmount = new Quantity(quantity, resource);
+        this.resourcesQuantity.push(new Quantity(quantity, resource));
         return this;
+    };
+    Producer.prototype.andProduce = function (quantity, resource) {
+        return this.thatProduce(quantity, resource);
     };
     Producer.prototype.manualy = function () {
         this.Interval = null;

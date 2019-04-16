@@ -23,7 +23,7 @@ class Player implements IPlayer{
         return this.Storage;
     }
 
-    public changeStorage(quantity: IQuantity) {
+    public increaseStorage(quantity: IQuantity) {
         let resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
             this.Storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));

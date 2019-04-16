@@ -47,9 +47,9 @@ class DesertIslandGui {
         this.Engine.Producers.forEach(
             producer => {
                 if (producer.isAuto()) {
-                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + "</td><td>every " + this.displayTime(producer.getInterval()) + "</td></tr>"
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + "</td><td>every " + this.displayTime(producer.getInterval()) + "</td></tr>"
                 } else {
-                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourceAmount().show() + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
+                    h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
                 }
             }
         );

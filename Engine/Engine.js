@@ -33,6 +33,7 @@ var Engine = (function () {
         this.Crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
     };
     Engine.prototype.autoCollectProducer = function (producer) {
+        var _this = this;
         if (producer.isAuto()) {
             var interval = 0;
             if (producer.getInterval() != null) {
@@ -42,12 +43,13 @@ var Engine = (function () {
             var startTime = producer.getStartTime();
             if (startTime != null && startTime.getTime() + interval < new Date().getTime()) {
                 producer.initStartTime();
-                this.Player.changeStorage(producer.getResourceAmount());
+                producer.getResourcesQuantity().forEach(function (res) { return _this.Player.increaseStorage(res); });
             }
         }
     };
     Engine.prototype.collectManualProducer = function (producer) {
-        this.Player.changeStorage(producer.getResourceAmount());
+        var _this = this;
+        producer.getResourcesQuantity().forEach(function (res) { return _this.Player.increaseStorage(res); });
     };
     Engine.prototype.collectProducer = function (producerName) {
         var producer = this.getProducerByName(producerName);
@@ -68,7 +70,7 @@ var Engine = (function () {
         var _this = this;
         if (this.Player.hasResources(trigger.getResourcesTrigger())) {
             trigger.getSpawnProducers().forEach(function (pawnProducer) { return _this.Producers.push(pawnProducer); });
-            trigger.getSpawnResources().forEach(function (res) { return _this.Player.changeStorage(res); });
+            trigger.getSpawnResources().forEach(function (res) { return _this.Player.increaseStorage(res); });
             trigger.getSpawnCrafters().forEach(function (crafter) { return _this.Crafters.push(crafter); });
             trigger.getSpawnNewTriggers().forEach(function (newTrigger) { return _this.Triggers.push(newTrigger); });
             this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
@@ -84,7 +86,7 @@ var Engine = (function () {
         var startTime = crafter.getStartTime();
         if (startTime != null && (startTime.getTime() + duration < new Date().getTime())) {
             crafter.resetStartTime();
-            crafter.getCraftedResources().forEach(function (resourceQty) { return _this.Player.changeStorage(resourceQty); });
+            crafter.getCraftedResources().forEach(function (resourceQty) { return _this.Player.increaseStorage(resourceQty); });
         }
     };
     Engine.prototype.checkStartAutoCrafting = function (crafter) {
