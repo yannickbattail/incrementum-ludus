@@ -21,11 +21,14 @@ class Scenario {
         engine.Player = new Player("Chuck Noland");
         // inital storage
         engine.Player.increaseStorage(Q(1, LEVEL));
+        engine.Player.increaseStorage(Q(0, WATER));
+        engine.Player.increaseStorage(Q(0, CLAY));
+        engine.Player.increaseStorage(Q(0, COPPER_ORE));
         engine.Producers = [
             // inital producers
             new Producer("take water")
             .thatProduce(Q(10, WATER))
-            .andProduce(new RandomResource(1, IRON_ORE, 0.02)).manualy(),
+            .andProduce(new RandomResource(1, COPPER_ORE, 0.02)).manualy(),
             new Producer("bare hands dig clay").thatProduce(Q(10, CLAY)).manualy()
         ];
         engine.Crafters = [
@@ -79,6 +82,7 @@ class Scenario {
                                     .thatCraft(Q(1, AXE)).thatCraft(Q(3, FULL_TRASH))
                                     .in(4).minutes()
                                     .atCostOf(Q(100, IRON))
+                                    .atCostOf(Q(3, COPPER_ORE))
                                     .and(Q(1000, WATER))
                                     .and(Q(2000, WOOD))
                                     .and(Q(1000, CLAY))

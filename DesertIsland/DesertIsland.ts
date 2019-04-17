@@ -11,7 +11,7 @@
 /// <reference path="./Level.ts" />
 /// <reference path="./Scenario.ts" />
 
-const VERSION = "1.22";
+const VERSION = "1.23";
 
 const LEVEL = new Level("level", "level");
 const CLAY = new Material("clay", "g", "clay");
@@ -20,6 +20,7 @@ const WOOD = new Material("wood", "g", "wood");
 const CHARCOAL = new Material("charcoal", "g", "charcoal");
 const IRON_ORE = new Material("iron ore", "g", "iron_ore");
 const IRON = new Material("iron", "g", "iron");
+const COPPER_ORE = new Material("copper ore", "g", "copper_ore");
 const CLAY_POT = new Item("clay pot", "clay_pot");
 const BRICK = new Item("brick", "brick");
 const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
