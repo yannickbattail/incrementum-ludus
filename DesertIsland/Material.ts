@@ -6,7 +6,7 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-class Material extends Resource {
+class Material extends Resource implements IPicturable {
     public $type : string = 'Material';
     constructor(public Name : string, public Unit : string, public Image : string){
         super(name);

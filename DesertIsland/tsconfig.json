@@ -21,6 +21,7 @@
     "../Engine/implementations/Trigger.ts",
     "../Engine/implementations/Player.ts",
     "../Engine/Engine.ts",
+    "IPicturable.ts",
     "Level.ts",
     "Material.ts",
     "RandomRangeQuantity.ts",
