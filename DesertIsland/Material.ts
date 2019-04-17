@@ -6,7 +6,7 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-class Material extends Resource implements IPicturable {
+class Material extends Resource {
     public $type : string = 'Material';
     constructor(public Name : string, public Unit : string, public Image : string){
         super(name);
@@ -30,6 +30,6 @@ class Material extends Resource implements IPicturable {
                 q = Math.round(q / 10) / 10;
             }
         }
-        return '<div class="resource Material">' + q + u + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return q + u;
     }
 }

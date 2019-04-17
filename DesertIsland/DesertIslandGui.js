@@ -6,9 +6,10 @@ var DesertIslandGui = (function () {
         var level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
             return "XXX level";
-        return 'Level: ' + level.show();
+        return 'Level: ' + this.displayQuantity(level);
     };
     DesertIslandGui.prototype.displayStorage = function () {
+        var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>resource</th></tr>";
         if (this.Engine.Player.getStorage().length <= 1) {
@@ -17,7 +18,7 @@ var DesertIslandGui = (function () {
         else {
             this.Engine.Player.getStorage().forEach(function (res) {
                 if (!(res.getResource() instanceof Level)) {
-                    h += '<tr><td>' + res.show() + '</td></tr>';
+                    h += '<tr><td>' + _this.displayQuantity(res) + '</td></tr>';
                 }
             });
         }
@@ -30,10 +31,10 @@ var DesertIslandGui = (function () {
         h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer.isAuto()) {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + "</td><td>every " + _this.displayTime(producer.getInterval()) + "</td></tr>";
+                h += "<tr><td>" + producer.getName() + "</td><td>" + _this.displayQuantities(producer.getResourcesQuantity()) + "</td><td>every " + _this.displayTime(producer.getInterval()) + "</td></tr>";
             }
             else {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
+                h += "<tr><td>" + producer.getName() + "</td><td>" + _this.displayQuantities(producer.getResourcesQuantity()) + '</td><td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
             }
         });
         h += "</table>";
@@ -51,9 +52,9 @@ var DesertIslandGui = (function () {
         var h = "<tr>";
         h += '<td>' + crafter.getName() + '</td>';
         h += "<td>";
-        h += this.displayAvailableResources(crafter.getCost());
+        h += this.displayAvailableQuantities(crafter.getCost());
         h += "</td>";
-        h += '<td>' + this.displayResources(crafter.getCraftedResources()) + '</td>';
+        h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '</tr>';
         return h;
@@ -108,7 +109,7 @@ var DesertIslandGui = (function () {
             h += "<tr>"
                 + "<td>" + nextGoal + "</td>"
                 + "<td>" + trig.getName() + "</td>"
-                + "<td>" + _this.displayAvailableResources(trig.getResourcesTrigger()) + "</td>"
+                + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
                 + "<td>" + ((trig.getSpawnProducers().length) ? '<b>Producers</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
                 + ((trig.getSpawnCrafters().length) ? ' <b>crafters</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '') + "</td>"
                 + "</tr>";
@@ -118,24 +119,36 @@ var DesertIslandGui = (function () {
         });
         return h;
     };
-    DesertIslandGui.prototype.displayResources = function (resourceQuantity) {
-        var h = '';
-        resourceQuantity.forEach(function (resQ) { return h += resQ.show(); });
-        h += '';
-        return h;
+    DesertIslandGui.prototype.displayQuantities = function (quantities) {
+        var _this = this;
+        return quantities.map(function (resQ) { return _this.displayQuantity(resQ); })
+            .join(' ');
     };
-    DesertIslandGui.prototype.displayAvailableResources = function (resourceQuantity) {
+    DesertIslandGui.prototype.displayAvailableQuantities = function (quantities) {
+        var _this = this;
         var h = '';
-        resourceQuantity.forEach(function (resQ) {
+        quantities.forEach(function (resQ) {
             var storageRes = engine.Player.getResourceInStorage(resQ.getResource().getName());
             var cssClass = 'notAvailableResource';
             if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                 cssClass = 'availableResource';
             }
-            h += '<span class="' + cssClass + '">' + resQ.show() + '</span>';
+            h += _this.displayQuantity(resQ, cssClass);
         });
         h += '';
         return h;
+    };
+    DesertIslandGui.prototype.displayQuantity = function (quantity, optionnalCss) {
+        if (optionnalCss === void 0) { optionnalCss = ''; }
+        var res = quantity.getResource();
+        var image = '';
+        if ('Image' in res) {
+            image = res.Image;
+        }
+        return '<div class="resource ' + typeof (quantity) + '">'
+            + '<div class="resource_label">' + quantity.show() + '</div>'
+            + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + '</div>';
     };
     DesertIslandGui.prototype.displayTime = function (miliSeconds) {
         if (miliSeconds == null) {

@@ -25,7 +25,7 @@ var Level = (function (_super) {
         return r;
     };
     Level.prototype.show = function (quantity) {
-        return '<div class="resource Level">' + quantity + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return "" + quantity;
     };
     return Level;
 }(Resource));

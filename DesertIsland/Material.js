@@ -40,7 +40,7 @@ var Material = (function (_super) {
                 q = Math.round(q / 10) / 10;
             }
         }
-        return '<div class="resource Material">' + q + u + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return q + u;
     };
     return Material;
 }(Resource));

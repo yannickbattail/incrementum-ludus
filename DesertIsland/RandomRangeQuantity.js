@@ -22,7 +22,7 @@ var RandomRangeQuantity = (function () {
         return this.resource;
     };
     RandomRangeQuantity.prototype.show = function () {
-        return '' + this.minQuantity + ' to ' + this.resource.show(this.maxQuantity);
+        return 'random between ' + this.resource.show(this.minQuantity) + ' and ' + this.resource.show(this.maxQuantity);
     };
     return RandomRangeQuantity;
 }());

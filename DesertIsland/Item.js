@@ -25,7 +25,7 @@ var Item = (function (_super) {
         return r;
     };
     Item.prototype.show = function (quantity) {
-        return '<div class="resource Item">' + quantity + ' <img src="images/' + this.Image + '.svg" title="' + this.Name + '" alt="' + this.Name + '" class="resource_img"></div>';
+        return "" + quantity;
     };
     return Item;
 }(Resource));
