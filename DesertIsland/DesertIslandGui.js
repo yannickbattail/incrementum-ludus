@@ -145,7 +145,7 @@ var DesertIslandGui = (function () {
         if ('Image' in res) {
             image = res.Image;
         }
-        return '<div class="resource ' + typeof (quantity) + '">'
+        return '<div class="resource ' + quantity.$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() + '</div>'
             + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
             + '</div>';

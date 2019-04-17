@@ -2,10 +2,10 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10pt;
     background-color: #222222;
-    color: #0099cc;
+    color: #00a7df;
 }
 table {
-    border-color: #0099cc;
+    border-color: #00a7df;
     border-style: none;
 }
 th {
@@ -41,6 +41,10 @@ ul {
 #producers {
     display: inline-block;
 }
+#level {
+    width: 110px;
+    max-width: 110px;
+}
 
 .resource {
     float: right;
@@ -55,8 +59,7 @@ ul {
 }
 
 .Level {
-    float: initial;
-    display: inline-block;
+
 }
 .Material {
     
@@ -69,6 +72,10 @@ ul {
     width : 24px;
     height: 24px;
     vertical-align: middle;
+}
+.resource_label {
+    display: inline-block;
+    padding-right: 2px;
 }
 
 .progressBar {
@@ -85,6 +92,6 @@ ul {
     border-style: none;
     border-width: 0px;
     border-radius: 3px;
-    background-color: #0099cc;
+    background-color: #00a7df;
     text-align: center;
 }
