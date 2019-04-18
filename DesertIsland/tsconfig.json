@@ -25,6 +25,7 @@
     "Material.ts",
     "RandomRangeQuantity.ts",
     "RandomResource.ts",
+    "domDiff.ts",
     "DesertIslandGui.ts",
     "Scenario.ts",
     "DesertIsland.ts"

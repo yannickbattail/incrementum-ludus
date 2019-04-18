@@ -19,8 +19,8 @@ class DesertIslandGui {
     displayLevel(): string {
         let level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
-            return "XXX level";
-        return 'Level: '+this.displayQuantity(level);
+            return '<div>Level: XXX<div>';
+        return '<div>Level: '+this.displayQuantity(level)+'<div>';
     }
 
     displayStorage(): string {
@@ -42,7 +42,8 @@ class DesertIslandGui {
     }
 
     displayProducers(): string {
-        var h = '<table border="1">';
+        var h = '';
+        h += '<table border="1">';
         h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(
             producer => {

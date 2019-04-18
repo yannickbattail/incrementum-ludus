@@ -5,8 +5,8 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayLevel = function () {
         var level = this.Engine.Player.getResourceInStorage("level");
         if (level == null)
-            return "XXX level";
-        return 'Level: ' + this.displayQuantity(level);
+            return '<div>Level: XXX<div>';
+        return '<div>Level: ' + this.displayQuantity(level) + '<div>';
     };
     DesertIslandGui.prototype.displayStorage = function () {
         var _this = this;
@@ -27,7 +27,8 @@ var DesertIslandGui = (function () {
     };
     DesertIslandGui.prototype.displayProducers = function () {
         var _this = this;
-        var h = '<table border="1">';
+        var h = '';
+        h += '<table border="1">';
         h += "<tr><th>Production</th><th>resource</th><th>when</th></tr>";
         this.Engine.Producers.forEach(function (producer) {
             if (producer.isAuto()) {
