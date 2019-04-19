@@ -91,33 +91,14 @@ class DesertIslandGui {
         return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft ('+this.displayTime(crafter.getDuration())+')</button>';
     }
 
-    displayTriggers(): string {
-        if (this.Engine.Triggers.length == 0){
-            return '...No more goal for now. Wait for next version of the game.';
-        }
-        var h = '<table border="1">';
-        h += '<tr><th>Next goal</th><th>needed resources</th></tr>';
-        this.Engine.Triggers.forEach(
-            trigger => h += this.displayTrigger(trigger)
-        );
-        h += "</table>";
-        return h;
-    }
-
-    private displayTrigger(trigger : ITrigger) : string {
-        let h = "<tr>";
-        h += '<td>' + trigger.getName() + '</td>';
-        h += "<td>";
-        h += this.displayQuantities(trigger.getResourcesTrigger());
-        h += "</td>";
-        h += '</tr>';
-        return h;
-    }
-
     displayTree(): string {
         let h = '<table border="1">';
-        h += "<tr><th>next goal</th><th>Evolutions</th><th>needed resources</th><th>unlock</th></tr>";
-        h += this.displayBranch(engine.Triggers);
+        h += "<tr><th>Next goals</th><th>needed resources</th><th>unlock</th></tr>";
+        if (this.Engine.Triggers.length == 0){
+            h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
+        } else {
+            h += this.displayBranch(engine.Triggers);
+        }
         h += "</table>";
         return h;
     }
@@ -126,12 +107,7 @@ class DesertIslandGui {
         let h = '';
         triggers.forEach(
             trig => {
-                let nextGoal = '';
-                if (engine.Triggers.indexOf(trig) != -1) {
-                    nextGoal = '<img src="images/arrow_right.svg" alt="arrow right" title="arrow right" widht="40px" height="40px"  />';
-                }
                 h += "<tr>"
-                    + "<td>" + nextGoal + "</td>"
                     + "<td>" + trig.getName() + "</td>"
                     + "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
                     + "<td>" + ((trig.getSpawnProducers().length)?' <b>Producers</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')

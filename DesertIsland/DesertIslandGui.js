@@ -71,30 +71,15 @@ var DesertIslandGui = (function () {
         }
         return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft (' + this.displayTime(crafter.getDuration()) + ')</button>';
     };
-    DesertIslandGui.prototype.displayTriggers = function () {
-        var _this = this;
-        if (this.Engine.Triggers.length == 0) {
-            return '...No more goal for now. Wait for next version of the game.';
-        }
-        var h = '<table border="1">';
-        h += '<tr><th>Next goal</th><th>needed resources</th></tr>';
-        this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
-        h += "</table>";
-        return h;
-    };
-    DesertIslandGui.prototype.displayTrigger = function (trigger) {
-        var h = "<tr>";
-        h += '<td>' + trigger.getName() + '</td>';
-        h += "<td>";
-        h += this.displayQuantities(trigger.getResourcesTrigger());
-        h += "</td>";
-        h += '</tr>';
-        return h;
-    };
     DesertIslandGui.prototype.displayTree = function () {
         var h = '<table border="1">';
-        h += "<tr><th>next goal</th><th>Evolutions</th><th>needed resources</th><th>unlock</th></tr>";
-        h += this.displayBranch(engine.Triggers);
+        h += "<tr><th>Next goals</th><th>needed resources</th><th>unlock</th></tr>";
+        if (this.Engine.Triggers.length == 0) {
+            h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
+        }
+        else {
+            h += this.displayBranch(engine.Triggers);
+        }
         h += "</table>";
         return h;
     };
@@ -102,12 +87,7 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '';
         triggers.forEach(function (trig) {
-            var nextGoal = '';
-            if (engine.Triggers.indexOf(trig) != -1) {
-                nextGoal = '<img src="images/arrow_right.svg" alt="arrow right" title="arrow right" widht="40px" height="40px"  />';
-            }
             h += "<tr>"
-                + "<td>" + nextGoal + "</td>"
                 + "<td>" + trig.getName() + "</td>"
                 + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
                 + "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Producers</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
