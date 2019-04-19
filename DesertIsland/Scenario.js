@@ -105,7 +105,7 @@ var Scenario = (function () {
                 .whenReached(Q(200, CHARCOAL))
                 .spawnResource(Q(1, LEVEL))).appendTrigger(new Trigger("brick crafting")
                 .whenReached(Q(400, CHARCOAL)).and(Q(500, WOOD)).and(Q(300, CLAY)).and(Q(200, WATER))
-                .spawnCrafter(new Crafter("Brik oven")
+                .spawnCrafter(new Crafter("Brick oven")
                 .thatCraft(Q(10, BRICK))["in"](20).seconds()
                 .atCostOf(Q(500, WOOD)).and(Q(200, CLAY)))
                 .appendTrigger(triggerLevel5))),
