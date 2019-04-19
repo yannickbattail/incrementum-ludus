@@ -16,6 +16,8 @@
     "../Engine/interfaces/ITrigger.ts",
     "../Engine/implementations/Resource.ts",
     "../Engine/implementations/Quantity.ts",
+    "../Engine/implementations/RandomRangeQuantity.ts",
+    "../Engine/implementations/RandomResource.ts",
     "../Engine/implementations/Crafter.ts",
     "../Engine/implementations/Producer.ts",
     "../Engine/implementations/Trigger.ts",
@@ -23,8 +25,6 @@
     "../Engine/Engine.ts",
     "Level.ts",
     "Material.ts",
-    "RandomRangeQuantity.ts",
-    "RandomResource.ts",
     "DesertIslandGui.ts",
     "Scenario.ts",
     "DesertIsland.ts"
