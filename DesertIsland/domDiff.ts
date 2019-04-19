@@ -1,12 +1,13 @@
 
 //from https://medium.com/@deathmood/how-to-write-your-own-virtual-dom-ee74acc13060
 
+// not used, keep it as an example. will be removed
 function changed(node1 : any, node2 : any) {
   return typeof node1 !== typeof node2 ||
           typeof node1 === 'string' && node1 !== node2 ||
           node1.type !== node2.type
 }
-
+// not used, keep it as an example. will be removed
 function updateElement($parent : any, oldNode : any, newNode : any, index = 0) {
   if (!oldNode) {
     $parent.appendChild(
@@ -42,9 +43,9 @@ function hasChanged(node1 : Node, node2 : Node) {
 }
 
 function updateChildNodes(oldNode : Node, newNode : Node) {
-  const newNodeLength = newNode.childNodes.length
-  const oldNodeLength = oldNode.childNodes.length;
-  const maxLength = Math.max(newNodeLength, oldNodeLength);
+  let newNodeLength = newNode.childNodes.length
+  let oldNodeLength = oldNode.childNodes.length;
+  let maxLength = Math.max(newNodeLength, oldNodeLength);
   for (let i = 0; i < maxLength; i++) {
     if (i >= oldNodeLength) {
       oldNode.appendChild(newNode.childNodes[i]);
