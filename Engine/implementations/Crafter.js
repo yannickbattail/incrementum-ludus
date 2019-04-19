@@ -1,14 +1,16 @@
 var Crafter = (function () {
-    function Crafter(Name, Duration, Cost, CraftedResources, AutoCrafting) {
+    function Crafter(Name, Duration, Cost, CraftedResources, AutoCrafting, automatable) {
         if (Duration === void 0) { Duration = 0; }
         if (Cost === void 0) { Cost = []; }
         if (CraftedResources === void 0) { CraftedResources = []; }
         if (AutoCrafting === void 0) { AutoCrafting = false; }
+        if (automatable === void 0) { automatable = false; }
         this.Name = Name;
         this.Duration = Duration;
         this.Cost = Cost;
         this.CraftedResources = CraftedResources;
         this.AutoCrafting = AutoCrafting;
+        this.automatable = automatable;
         this.$type = 'Crafter';
     }
     Crafter.load = function (data) {
@@ -18,6 +20,7 @@ var Crafter = (function () {
         newObj.Cost = data.Cost.map(function (p) { return curContext[p.$type].load(p); });
         newObj.CraftedResources = data.CraftedResources.map(function (p) { return curContext[p.$type].load(p); });
         newObj.AutoCrafting = data.AutoCrafting;
+        newObj.automatable = data.automatable;
         return newObj;
     };
     Crafter.prototype.getStartTime = function () {
@@ -43,6 +46,15 @@ var Crafter = (function () {
     };
     Crafter.prototype.isAuto = function () {
         return this.AutoCrafting;
+    };
+    Crafter.prototype.setAuto = function (auto) {
+        this.AutoCrafting = auto;
+    };
+    Crafter.prototype.isAutomatable = function () {
+        return this.automatable;
+    };
+    Crafter.prototype.setAutomatable = function (automatable) {
+        this.automatable = automatable;
     };
     Crafter.prototype.thatCraft = function (quantity) {
         this.CraftedResources.push(quantity);

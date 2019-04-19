@@ -12,7 +12,8 @@ class Crafter implements ICrafter {
                 protected Duration: number = 0,
                 protected Cost: Array<IQuantity> = [],
                 protected CraftedResources: Array<IQuantity> = [],
-                protected AutoCrafting: boolean = false) {
+                protected AutoCrafting: boolean = false,
+                protected automatable: boolean = false) {
 
     }
     public static load(data : any) : Crafter {
@@ -22,6 +23,7 @@ class Crafter implements ICrafter {
         newObj.Cost = (data.Cost as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.CraftedResources = (data.CraftedResources as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.AutoCrafting = data.AutoCrafting;
+        newObj.automatable = data.automatable;
         return newObj;
     }
 
@@ -48,6 +50,15 @@ class Crafter implements ICrafter {
     }
     isAuto(): boolean {
         return this.AutoCrafting;
+    }
+    setAuto(auto : boolean) : void {
+        this.AutoCrafting = auto;
+    }
+    isAutomatable(): boolean {
+        return this.automatable;
+    }
+    setAutomatable(automatable : boolean) : void {
+        this.automatable = automatable;
     }
 
     public thatCraft(quantity : IQuantity) : ICrafter {
