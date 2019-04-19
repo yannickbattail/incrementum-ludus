@@ -22,6 +22,7 @@ interface ICrafter {
     seconds() : ICrafter;
     minutes() : ICrafter;
     automaticaly() : ICrafter;
+    canBeSwitchedToAuto() : ICrafter;
     atCostOf(quantity : IQuantity) : ICrafter;
     and(quantity : IQuantity) : ICrafter;
     isCrafting() : boolean;

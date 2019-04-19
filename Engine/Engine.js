@@ -111,6 +111,12 @@ var Engine = (function () {
         }
         return false;
     };
+    Engine.prototype.switchAutoCrafting = function (crafterName) {
+        var crafter = this.getCrafterByName(crafterName);
+        if (crafter != null) {
+            crafter.setAuto(!crafter.isAuto());
+        }
+    };
     Engine.prototype.getCrafterByName = function (crafterName) {
         var crafters = this.Crafters.filter(function (src) { return src.getName() == crafterName; });
         if (crafters.length == 0) {

@@ -79,6 +79,10 @@ var Crafter = (function () {
         this.AutoCrafting = true;
         return this;
     };
+    Crafter.prototype.canBeSwitchedToAuto = function () {
+        this.automatable = true;
+        return this;
+    };
     Crafter.prototype.atCostOf = function (quantity) {
         this.Cost.push(quantity);
         return this;

@@ -19,6 +19,7 @@ var Scenario = (function () {
             new Crafter("craft clay pot")
                 .thatCraft(Q(1, CLAY_POT))["in"](10).seconds()
                 .atCostOf(Q(100, CLAY)).and(Q(10, WATER))
+                .canBeSwitchedToAuto()
         ];
         var triggerLevel7 = new Trigger("iron age")
             .whenReached(Q(100, IRON_ORE)).and(Q(40, BRICK)).and(Q(400, CHARCOAL))

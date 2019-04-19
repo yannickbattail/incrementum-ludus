@@ -6,8 +6,8 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-/// <reference path="./RandomResource.ts" />
-/// <reference path="./RandomRangeQuantity.ts" />
+/// <reference path="../Engine/implementations/RandomResource.ts" />
+/// <reference path="../Engine/implementations/RandomRangeQuantity.ts" />
 /// <reference path="./Material.ts" />
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
@@ -37,6 +37,7 @@ class Scenario {
                 .thatCraft(Q(1, CLAY_POT))
                 .in(10).seconds()
                 .atCostOf(Q(100, CLAY)).and(Q(10, WATER))
+                .canBeSwitchedToAuto()
         ];
 
 

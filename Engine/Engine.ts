@@ -139,6 +139,13 @@ class Engine {
         return false;
     }
 
+    public switchAutoCrafting(crafterName: string) {
+        let crafter = this.getCrafterByName(crafterName);
+        if (crafter != null) {
+            crafter.setAuto(!crafter.isAuto());
+        }
+    }
+
     public getCrafterByName(crafterName : string) : ICrafter | null {
         let crafters: ICrafter[] =  this.Crafters.filter(
             src => src.getName() == crafterName

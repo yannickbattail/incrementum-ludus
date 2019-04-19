@@ -73,22 +73,29 @@ class DesertIslandGui {
         h += this.displayAvailableQuantities(crafter.getCost());
         h += "</td>"
         h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
-        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + this.displayAutoCraft(crafter) + '</td>';
         h += '</tr>';
         return h;
     }
 
     private displayCraftButton(crafter : ICrafter) : string {
-        if (crafter.isAuto()) {
-            return 'Auto Crafting';
-        }
+        let h = '';
         if (crafter.isCrafting()) {
-            return this.displayProgress(crafter.getStartTime(), crafter.getDuration());
+            h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
+        } else if (!this.Engine.Player.hasResources(crafter.getCost())) {
+            h += 'Not enough resources';
+        } else {
+            h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft ('+this.displayTime(crafter.getDuration())+')</button>';
         }
-        if (!this.Engine.Player.hasResources(crafter.getCost())) {
-            return 'Not enough resources';
-        }
-        return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft ('+this.displayTime(crafter.getDuration())+')</button>';
+        return h;
+    }
+
+    private displayAutoCraft(crafter : ICrafter) : string {
+        return '<br />[<label>'
+        + '<input type="checkbox" onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
+        +   (crafter.isAuto()?' checked="checked"':'')+''
+        +   (crafter.isAutomatable()?'':' disabled="disabled"')+' />'
+        + 'Auto</label>]';
     }
 
     displayTree(): string {

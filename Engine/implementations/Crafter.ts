@@ -84,6 +84,11 @@ class Crafter implements ICrafter {
         this.AutoCrafting = true;
         return this;
     }
+    canBeSwitchedToAuto() : ICrafter {
+        this.automatable = true;
+        return this;
+    }
+
     public atCostOf(quantity : IQuantity) : ICrafter {
         this.Cost.push(quantity);
         return this;
