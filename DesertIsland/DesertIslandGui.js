@@ -86,7 +86,7 @@ var DesertIslandGui = (function () {
         var h = "<tr>";
         h += '<td>' + trigger.getName() + '</td>';
         h += "<td>";
-        trigger.getResourcesTrigger().forEach(function (res) { return h += res.show(); });
+        h += this.displayQuantities(trigger.getResourcesTrigger());
         h += "</td>";
         h += '</tr>';
         return h;
@@ -111,11 +111,9 @@ var DesertIslandGui = (function () {
                 + "<td>" + trig.getName() + "</td>"
                 + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
                 + "<td>" + ((trig.getSpawnProducers().length) ? '<b>Producers</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnCrafters().length) ? ' <b>crafters</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '') + "</td>"
+                + ((trig.getSpawnCrafters().length) ? ' <b>crafters</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
+                + ((trig.getSpawnResources().length) ? ' <b>crafters</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
                 + "</tr>";
-            if (trig.getSpawnNewTriggers().length) {
-                h += _this.displayBranch(trig.getSpawnNewTriggers());
-            }
         });
         return h;
     };

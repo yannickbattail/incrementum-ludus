@@ -108,9 +108,7 @@ class DesertIslandGui {
         let h = "<tr>";
         h += '<td>' + trigger.getName() + '</td>';
         h += "<td>";
-        trigger.getResourcesTrigger().forEach(
-            res => h += res.show()
-        );
+        h += this.displayQuantities(trigger.getResourcesTrigger());
         h += "</td>";
         h += '</tr>';
         return h;
@@ -136,12 +134,14 @@ class DesertIslandGui {
                     + "<td>" + nextGoal + "</td>"
                     + "<td>" + trig.getName() + "</td>"
                     + "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                    + "<td>" + ((trig.getSpawnProducers().length)?'<b>Producers</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
-                    + ((trig.getSpawnCrafters().length)?' <b>crafters</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'') + "</td>"
+                    + "<td>" + ((trig.getSpawnProducers().length)?' <b>Producers</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
+                             + ((trig.getSpawnCrafters().length)?' <b>crafters</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'')
+                             + ((trig.getSpawnResources().length)?' <b>crafters</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>"
                 + "</tr>";
+                /*
                 if (trig.getSpawnNewTriggers().length) {
                     h += this.displayBranch(trig.getSpawnNewTriggers());
-                }
+                }*/
             }
         );
         return h;
