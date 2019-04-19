@@ -135,8 +135,8 @@ class DesertIslandGui {
                     + "<td>" + trig.getName() + "</td>"
                     + "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
                     + "<td>" + ((trig.getSpawnProducers().length)?' <b>Producers</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
-                             + ((trig.getSpawnCrafters().length)?' <b>crafters</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'')
-                             + ((trig.getSpawnResources().length)?' <b>crafters</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>"
+                             + ((trig.getSpawnCrafters().length)?' <b>Crafters</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'')
+                             + ((trig.getSpawnResources().length)?' <b>Resources</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>"
                 + "</tr>";
                 /*
                 if (trig.getSpawnNewTriggers().length) {

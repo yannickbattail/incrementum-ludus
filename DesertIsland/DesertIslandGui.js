@@ -110,9 +110,9 @@ var DesertIslandGui = (function () {
                 + "<td>" + nextGoal + "</td>"
                 + "<td>" + trig.getName() + "</td>"
                 + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                + "<td>" + ((trig.getSpawnProducers().length) ? '<b>Producers</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnCrafters().length) ? ' <b>crafters</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnResources().length) ? ' <b>crafters</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
+                + "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Producers</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
+                + ((trig.getSpawnCrafters().length) ? ' <b>Crafters</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
+                + ((trig.getSpawnResources().length) ? ' <b>Resources</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
                 + "</tr>";
         });
         return h;
