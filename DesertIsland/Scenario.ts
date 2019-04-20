@@ -62,6 +62,7 @@ class Scenario {
                             .thatCraft(Q(1, EMPTY_TRASH))
                             .in(40).seconds()
                             .atCostOf(Q(1, TERRACOTTA_POT)).and(Q(100, WATER)).and(Q(1, FULL_TRASH))
+                            .canBeSwitchedToAuto()
                     )
                     .appendTrigger(
                         new Trigger("tools forging")
@@ -111,6 +112,7 @@ class Scenario {
                     .thatCraft(Q(1, TERRACOTTA_POT))
                     .in(20).seconds()
                     .atCostOf(Q(800, WOOD)).and(Q(1, CLAY_POT))
+                    .canBeSwitchedToAuto()
             )
             .appendTrigger(
                 new Trigger("clay digging")
@@ -127,6 +129,7 @@ class Scenario {
                                     .thatCraft(Q(10000, WOOD))
                                     .in(1).minutes()
                                     .atCostOf(Q(4000, WATER))
+                                    .canBeSwitchedToAuto()
                             )
                             .appendTrigger(
                                 new Trigger("wood choping")
@@ -164,6 +167,7 @@ class Scenario {
                             .thatCraft(Q(200, CHARCOAL))
                             .in(20).seconds()
                             .atCostOf(Q(600, WOOD)).and(Q(200, CLAY))
+                            .canBeSwitchedToAuto()
                         ).appendTrigger(
                             new Trigger("charcoal level")
                                 .whenReached(Q(200, CHARCOAL))
