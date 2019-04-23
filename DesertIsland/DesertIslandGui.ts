@@ -240,33 +240,16 @@ class DesertIslandGui {
         if (oldDiv != null) {
             var newdiv = document.createElement('div');
             newdiv.innerHTML = html;
-            if (newdiv.childNodes.length == 0) {
-                oldDiv.appendChildren(newdiv.childNodes);
-            } else {
-                let child = newdiv.firstChild;
-                if (child != null) {
-                    updateChildNodes(oldDiv, child);
-                }
-            }
+            updateChildNodes(oldDiv, newdiv);
         }
     }
 
     private updateGui() {
-        let level = document.getElementById('level');
-        if (level) level.innerHTML = this.displayLevel();
-
-        let storage = document.getElementById('storage')
-        if (storage) storage.innerHTML = this.displayStorage();
-
-        let producers = document.getElementById('producers')
-        if (producers) producers.innerHTML = this.displayProducers();
-
-        let crafters = document.getElementById('crafters')
-        if (crafters) crafters.innerHTML = this.displayCrafters();
-
-        let tree = document.getElementById('tree')
-        if (tree) tree.innerHTML = this.displayTree();
-
+        this.updateDiv('level', this.displayLevel());
+        this.updateDiv('storage', this.displayStorage());
+        this.updateDiv('producers', this.displayProducers());
+        this.updateDiv('crafters', this.displayCrafters());
+        this.updateDiv('tree', this.displayTree());
         saveEngine(engine);
     }
 

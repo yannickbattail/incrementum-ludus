@@ -33,10 +33,15 @@ function updateChildNodes(oldNode, newNode) {
     var maxLength = Math.max(newNodeLength, oldNodeLength);
     for (var i = 0; i < maxLength; i++) {
         if (i >= oldNodeLength) {
-            oldNode.appendChild(newNode.childNodes[i]);
+            try {
+                oldNode.appendChild(newNode.childNodes[i]);
+            }
+            catch (e) {
+                console.log(e);
+            }
         }
         else if (i >= newNodeLength) {
-            oldNode.removeChild(oldNode.childNodes[i]);
+            oldNode.removeChild(oldNode.childNodes[newNodeLength]);
         }
         else {
             if (hasChanged(oldNode.childNodes[i], newNode.childNodes[i])) {

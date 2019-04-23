@@ -207,33 +207,15 @@ var DesertIslandGui = (function () {
         if (oldDiv != null) {
             var newdiv = document.createElement('div');
             newdiv.innerHTML = html;
-            if (newdiv.childNodes.length == 0) {
-                oldDiv.appendChildren(newdiv.childNodes);
-            }
-            else {
-                var child = newdiv.firstChild;
-                if (child != null) {
-                    updateChildNodes(oldDiv, child);
-                }
-            }
+            updateChildNodes(oldDiv, newdiv);
         }
     };
     DesertIslandGui.prototype.updateGui = function () {
-        var level = document.getElementById('level');
-        if (level)
-            level.innerHTML = this.displayLevel();
-        var storage = document.getElementById('storage');
-        if (storage)
-            storage.innerHTML = this.displayStorage();
-        var producers = document.getElementById('producers');
-        if (producers)
-            producers.innerHTML = this.displayProducers();
-        var crafters = document.getElementById('crafters');
-        if (crafters)
-            crafters.innerHTML = this.displayCrafters();
-        var tree = document.getElementById('tree');
-        if (tree)
-            tree.innerHTML = this.displayTree();
+        this.updateDiv('level', this.displayLevel());
+        this.updateDiv('storage', this.displayStorage());
+        this.updateDiv('producers', this.displayProducers());
+        this.updateDiv('crafters', this.displayCrafters());
+        this.updateDiv('tree', this.displayTree());
         saveEngine(engine);
     };
     DesertIslandGui.prototype.start = function (refreshInterval) {
