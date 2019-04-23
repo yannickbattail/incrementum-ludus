@@ -27,9 +27,12 @@ class Scenario {
         engine.Producers = [
             // inital producers
             new Producer("take water")
-            .thatProduce(Q(10, WATER))
-            .andProduce(new RandomResource(1, COPPER_ORE, 0.02)).manualy(),
-            new Producer("bare hands dig clay").thatProduce(Q(10, CLAY)).manualy()
+                .thatProduce(Q(10, WATER))
+                .manualy(),
+            new Producer("bare hands dig clay")
+                .thatProduce(Q(10, CLAY))
+                .andProduce(new RandomResource(1, COPPER_ORE, 0.02))
+                .manualy()
         ];
         engine.Crafters = [
             // inital Crafters
