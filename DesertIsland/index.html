@@ -18,6 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js" integrity="sha256-fD5k74TlKQ/u8+bmlDxGGM07YJmVtte95uiYsGu/XVo=" crossorigin="anonymous"></script>
     <script src="../Engine/implementations/Resource.js"></script>
     <script src="../Engine/implementations/Quantity.js"></script>
+    <script src="../Engine/implementations/RandomResource.js"></script>
+    <script src="../Engine/implementations/RandomRangeQuantity.js"></script>
     <script src="../Engine/implementations/Producer.js"></script>
     <script src="../Engine/implementations/Producer.js"></script>
     <script src="../Engine/implementations/Trigger.js"></script>
@@ -28,8 +30,6 @@
     <script src="Level.js"></script>
     <script src="Item.js"></script>
     <script src="Material.js"></script>
-    <script src="RandomResource.js"></script>
-    <script src="RandomRangeQuantity.js"></script>
     <script src="Scenario.js"></script>
     <script src="DesertIsland.js"></script>
     <script src="DesertIslandGui.js"></script>
@@ -41,60 +41,22 @@
     <p><i>(inspired by the youtube channel: primitive technology)</i></p>
     <p>Your are alone in desert island. You need to survive. Start <b>collecting</b> some resources.</p>
     <div id="level"></div>
+    <div id="tree"></div>
     <div id="storage"></div>
     <div id="producers"></div>
     <div id="crafters"></div>
-    <!--<div id="triggers"></div>-->
-    <br />
-    <div id="tree"></div>
     <script>
         engine.run();
         var gui = new DesertIslandGui(engine);
-        function updateDiv(id, html) {
-            var oldDiv = document.getElementById(id);
-            var newdiv = document.createElement('div');
-            newdiv.innerHTML = html;
-            if (newdiv.childNodes.length == 0) {
-                oldDiv.appendChildren(newdiv.childNodes);
-            } else {
-                updateChildNodes(oldDiv, newdiv.firstChild);
-            }
-        }
-        function updateGui() {
-            updateDiv('level', gui.displayLevel());
-            updateDiv('storage', gui.displayStorage());
-            updateDiv('producers', gui.displayProducers());
-            updateDiv('crafters', gui.displayCrafters());
-            //updateDiv('triggers', gui.displayTriggers());
-            updateDiv('tree', gui.displayTree());
-            
-            saveEngine(engine);
-        }
-        function stop() {
-            window.clearInterval(interval);
-        }
-        function clearStorage() {
-            window.localStorage.removeItem('DesertIsland');
-            window.localStorage.removeItem('DesertIslandVersion');
-        }
-        function restart() {
-            if (window.confirm('It will restart the game from zero. Are you sure?')) {
-                stop();
-                clearStorage();
-                window.location.reload();
-            }
-        }
-        function fastMode() {
-            engine.FastMode=1000;
-        }
-        var interval = window.setInterval(updateGui, 500);
+        gui.start(1000);
+
     </script>
-    <button onclick="restart()">Restart</button>
+
     <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">
-        <div onclick="stop()">stop</div>
-        <div onclick="clearStorage()">clear</div>
-        <div onclick="fastMode()">fast mode</div>
+        <div onclick="gui.stop()">stop</div>
+        <div onclick="gui.clearStorage()">clear</div>
+        <div onclick="gui.fastMode()">fast mode</div>
         PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
     </div>
 </body>

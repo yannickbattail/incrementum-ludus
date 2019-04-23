@@ -12,7 +12,9 @@ interface ICrafter {
     getCost(): Array<IQuantity>;
     getCraftedResources(): Array<IQuantity>;
     isAuto(): boolean;
-
+    setAuto(auto : boolean) : void;
+    isAutomatable() : boolean;
+    setAutomatable(automatable : boolean) : void;
     // builder inferface
     thatCraft(quantity : IQuantity) : ICrafter
     andCraft(quantity : IQuantity) : ICrafter
@@ -20,6 +22,7 @@ interface ICrafter {
     seconds() : ICrafter;
     minutes() : ICrafter;
     automaticaly() : ICrafter;
+    canBeSwitchedToAuto() : ICrafter;
     atCostOf(quantity : IQuantity) : ICrafter;
     and(quantity : IQuantity) : ICrafter;
     isCrafting() : boolean;

@@ -7,7 +7,7 @@
 
 class Engine {
     $type : string = 'Engine';
-    tickInterval: number = 500;
+    tickInterval: number = 100;
     Player: IPlayer;
     Producers: Array<IProducer> = [];
     Triggers: Array<ITrigger> = [];
@@ -44,13 +44,14 @@ class Engine {
     }
     private autoCollectProducer(producer: IProducer) {
         if (producer.isAuto()) {
-            let interval : number = 0;
-            if (producer.getInterval() != null) {
-                producer.getInterval();
+            let interval : number = 6666666;
+            let i = producer.getInterval();
+            if (i != null) {
+                interval = i;
             }
             interval = this.FastMode ? this.FastMode : interval;
             let startTime = producer.getStartTime();
-            if (startTime != null && startTime.getTime() + interval < new Date().getTime()) {
+            if (startTime != null && startTime.getTime() + interval <= new Date().getTime()) {
                 producer.initStartTime();
                 producer.getResourcesQuantity().forEach(
                     res => this.Player.increaseStorage(res)
@@ -107,7 +108,7 @@ class Engine {
     private checkFinishedCrafting(crafter: ICrafter) {
         let duration = this.FastMode ? this.FastMode : crafter.getDuration();
         let startTime = crafter.getStartTime();
-        if (startTime != null && (startTime.getTime() + duration < new Date().getTime())) {
+        if (startTime != null && (startTime.getTime() + duration <= new Date().getTime())) {
             crafter.resetStartTime();
             crafter.getCraftedResources().forEach(
                 resourceQty =>  this.Player.increaseStorage(resourceQty)
@@ -137,6 +138,13 @@ class Engine {
             return true;
         }
         return false;
+    }
+
+    public switchAutoCrafting(crafterName: string) {
+        let crafter = this.getCrafterByName(crafterName);
+        if (crafter != null) {
+            crafter.setAuto(!crafter.isAuto());
+        }
     }
 
     public getCrafterByName(crafterName : string) : ICrafter | null {

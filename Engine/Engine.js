@@ -1,7 +1,7 @@
 var Engine = (function () {
     function Engine() {
         this.$type = 'Engine';
-        this.tickInterval = 500;
+        this.tickInterval = 100;
         this.Producers = [];
         this.Triggers = [];
         this.Crafters = [];
@@ -35,13 +35,14 @@ var Engine = (function () {
     Engine.prototype.autoCollectProducer = function (producer) {
         var _this = this;
         if (producer.isAuto()) {
-            var interval = 0;
-            if (producer.getInterval() != null) {
-                producer.getInterval();
+            var interval = 6666666;
+            var i = producer.getInterval();
+            if (i != null) {
+                interval = i;
             }
             interval = this.FastMode ? this.FastMode : interval;
             var startTime = producer.getStartTime();
-            if (startTime != null && startTime.getTime() + interval < new Date().getTime()) {
+            if (startTime != null && startTime.getTime() + interval <= new Date().getTime()) {
                 producer.initStartTime();
                 producer.getResourcesQuantity().forEach(function (res) { return _this.Player.increaseStorage(res); });
             }
@@ -84,7 +85,7 @@ var Engine = (function () {
         var _this = this;
         var duration = this.FastMode ? this.FastMode : crafter.getDuration();
         var startTime = crafter.getStartTime();
-        if (startTime != null && (startTime.getTime() + duration < new Date().getTime())) {
+        if (startTime != null && (startTime.getTime() + duration <= new Date().getTime())) {
             crafter.resetStartTime();
             crafter.getCraftedResources().forEach(function (resourceQty) { return _this.Player.increaseStorage(resourceQty); });
         }
@@ -110,6 +111,12 @@ var Engine = (function () {
             return true;
         }
         return false;
+    };
+    Engine.prototype.switchAutoCrafting = function (crafterName) {
+        var crafter = this.getCrafterByName(crafterName);
+        if (crafter != null) {
+            crafter.setAuto(!crafter.isAuto());
+        }
     };
     Engine.prototype.getCrafterByName = function (crafterName) {
         var crafters = this.Crafters.filter(function (src) { return src.getName() == crafterName; });

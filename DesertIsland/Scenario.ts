@@ -6,8 +6,8 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-/// <reference path="./RandomResource.ts" />
-/// <reference path="./RandomRangeQuantity.ts" />
+/// <reference path="../Engine/implementations/RandomResource.ts" />
+/// <reference path="../Engine/implementations/RandomRangeQuantity.ts" />
 /// <reference path="./Material.ts" />
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
@@ -27,9 +27,12 @@ class Scenario {
         engine.Producers = [
             // inital producers
             new Producer("take water")
-            .thatProduce(Q(10, WATER))
-            .andProduce(new RandomResource(1, COPPER_ORE, 0.02)).manualy(),
-            new Producer("bare hands dig clay").thatProduce(Q(10, CLAY)).manualy()
+                .thatProduce(Q(10, WATER))
+                .manualy(),
+            new Producer("bare hands dig clay")
+                .thatProduce(Q(10, CLAY))
+                .andProduce(new RandomResource(1, COPPER_ORE, 0.02))
+                .manualy()
         ];
         engine.Crafters = [
             // inital Crafters
@@ -37,6 +40,7 @@ class Scenario {
                 .thatCraft(Q(1, CLAY_POT))
                 .in(10).seconds()
                 .atCostOf(Q(100, CLAY)).and(Q(10, WATER))
+                .canBeSwitchedToAuto()
         ];
 
 
@@ -61,6 +65,7 @@ class Scenario {
                             .thatCraft(Q(1, EMPTY_TRASH))
                             .in(40).seconds()
                             .atCostOf(Q(1, TERRACOTTA_POT)).and(Q(100, WATER)).and(Q(1, FULL_TRASH))
+                            .canBeSwitchedToAuto()
                     )
                     .appendTrigger(
                         new Trigger("tools forging")
@@ -110,6 +115,7 @@ class Scenario {
                     .thatCraft(Q(1, TERRACOTTA_POT))
                     .in(20).seconds()
                     .atCostOf(Q(800, WOOD)).and(Q(1, CLAY_POT))
+                    .canBeSwitchedToAuto()
             )
             .appendTrigger(
                 new Trigger("clay digging")
@@ -126,6 +132,7 @@ class Scenario {
                                     .thatCraft(Q(10000, WOOD))
                                     .in(1).minutes()
                                     .atCostOf(Q(4000, WATER))
+                                    .canBeSwitchedToAuto()
                             )
                             .appendTrigger(
                                 new Trigger("wood choping")
@@ -146,8 +153,8 @@ class Scenario {
             new Trigger("carry water in clay pot")
                 .whenReached(Q(1, CLAY_POT))
                 .spawnProducer(new Producer("carry water").thatProduce(new RandomRangeQuantity(60, 110, WATER)).manualy())
-                .spawnResource(Q(1, LEVEL)) // level 2
                 .spawnResource(Q(-1, CLAY_POT))
+                .spawnResource(Q(1, LEVEL)) // level 2
             ,
             new Trigger("carry clay in clay pot")
                 .whenReached(Q(1, CLAY_POT)).and(Q(2, LEVEL))
@@ -163,6 +170,7 @@ class Scenario {
                             .thatCraft(Q(200, CHARCOAL))
                             .in(20).seconds()
                             .atCostOf(Q(600, WOOD)).and(Q(200, CLAY))
+                            .canBeSwitchedToAuto()
                         ).appendTrigger(
                             new Trigger("charcoal level")
                                 .whenReached(Q(200, CHARCOAL))
@@ -171,7 +179,7 @@ class Scenario {
                             new Trigger("brick crafting")
                                 .whenReached(Q(400, CHARCOAL)).and(Q(500, WOOD)).and(Q(300, CLAY)).and(Q(200, WATER))
                                 .spawnCrafter(
-                                    new Crafter("Brik oven")
+                                    new Crafter("Brick oven")
                                     .thatCraft(Q(10, BRICK))
                                     .in(20).seconds()
                                     .atCostOf(Q(500, WOOD)).and(Q(200, CLAY))

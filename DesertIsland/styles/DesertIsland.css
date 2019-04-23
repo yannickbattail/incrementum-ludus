@@ -18,20 +18,15 @@ td {
     text-align: center;
     height: 32px;
 }
-ul {
-    margin: 2px;
-    margin-left: 20px;
-    padding: 2px;
-}
+
 .titleIcon {
     width: 24px;
     height: 24px;
 }
 
 #storage {
-    display: inline-block;
+
 }
-#storage > table > tbody > tr > td,
 #crafters > table > tbody > tr > th:nth-child(4),
 #producers > table > tbody > tr > th:nth-child(3) {
     width: 110px;
@@ -42,14 +37,25 @@ ul {
     display: inline-block;
 }
 #level {
+    display: inline-block;
     width: 110px;
     max-width: 110px;
 }
+#level > button {
+    display: inline-block;
+}
 
 .resource {
-    float: right;
-    display: block;
+    display: inline-block;
     margin: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00a7df;
+    border-radius: 5px;
+    background-color: #444444;
+    padding: 1px;
+    text-align: right;
+    min-width: 60px;
 }
 .availableResource {
     color: chartreuse;

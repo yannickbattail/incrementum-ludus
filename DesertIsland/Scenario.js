@@ -12,13 +12,17 @@ var Scenario = (function () {
         engine.Producers = [
             new Producer("take water")
                 .thatProduce(Q(10, WATER))
-                .andProduce(new RandomResource(1, COPPER_ORE, 0.02)).manualy(),
-            new Producer("bare hands dig clay").thatProduce(Q(10, CLAY)).manualy()
+                .manualy(),
+            new Producer("bare hands dig clay")
+                .thatProduce(Q(10, CLAY))
+                .andProduce(new RandomResource(1, COPPER_ORE, 0.02))
+                .manualy()
         ];
         engine.Crafters = [
             new Crafter("craft clay pot")
                 .thatCraft(Q(1, CLAY_POT))["in"](10).seconds()
                 .atCostOf(Q(100, CLAY)).and(Q(10, WATER))
+                .canBeSwitchedToAuto()
         ];
         var triggerLevel7 = new Trigger("iron age")
             .whenReached(Q(100, IRON_ORE)).and(Q(40, BRICK)).and(Q(400, CHARCOAL))
@@ -34,7 +38,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, EMPTY_TRASH))
             .spawnCrafter(new Crafter("waste recycling")
             .thatCraft(Q(1, EMPTY_TRASH))["in"](40).seconds()
-            .atCostOf(Q(1, TERRACOTTA_POT)).and(Q(100, WATER)).and(Q(1, FULL_TRASH)))
+            .atCostOf(Q(1, TERRACOTTA_POT)).and(Q(100, WATER)).and(Q(1, FULL_TRASH))
+            .canBeSwitchedToAuto())
             .appendTrigger(new Trigger("tools forging")
             .whenReached(Q(40, IRON)).and(Q(100, BRICK)).and(Q(8, LEVEL))
             .spawnResource(Q(-100, BRICK))
@@ -66,7 +71,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, LEVEL))
             .spawnCrafter(new Crafter("pottery oven")
             .thatCraft(Q(1, TERRACOTTA_POT))["in"](20).seconds()
-            .atCostOf(Q(800, WOOD)).and(Q(1, CLAY_POT)))
+            .atCostOf(Q(800, WOOD)).and(Q(1, CLAY_POT))
+            .canBeSwitchedToAuto())
             .appendTrigger(new Trigger("clay digging")
             .whenReached(Q(2, TERRACOTTA_POT))
             .spawnResource(Q(-2, TERRACOTTA_POT))
@@ -77,7 +83,8 @@ var Scenario = (function () {
             .spawnProducer(new Producer("water canal").thatProduce(Q(100, WATER)).every(1).seconds())
             .spawnCrafter(new Crafter("plant tree")
             .thatCraft(Q(10000, WOOD))["in"](1).minutes()
-            .atCostOf(Q(4000, WATER)))
+            .atCostOf(Q(4000, WATER))
+            .canBeSwitchedToAuto())
             .appendTrigger(new Trigger("wood choping")
             .whenReached(Q(4000, WATER))
             .spawnProducer(new Producer("mine iron-ore").thatProduce(Q(10, IRON_ORE)).every(10).seconds()))
@@ -89,8 +96,8 @@ var Scenario = (function () {
             new Trigger("carry water in clay pot")
                 .whenReached(Q(1, CLAY_POT))
                 .spawnProducer(new Producer("carry water").thatProduce(new RandomRangeQuantity(60, 110, WATER)).manualy())
-                .spawnResource(Q(1, LEVEL))
-                .spawnResource(Q(-1, CLAY_POT)),
+                .spawnResource(Q(-1, CLAY_POT))
+                .spawnResource(Q(1, LEVEL)),
             new Trigger("carry clay in clay pot")
                 .whenReached(Q(1, CLAY_POT)).and(Q(2, LEVEL))
                 .spawnProducer(new Producer("carry clay").thatProduce(Q(100, CLAY)).manualy())
@@ -101,11 +108,12 @@ var Scenario = (function () {
                 .whenReached(Q(200, WOOD))
                 .spawnCrafter(new Crafter("craft charcoal")
                 .thatCraft(Q(200, CHARCOAL))["in"](20).seconds()
-                .atCostOf(Q(600, WOOD)).and(Q(200, CLAY))).appendTrigger(new Trigger("charcoal level")
+                .atCostOf(Q(600, WOOD)).and(Q(200, CLAY))
+                .canBeSwitchedToAuto()).appendTrigger(new Trigger("charcoal level")
                 .whenReached(Q(200, CHARCOAL))
                 .spawnResource(Q(1, LEVEL))).appendTrigger(new Trigger("brick crafting")
                 .whenReached(Q(400, CHARCOAL)).and(Q(500, WOOD)).and(Q(300, CLAY)).and(Q(200, WATER))
-                .spawnCrafter(new Crafter("Brik oven")
+                .spawnCrafter(new Crafter("Brick oven")
                 .thatCraft(Q(10, BRICK))["in"](20).seconds()
                 .atCostOf(Q(500, WOOD)).and(Q(200, CLAY)))
                 .appendTrigger(triggerLevel5))),

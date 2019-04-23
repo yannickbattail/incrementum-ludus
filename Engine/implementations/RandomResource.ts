@@ -1,10 +1,9 @@
-/// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IQuantity.ts" />
-/// <reference path="../Engine/interfaces/IProducer.ts" />
-/// <reference path="../Engine/interfaces/ITrigger.ts" />
-/// <reference path="../Engine/interfaces/ICrafter.ts" />
-/// <reference path="../Engine/interfaces/IPlayer.ts" />
-/// <reference path="../Engine/Engine.ts" />
+/// <reference path="../interfaces/IResource.ts" />
+/// <reference path="../interfaces/IQuantity.ts" />
+/// <reference path="../interfaces/IProducer.ts" />
+/// <reference path="../interfaces/ITrigger.ts" />
+/// <reference path="../interfaces/ICrafter.ts" />
+/// <reference path="../interfaces/IPlayer.ts" />
 
 class RandomResource implements IQuantity {
     $type : string = 'RandomResource';
@@ -29,7 +28,7 @@ class RandomResource implements IQuantity {
         return this.resource;
     }
     show() : string{
-        return  this.displayPercent(this.probability) +' chance of ' + this.resource.show(this.quantity);
+        return  this.displayPercent(this.probability) +' chance ' + this.resource.show(this.quantity);
     }
     private displayPercent(percent : number) : string {
         return '' + Math.round(percent * 10000) / 100 + '%';
