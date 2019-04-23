@@ -1,7 +1,7 @@
 var Engine = (function () {
     function Engine() {
         this.$type = 'Engine';
-        this.tickInterval = 500;
+        this.tickInterval = 1000;
         this.Producers = [];
         this.Triggers = [];
         this.Crafters = [];

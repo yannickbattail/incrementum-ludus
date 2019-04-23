@@ -7,7 +7,7 @@
 
 class Engine {
     $type : string = 'Engine';
-    tickInterval: number = 500;
+    tickInterval: number = 1000;
     Player: IPlayer;
     Producers: Array<IProducer> = [];
     Triggers: Array<ITrigger> = [];
