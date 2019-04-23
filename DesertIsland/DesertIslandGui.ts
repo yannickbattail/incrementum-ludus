@@ -19,9 +19,12 @@ class DesertIslandGui {
 
     private displayLevel(): string {
         let level = this.Engine.Player.getResourceInStorage("level");
-        if (level == null)
-            return "XXX level";
-        return 'Level: '+this.displayQuantity(level);
+        let h = "XXX level";
+        if (level != null) {
+            h = 'Level: '+this.displayQuantity(level);
+        }
+        h +=  '<button onclick="gui.restart()">Restart</button>';
+        return h;
     }
 
     private displayStorage(): string {
@@ -172,7 +175,7 @@ class DesertIslandGui {
         if ('Image' in res) {
             image = res.Image;
         }
-        return '<div class="resource ' + quantity.$type + ' ' + optionnalCss + '">'
+        return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() +  '</div>'
             + ((image=='')?quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
             + '</div>';

@@ -41,6 +41,9 @@ td {
     width: 110px;
     max-width: 110px;
 }
+#level > button {
+    display: inline-block;
+}
 
 .resource {
     display: inline-block;
@@ -50,7 +53,7 @@ td {
     border-color: #00a7df;
     border-radius: 5px;
     background-color: #444444;
-    padding: 2px;
+    padding: 1px;
     text-align: right;
     min-width: 60px;
 }
