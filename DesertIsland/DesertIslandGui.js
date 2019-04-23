@@ -217,9 +217,9 @@ var DesertIslandGui = (function () {
             tree.innerHTML = this.displayTree();
         saveEngine(engine);
     };
-    DesertIslandGui.prototype.start = function () {
+    DesertIslandGui.prototype.start = function (refreshInterval) {
         var _this = this;
-        this.intervalId = window.setInterval(function () { return _this.updateGui(); }, 1000);
+        this.intervalId = window.setInterval(function () { return _this.updateGui(); }, refreshInterval);
     };
     return DesertIslandGui;
 }());

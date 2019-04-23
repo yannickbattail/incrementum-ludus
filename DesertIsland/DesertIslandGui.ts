@@ -250,7 +250,7 @@ class DesertIslandGui {
         saveEngine(engine);
     }
 
-    start() {
-        this.intervalId = window.setInterval(() => this.updateGui(), 1000);
+    start(refreshInterval : number) {
+        this.intervalId = window.setInterval(() => this.updateGui(), refreshInterval);
     }
 }
