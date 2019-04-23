@@ -24,7 +24,7 @@ var RandomResource = (function () {
         return this.resource;
     };
     RandomResource.prototype.show = function () {
-        return this.displayPercent(this.probability) + ' chance of ' + this.resource.show(this.quantity);
+        return this.displayPercent(this.probability) + ' chance ' + this.resource.show(this.quantity);
     };
     RandomResource.prototype.displayPercent = function (percent) {
         return '' + Math.round(percent * 10000) / 100 + '%';

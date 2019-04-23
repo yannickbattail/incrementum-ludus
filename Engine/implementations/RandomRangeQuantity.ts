@@ -26,6 +26,6 @@ class RandomRangeQuantity implements IQuantity {
         return this.resource;
     }
     show() : string{
-        return 'random between ' +  this.resource.show(this.minQuantity) + ' and ' + this.resource.show(this.maxQuantity);
+        return 'random [' +  this.resource.show(this.minQuantity) + '-' + this.resource.show(this.maxQuantity)+']';
     }
 }
