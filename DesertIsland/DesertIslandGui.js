@@ -89,7 +89,7 @@ var DesertIslandGui = (function () {
             h += '<label>'
                 + '<input type="checkbox" onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
                 + (crafter.isAuto() ? ' checked="checked"' : '') + ' />'
-                + 'Auto</label>]';
+                + 'Auto</label>';
         }
         h += ']';
         return h;
