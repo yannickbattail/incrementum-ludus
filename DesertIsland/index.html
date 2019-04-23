@@ -40,49 +40,23 @@
     <p><i>(inspired by the youtube channel: primitive technology)</i></p>
     <p>Your are alone in desert island. You need to survive. Start <b>collecting</b> some resources.</p>
     <div id="level"></div>
+    <button onclick="gui.restart()">Restart</button>
+    <div id="tree"></div>
     <div id="storage"></div>
     <div id="producers"></div>
     <div id="crafters"></div>
-    <!--<div id="triggers"></div>-->
-    <br />
-    <div id="tree"></div>
     <script>
         engine.run();
         var gui = new DesertIslandGui(engine);
-        var updateGui = function () {
-            document.getElementById('level').innerHTML = gui.displayLevel();
-            document.getElementById('storage').innerHTML = gui.displayStorage();
-            document.getElementById('producers').innerHTML = gui.displayProducers();
-            document.getElementById('crafters').innerHTML = gui.displayCrafters();
-            //document.getElementById('triggers').innerHTML = gui.displayTriggers();
-            document.getElementById('tree').innerHTML = gui.displayTree();
-            saveEngine(engine);
-        }
-        function stop() {
-            window.clearInterval(interval);
-        }
-        function clearStorage() {
-            window.localStorage.removeItem('DesertIsland');
-            window.localStorage.removeItem('DesertIslandVersion');
-        }
-        function restart() {
-            if (window.confirm('It will restart the game from zero. Are you sure?')) {
-                stop();
-                clearStorage();
-                window.location.reload();
-            }
-        }
-        function fastMode() {
-            engine.FastMode=1000;
-        }
-        var interval = window.setInterval(updateGui, 1000);
+        gui.start();
+
     </script>
-    <button onclick="restart()">Restart</button>
+
     <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">
-        <div onclick="stop()">stop</div>
-        <div onclick="clearStorage()">clear</div>
-        <div onclick="fastMode()">fast mode</div>
+        <div onclick="gui.stop()">stop</div>
+        <div onclick="gui.clearStorage()">clear</div>
+        <div onclick="gui.fastMode()">fast mode</div>
         PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
     </div>
 </body>

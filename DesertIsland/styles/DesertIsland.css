@@ -29,9 +29,8 @@ ul {
 }
 
 #storage {
-    display: inline-block;
+
 }
-#storage > table > tbody > tr > td,
 #crafters > table > tbody > tr > th:nth-child(4),
 #producers > table > tbody > tr > th:nth-child(3) {
     width: 110px;
@@ -50,6 +49,11 @@ ul {
     float: right;
     display: block;
     margin: 2px;
+    border-width: 1px;
+    border-style: inset;
+    border-color: #00a7df;
+    padding: 2px;
+    text-align: right;
 }
 .availableResource {
     color: chartreuse;

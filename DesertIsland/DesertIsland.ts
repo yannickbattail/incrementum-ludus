@@ -11,7 +11,7 @@
 /// <reference path="./Level.ts" />
 /// <reference path="./Scenario.ts" />
 
-const VERSION = "1.24";
+const VERSION = "1.25";
 
 const LEVEL = new Level("level", "level");
 const CLAY = new Material("clay", "g", "clay");
