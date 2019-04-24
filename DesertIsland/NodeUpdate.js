@@ -14,32 +14,39 @@ var NodeUpdate = (function () {
         var attrToRm = oldNode.getAttributeNames().filter(function (attr) { return newNode.getAttributeNames().indexOf(attr) === -1; });
         attrToRm.forEach(function (attr) { return oldNode.removeAttribute(attr); });
         for (var i = 0; i < newNode.attributes.length; ++i) {
-            oldNode.setAttribute(newNode.attributes[i].name, newNode.attributes[i].value);
+            if ((!oldNode.hasAttribute(newNode.attributes[i].name))
+                || (oldNode.getAttribute(newNode.attributes[i].name) != newNode.attributes[i].value)) {
+                oldNode.setAttribute(newNode.attributes[i].name, newNode.attributes[i].value);
+            }
         }
     };
     NodeUpdate.updateChildren = function (oldNode, newNode) {
-        var newNodeLength = newNode.children.length;
-        var oldNodeLength = oldNode.children.length;
+        var newNodeLength = newNode.childNodes.length;
+        var oldNodeLength = oldNode.childNodes.length;
         var maxLength = Math.max(newNodeLength, oldNodeLength);
         for (var i = 0; i < maxLength; i++) {
             if (i >= oldNodeLength) {
                 try {
-                    oldNode.appendChild(newNode.children[oldNodeLength]);
+                    oldNode.appendChild(newNode.childNodes[i].cloneNode(true));
                 }
                 catch (e) {
                     console.log(e);
                 }
             }
             else if (i >= newNodeLength) {
-                oldNode.removeChild(oldNode.children[newNodeLength]);
+                oldNode.removeChild(oldNode.childNodes[newNodeLength]);
             }
             else {
-                if (NodeUpdate.hasChanged(oldNode.children[i], newNode.children[i])) {
-                    oldNode.replaceChild(newNode.children[i], oldNode.children[i]);
+                var oldChild = oldNode.childNodes[i];
+                var newChild = newNode.childNodes[i];
+                if (NodeUpdate.hasChanged(oldChild, newChild)) {
+                    oldNode.replaceChild(newChild.cloneNode(true), oldChild);
                 }
                 else {
-                    NodeUpdate.updateAttributes(oldNode.children[i], newNode.children[i]);
-                    NodeUpdate.updateChildren(oldNode.children[i], newNode.children[i]);
+                    NodeUpdate.updateChildren(oldChild, newChild);
+                    if (oldChild instanceof HTMLElement && newChild instanceof HTMLElement) {
+                        NodeUpdate.updateAttributes(oldChild, newChild);
+                    }
                 }
             }
         }

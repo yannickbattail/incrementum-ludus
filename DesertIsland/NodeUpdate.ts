@@ -1,7 +1,7 @@
 
 class NodeUpdate {
 
-    public static hasChanged(node1 : Element, node2 : Element) {
+    public static hasChanged(node1 : Node, node2 : Node) {
         if (node1.nodeType !== node2.nodeType)
             return true;
         if (node1.nodeName !== node2.nodeName)
@@ -24,26 +24,30 @@ class NodeUpdate {
         }
     }
 
-    public static updateChildren(oldNode : Element, newNode : Element) {
-        let newNodeLength = newNode.children.length
-        let oldNodeLength = oldNode.children.length;
+    public static updateChildren(oldNode : Node, newNode : Node) {
+        let newNodeLength = newNode.childNodes.length
+        let oldNodeLength = oldNode.childNodes.length;
         let maxLength = Math.max(newNodeLength, oldNodeLength);
         for (let i = 0; i < maxLength; i++) {
             if (i >= oldNodeLength) {
                 try {
-                    oldNode.appendChild(newNode.children[oldNodeLength]);
+                    oldNode.appendChild(newNode.childNodes[i].cloneNode(true));
                 } catch (e) {
                     console.log(e);
                 }
             } else if (i >= newNodeLength) {
-                oldNode.removeChild(oldNode.children[newNodeLength]);
+                oldNode.removeChild(oldNode.childNodes[newNodeLength]);
             } else {
-                if (NodeUpdate.hasChanged(oldNode.children[i], newNode.children[i])) {
-                    oldNode.replaceChild(newNode.children[i], oldNode.children[i]);
+                let oldChild = oldNode.childNodes[i];
+                let newChild = newNode.childNodes[i];
+                if (NodeUpdate.hasChanged(oldChild, newChild)) {
+                    oldNode.replaceChild(newChild.cloneNode(true), oldChild);
                 } else {
-                    NodeUpdate.updateAttributes(oldNode.children[i], newNode.children[i]);
-                    NodeUpdate.updateChildren(oldNode.children[i], newNode.children[i]);
-                    NodeUpdate.updateAttributes(oldNode.children[i], newNode.children[i]);
+                    NodeUpdate.updateChildren(oldChild, newChild);
+
+                    if (oldChild instanceof HTMLElement && newChild instanceof HTMLElement) {
+                        NodeUpdate.updateAttributes(oldChild, newChild);
+                    }
                 }
             }
         }

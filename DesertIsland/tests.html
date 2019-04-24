@@ -63,10 +63,10 @@ describe("A suite", function() {
   });
   
   it("tests with attributes", function() {
-    expect(divNode('<img>', '<img src="poc.png">')).toBe('<img src="poc.png">');
-    expect(divNode('<img src="poc.png">', '<img>')).toBe('<img>');
-    expect(divNode('<img src="pif.png">', '<img src="poc.png">')).toBe('<img src="poc.png">');
-    expect(divNode('<img src="pif.png">', '<img src="poc.png" alt="poc">')).toBe('<img src="poc.png" alt="poc">');
+    expect(divNode('<img>', '<img title="poc.png">')).toBe('<img title="poc.png">');
+    expect(divNode('<img title="poc.png">', '<img>')).toBe('<img>');
+    expect(divNode('<img title="pif.png">', '<img title="poc.png">')).toBe('<img title="poc.png">');
+    expect(divNode('<img title="pif.png">', '<img title="poc.png" alt="poc">')).toBe('<img title="poc.png" alt="poc">');
   });
 });
 </script>
