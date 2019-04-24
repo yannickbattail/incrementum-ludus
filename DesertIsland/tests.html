@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+      ----------------------------------------------------------------------------
+      "THE BEER-WARE LICENSE" (Revision 42):
+      <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
+      can do whatever you want with this stuff. If we meet some day, and you think
+      this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+      ----------------------------------------------------------------------------
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tests</title>
+
+    <script src="NodeUpdate.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="jasmine/lib/jasmine-3.4.0/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="jasmine/lib/jasmine-3.4.0/jasmine.css">
+
+    <script type="text/javascript" src="jasmine/lib/jasmine-3.4.0/jasmine.js"></script>
+    <script type="text/javascript" src="jasmine/lib/jasmine-3.4.0/jasmine-html.js"></script>
+    <script type="text/javascript" src="jasmine/lib/jasmine-3.4.0/boot.js"></script>
+</head>
+<body id="body">
+<script>
+
+function divNode(htmlOld, htmlNew) {
+  var oldDiv = document.createElement('div');
+  oldDiv.innerHTML = htmlOld;
+  var newDiv = document.createElement('div');
+  newDiv.innerHTML = htmlNew;
+  NodeUpdate.updateChildNodes(oldDiv, newDiv);
+  return oldDiv.innerHTML;
+}
+
+describe("A suite", function() {
+  it("contains spec with an expectation", function() {
+    expect(divNode('', '')).toBe('');
+    expect(divNode('a', 'a')).toBe('a');
+    expect(divNode('a', 'b')).toBe('b');
+    expect(divNode('a', '<img>')).toBe('<img>');
+    expect(divNode('<img>', 'b')).toBe('b');
+    expect(divNode('a', '<span></span>')).toBe('<span></span>');
+    expect(divNode('<span></span>', 'b')).toBe('b');
+
+    expect(divNode('a', '<span>d</span>')).toBe('<span>d</span>');
+    expect(divNode('a', '<span><br></span>')).toBe('<span><br></span>');
+    expect(divNode('<span>c</span>', '<span><br></span>')).toBe('<span><br></span>');
+    expect(divNode('<span>c</span>', '<span><b>d</b></span>')).toBe('<span><b>d</b></span>');
+    expect(divNode('<span>c</span>', '<span><b>d</b><b>e</b></span>')).toBe('<span><b>d</b><b>e</b></span>');
+    expect(divNode('<span><b>a</b><b>b</b></span>', '<span><b>f</b><b>g</b></span>')).toBe('<span><b>f</b><b>g</b></span>');
+    expect(divNode('<span><b>a</b><b>b</b></span>', '<span><b>f</b><i>g</i></span>')).toBe('<span><b>f</b><i>g</i></span>');
+    expect(divNode('<span><b>a</b><i>b</i></span>', '<span><b>f</b><b>g</b></span>')).toBe('<span><b>f</b><b>g</b></span>');
+  });
+});
+</script>
+</body>
+</html>
