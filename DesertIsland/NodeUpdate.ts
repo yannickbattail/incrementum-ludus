@@ -13,23 +13,13 @@ class NodeUpdate {
     }
     
     public static updateAttributes(oldNode : Element, newNode : Element) {
-        let newNodeLength = newNode.attributes.length
-        let oldNodeLength = oldNode.attributes.length;
-        let maxLength = Math.max(newNodeLength, oldNodeLength);
-        for(var i = maxLength - 1; i >= 0; i--) {
-            if (i >= oldNodeLength) {
-                try {
-                    oldNode.appendChild(newNode.children[oldNodeLength]);
-                } catch (e) {
-                    console.log(e);
-                }
-            } else if (i >= newNodeLength) {
-                oldNode.removeChild(oldNode.children[newNodeLength]);
-            } else {
-                if (NodeUpdate.hasChanged(oldNode.children[i], newNode.children[i])) {
-                    oldNode.replaceChild(newNode.children[i], oldNode.children[i]);
-                } else {
-                }
+        let attrToRm = oldNode.getAttributeNames().filter(attr => newNode.getAttributeNames().indexOf(attr) === -1);
+        attrToRm.forEach(attr => oldNode.removeAttribute(attr));
+
+        for(var i = 0; i < newNode.attributes.length; ++i) {
+            if ((!oldNode.hasAttribute(newNode.attributes[i].name))
+                || (oldNode.getAttribute(newNode.attributes[i].name) != newNode.attributes[i].value)) {
+                oldNode.setAttribute(newNode.attributes[i].name, newNode.attributes[i].value);
             }
         }
     }
@@ -53,6 +43,7 @@ class NodeUpdate {
                 } else {
                     NodeUpdate.updateAttributes(oldNode.children[i], newNode.children[i]);
                     NodeUpdate.updateChildren(oldNode.children[i], newNode.children[i]);
+                    NodeUpdate.updateAttributes(oldNode.children[i], newNode.children[i]);
                 }
             }
         }

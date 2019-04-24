@@ -11,28 +11,10 @@ var NodeUpdate = (function () {
         return false;
     };
     NodeUpdate.updateAttributes = function (oldNode, newNode) {
-        var newNodeLength = newNode.attributes.length;
-        var oldNodeLength = oldNode.attributes.length;
-        var maxLength = Math.max(newNodeLength, oldNodeLength);
-        for (var i = maxLength - 1; i >= 0; i--) {
-            if (i >= oldNodeLength) {
-                try {
-                    oldNode.appendChild(newNode.children[oldNodeLength]);
-                }
-                catch (e) {
-                    console.log(e);
-                }
-            }
-            else if (i >= newNodeLength) {
-                oldNode.removeChild(oldNode.children[newNodeLength]);
-            }
-            else {
-                if (NodeUpdate.hasChanged(oldNode.children[i], newNode.children[i])) {
-                    oldNode.replaceChild(newNode.children[i], oldNode.children[i]);
-                }
-                else {
-                }
-            }
+        var attrToRm = oldNode.getAttributeNames().filter(function (attr) { return newNode.getAttributeNames().indexOf(attr) === -1; });
+        attrToRm.forEach(function (attr) { return oldNode.removeAttribute(attr); });
+        for (var i = 0; i < newNode.attributes.length; ++i) {
+            oldNode.setAttribute(newNode.attributes[i].name, newNode.attributes[i].value);
         }
     };
     NodeUpdate.updateChildren = function (oldNode, newNode) {

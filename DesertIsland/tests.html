@@ -29,7 +29,7 @@ function divNode(htmlOld, htmlNew) {
   oldDiv.innerHTML = htmlOld;
   var newDiv = document.createElement('div');
   newDiv.innerHTML = htmlNew;
-  NodeUpdate.updateChildNodes(oldDiv, newDiv);
+  NodeUpdate.updateChildren(oldDiv, newDiv);
   return oldDiv.innerHTML;
 }
 
