@@ -1,7 +1,7 @@
 
 class NodeUpdate {
 
-    public static hasChanged(node1 : Node, node2 : Node) {
+    public static hasChanged(node1 : Element, node2 : Element) {
         if (node1.nodeType !== node2.nodeType)
             return true;
         if (node1.nodeName !== node2.nodeName)
@@ -11,25 +11,48 @@ class NodeUpdate {
 
         return false;
     }
-      
-    public static updateChildNodes(oldNode : Node, newNode : Node) {
-        let newNodeLength = newNode.childNodes.length
-        let oldNodeLength = oldNode.childNodes.length;
+    
+    public static updateAttributes(oldNode : Element, newNode : Element) {
+        let newNodeLength = newNode.attributes.length
+        let oldNodeLength = oldNode.attributes.length;
         let maxLength = Math.max(newNodeLength, oldNodeLength);
-        for (let i = 0; i < maxLength; i++) {
+        for(var i = maxLength - 1; i >= 0; i--) {
             if (i >= oldNodeLength) {
                 try {
-                    oldNode.appendChild(newNode.childNodes[oldNodeLength]);
+                    oldNode.appendChild(newNode.children[oldNodeLength]);
                 } catch (e) {
                     console.log(e);
                 }
             } else if (i >= newNodeLength) {
-                oldNode.removeChild(oldNode.childNodes[newNodeLength]);
+                oldNode.removeChild(oldNode.children[newNodeLength]);
             } else {
-                if (NodeUpdate.hasChanged(oldNode.childNodes[i], newNode.childNodes[i])) {
-                    oldNode.replaceChild(newNode.childNodes[i], oldNode.childNodes[i]);
+                if (NodeUpdate.hasChanged(oldNode.children[i], newNode.children[i])) {
+                    oldNode.replaceChild(newNode.children[i], oldNode.children[i]);
                 } else {
-                    NodeUpdate.updateChildNodes(oldNode.childNodes[i], newNode.childNodes[i]);
+                }
+            }
+        }
+    }
+
+    public static updateChildren(oldNode : Element, newNode : Element) {
+        let newNodeLength = newNode.children.length
+        let oldNodeLength = oldNode.children.length;
+        let maxLength = Math.max(newNodeLength, oldNodeLength);
+        for (let i = 0; i < maxLength; i++) {
+            if (i >= oldNodeLength) {
+                try {
+                    oldNode.appendChild(newNode.children[oldNodeLength]);
+                } catch (e) {
+                    console.log(e);
+                }
+            } else if (i >= newNodeLength) {
+                oldNode.removeChild(oldNode.children[newNodeLength]);
+            } else {
+                if (NodeUpdate.hasChanged(oldNode.children[i], newNode.children[i])) {
+                    oldNode.replaceChild(newNode.children[i], oldNode.children[i]);
+                } else {
+                    NodeUpdate.updateAttributes(oldNode.children[i], newNode.children[i]);
+                    NodeUpdate.updateChildren(oldNode.children[i], newNode.children[i]);
                 }
             }
         }
@@ -40,7 +63,7 @@ class NodeUpdate {
         if (oldDiv != null) {
             var newdiv = document.createElement('div');
             newdiv.innerHTML = html;
-            NodeUpdate.updateChildNodes(oldDiv, newdiv);
+            NodeUpdate.updateChildren(oldDiv, newdiv);
         }
     }
 }
