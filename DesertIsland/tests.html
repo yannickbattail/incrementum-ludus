@@ -10,7 +10,6 @@
       ----------------------------------------------------------------------------
     -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tests</title>
 
     <script src="NodeUpdate.js"></script>
@@ -35,7 +34,7 @@ function divNode(htmlOld, htmlNew) {
 }
 
 describe("A suite", function() {
-  it("contains spec with an expectation", function() {
+  it("test with text node", function() {
     expect(divNode('', '')).toBe('');
     expect(divNode('a', 'a')).toBe('a');
     expect(divNode('a', 'b')).toBe('b');
@@ -46,12 +45,28 @@ describe("A suite", function() {
 
     expect(divNode('a', '<span>d</span>')).toBe('<span>d</span>');
     expect(divNode('a', '<span><br></span>')).toBe('<span><br></span>');
+  });
+  
+  it("tests with multiple node", function() {
     expect(divNode('<span>c</span>', '<span><br></span>')).toBe('<span><br></span>');
+    expect(divNode('<span>c</span>', '<span>a</span><span>b</span>')).toBe('<span>a</span><span>b</span>');
+    expect(divNode('<span>c</span><span>d</span>', '<span>a</span><span>b</span>')).toBe('<span>a</span><span>b</span>');
+    expect(divNode('<span>c</span><span>d</span>', '<span>a</span>')).toBe('<span>a</span>');
+
     expect(divNode('<span>c</span>', '<span><b>d</b></span>')).toBe('<span><b>d</b></span>');
     expect(divNode('<span>c</span>', '<span><b>d</b><b>e</b></span>')).toBe('<span><b>d</b><b>e</b></span>');
     expect(divNode('<span><b>a</b><b>b</b></span>', '<span><b>f</b><b>g</b></span>')).toBe('<span><b>f</b><b>g</b></span>');
     expect(divNode('<span><b>a</b><b>b</b></span>', '<span><b>f</b><i>g</i></span>')).toBe('<span><b>f</b><i>g</i></span>');
     expect(divNode('<span><b>a</b><i>b</i></span>', '<span><b>f</b><b>g</b></span>')).toBe('<span><b>f</b><b>g</b></span>');
+
+    expect(divNode('<span><b>a</b><i>b</i></span>', '<span><b>f</b><b>g</b></span>')).toBe('<span><b>f</b><b>g</b></span>');
+  });
+  
+  it("tests with attributes", function() {
+    expect(divNode('<img>', '<img src="poc.png">')).toBe('<img src="poc.png">');
+    expect(divNode('<img src="poc.png">', '<img>')).toBe('<img>');
+    expect(divNode('<img src="pif.png">', '<img src="poc.png">')).toBe('<img src="poc.png">');
+    expect(divNode('<img src="pif.png">', '<img src="poc.png" alt="poc">')).toBe('<img src="poc.png" alt="poc">');
   });
 });
 </script>
