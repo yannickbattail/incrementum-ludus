@@ -18,8 +18,10 @@ var Engine = (function () {
         newObj.FastMode = data.FastMode;
         return newObj;
     };
-    Engine.prototype.run = function () {
+    Engine.prototype.run = function (tickInterval) {
         var _this = this;
+        if (tickInterval === void 0) { tickInterval = 100; }
+        this.tickInterval = tickInterval;
         window.setInterval(function () { return _this.onTick(); }, this.tickInterval);
     };
     Engine.prototype.onTick = function () {

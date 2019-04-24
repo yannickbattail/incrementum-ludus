@@ -24,7 +24,8 @@ class Engine {
         newObj.FastMode = data.FastMode;
         return newObj;
     }
-    run() {
+    run(tickInterval : number = 100) {
+        this.tickInterval = tickInterval;
         window.setInterval(() => this.onTick(), this.tickInterval);
     }
     private onTick() {
