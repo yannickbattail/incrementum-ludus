@@ -25,6 +25,7 @@
     "../Engine/Engine.ts",
     "Level.ts",
     "Material.ts",
+    "NodeUpdate.ts",
     "DesertIslandGui.ts",
     "Scenario.ts",
     "DesertIsland.ts"
