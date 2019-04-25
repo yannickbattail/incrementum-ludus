@@ -37,7 +37,7 @@ td {
     display: inline-block;
 }
 #level {
-    display: inline-block;
+    display: inline-flex;
     width: 110px;
     max-width: 110px;
 }
@@ -68,10 +68,10 @@ td {
 
 }
 .Material {
-    
+
 }
 .Item {
-    
+
 }
 
 .resource_img {
