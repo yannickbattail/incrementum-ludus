@@ -13,22 +13,6 @@
 
 const VERSION = "1.26";
 
-const LEVEL = new Level("level", "level");
-const CLAY = new Material("clay", "g", "clay");
-const WATER = new Material("water", "cl", "water");
-const WOOD = new Material("wood", "g", "wood");
-const CHARCOAL = new Material("charcoal", "g", "charcoal");
-const IRON_ORE = new Material("iron ore", "g", "iron_ore");
-const IRON = new Material("iron", "g", "iron");
-const COPPER_ORE = new Material("copper ore", "g", "copper_ore");
-const CLAY_POT = new Item("clay pot", "clay_pot");
-const BRICK = new Item("brick", "brick");
-const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
-const EMPTY_TRASH = new Item("empty trash", "empty_trash");
-const FULL_TRASH = new Item("full trash", "full_trash");
-const KNIFE = new Item("knife", "knife");
-const AXE = new Item("axe", "axe");
-
 function loadEngine() : Engine | null {
 
     let json = window.localStorage.getItem('DesertIsland');
