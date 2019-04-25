@@ -52,6 +52,7 @@ engine.Triggers = [
                         .thatCraft(new Quantity(1, BEER))
                         .in(20).seconds()
                         .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
+                        .canBeSwitchedToAuto()
             )
         )
 ];
@@ -68,7 +69,7 @@ engine.Crafters = [
         [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false/*auto*/),
 ];
 
-const VERSION = "1.1";
+const VERSION = "1.2";
 function loadEngine() : Engine | null {
 
     let json = window.localStorage.getItem('incr');

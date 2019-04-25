@@ -112,29 +112,71 @@ class IncrGui {
             res => h += '<li>' + res.show() + '</li>'
         );
         h += "</ul></td>"
-        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + this.displayAutoCraft(crafter) + '</td>';
         h += '</tr>';
         return h;
     }
 
 
     private displayCraftButton(crafter : ICrafter) : string {
-        if (crafter.isAuto()) {
-            return 'Auto Crafting';
-        }
+        let h = '';
         if (crafter.isCrafting()) {
-            return '<button disabled="disabled">craft</button> Crafting in progress';
+            h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
+        } else if (!this.Engine.Player.hasResources(crafter.getCost())) {
+            h += 'Not enough resources';
+        } else {
+            h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">'
+                + 'craft ('+this.displayTime(crafter.getDuration())+')</button>';
         }
-        if (!this.Engine.Player.hasResources(crafter.getCost())) {
-            return '<button disabled="disabled">craft</button> not enough resources';
-        }
-        return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft</button>';
+        return h;
     }
 
-    private displayTime(miliSeconds : number) : string {
-        return "" + Math.round(miliSeconds / 1000) + "s";
-
+    private displayAutoCraft(crafter : ICrafter) : string {
+        let h = '<br />[';
+        if (!crafter.isAutomatable()) {
+            if (crafter.isAuto()) {
+                h += 'Auto';
+            } else {
+                h += 'Manual';
+            }
+        } else {
+            h += '<label>'
+            + '<input type="checkbox" onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
+            +   (crafter.isAuto()?' checked="checked"':'')+' />'
+            + 'Auto</label>';
+        }
+        h += ']';
+        return h;
     }
+
+    private displayProgress(startTime : Date | null, duration : number) : string {
+        let progress = this.calculateProgress(startTime)
+        return this.displayTime(progress)+'/'+this.displayTime(duration);
+    }
+
+    private calculateProgress(startTime : Date | null) : number {
+        if (startTime == null) {
+            return 0;
+        }
+        return (new Date().getTime() - startTime.getTime());
+    }
+
+    private displayTime(miliSeconds : number | null) : string {
+        if (miliSeconds == null) {
+            return '';
+        }
+        let time = '';
+        if (miliSeconds >= 60000) {
+            time += Math.round(miliSeconds / 60000) + 'min';
+            miliSeconds = miliSeconds % 60000;
+        }
+        if (miliSeconds < 500 && time != "") {
+            return time;
+        }
+        time += Math.round(miliSeconds / 1000) + 's';
+        return time;
+    }
+
     private displayRemainingTime(startTime : Date | null) : string {
         if (startTime == null) {
             return ' - ';

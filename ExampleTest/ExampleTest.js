@@ -28,13 +28,14 @@ engine.Triggers = [
         .whenReached(new Quantity(20, WATER))
         .spawnCrafter(new Crafter("brewery")
         .thatCraft(new Quantity(1, BEER))["in"](20).seconds()
-        .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))))
+        .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
+        .canBeSwitchedToAuto()))
 ];
 engine.Crafters = [
     new Crafter("forge axe", 20000, [new Quantity(30, IRON), new Quantity(10, COPPER)], [new Quantity(1, AXE)], true),
     new Crafter("forge knife", 20000, [new Quantity(10, IRON), new Quantity(6, COPPER)], [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false),
 ];
-var VERSION = "1.1";
+var VERSION = "1.2";
 function loadEngine() {
     var json = window.localStorage.getItem('incr');
     if (json != null) {

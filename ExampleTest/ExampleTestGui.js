@@ -81,24 +81,67 @@ var IncrGui = (function () {
         h += "<td><ul>";
         crafter.getCraftedResources().forEach(function (res) { return h += '<li>' + res.show() + '</li>'; });
         h += "</ul></td>";
-        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
+        h += '<td>' + this.displayCraftButton(crafter) + this.displayAutoCraft(crafter) + '</td>';
         h += '</tr>';
         return h;
     };
     IncrGui.prototype.displayCraftButton = function (crafter) {
-        if (crafter.isAuto()) {
-            return 'Auto Crafting';
-        }
+        var h = '';
         if (crafter.isCrafting()) {
-            return '<button disabled="disabled">craft</button> Crafting in progress';
+            h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
         }
-        if (!this.Engine.Player.hasResources(crafter.getCost())) {
-            return '<button disabled="disabled">craft</button> not enough resources';
+        else if (!this.Engine.Player.hasResources(crafter.getCost())) {
+            h += 'Not enough resources';
         }
-        return '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">craft</button>';
+        else {
+            h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">'
+                + 'craft (' + this.displayTime(crafter.getDuration()) + ')</button>';
+        }
+        return h;
+    };
+    IncrGui.prototype.displayAutoCraft = function (crafter) {
+        var h = '<br />[';
+        if (!crafter.isAutomatable()) {
+            if (crafter.isAuto()) {
+                h += 'Auto';
+            }
+            else {
+                h += 'Manual';
+            }
+        }
+        else {
+            h += '<label>'
+                + '<input type="checkbox" onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
+                + (crafter.isAuto() ? ' checked="checked"' : '') + ' />'
+                + 'Auto</label>';
+        }
+        h += ']';
+        return h;
+    };
+    IncrGui.prototype.displayProgress = function (startTime, duration) {
+        var progress = this.calculateProgress(startTime);
+        return this.displayTime(progress) + '/' + this.displayTime(duration);
+    };
+    IncrGui.prototype.calculateProgress = function (startTime) {
+        if (startTime == null) {
+            return 0;
+        }
+        return (new Date().getTime() - startTime.getTime());
     };
     IncrGui.prototype.displayTime = function (miliSeconds) {
-        return "" + Math.round(miliSeconds / 1000) + "s";
+        if (miliSeconds == null) {
+            return '';
+        }
+        var time = '';
+        if (miliSeconds >= 60000) {
+            time += Math.round(miliSeconds / 60000) + 'min';
+            miliSeconds = miliSeconds % 60000;
+        }
+        if (miliSeconds < 500 && time != "") {
+            return time;
+        }
+        time += Math.round(miliSeconds / 1000) + 's';
+        return time;
     };
     IncrGui.prototype.displayRemainingTime = function (startTime) {
         if (startTime == null) {
