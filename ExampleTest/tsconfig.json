@@ -21,7 +21,7 @@
     "../Engine/implementations/Trigger.ts",
     "../Engine/implementations/Player.ts",
     "../Engine/Engine.ts",
-    "gui.ts",
-    "incr.ts"
+    "ExampleTestGui.ts",
+    "ExampleTest.ts"
   ]
 }
