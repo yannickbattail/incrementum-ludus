@@ -1,19 +1,4 @@
-var VERSION = "1.26";
-var LEVEL = new Level("level", "level");
-var CLAY = new Material("clay", "g", "clay");
-var WATER = new Material("water", "cl", "water");
-var WOOD = new Material("wood", "g", "wood");
-var CHARCOAL = new Material("charcoal", "g", "charcoal");
-var IRON_ORE = new Material("iron ore", "g", "iron_ore");
-var IRON = new Material("iron", "g", "iron");
-var COPPER_ORE = new Material("copper ore", "g", "copper_ore");
-var CLAY_POT = new Item("clay pot", "clay_pot");
-var BRICK = new Item("brick", "brick");
-var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
-var EMPTY_TRASH = new Item("empty trash", "empty_trash");
-var FULL_TRASH = new Item("full trash", "full_trash");
-var KNIFE = new Item("knife", "knife");
-var AXE = new Item("axe", "axe");
+var VERSION = "2.0";
 function loadEngine() {
     var json = window.localStorage.getItem('DesertIsland');
     if (json != null) {
