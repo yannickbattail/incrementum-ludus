@@ -53,9 +53,9 @@ class Scenario {
                 .thatProduce(Q(10, CLAY))
                 .andProduce(new RandomResource(1, COPPER_ORE, 0.02))
                 .manualy(),
-            new Producer("Starvtion")
+            new Producer("Starvation")
                 .thatProduce(Q(1, STARVATION))
-                .every(2).minutes()
+                .every(1).minutes()
         ];
         engine.Crafters = [
             // inital Crafters
@@ -142,9 +142,9 @@ class Scenario {
             )
             .spawnCrafter(
                 new Crafter("Boil more water")
-                    .thatCraft(Q(5, POTABLE_WATER)).andCraft(Q(1, TERRACOTTA_POT)).andCraft(new RandomResource(-1, TERRACOTTA_POT, 0.05))
-                    .in(10).seconds()
-                    .atCostOf(Q(60, WATER)).and(Q(100, WOOD)).and(Q(1, TERRACOTTA_POT))
+                    .thatCraft(Q(1, POTABLE_WATER)).andCraft(Q(1, TERRACOTTA_POT)).andCraft(new RandomResource(-1, TERRACOTTA_POT, 0.05))
+                    .in(20).seconds()
+                    .atCostOf(Q(100, WATER)).and(Q(100, WOOD)).and(Q(1, TERRACOTTA_POT))
                     .canBeSwitchedToAuto()
             )
             .appendTrigger(
@@ -164,10 +164,23 @@ class Scenario {
                                     .atCostOf(Q(4000, WATER))
                                     .canBeSwitchedToAuto()
                             )
+
                             .appendTrigger(
                                 new Trigger("wood choping")
                                     .whenReached(Q(4000, WATER))
                                     .spawnProducer(new Producer("mine iron-ore").thatProduce(Q(10, IRON_ORE)).every(10).seconds())
+                            )
+                            .appendTrigger(
+                                new Trigger("Evaporate water with the sun")
+                                    .whenReached(Q(10, TERRACOTTA_POT))
+                                    .spawnResource(Q(-10, TERRACOTTA_POT))
+                                    .spawnCrafter(
+                                        new Crafter("Water evaporator")
+                                            .thatCraft(Q(1, POTABLE_WATER))
+                                            .in(30).seconds()
+                                            .atCostOf(Q(100, WATER))
+                                            .automaticaly()
+                                    )
                             )
                             .appendTrigger(
                                 new Trigger("iron-ore mining")
@@ -199,9 +212,9 @@ class Scenario {
                 .spawnProducer(new Producer("collect branches").thatProduce(Q(100, WOOD)).manualy())
                 .spawnCrafter(
                     new Crafter("Boil water")
-                        .thatCraft(Q(3, POTABLE_WATER))
-                        .in(10).seconds()
-                        .atCostOf(Q(40, WATER)).and(Q(100, WOOD)).and(Q(1, CLAY_POT))
+                        .thatCraft(Q(1, POTABLE_WATER))
+                        .in(20).seconds()
+                        .atCostOf(Q(100, WATER)).and(Q(100, WOOD)).and(Q(1, CLAY_POT))
                 )
                 .spawnCrafter(
                     new Crafter("Dring water")
