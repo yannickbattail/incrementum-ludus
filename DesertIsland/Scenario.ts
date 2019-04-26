@@ -57,7 +57,7 @@ class Scenario {
                 .manualy(),
             new Producer("Starvation")
                 .thatProduce(Q(1, STARVATION))
-                .every(50).seconds()
+                .every(40).seconds()
         ];
         engine.Crafters = [
             // inital Crafters
@@ -143,7 +143,7 @@ class Scenario {
                     .canBeSwitchedToAuto()
             )
             .spawnCrafter(
-                new Crafter("Boil more water")
+                new Crafter("Purify water")
                     .thatCraft(Q(1, POTABLE_WATER)).andCraft(Q(1, TERRACOTTA_POT)).andCraft(new RandomResource(-1, TERRACOTTA_POT, 0.05))
                     .in(20).seconds()
                     .atCostOf(Q(100, WATER)).and(Q(100, WOOD)).and(Q(1, TERRACOTTA_POT))
@@ -196,7 +196,7 @@ class Scenario {
                                         new Crafter("Cook vegetables")
                                             .thatCraft(Q(100, FOOD))
                                             .in(10).seconds()
-                                            .atCostOf(Q(200, VEGETABLE))
+                                            .atCostOf(Q(200, VEGETABLE)).and(Q(1, POTABLE_WATER))
                                     )
                             )
                             .appendTrigger(
