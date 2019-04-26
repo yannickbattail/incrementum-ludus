@@ -23,7 +23,7 @@ var Scenario = (function () {
         var Q = function (quantity, res) { return new Quantity(quantity, res); };
         var engine = new Engine();
         engine.Player = new Player("Chuck Noland");
-        engine.Player.increaseStorage(Q(1, STARVATION));
+        engine.Player.increaseStorage(Q(-1, STARVATION));
         engine.Player.increaseStorage(Q(1, LEVEL));
         engine.Player.increaseStorage(Q(0, WATER));
         engine.Player.increaseStorage(Q(0, POTABLE_WATER));
@@ -39,7 +39,7 @@ var Scenario = (function () {
                 .manualy(),
             new Producer("Starvation")
                 .thatProduce(Q(1, STARVATION))
-                .every(1).minutes()
+                .every(50).seconds()
         ];
         engine.Crafters = [
             new Crafter("Craft clay pot")
@@ -102,7 +102,6 @@ var Scenario = (function () {
             .canBeSwitchedToAuto())
             .appendTrigger(new Trigger("clay digging")
             .whenReached(Q(2, TERRACOTTA_POT))
-            .spawnResource(Q(-2, TERRACOTTA_POT))
             .spawnResource(Q(1, LEVEL))
             .spawnProducer(new Producer("dig clay").thatProduce(Q(500, CLAY)).every(5).seconds())
             .appendTrigger(new Trigger("water canal digging")
