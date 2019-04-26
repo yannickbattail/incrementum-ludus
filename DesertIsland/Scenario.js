@@ -1,3 +1,21 @@
+var LEVEL = new Level("level", "level");
+var CLAY = new Material("clay", "g", "clay");
+var WATER = new Material("water", "cl", "water");
+var POTABLE_WATER = new Material("potable water", "cl", "water_potable");
+var WOOD = new Material("wood", "g", "wood");
+var CHARCOAL = new Material("charcoal", "g", "charcoal");
+var IRON_ORE = new Material("iron ore", "g", "iron_ore");
+var IRON = new Material("iron", "g", "iron");
+var COPPER_ORE = new Material("copper ore", "g", "copper_ore");
+var CLAY_POT = new Item("clay pot", "clay_pot");
+var BRICK = new Item("brick", "brick");
+var TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
+var KNIFE = new Item("knife", "knife");
+var AXE = new Item("axe", "axe");
+var EMPTY_TRASH = new Item("empty trash", "empty_trash");
+var FULL_TRASH = new Item("full trash", "full_trash");
+var STARVATION_FOOD = new Item("full trash", "skull_grey");
+var STARVATION = new Item("full trash", "skull_white");
 var Scenario = (function () {
     function Scenario() {
     }
@@ -5,21 +23,26 @@ var Scenario = (function () {
         var Q = function (quantity, res) { return new Quantity(quantity, res); };
         var engine = new Engine();
         engine.Player = new Player("Chuck Noland");
+        engine.Player.increaseStorage(Q(1, STARVATION));
         engine.Player.increaseStorage(Q(1, LEVEL));
         engine.Player.increaseStorage(Q(0, WATER));
+        engine.Player.increaseStorage(Q(0, POTABLE_WATER));
         engine.Player.increaseStorage(Q(0, CLAY));
         engine.Player.increaseStorage(Q(0, COPPER_ORE));
         engine.Producers = [
-            new Producer("take water")
+            new Producer("Take water")
                 .thatProduce(Q(10, WATER))
                 .manualy(),
-            new Producer("bare hands dig clay")
+            new Producer("Bare hands dig clay")
                 .thatProduce(Q(10, CLAY))
                 .andProduce(new RandomResource(1, COPPER_ORE, 0.02))
-                .manualy()
+                .manualy(),
+            new Producer("Starvtion")
+                .thatProduce(Q(1, STARVATION))
+                .every(2).minutes()
         ];
         engine.Crafters = [
-            new Crafter("craft clay pot")
+            new Crafter("Craft clay pot")
                 .thatCraft(Q(1, CLAY_POT))["in"](10).seconds()
                 .atCostOf(Q(100, CLAY)).and(Q(10, WATER))
                 .canBeSwitchedToAuto()
@@ -73,6 +96,10 @@ var Scenario = (function () {
             .thatCraft(Q(1, TERRACOTTA_POT))["in"](20).seconds()
             .atCostOf(Q(800, WOOD)).and(Q(1, CLAY_POT))
             .canBeSwitchedToAuto())
+            .spawnCrafter(new Crafter("Boil more water")
+            .thatCraft(Q(5, POTABLE_WATER)).andCraft(Q(1, TERRACOTTA_POT)).andCraft(new RandomResource(-1, TERRACOTTA_POT, 0.05))["in"](10).seconds()
+            .atCostOf(Q(60, WATER)).and(Q(100, WOOD)).and(Q(1, TERRACOTTA_POT))
+            .canBeSwitchedToAuto())
             .appendTrigger(new Trigger("clay digging")
             .whenReached(Q(2, TERRACOTTA_POT))
             .spawnResource(Q(-2, TERRACOTTA_POT))
@@ -92,7 +119,14 @@ var Scenario = (function () {
             .whenReached(Q(10, IRON_ORE))
             .spawnResource(Q(1, LEVEL))
             .appendTrigger(triggerLevel7))));
+        var triggerStarvation = new Trigger("Don't starve or DIE!")
+            .whenReached(Q(10, STARVATION))
+            .spawnResource(Q(-100, LEVEL))
+            .spawnResource(Q(-100000, WATER))
+            .spawnResource(Q(-100000, WOOD))
+            .spawnResource(Q(-100000, CLAY));
         engine.Triggers = [
+            triggerStarvation,
             new Trigger("carry water in clay pot")
                 .whenReached(Q(1, CLAY_POT))
                 .spawnProducer(new Producer("carry water").thatProduce(new RandomRangeQuantity(60, 110, WATER)).manualy())
@@ -102,6 +136,12 @@ var Scenario = (function () {
                 .whenReached(Q(1, CLAY_POT)).and(Q(2, LEVEL))
                 .spawnProducer(new Producer("carry clay").thatProduce(Q(100, CLAY)).manualy())
                 .spawnProducer(new Producer("collect branches").thatProduce(Q(100, WOOD)).manualy())
+                .spawnCrafter(new Crafter("Boil water")
+                .thatCraft(Q(3, POTABLE_WATER))["in"](10).seconds()
+                .atCostOf(Q(40, WATER)).and(Q(100, WOOD)).and(Q(1, CLAY_POT)))
+                .spawnCrafter(new Crafter("Dring water")
+                .thatCraft(Q(-1, STARVATION))["in"](3).seconds()
+                .atCostOf(Q(10, POTABLE_WATER)))
                 .spawnResource(Q(-1, CLAY_POT))
                 .spawnResource(Q(1, LEVEL))
                 .appendTrigger(new Trigger("charcoal crafting")
