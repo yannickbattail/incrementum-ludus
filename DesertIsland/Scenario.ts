@@ -171,7 +171,7 @@ class Scenario {
                             )
                             .appendTrigger(
                                 new Trigger("Evaporate water with the sun")
-                                    .whenReached(Q(10, TERRACOTTA_POT))
+                                    .whenReached(Q(5, TERRACOTTA_POT))
                                     .spawnResource(Q(-10, TERRACOTTA_POT))
                                     .spawnCrafter(
                                         new Crafter("Water evaporator")
