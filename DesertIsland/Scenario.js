@@ -115,7 +115,7 @@ var Scenario = (function () {
             .whenReached(Q(4000, WATER))
             .spawnProducer(new Producer("mine iron-ore").thatProduce(Q(10, IRON_ORE)).every(10).seconds()))
             .appendTrigger(new Trigger("Evaporate water with the sun")
-            .whenReached(Q(10, TERRACOTTA_POT))
+            .whenReached(Q(5, TERRACOTTA_POT))
             .spawnResource(Q(-10, TERRACOTTA_POT))
             .spawnCrafter(new Crafter("Water evaporator")
             .thatCraft(Q(1, POTABLE_WATER))["in"](30).seconds()
