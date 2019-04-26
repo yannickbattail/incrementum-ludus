@@ -14,9 +14,11 @@
 
 const LEVEL = new Level("level", "level");
 const CLAY = new Material("clay", "g", "clay");
-const WATER = new Material("water", "cl", "water");
+const WATER = new Material("salt water", "cl", "water");
 const POTABLE_WATER = new Material("potable water", "cl", "water_potable");
 const WOOD = new Material("wood", "g", "wood");
+const VEGETABLE = new Material("vegetable", "g", "vegetable");
+const FOOD = new Material("food", "g", "food");
 const CHARCOAL = new Material("charcoal", "g", "charcoal");
 const IRON_ORE = new Material("iron ore", "g", "iron_ore");
 const IRON = new Material("iron", "g", "iron");
@@ -163,7 +165,12 @@ class Scenario {
                                     .atCostOf(Q(4000, WATER))
                                     .canBeSwitchedToAuto()
                             )
-
+                            .spawnCrafter(
+                                new Crafter("plant vegetables")
+                                    .thatCraft(Q(100, VEGETABLE))
+                                    .in(1).minutes()
+                                    .atCostOf(Q(1000, WATER))
+                            )
                             .appendTrigger(
                                 new Trigger("wood choping")
                                     .whenReached(Q(4000, WATER))
@@ -172,13 +179,24 @@ class Scenario {
                             .appendTrigger(
                                 new Trigger("Evaporate water with the sun")
                                     .whenReached(Q(5, TERRACOTTA_POT))
-                                    .spawnResource(Q(-10, TERRACOTTA_POT))
+                                    .spawnResource(Q(-5, TERRACOTTA_POT))
                                     .spawnCrafter(
                                         new Crafter("Water evaporator")
                                             .thatCraft(Q(1, POTABLE_WATER))
                                             .in(30).seconds()
                                             .atCostOf(Q(100, WATER))
                                             .automaticaly()
+                                    )
+                            )
+                            .appendTrigger(
+                                new Trigger("Cooking vegetables")
+                                    .whenReached(Q(100, VEGETABLE))
+                                    .spawnResource(Q(-5, TERRACOTTA_POT))
+                                    .spawnCrafter(
+                                        new Crafter("Cook vegetables")
+                                            .thatCraft(Q(100, FOOD))
+                                            .in(10).seconds()
+                                            .atCostOf(Q(200, VEGETABLE))
                                     )
                             )
                             .appendTrigger(
@@ -220,6 +238,12 @@ class Scenario {
                         .thatCraft(Q(-1, STARVATION))
                         .in(3).seconds()
                         .atCostOf(Q(10, POTABLE_WATER))
+                )
+                .spawnCrafter(
+                    new Crafter("Eat food")
+                        .thatCraft(Q(-2, STARVATION))
+                        .in(5).seconds()
+                        .atCostOf(Q(100, FOOD))
                 )
                 .spawnResource(Q(-1, CLAY_POT))
                 .spawnResource(Q(1, LEVEL)) // level 3
