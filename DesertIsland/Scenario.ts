@@ -179,7 +179,6 @@ class Scenario {
                             .appendTrigger(
                                 new Trigger("Evaporate water with the sun")
                                     .whenReached(Q(5, TERRACOTTA_POT))
-                                    .spawnResource(Q(-5, TERRACOTTA_POT))
                                     .spawnCrafter(
                                         new Crafter("Water evaporator")
                                             .thatCraft(Q(1, POTABLE_WATER))
@@ -191,7 +190,6 @@ class Scenario {
                             .appendTrigger(
                                 new Trigger("Cooking vegetables")
                                     .whenReached(Q(100, VEGETABLE))
-                                    .spawnResource(Q(-5, TERRACOTTA_POT))
                                     .spawnCrafter(
                                         new Crafter("Cook vegetables")
                                             .thatCraft(Q(100, FOOD))
