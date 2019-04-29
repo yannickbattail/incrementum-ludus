@@ -107,7 +107,7 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayTree = function () {
         var h = '<table border="1">';
         h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
-        if (this.Engine.Triggers.length == 0) {
+        if (this.Engine.Triggers.length <= 1) {
             h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
         }
         else {
