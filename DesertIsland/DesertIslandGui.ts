@@ -9,7 +9,7 @@
 /// <reference path="./Material.ts" />
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
-/// <reference path="./NodeUpdate.ts" />
+/// <reference path="../NodeUpdate/NodeUpdate.ts" />
 
 class DesertIslandGui {
     Engine: Engine;
