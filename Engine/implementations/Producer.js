@@ -1,38 +1,39 @@
 var Producer = (function () {
-    function Producer(Name, resourcesQuantity, Interval) {
+    function Producer(name, resourcesQuantity, interval) {
         if (resourcesQuantity === void 0) { resourcesQuantity = []; }
-        if (Interval === void 0) { Interval = null; }
-        this.Name = Name;
+        if (interval === void 0) { interval = null; }
+        this.name = name;
         this.resourcesQuantity = resourcesQuantity;
-        this.Interval = Interval;
+        this.interval = interval;
         this.$type = 'Producer';
-        this.StartTime = new Date(1970, 0, 1);
+        this.startTime = new Date(1970, 0, 1);
     }
     Producer.prototype.getName = function () {
-        return this.Name;
+        return this.name;
     };
     Producer.prototype.getResourcesQuantity = function () {
         return this.resourcesQuantity;
     };
     Producer.prototype.getInterval = function () {
-        return this.Interval;
+        return this.interval;
     };
     Producer.prototype.isAuto = function () {
-        return this.Interval != null;
+        return this.interval != null;
     };
     Producer.prototype.getStartTime = function () {
-        return this.StartTime;
+        return this.startTime;
     };
     Producer.prototype.resetStartTime = function () {
-        this.StartTime = null;
+        this.startTime = null;
     };
     Producer.prototype.initStartTime = function () {
-        this.StartTime = new Date();
+        this.startTime = new Date();
     };
     Producer.load = function (data) {
         var curContext = window;
-        var newObj = new Producer(data.Name);
-        newObj.Interval = data.Interval;
+        var newObj = new Producer(data.name);
+        newObj.interval = data.interval;
+        newObj.startTime = data.startTime != null ? new Date(data.startTime) : null;
         newObj.resourcesQuantity = data.resourcesQuantity.map(function (p) { return curContext[p.$type].load(p); });
         return newObj;
     };
@@ -44,22 +45,22 @@ var Producer = (function () {
         return this.thatProduce(quantity);
     };
     Producer.prototype.manualy = function () {
-        this.Interval = null;
+        this.interval = null;
         return this;
     };
     Producer.prototype.every = function (interval) {
-        this.Interval = interval;
+        this.interval = interval;
         return this;
     };
     Producer.prototype.seconds = function () {
-        if (this.Interval != null) {
-            this.Interval *= 1000;
+        if (this.interval != null) {
+            this.interval *= 1000;
         }
         return this;
     };
     Producer.prototype.minutes = function () {
-        if (this.Interval != null) {
-            this.Interval *= 60 * 1000;
+        if (this.interval != null) {
+            this.interval *= 60 * 1000;
         }
         return this;
     };

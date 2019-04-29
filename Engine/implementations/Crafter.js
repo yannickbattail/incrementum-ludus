@@ -1,54 +1,55 @@
 var Crafter = (function () {
-    function Crafter(Name, Duration, Cost, CraftedResources, AutoCrafting, automatable) {
-        if (Duration === void 0) { Duration = 0; }
-        if (Cost === void 0) { Cost = []; }
-        if (CraftedResources === void 0) { CraftedResources = []; }
-        if (AutoCrafting === void 0) { AutoCrafting = false; }
+    function Crafter(name, duration, cost, craftedResources, autoCrafting, automatable) {
+        if (duration === void 0) { duration = 0; }
+        if (cost === void 0) { cost = []; }
+        if (craftedResources === void 0) { craftedResources = []; }
+        if (autoCrafting === void 0) { autoCrafting = false; }
         if (automatable === void 0) { automatable = false; }
-        this.Name = Name;
-        this.Duration = Duration;
-        this.Cost = Cost;
-        this.CraftedResources = CraftedResources;
-        this.AutoCrafting = AutoCrafting;
+        this.name = name;
+        this.duration = duration;
+        this.cost = cost;
+        this.craftedResources = craftedResources;
+        this.autoCrafting = autoCrafting;
         this.automatable = automatable;
         this.$type = 'Crafter';
     }
     Crafter.load = function (data) {
         var curContext = window;
-        var newObj = new Crafter(data.Name);
-        newObj.Duration = data.Duration;
-        newObj.Cost = data.Cost.map(function (p) { return curContext[p.$type].load(p); });
-        newObj.CraftedResources = data.CraftedResources.map(function (p) { return curContext[p.$type].load(p); });
-        newObj.AutoCrafting = data.AutoCrafting;
+        var newObj = new Crafter(data.name);
+        newObj.duration = data.duration;
+        newObj.startTime = data.startTime != null ? new Date(data.startTime) : null;
+        newObj.cost = data.cost.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.craftedResources = data.craftedResources.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.autoCrafting = data.autoCrafting;
         newObj.automatable = data.automatable;
         return newObj;
     };
     Crafter.prototype.getStartTime = function () {
-        return this.StartTime;
+        return this.startTime;
     };
     Crafter.prototype.resetStartTime = function () {
-        this.StartTime = null;
+        this.startTime = null;
     };
     Crafter.prototype.initStartTime = function () {
-        this.StartTime = new Date();
+        this.startTime = new Date();
     };
     Crafter.prototype.getName = function () {
-        return this.Name;
+        return this.name;
     };
     Crafter.prototype.getDuration = function () {
-        return this.Duration;
+        return this.duration;
     };
     Crafter.prototype.getCost = function () {
-        return this.Cost;
+        return this.cost;
     };
     Crafter.prototype.getCraftedResources = function () {
-        return this.CraftedResources;
+        return this.craftedResources;
     };
     Crafter.prototype.isAuto = function () {
-        return this.AutoCrafting;
+        return this.autoCrafting;
     };
     Crafter.prototype.setAuto = function (auto) {
-        this.AutoCrafting = auto;
+        this.autoCrafting = auto;
     };
     Crafter.prototype.isAutomatable = function () {
         return this.automatable;
@@ -57,26 +58,26 @@ var Crafter = (function () {
         this.automatable = automatable;
     };
     Crafter.prototype.thatCraft = function (quantity) {
-        this.CraftedResources.push(quantity);
+        this.craftedResources.push(quantity);
         return this;
     };
     Crafter.prototype.andCraft = function (quantity) {
         return this.thatCraft(quantity);
     };
     Crafter.prototype["in"] = function (interval) {
-        this.Duration = interval;
+        this.duration = interval;
         return this;
     };
     Crafter.prototype.seconds = function () {
-        this.Duration *= 1000;
+        this.duration *= 1000;
         return this;
     };
     Crafter.prototype.minutes = function () {
-        this.Duration *= 60 * 1000;
+        this.duration *= 60 * 1000;
         return this;
     };
     Crafter.prototype.automaticaly = function () {
-        this.AutoCrafting = true;
+        this.autoCrafting = true;
         return this;
     };
     Crafter.prototype.canBeSwitchedToAuto = function () {
@@ -84,14 +85,14 @@ var Crafter = (function () {
         return this;
     };
     Crafter.prototype.atCostOf = function (quantity) {
-        this.Cost.push(quantity);
+        this.cost.push(quantity);
         return this;
     };
     Crafter.prototype.and = function (quantity) {
         return this.atCostOf(quantity);
     };
     Crafter.prototype.isCrafting = function () {
-        return this.StartTime != null;
+        return this.startTime != null;
     };
     return Crafter;
 }());

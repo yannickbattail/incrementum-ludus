@@ -7,7 +7,9 @@
 
 class RandomRangeQuantity implements IQuantity {
     $type : string = 'RandomRangeQuantity';
-    constructor(protected minQuantity: number, protected maxQuantity: number, protected resource: IResource,) {
+    constructor(protected minQuantity: number,
+                protected maxQuantity: number,
+                protected resource: IResource,) {
     }
     public static load(data : any) : RandomRangeQuantity {
         let curContext : any = window;

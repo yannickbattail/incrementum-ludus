@@ -13,15 +13,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Item = (function (_super) {
     __extends(Item, _super);
-    function Item(Name, Image) {
+    function Item(name, image) {
         var _this = _super.call(this, name) || this;
-        _this.Name = Name;
-        _this.Image = Image;
+        _this.name = name;
+        _this.image = image;
         _this.$type = 'Item';
         return _this;
     }
     Item.load = function (data) {
-        var r = new Item(data.Name, data.Image);
+        var r = new Item(data.name, data.image);
         return r;
     };
     Item.prototype.show = function (quantity) {

@@ -1,25 +1,25 @@
 var Player = (function () {
-    function Player(Name) {
-        this.Name = Name;
+    function Player(name) {
+        this.name = name;
         this.$type = 'Player';
-        this.Storage = new Array();
+        this.storage = new Array();
     }
     Player.load = function (data) {
         var curContext = window;
-        var player = new Player(data.Name);
-        player.Storage = data.Storage.map(function (p) { return curContext[p.$type].load(p); });
+        var player = new Player(data.name);
+        player.storage = data.storage.map(function (p) { return curContext[p.$type].load(p); });
         return player;
     };
     Player.prototype.getName = function () {
-        return this.Name;
+        return this.name;
     };
     Player.prototype.getStorage = function () {
-        return this.Storage;
+        return this.storage;
     };
     Player.prototype.increaseStorage = function (quantity) {
         var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
+            this.storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
         }
         else {
             resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
@@ -28,14 +28,14 @@ var Player = (function () {
     Player.prototype.decreaseStorage = function (quantity) {
         var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
+            this.storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
         }
         else {
             resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
         }
     };
     Player.prototype.getResourceInStorage = function (resourceName) {
-        var res = this.Storage.filter(function (res) { return res.getResource().getName() == resourceName; });
+        var res = this.storage.filter(function (res) { return res.getResource().getName() == resourceName; });
         if (res.length) {
             return res[0];
         }

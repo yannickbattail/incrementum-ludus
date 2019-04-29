@@ -8,64 +8,64 @@
 
 class Trigger implements ITrigger {
     $type : string = 'Trigger';
-    constructor(protected Name: string,
-        protected ResourcesTrigger: Array<IQuantity> = [],
-        protected SpawnProducers:  Array<IProducer> = [],
-        protected SpawnResources: Array<IQuantity> = [],
-        protected SpawnCrafters: Array<ICrafter> = [],
-        protected SpawnNewTriggers: Array<ITrigger> = []) {
+    constructor(protected name: string,
+        protected resourcesTrigger: Array<IQuantity> = [],
+        protected spawnProducers:  Array<IProducer> = [],
+        protected spawnResources: Array<IQuantity> = [],
+        protected spawnCrafters: Array<ICrafter> = [],
+        protected spawnNewTriggers: Array<ITrigger> = []) {
 
     }
     getName() : string {
-        return this.Name;
+        return this.name;
     }
     getResourcesTrigger() : Array<IQuantity> {
-        return this.ResourcesTrigger;
+        return this.resourcesTrigger;
     }
     getSpawnProducers() :  Array<IProducer> {
-        return this.SpawnProducers;
+        return this.spawnProducers;
     }
     getSpawnResources(): Array<IQuantity> {
-        return this.SpawnResources;
+        return this.spawnResources;
     }
     getSpawnCrafters(): Array<ICrafter> {
-        return this.SpawnCrafters;
+        return this.spawnCrafters;
     }
     getSpawnNewTriggers(): Array<ITrigger> {
-        return this.SpawnNewTriggers;
+        return this.spawnNewTriggers;
     }
     public static load(data : any) : Trigger {
         let curContext : any = window;
-        let newObj : Trigger = new Trigger(data.Name);
-        newObj.ResourcesTrigger = (data.ResourcesTrigger as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.SpawnProducers = (data.SpawnProducers as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.SpawnResources = (data.SpawnResources as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.SpawnCrafters = (data.SpawnCrafters as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.SpawnNewTriggers = (data.SpawnNewTriggers as Array<any>).map(p => curContext[p.$type].load(p));
+        let newObj : Trigger = new Trigger(data.name);
+        newObj.resourcesTrigger = (data.resourcesTrigger as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.spawnProducers = (data.spawnProducers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.spawnResources = (data.spawnResources as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.spawnCrafters = (data.spawnCrafters as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.spawnNewTriggers = (data.spawnNewTriggers as Array<any>).map(p => curContext[p.$type].load(p));
         return newObj;
     }
 
     public whenReached(quantity : IQuantity) : ITrigger {
-        this.ResourcesTrigger.push(quantity);
+        this.resourcesTrigger.push(quantity);
         return this;
     }
     public and(quantity : IQuantity) : ITrigger {
         return this.whenReached(quantity);
     }
     public spawnProducer(producer : IProducer) : ITrigger {
-        this.SpawnProducers.push(producer);
+        this.spawnProducers.push(producer);
         return this;
     }
     public spawnResource(quantity : IQuantity) : ITrigger {
-        this.SpawnResources.push(quantity);
+        this.spawnResources.push(quantity);
         return this;
     }
     public spawnCrafter(crafter : ICrafter) : ITrigger {
-        this.SpawnCrafters.push(crafter);
+        this.spawnCrafters.push(crafter);
         return this;
     }
     public appendTrigger(trigger : ITrigger) : ITrigger {
-        this.SpawnNewTriggers.push(trigger);
+        this.spawnNewTriggers.push(trigger);
         return this;
     }
 

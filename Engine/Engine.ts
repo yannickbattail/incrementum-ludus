@@ -8,40 +8,47 @@
 class Engine {
     $type : string = 'Engine';
     tickInterval: number = 100;
-    Player: IPlayer;
-    Producers: Array<IProducer> = [];
-    Triggers: Array<ITrigger> = [];
-    Crafters: Array<ICrafter> = [];
-    FastMode : number = 0;
+    player: IPlayer;
+    producers: Array<IProducer> = [];
+    triggers: Array<ITrigger> = [];
+    crafters: Array<ICrafter> = [];
+    fastMode : number = 0;
+    private intervalId : number;
+    private saveCallback: (engine: Engine) => void;
     public static load(data : any) : Engine {
         let curContext : any = window;
         let newObj : Engine = new Engine();
         newObj.tickInterval = data.tickInterval;
-        newObj.Player = curContext[data.Player.$type].load(data.Player);
-        newObj.Producers = (data.Producers as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.Triggers = (data.Triggers as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.Crafters = (data.Crafters as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.FastMode = data.FastMode;
+        newObj.player = curContext[data.player.$type].load(data.player);
+        newObj.producers = (data.producers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.triggers = (data.triggers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.crafters = (data.crafters as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.fastMode = data.fastMode;
         return newObj;
     }
-    run(tickInterval : number = 100) {
+    run(tickInterval : number, saveCallback: (engine: Engine) => void) {
         this.tickInterval = tickInterval;
-        window.setInterval(() => this.onTick(), this.tickInterval);
+        this.saveCallback = saveCallback;
+        this.intervalId = window.setInterval(() => this.onTick(), this.tickInterval);
+    }
+    stop() {
+        window.clearInterval(this.intervalId);
     }
     private onTick() {
-        this.Producers.forEach(
+        this.producers.forEach(
             producer => {
                  if (producer.isAuto) {
                    this.autoCollectProducer(producer);
                  }
             }
         );
-        this.Triggers.forEach(
+        this.triggers.forEach(
             trigger => this.checkTrigger(trigger)
         );
-        this.Crafters.forEach(
+        this.crafters.forEach(
             crafter => this.checkCrafter(crafter)
         );
+        this.saveCallback(this);
     }
     private autoCollectProducer(producer: IProducer) {
         if (producer.isAuto()) {
@@ -50,19 +57,19 @@ class Engine {
             if (i != null) {
                 interval = i;
             }
-            interval = this.FastMode ? this.FastMode : interval;
+            interval = this.fastMode ? this.fastMode : interval;
             let startTime = producer.getStartTime();
             if (startTime != null && startTime.getTime() + interval <= new Date().getTime()) {
                 producer.initStartTime();
                 producer.getResourcesQuantity().forEach(
-                    res => this.Player.increaseStorage(res)
+                    res => this.player.increaseStorage(res)
                 );
             }
         }
     }
     public collectManualProducer(producer: IProducer) {
         producer.getResourcesQuantity().forEach(
-            res => this.Player.increaseStorage(res)
+            res => this.player.increaseStorage(res)
         );
     }
     public collectProducer(producerName: string) {
@@ -74,7 +81,7 @@ class Engine {
         }
     }
     public getProducerByName(producerName : string) : IProducer | null {
-        let producers : IProducer[] =  this.Producers.filter(
+        let producers : IProducer[] =  this.producers.filter(
             src => src.getName() == producerName
         );
         if (producers.length == 0) {
@@ -84,21 +91,21 @@ class Engine {
     }
 
     private checkTrigger(trigger: ITrigger) {
-        if (this.Player.hasResources(trigger.getResourcesTrigger())) {
+        if (this.player.hasResources(trigger.getResourcesTrigger())) {
             trigger.getSpawnProducers().forEach(
-                pawnProducer => this.Producers.push(pawnProducer)
+                pawnProducer => this.producers.push(pawnProducer)
             );
             trigger.getSpawnResources().forEach(
-                res => this.Player.increaseStorage(res)
+                res => this.player.increaseStorage(res)
             );
             trigger.getSpawnCrafters().forEach(
-                crafter => this.Crafters.push(crafter)
+                crafter => this.crafters.push(crafter)
             );
             trigger.getSpawnNewTriggers().forEach(
-                newTrigger => this.Triggers.push(newTrigger)
+                newTrigger => this.triggers.push(newTrigger)
             );
             // remove the trigger
-            this.Triggers.splice(this.Triggers.indexOf(trigger), 1);
+            this.triggers.splice(this.triggers.indexOf(trigger), 1);
         }
     }
 
@@ -107,20 +114,20 @@ class Engine {
         this.checkStartAutoCrafting(crafter);
     }
     private checkFinishedCrafting(crafter: ICrafter) {
-        let duration = this.FastMode ? this.FastMode : crafter.getDuration();
+        let duration = this.fastMode ? this.fastMode : crafter.getDuration();
         let startTime = crafter.getStartTime();
         if (startTime != null && (startTime.getTime() + duration <= new Date().getTime())) {
             crafter.resetStartTime();
             crafter.getCraftedResources().forEach(
-                resourceQty =>  this.Player.increaseStorage(resourceQty)
+                resourceQty =>  this.player.increaseStorage(resourceQty)
             );
         }
     }
     private checkStartAutoCrafting(crafter: ICrafter) {
-        if (crafter.isAuto() && crafter.getStartTime() == null && this.Player.hasResources(crafter.getCost())) {
+        if (crafter.isAuto() && crafter.getStartTime() == null && this.player.hasResources(crafter.getCost())) {
             crafter.initStartTime();
             crafter.getCost().forEach(
-                resourceQty =>  this.Player.decreaseStorage(resourceQty)
+                resourceQty =>  this.player.decreaseStorage(resourceQty)
             );
         }
     }
@@ -131,10 +138,10 @@ class Engine {
         }
     }
     public startManualCrafting(crafter: ICrafter) : boolean {
-        if (!crafter.isAuto() && !crafter.isCrafting() && this.Player.hasResources(crafter.getCost())) {
+        if (!crafter.isAuto() && !crafter.isCrafting() && this.player.hasResources(crafter.getCost())) {
             crafter.initStartTime();
             crafter.getCost().forEach(
-                resourceQty =>  this.Player.decreaseStorage(resourceQty)
+                resourceQty =>  this.player.decreaseStorage(resourceQty)
             );
             return true;
         }
@@ -149,7 +156,7 @@ class Engine {
     }
 
     public getCrafterByName(crafterName : string) : ICrafter | null {
-        let crafters: ICrafter[] =  this.Crafters.filter(
+        let crafters: ICrafter[] =  this.crafters.filter(
             src => src.getName() == crafterName
         );
         if (crafters.length == 0) {

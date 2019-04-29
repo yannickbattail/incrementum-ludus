@@ -1,20 +1,20 @@
 var Resource = (function () {
-    function Resource(Name) {
-        this.Name = Name;
+    function Resource(name) {
+        this.name = name;
         this.$type = 'Resource';
     }
     Resource.prototype.getName = function () {
-        return this.Name;
+        return this.name;
     };
     Resource.load = function (data) {
-        var r = new Resource(data.Name);
+        var r = new Resource(data.name);
         return r;
     };
     Resource.prototype.equals = function (obj) {
         return this.getName() == obj.getName();
     };
     Resource.prototype.show = function (quantity) {
-        return quantity + ' ' + this.Name;
+        return quantity + ' ' + this.name;
     };
     return Resource;
 }());

@@ -8,11 +8,11 @@
 
 class Level extends Resource {
     public $type : string = 'Level';
-    constructor(public Name : string, public Image : string){
-        super(Name);
+    constructor(public name : string, public image : string){
+        super(name);
     }
     public static load(data : any) : Level {
-        let r : Level = new Level(data.Name, data.Image);
+        let r : Level = new Level(data.name, data.image);
         return r;
     }
     public show(quantity : number) : string {

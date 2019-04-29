@@ -8,11 +8,11 @@
 
 class Item extends Resource {
     public $type : string = 'Item';
-    constructor(public Name : string, public Image : string){
+    constructor(public name : string, public image : string){
         super(name);
     }
     public static load(data : any) : Item {
-        let r : Item = new Item(data.Name, data.Image);
+        let r : Item = new Item(data.name, data.image);
         return r;
     }
     public show(quantity : number) : string {

@@ -7,52 +7,53 @@
 
 class Crafter implements ICrafter {
     $type : string = 'Crafter';
-    public StartTime: Date | null;
-    constructor(protected Name: string,
-                protected Duration: number = 0,
-                protected Cost: Array<IQuantity> = [],
-                protected CraftedResources: Array<IQuantity> = [],
-                protected AutoCrafting: boolean = false,
+    public startTime: Date | null;
+    constructor(protected name: string,
+                protected duration: number = 0,
+                protected cost: Array<IQuantity> = [],
+                protected craftedResources: Array<IQuantity> = [],
+                protected autoCrafting: boolean = false,
                 protected automatable: boolean = false) {
 
     }
     public static load(data : any) : Crafter {
         let curContext : any = window;
-        let newObj : Crafter = new Crafter(data.Name);
-        newObj.Duration = data.Duration;
-        newObj.Cost = (data.Cost as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.CraftedResources = (data.CraftedResources as Array<any>).map(p => curContext[p.$type].load(p));
-        newObj.AutoCrafting = data.AutoCrafting;
+        let newObj : Crafter = new Crafter(data.name);
+        newObj.duration = data.duration;
+        newObj.startTime = data.startTime!=null?new Date(data.startTime):null;
+        newObj.cost = (data.cost as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.craftedResources = (data.craftedResources as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.autoCrafting = data.autoCrafting;
         newObj.automatable = data.automatable;
         return newObj;
     }
 
     getStartTime(): Date | null{
-        return this.StartTime;
+        return this.startTime;
     }
     resetStartTime(): void{
-        this.StartTime = null;
+        this.startTime = null;
     }
     initStartTime(): void{
-        this.StartTime = new Date();
+        this.startTime = new Date();
     }
     getName(): string {
-        return this.Name;
+        return this.name;
     }
     getDuration(): number {
-        return this.Duration;
+        return this.duration;
     }
     getCost(): Array<IQuantity> {
-        return this.Cost;
+        return this.cost;
     }
     getCraftedResources(): Array<IQuantity> {
-        return this.CraftedResources;
+        return this.craftedResources;
     }
     isAuto(): boolean {
-        return this.AutoCrafting;
+        return this.autoCrafting;
     }
     setAuto(auto : boolean) : void {
-        this.AutoCrafting = auto;
+        this.autoCrafting = auto;
     }
     isAutomatable(): boolean {
         return this.automatable;
@@ -62,26 +63,26 @@ class Crafter implements ICrafter {
     }
 
     public thatCraft(quantity : IQuantity) : ICrafter {
-        this.CraftedResources.push(quantity);
+        this.craftedResources.push(quantity);
         return this;
     }
     public andCraft(quantity : IQuantity) : ICrafter {
         return this.thatCraft(quantity);
     }
     public in(interval: number) : ICrafter {
-        this.Duration = interval;
+        this.duration = interval;
         return this;
     }
     public seconds() : ICrafter {
-        this.Duration *= 1000;
+        this.duration *= 1000;
         return this;
     }
     public minutes() : ICrafter {
-        this.Duration *= 60 * 1000;
+        this.duration *= 60 * 1000;
         return this;
     }
     public automaticaly() : ICrafter {
-        this.AutoCrafting = true;
+        this.autoCrafting = true;
         return this;
     }
     canBeSwitchedToAuto() : ICrafter {
@@ -90,7 +91,7 @@ class Crafter implements ICrafter {
     }
 
     public atCostOf(quantity : IQuantity) : ICrafter {
-        this.Cost.push(quantity);
+        this.cost.push(quantity);
         return this;
     }
     public and(quantity : IQuantity) : ICrafter {
@@ -98,6 +99,6 @@ class Crafter implements ICrafter {
     }
 
     public isCrafting() : boolean {
-        return this.StartTime != null;
+        return this.startTime != null;
     }
 }

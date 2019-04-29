@@ -13,15 +13,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Level = (function (_super) {
     __extends(Level, _super);
-    function Level(Name, Image) {
-        var _this = _super.call(this, Name) || this;
-        _this.Name = Name;
-        _this.Image = Image;
+    function Level(name, image) {
+        var _this = _super.call(this, name) || this;
+        _this.name = name;
+        _this.image = image;
         _this.$type = 'Level';
         return _this;
     }
     Level.load = function (data) {
-        var r = new Level(data.Name, data.Image);
+        var r = new Level(data.name, data.image);
         return r;
     };
     Level.prototype.show = function (quantity) {

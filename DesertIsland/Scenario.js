@@ -16,34 +16,34 @@ var KNIFE = new Item("knife", "knife");
 var AXE = new Item("axe", "axe");
 var EMPTY_TRASH = new Item("empty trash", "empty_trash");
 var FULL_TRASH = new Item("full trash", "full_trash");
-var STARVATION_FOOD = new Item("full trash", "skull_grey");
-var STARVATION = new Item("full trash", "skull_white");
+var STARVATION_FOOD = new Item("starvation", "skull_grey");
+var STARVATION = new Item("starvation", "skull_white");
 var Scenario = (function () {
     function Scenario() {
     }
     Scenario.initEngine = function () {
         var Q = function (quantity, res) { return new Quantity(quantity, res); };
         var engine = new Engine();
-        engine.Player = new Player("Chuck Noland");
-        engine.Player.increaseStorage(Q(-1, STARVATION));
-        engine.Player.increaseStorage(Q(1, LEVEL));
-        engine.Player.increaseStorage(Q(0, WATER));
-        engine.Player.increaseStorage(Q(0, POTABLE_WATER));
-        engine.Player.increaseStorage(Q(0, CLAY));
-        engine.Player.increaseStorage(Q(0, COPPER_ORE));
-        engine.Producers = [
+        engine.player = new Player("Chuck Noland");
+        engine.player.increaseStorage(Q(-1, STARVATION));
+        engine.player.increaseStorage(Q(1, LEVEL));
+        engine.player.increaseStorage(Q(0, WATER));
+        engine.player.increaseStorage(Q(0, POTABLE_WATER));
+        engine.player.increaseStorage(Q(0, CLAY));
+        engine.player.increaseStorage(Q(0, COPPER_ORE));
+        engine.producers = [
+            new Producer("Starvation")
+                .thatProduce(Q(1, STARVATION))
+                .every(40).seconds(),
             new Producer("Take water")
                 .thatProduce(Q(10, WATER))
                 .manualy(),
             new Producer("Bare hands dig clay")
                 .thatProduce(Q(10, CLAY))
                 .andProduce(new RandomResource(1, COPPER_ORE, 0.02))
-                .manualy(),
-            new Producer("Starvation")
-                .thatProduce(Q(1, STARVATION))
-                .every(40).seconds()
+                .manualy()
         ];
-        engine.Crafters = [
+        engine.crafters = [
             new Crafter("Craft clay pot")
                 .thatCraft(Q(1, CLAY_POT))["in"](10).seconds()
                 .atCostOf(Q(100, CLAY)).and(Q(10, WATER))
@@ -140,7 +140,7 @@ var Scenario = (function () {
             .spawnResource(Q(-100000, WATER))
             .spawnResource(Q(-100000, WOOD))
             .spawnResource(Q(-100000, CLAY));
-        engine.Triggers = [
+        engine.triggers = [
             triggerStarvation,
             new Trigger("carry water in clay pot")
                 .whenReached(Q(1, CLAY_POT))

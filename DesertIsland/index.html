@@ -46,20 +46,20 @@
         And watch out not to die of starvation! (Don't forget to produce potable water and drink it)
         </div>
     <br />
-    <div id="level"></div>
+    <div id="level">If it do not work: <button onclick="DesertIslandGui.eraseStorage();window.location.reload();">Force reload</button></div>
     <div id="tree"></div>
     <div id="storage"></div>
     <div id="producers"></div>
     <div id="crafters"></div>
     <script>
-        engine.run(100);
         var gui = new DesertIslandGui(engine);
         gui.start(200);
+        engine.run(100, saveEngine);
     </script>
     <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">
         <div onclick="gui.stop()">stop</div>
-        <div onclick="gui.clearStorage()">clear</div>
+        <div onclick="DesertIslandGui.eraseStorage()">clear</div>
         <div onclick="gui.fastMode()">fast mode</div>
         PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
     </div>

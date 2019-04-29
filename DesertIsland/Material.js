@@ -13,20 +13,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Material = (function (_super) {
     __extends(Material, _super);
-    function Material(Name, Unit, Image) {
+    function Material(name, unit, image) {
         var _this = _super.call(this, name) || this;
-        _this.Name = Name;
-        _this.Unit = Unit;
-        _this.Image = Image;
+        _this.name = name;
+        _this.unit = unit;
+        _this.image = image;
         _this.$type = 'Material';
         return _this;
     }
     Material.load = function (data) {
-        var r = new Material(data.Name, data.Unit, data.Image);
+        var r = new Material(data.name, data.unit, data.image);
         return r;
     };
     Material.prototype.show = function (quantity) {
-        var u = this.Unit;
+        var u = this.unit;
         var q = quantity;
         if (u == 'g') {
             if (quantity >= 1000) {

@@ -7,26 +7,26 @@
 
 class Player implements IPlayer{
     $type : string = 'Player';
-    protected Storage: Array<Quantity> = new Array<Quantity>();
-    constructor(protected Name: string) {
+    protected storage: Array<Quantity> = new Array<Quantity>();
+    constructor(protected name: string) {
     }
     public static load(data : any) : Player {
         let curContext : any = window;
-        let player : Player = new Player(data.Name);
-        player.Storage = (data.Storage as Array<any>).map(p => curContext[p.$type].load(p));
+        let player : Player = new Player(data.name);
+        player.storage = (data.storage as Array<any>).map(p => curContext[p.$type].load(p));
         return player;
     }
     public getName() : string {
-        return this.Name;
+        return this.name;
     }
     public getStorage() : Array<IQuantity>{
-        return this.Storage;
+        return this.storage;
     }
 
     public increaseStorage(quantity: IQuantity) {
         let resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
+            this.storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
         } else {
             resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
         }
@@ -34,7 +34,7 @@ class Player implements IPlayer{
     public decreaseStorage(quantity: IQuantity) {
         let resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.Storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
+            this.storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
         } else {
             resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
         }
@@ -42,7 +42,7 @@ class Player implements IPlayer{
 
 
     public getResourceInStorage(resourceName: string): Quantity | null {
-        let res = this.Storage.filter((res: Quantity) => res.getResource().getName() == resourceName);
+        let res = this.storage.filter((res: Quantity) => res.getResource().getName() == resourceName);
         if (res.length) {
             return res[0];
         }

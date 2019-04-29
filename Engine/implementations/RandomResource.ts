@@ -7,7 +7,9 @@
 
 class RandomResource implements IQuantity {
     $type : string = 'RandomResource';
-    constructor(protected quantity: number, protected resource: IResource, protected probability: number) {
+    constructor(protected quantity: number,
+                protected resource: IResource,
+                protected probability: number) {
     }
     public static load(data : any) : RandomResource {
         let curContext : any = window;

@@ -8,15 +8,15 @@
 
 class Material extends Resource {
     public $type : string = 'Material';
-    constructor(public Name : string, public Unit : string, public Image : string){
+    constructor(public name : string, public unit : string, public image : string){
         super(name);
     }
     public static load(data : any) : Material {
-        let r : Material = new Material(data.Name, data.Unit, data.Image);
+        let r : Material = new Material(data.name, data.unit, data.image);
         return r;
     }
     public show(quantity : number) : string {
-        let u = this.Unit;
+        let u = this.unit;
         let q = quantity;
         if (u == 'g') {
             if (quantity >= 1000) {

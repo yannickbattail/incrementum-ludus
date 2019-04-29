@@ -7,37 +7,38 @@
 
 class Producer implements IProducer {
     $type : string = 'Producer';
-    protected StartTime: Date | null = new Date(1970, 0, 1);
-    constructor(protected Name: string,
+    protected startTime: Date | null = new Date(1970, 0, 1);
+    constructor(protected name: string,
                 protected resourcesQuantity: Array<IQuantity> = [],
-                protected Interval: number | null = null) {
+                protected interval: number | null = null) {
                     
     }
     getName() : string {
-        return this.Name;
+        return this.name;
     }
     getResourcesQuantity() : Array<IQuantity> {
         return this.resourcesQuantity;
     }
     getInterval() : number | null {
-        return this.Interval;
+        return this.interval;
     }
     isAuto() : boolean {
-        return this.Interval != null;
+        return this.interval != null;
     }
     getStartTime(): Date | null {
-        return this.StartTime;
+        return this.startTime;
     }
     resetStartTime(): void{
-        this.StartTime = null;
+        this.startTime = null;
     }
     initStartTime(): void{
-        this.StartTime = new Date();
+        this.startTime = new Date();
     }
     public static load(data : any) : Producer {
         let curContext : any = window;
-        let newObj : Producer = new Producer(data.Name);
-        newObj.Interval = data.Interval;
+        let newObj : Producer = new Producer(data.name);
+        newObj.interval = data.interval;
+        newObj.startTime = data.startTime!=null?new Date(data.startTime):null;
         newObj.resourcesQuantity = (data.resourcesQuantity as Array<any>).map(p => curContext[p.$type].load(p));
         return newObj;
     }
@@ -52,25 +53,25 @@ class Producer implements IProducer {
     }
 
     public manualy() : IProducer {
-        this.Interval = null;
+        this.interval = null;
         return this;
     }
 
     public every(interval: number) : IProducer {
-        this.Interval = interval;
+        this.interval = interval;
         return this;
     }
 
     public seconds() : IProducer {
-        if (this.Interval != null) {
-            this.Interval *= 1000;
+        if (this.interval != null) {
+            this.interval *= 1000;
         }
         return this;
     }
 
     public minutes() : IProducer {
-        if (this.Interval != null) {
-            this.Interval *= 60 * 1000;
+        if (this.interval != null) {
+            this.interval *= 60 * 1000;
         }
         return this;
     }
