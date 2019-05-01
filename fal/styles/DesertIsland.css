@@ -1,0 +1,103 @@
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    background-color: #222222;
+    color: #00a7df;
+}
+table {
+    border-color: #00a7df;
+    border-style: none;
+}
+th {
+    padding: 2px;
+}
+td {
+    border: none;
+    background-color: #333333;
+    padding: 2px;
+    text-align: center;
+    height: 32px;
+}
+
+.titleIcon {
+    width: 24px;
+    height: 24px;
+}
+
+#storage {
+
+}
+#crafters > table > tbody > tr > th:nth-child(4),
+#producers > table > tbody > tr > th:nth-child(3) {
+    width: 110px;
+    max-width: 110px;
+}
+
+#producers {
+    display: inline-block;
+}
+#level {
+    display: inline-flex;
+    width: 110px;
+    max-width: 110px;
+}
+#level > button {
+    display: inline-block;
+}
+
+.resource {
+    display: inline-block;
+    margin: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00a7df;
+    border-radius: 5px;
+    background-color: #444444;
+    padding: 1px;
+    text-align: right;
+    min-width: 60px;
+}
+.availableResource {
+    color: chartreuse;
+}
+.notAvailableResource {
+    color: red;
+}
+
+.Level {
+
+}
+.Material {
+
+}
+.Item {
+
+}
+
+.resource_img {
+    width : 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+.resource_label {
+    display: inline-block;
+    padding-right: 2px;
+}
+
+.progressBar {
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 3px;
+    color: black;
+    width: 100px;
+    background-color: #eee;
+    box-shadow: 0 2px 3px rgba(0,0,0,.2) inset;
+}
+.progressBarIn {
+    border-style: none;
+    border-width: 0px;
+    border-radius: 3px;
+    background-color: #00a7df;
+    text-align: center;
+}
