@@ -15,10 +15,10 @@ const VERSION = "1.0";
 
 function loadEngine() : Engine | null {
 
-    let json = window.localStorage.getItem('DesertIsland');
+    let json = window.localStorage.getItem('Fal');
     if (json != null) {
-        if ((window.localStorage.getItem('DesertIslandVersion') != null)
-            || (window.localStorage.getItem('DesertIslandVersion') == VERSION)) {
+        if ((window.localStorage.getItem('FalVersion') != null)
+            || (window.localStorage.getItem('FalVersion') == VERSION)) {
             let obj : Engine = JSON.parse(json);
             console.log('load engine');
             let curContext : any = window;
@@ -30,8 +30,8 @@ function loadEngine() : Engine | null {
     return null;
 }
 function saveEngine(engine : Engine) {
-    window.localStorage.setItem('DesertIsland', JSON.stringify(engine));
-    window.localStorage.setItem('DesertIslandVersion', VERSION);
+    window.localStorage.setItem('Fal', JSON.stringify(engine));
+    window.localStorage.setItem('FalVersion', VERSION);
 }
 
 var engine : Engine;

@@ -1,9 +1,9 @@
 var VERSION = "1.0";
 function loadEngine() {
-    var json = window.localStorage.getItem('DesertIsland');
+    var json = window.localStorage.getItem('Fal');
     if (json != null) {
-        if ((window.localStorage.getItem('DesertIslandVersion') != null)
-            || (window.localStorage.getItem('DesertIslandVersion') == VERSION)) {
+        if ((window.localStorage.getItem('FalVersion') != null)
+            || (window.localStorage.getItem('FalVersion') == VERSION)) {
             var obj = JSON.parse(json);
             console.log('load engine');
             var curContext = window;
@@ -15,8 +15,8 @@ function loadEngine() {
     return null;
 }
 function saveEngine(engine) {
-    window.localStorage.setItem('DesertIsland', JSON.stringify(engine));
-    window.localStorage.setItem('DesertIslandVersion', VERSION);
+    window.localStorage.setItem('Fal', JSON.stringify(engine));
+    window.localStorage.setItem('FalVersion', VERSION);
 }
 var engine;
 var e = loadEngine();
