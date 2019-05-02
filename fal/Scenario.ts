@@ -110,6 +110,11 @@ class Scenario {
                                                     .atCostOf(Q(1, CODE_VILLE)).and(Q(2, PARRAIN))
                                             )
                                             .spawnResource(Q(1, LEVEL)) // level 6
+                                            .appendTrigger(
+                                                new Trigger("Faluche")
+                                                    .whenReached(Q(1, FALUCHE))
+                                                    .spawnResource(Q(1, LEVEL)) // level 7
+                                            )
                                     )
                             )
                     )

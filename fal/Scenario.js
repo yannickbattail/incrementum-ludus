@@ -66,7 +66,10 @@ var Scenario = (function () {
                 .spawnCrafter(new Crafter("Baptême")
                 .thatCraft(Q(1, FALUCHE))["in"](30).seconds()
                 .atCostOf(Q(1, CODE_VILLE)).and(Q(2, PARRAIN)))
-                .spawnResource(Q(1, LEVEL))))))
+                .spawnResource(Q(1, LEVEL))
+                .appendTrigger(new Trigger("Faluche")
+                .whenReached(Q(1, FALUCHE))
+                .spawnResource(Q(1, LEVEL)))))))
         ];
         return engine;
     };
