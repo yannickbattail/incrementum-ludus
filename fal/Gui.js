@@ -226,4 +226,4 @@ var DesertIslandGui = (function () {
     };
     return DesertIslandGui;
 }());
-//# sourceMappingURL=DesertIslandGui.js.map
+//# sourceMappingURL=Gui.js.map

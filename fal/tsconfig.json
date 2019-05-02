@@ -26,8 +26,8 @@
     "Level.ts",
     "Material.ts",
     "../NodeUpdate/NodeUpdate.ts",
-    "DesertIslandGui.ts",
+    "Gui.ts",
     "Scenario.ts",
-    "DesertIsland.ts"
+    "App.ts"
   ]
 }
