@@ -12,10 +12,13 @@
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
 
-const LEVEL = new Level("level", "level");
-const TEMPS = new Item("temps", "temps");
-const PINS_FILIERE = new Item("pin's filière", "pins");
-const PINS_VILLE = new Item("pin's ville", "pins");
+const LEVEL = new Level("level", "level.svg");
+const TEMPS = new Item("temps", "time.png");
+const PINS_FILIERE = new Item("pin's filière", "pins_gris.png");
+const PINS_VILLE = new Item("pin's ville", "pins.png");
+const PARRAIN = new Item("parrain", "food.svg");
+const CODE_VILLE = new Item("code de ville", "etoile_or.png");
+
 
 class Scenario {
     public static initEngine() : Engine {
@@ -51,14 +54,56 @@ class Scenario {
                 .spawnResource(Q(1, LEVEL)) // level 2
                 .appendTrigger(
                     new Trigger("Impétrent")
-                    .whenReached(Q(50, PINS_FILIERE))
-                    .spawnCrafter(
-                        new Crafter("Apéro fal de ville")
-                            .thatCraft(new RandomRangeQuantity(1, 3, PINS_VILLE))
-                            .in(3).seconds()
-                            .atCostOf(Q(2, TEMPS))
+                        .whenReached(Q(50, PINS_FILIERE))
+                        .spawnCrafter(
+                            new Crafter("Apéro fal de ville")
+                                .thatCraft(new RandomRangeQuantity(1, 3, PINS_VILLE))
+                                .in(3).seconds()
+                                .atCostOf(Q(2, TEMPS))
+                        )
+                        .spawnResource(Q(1, LEVEL)) // level 3
+                    .appendTrigger(
+                        new Trigger("Néo")
+                            .whenReached(Q(20, PINS_VILLE))
+                            .spawnCrafter(
+                                new Crafter("Apéro fal hebdomadaire")
+                                    .thatCraft(Q(3, PINS_VILLE))
+                                    .in(3).seconds()
+                                    .atCostOf(Q(2, TEMPS))
+                                    .canBeSwitchedToAuto()
+                            )
+                            .spawnCrafter(
+                                new Crafter("Trouver des parrains marraines")
+                                    .thatCraft(Q(1, PARRAIN))
+                                    .in(20).seconds()
+                                    .atCostOf(Q(30, PINS_VILLE)).and(Q(30, PINS_FILIERE))
+                            )
+                            .spawnResource(Q(1, LEVEL)) // level 4
+                            .appendTrigger(
+                                new Trigger("Parrainé")
+                                    .whenReached(Q(2, PARRAIN))
+                                    .spawnCrafter(
+                                        new Crafter("Apprentissage du code")
+                                            .thatCraft(Q(1, CODE_VILLE))
+                                            .in(30).seconds()
+                                            .atCostOf(Q(20, PINS_VILLE))
+                                    )
+                                    .spawnResource(Q(1, LEVEL)) // level 5
+                                    .appendTrigger(
+                                        new Trigger("Bâptisable")
+                                            .whenReached(Q(1, CODE_VILLE))
+                                            /*
+                                            .spawnCrafter(
+                                                new Crafter("Apprentissage du code")
+                                                    .thatCraft(Q(1, CODE_VILLE))
+                                                    .in(30).seconds()
+                                                    .atCostOf(Q(20, PINS_VILLE))
+                                            )
+                                            */
+                                            .spawnResource(Q(1, LEVEL)) // level 6
+                                    )
+                            )
                     )
-                    .spawnResource(Q(1, LEVEL)) // level 3
                 )
         ];
         return engine;

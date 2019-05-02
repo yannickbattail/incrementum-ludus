@@ -11,15 +11,14 @@
 /// <reference path="./Level.ts" />
 /// <reference path="../NodeUpdate/NodeUpdate.ts" />
 
-class DesertIslandGui {
-    Engine: Engine;
+class Gui {
     intervalId : number;
-    constructor(engine: Engine) {
-        this.Engine = engine;
+    constructor(private engine: Engine) {
+        this.engine = engine;
     }
 
     private displayLevel(): string {
-        let level = this.Engine.player.getResourceInStorage("level");
+        let level = this.engine.player.getResourceInStorage("level");
         let h = "XXX level";
         if (level != null) {
             h = 'Level: '+this.displayQuantity(level);
@@ -32,10 +31,10 @@ class DesertIslandGui {
         var h = '<table border="1">';
         h += "<tr><th>Resource storage</th></tr>";
         h += "<tr><td>";
-        if (this.Engine.player.getStorage().length <= 1) {
+        if (this.engine.player.getStorage().length <= 1) {
             h += "no resource";
         } else {
-            this.Engine.player.getStorage().forEach(
+            this.engine.player.getStorage().forEach(
                 res => {
                     if (!(res.getResource() instanceof Level)) {
                         h += this.displayQuantity(res);
@@ -51,7 +50,7 @@ class DesertIslandGui {
     private displayProducers(): string {
         var h = '<table border="1">';
         h += "<tr><th>Production</th><th>Resource</th><th>When</th></tr>";
-        this.Engine.producers.forEach(
+        this.engine.producers.forEach(
             producer => {
                 if (producer.isAuto()) {
                     var i = producer.getInterval();
@@ -73,7 +72,7 @@ class DesertIslandGui {
     private displayCrafters(): string {
         var h = '<table border="1">';
         h += "<tr><th>Crafter</th><th>Cost</th><th>It will make</th><th></th></tr>";
-        this.Engine.crafters.forEach(
+        this.engine.crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
         h += "</table>";
@@ -96,7 +95,7 @@ class DesertIslandGui {
         let h = '';
         if (crafter.isCrafting()) {
             h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
-        } else if (!this.Engine.player.hasResources(crafter.getCost())) {
+        } else if (!this.engine.player.hasResources(crafter.getCost())) {
             h += 'Not enough resources';
         } else {
             h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">'
@@ -126,10 +125,10 @@ class DesertIslandGui {
     private displayTree(): string {
         let h = '<table border="1">';
         h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
-        if (this.Engine.triggers.length <= 0){
+        if (this.engine.triggers.length <= 0){
             h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
         } else {
-            h += this.displayBranch(engine.triggers);
+            h += this.displayBranch(this.engine.triggers);
         }
         h += "</table>";
         return h;
@@ -165,7 +164,7 @@ class DesertIslandGui {
         var h = '';
         quantities.forEach(
             resQ => {
-                let storageRes = this.Engine.player.getResourceInStorage(resQ.getResource().getName());
+                let storageRes = this.engine.player.getResourceInStorage(resQ.getResource().getName());
                 let cssClass = 'notAvailableResource';
                 if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                     cssClass = 'availableResource';
@@ -185,7 +184,8 @@ class DesertIslandGui {
         }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() +  '</div>'
-            + ((image=='')?quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + quantity.getResource().getName()
+            + '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">'
             + '</div>';
     }
 
@@ -227,14 +227,14 @@ class DesertIslandGui {
 
     stop() {
         window.clearInterval(this.intervalId);
-        engine.stop();
+        this.engine.stop();
     }
     static eraseStorage() {
-        window.localStorage.removeItem('DesertIsland');
-        window.localStorage.removeItem('DesertIslandVersion');
+        window.localStorage.removeItem('Fal');
+        window.localStorage.removeItem('FalVersion');
     }
     clearStorage() {
-        DesertIslandGui.eraseStorage();
+        Gui.eraseStorage();
     }
     restart() {
         if (window.confirm('It will restart the game from zero. Are you sure?')) {
@@ -244,7 +244,7 @@ class DesertIslandGui {
         }
     }
     fastMode() {
-        engine.fastMode=1000;
+        this.engine.fastMode=1000;
     }
 
     private updateGui() {

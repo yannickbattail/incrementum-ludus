@@ -1,9 +1,10 @@
-var DesertIslandGui = (function () {
-    function DesertIslandGui(engine) {
-        this.Engine = engine;
+var Gui = (function () {
+    function Gui(engine) {
+        this.engine = engine;
+        this.engine = engine;
     }
-    DesertIslandGui.prototype.displayLevel = function () {
-        var level = this.Engine.player.getResourceInStorage("level");
+    Gui.prototype.displayLevel = function () {
+        var level = this.engine.player.getResourceInStorage("level");
         var h = "XXX level";
         if (level != null) {
             h = 'Level: ' + this.displayQuantity(level);
@@ -11,16 +12,16 @@ var DesertIslandGui = (function () {
         h += '<button onclick="gui.restart()">Restart</button>';
         return h;
     };
-    DesertIslandGui.prototype.displayStorage = function () {
+    Gui.prototype.displayStorage = function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>Resource storage</th></tr>";
         h += "<tr><td>";
-        if (this.Engine.player.getStorage().length <= 1) {
+        if (this.engine.player.getStorage().length <= 1) {
             h += "no resource";
         }
         else {
-            this.Engine.player.getStorage().forEach(function (res) {
+            this.engine.player.getStorage().forEach(function (res) {
                 if (!(res.getResource() instanceof Level)) {
                     h += _this.displayQuantity(res);
                 }
@@ -30,11 +31,11 @@ var DesertIslandGui = (function () {
         h += "</table>";
         return h;
     };
-    DesertIslandGui.prototype.displayProducers = function () {
+    Gui.prototype.displayProducers = function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>Production</th><th>Resource</th><th>When</th></tr>";
-        this.Engine.producers.forEach(function (producer) {
+        this.engine.producers.forEach(function (producer) {
             if (producer.isAuto()) {
                 var i = producer.getInterval();
                 var interval = 0;
@@ -52,15 +53,15 @@ var DesertIslandGui = (function () {
         h += "</table>";
         return h;
     };
-    DesertIslandGui.prototype.displayCrafters = function () {
+    Gui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>Crafter</th><th>Cost</th><th>It will make</th><th></th></tr>";
-        this.Engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
+        this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
     };
-    DesertIslandGui.prototype.displayCrafter = function (crafter) {
+    Gui.prototype.displayCrafter = function (crafter) {
         var h = "<tr>";
         h += '<td>' + crafter.getName() + '</td>';
         h += "<td>";
@@ -71,12 +72,12 @@ var DesertIslandGui = (function () {
         h += '</tr>';
         return h;
     };
-    DesertIslandGui.prototype.displayCraftButton = function (crafter) {
+    Gui.prototype.displayCraftButton = function (crafter) {
         var h = '';
         if (crafter.isCrafting()) {
             h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
         }
-        else if (!this.Engine.player.hasResources(crafter.getCost())) {
+        else if (!this.engine.player.hasResources(crafter.getCost())) {
             h += 'Not enough resources';
         }
         else {
@@ -85,7 +86,7 @@ var DesertIslandGui = (function () {
         }
         return h;
     };
-    DesertIslandGui.prototype.displayAutoCraft = function (crafter) {
+    Gui.prototype.displayAutoCraft = function (crafter) {
         var h = '<br />[';
         if (!crafter.isAutomatable()) {
             if (crafter.isAuto()) {
@@ -104,19 +105,19 @@ var DesertIslandGui = (function () {
         h += ']';
         return h;
     };
-    DesertIslandGui.prototype.displayTree = function () {
+    Gui.prototype.displayTree = function () {
         var h = '<table border="1">';
         h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
-        if (this.Engine.triggers.length <= 0) {
+        if (this.engine.triggers.length <= 0) {
             h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
         }
         else {
-            h += this.displayBranch(engine.triggers);
+            h += this.displayBranch(this.engine.triggers);
         }
         h += "</table>";
         return h;
     };
-    DesertIslandGui.prototype.displayBranch = function (triggers) {
+    Gui.prototype.displayBranch = function (triggers) {
         var _this = this;
         var h = '';
         triggers.forEach(function (trig) {
@@ -130,16 +131,16 @@ var DesertIslandGui = (function () {
         });
         return h;
     };
-    DesertIslandGui.prototype.displayQuantities = function (quantities) {
+    Gui.prototype.displayQuantities = function (quantities) {
         var _this = this;
         return quantities.map(function (resQ) { return _this.displayQuantity(resQ); })
             .join(' ');
     };
-    DesertIslandGui.prototype.displayAvailableQuantities = function (quantities) {
+    Gui.prototype.displayAvailableQuantities = function (quantities) {
         var _this = this;
         var h = '';
         quantities.forEach(function (resQ) {
-            var storageRes = _this.Engine.player.getResourceInStorage(resQ.getResource().getName());
+            var storageRes = _this.engine.player.getResourceInStorage(resQ.getResource().getName());
             var cssClass = 'notAvailableResource';
             if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                 cssClass = 'availableResource';
@@ -149,7 +150,7 @@ var DesertIslandGui = (function () {
         h += '';
         return h;
     };
-    DesertIslandGui.prototype.displayQuantity = function (quantity, optionnalCss) {
+    Gui.prototype.displayQuantity = function (quantity, optionnalCss) {
         if (optionnalCss === void 0) { optionnalCss = ''; }
         var res = quantity.getResource();
         var image = '';
@@ -158,10 +159,11 @@ var DesertIslandGui = (function () {
         }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() + '</div>'
-            + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + quantity.getResource().getName()
+            + '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">'
             + '</div>';
     };
-    DesertIslandGui.prototype.displayTime = function (miliSeconds) {
+    Gui.prototype.displayTime = function (miliSeconds) {
         if (miliSeconds == null) {
             return '';
         }
@@ -176,54 +178,54 @@ var DesertIslandGui = (function () {
         time += Math.round(miliSeconds / 1000) + 's';
         return time;
     };
-    DesertIslandGui.prototype.displayProgress = function (startTime, duration) {
+    Gui.prototype.displayProgress = function (startTime, duration) {
         var progress = this.calculateProgress(startTime);
         return this.formatProgress(progress / duration, this.displayTime(duration - progress));
     };
-    DesertIslandGui.prototype.calculateProgress = function (startTime) {
+    Gui.prototype.calculateProgress = function (startTime) {
         if (startTime == null) {
             return 0;
         }
         return (new Date().getTime() - startTime.getTime());
     };
-    DesertIslandGui.prototype.formatProgress = function (percent01, text) {
+    Gui.prototype.formatProgress = function (percent01, text) {
         var percent100 = Math.round(percent01 * 100);
         return '<div class="progressBar">' +
             '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + text + '</div>' +
             '</div>';
     };
-    DesertIslandGui.prototype.stop = function () {
+    Gui.prototype.stop = function () {
         window.clearInterval(this.intervalId);
-        engine.stop();
+        this.engine.stop();
     };
-    DesertIslandGui.eraseStorage = function () {
-        window.localStorage.removeItem('DesertIsland');
-        window.localStorage.removeItem('DesertIslandVersion');
+    Gui.eraseStorage = function () {
+        window.localStorage.removeItem('Fal');
+        window.localStorage.removeItem('FalVersion');
     };
-    DesertIslandGui.prototype.clearStorage = function () {
-        DesertIslandGui.eraseStorage();
+    Gui.prototype.clearStorage = function () {
+        Gui.eraseStorage();
     };
-    DesertIslandGui.prototype.restart = function () {
+    Gui.prototype.restart = function () {
         if (window.confirm('It will restart the game from zero. Are you sure?')) {
             this.stop();
             this.clearStorage();
             window.location.reload();
         }
     };
-    DesertIslandGui.prototype.fastMode = function () {
-        engine.fastMode = 1000;
+    Gui.prototype.fastMode = function () {
+        this.engine.fastMode = 1000;
     };
-    DesertIslandGui.prototype.updateGui = function () {
+    Gui.prototype.updateGui = function () {
         NodeUpdate.updateDiv('level', this.displayLevel());
         NodeUpdate.updateDiv('storage', this.displayStorage());
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());
     };
-    DesertIslandGui.prototype.start = function (refreshInterval) {
+    Gui.prototype.start = function (refreshInterval) {
         var _this = this;
         this.intervalId = window.setInterval(function () { return _this.updateGui(); }, refreshInterval);
     };
-    return DesertIslandGui;
+    return Gui;
 }());
 //# sourceMappingURL=Gui.js.map
