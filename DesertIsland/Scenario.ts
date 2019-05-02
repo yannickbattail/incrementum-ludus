@@ -217,7 +217,10 @@ class Scenario {
             triggerStarvation,
             new Trigger("carry water in clay pot")
                 .whenReached(Q(1, CLAY_POT))
-                .spawnProducer(new Producer("carry water").thatProduce(new RandomRangeQuantity(60, 110, WATER)).manualy())
+                .spawnProducer(
+                    new Producer("carry water")
+                        .thatProduce(new RandomRangeQuantity(60, 110, WATER))
+                        .manualy())
                 .spawnResource(Q(-1, CLAY_POT))
                 .spawnResource(Q(1, LEVEL)) // level 2
             ,
