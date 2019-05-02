@@ -16,6 +16,7 @@
     "interfaces/ITrigger.ts",
     "implementations/Resource.ts",
     "implementations/Quantity.ts",
+    "implementations/NamedStepResource.ts",
     "implementations/RandomRangeQuantity.ts",
     "implementations/RandomResource.ts",
     "implementations/Crafter.ts",
