@@ -8,16 +8,27 @@
 
 /// <reference path="../Engine/implementations/RandomResource.ts" />
 /// <reference path="../Engine/implementations/RandomRangeQuantity.ts" />
+/// <reference path="../Engine/implementations/NamedStepResource.ts" />
 /// <reference path="./Material.ts" />
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
 
-const LEVEL = new Level("level", "level.svg");
+const LEVEL = new NamedStepResource("level", "level.svg", [
+    "NOTHING",
+    "Moldus",
+    "Sympatisant",
+    "Impétrent",
+    "Néo",
+    "Parrainé",
+    "Baptisable",
+    "Faluchard"
+]);
 const TEMPS = new Item("temps", "time.png");
 const PINS_FILIERE = new Item("pin's filière", "pins_gris.png");
 const PINS_VILLE = new Item("pin's ville", "pins.png");
 const PARRAIN = new Item("parrain", "food.svg");
 const CODE_VILLE = new Item("code de ville", "etoile_or.png");
+const FALUCHE = new Item("faluche", "faluche.png");
 
 
 class Scenario {
@@ -90,16 +101,14 @@ class Scenario {
                                     )
                                     .spawnResource(Q(1, LEVEL)) // level 5
                                     .appendTrigger(
-                                        new Trigger("Bâptisable")
+                                        new Trigger("Baptisable")
                                             .whenReached(Q(1, CODE_VILLE))
-                                            /*
                                             .spawnCrafter(
-                                                new Crafter("Apprentissage du code")
-                                                    .thatCraft(Q(1, CODE_VILLE))
+                                                new Crafter("Baptême")
+                                                    .thatCraft(Q(1, FALUCHE))
                                                     .in(30).seconds()
-                                                    .atCostOf(Q(20, PINS_VILLE))
+                                                    .atCostOf(Q(1, CODE_VILLE)).and(Q(2, PARRAIN))
                                             )
-                                            */
                                             .spawnResource(Q(1, LEVEL)) // level 6
                                     )
                             )

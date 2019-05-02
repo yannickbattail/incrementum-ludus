@@ -1,9 +1,19 @@
-var LEVEL = new Level("level", "level.svg");
+var LEVEL = new NamedStepResource("level", "level.svg", [
+    "NOTHING",
+    "Moldus",
+    "Sympatisant",
+    "Impétrent",
+    "Néo",
+    "Parrainé",
+    "Baptisable",
+    "Faluchard"
+]);
 var TEMPS = new Item("temps", "time.png");
 var PINS_FILIERE = new Item("pin's filière", "pins_gris.png");
 var PINS_VILLE = new Item("pin's ville", "pins.png");
 var PARRAIN = new Item("parrain", "food.svg");
 var CODE_VILLE = new Item("code de ville", "etoile_or.png");
+var FALUCHE = new Item("faluche", "faluche.png");
 var Scenario = (function () {
     function Scenario() {
     }
@@ -51,8 +61,11 @@ var Scenario = (function () {
                 .thatCraft(Q(1, CODE_VILLE))["in"](30).seconds()
                 .atCostOf(Q(20, PINS_VILLE)))
                 .spawnResource(Q(1, LEVEL))
-                .appendTrigger(new Trigger("Bâptisable")
+                .appendTrigger(new Trigger("Baptisable")
                 .whenReached(Q(1, CODE_VILLE))
+                .spawnCrafter(new Crafter("Baptême")
+                .thatCraft(Q(1, FALUCHE))["in"](30).seconds()
+                .atCostOf(Q(1, CODE_VILLE)).and(Q(2, PARRAIN)))
                 .spawnResource(Q(1, LEVEL))))))
         ];
         return engine;
