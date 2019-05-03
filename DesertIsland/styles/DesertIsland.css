@@ -104,23 +104,16 @@ button {
 
 progress {
     width: 100px;
-    height: 4px;
+    height: 3px;
 }
-
-.progressBar {
-    border-style: solid;
-    border-width: 1px;
-    border-color: gray;
-    border-radius: 3px;
-    color: black;
-    width: 100px;
-    background-color: #eee;
-    box-shadow: 0 2px 3px rgba(0,0,0,.2) inset;
+progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    appearance: none;
 }
-.progressBarIn {
-    border-style: none;
-    border-width: 0px;
-    border-radius: 3px;
+progress[value]::-webkit-progress-bar {
+    background-color: white;
+}
+progress[value]::-webkit-progress-value {
     background-color: var(--text-color);
-    text-align: center;
 }
