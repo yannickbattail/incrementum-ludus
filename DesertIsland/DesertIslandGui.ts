@@ -72,7 +72,7 @@ class DesertIslandGui {
     }
     private displayCrafters(): string {
         var h = '<table border="1">';
-        h += "<tr><th>Crafter</th><th>Cost</th><th>It will make</th><th></th></tr>";
+        h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
         this.Engine.crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
@@ -81,46 +81,32 @@ class DesertIslandGui {
     }
 
     private displayCrafter(crafter : ICrafter) : string {
-        let h = "<tr>";
-        h += '<td>' + crafter.getName() + '</td>';
-        h += "<td>"
-        h += this.displayAvailableQuantities(crafter.getCost());
-        h += "</td>"
+        let h = '<tr>';
+        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
-        h += '<td>' + this.displayCraftButton(crafter) + this.displayAutoCraft(crafter) + '</td>';
+        h += '<td>' + this.displayAvailableQuantities(crafter.getCost()) + '</td>';
         h += '</tr>';
         return h;
     }
 
     private displayCraftButton(crafter : ICrafter) : string {
-        let h = '';
-        if (crafter.isCrafting()) {
-            h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
-        } else if (!this.Engine.player.hasResources(crafter.getCost())) {
-            h += 'Not enough resources';
-        } else {
-            h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">'
-                + 'craft ('+this.displayTime(crafter.getDuration())+')</button>';
-        }
+        let h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
+                + (!this.Engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Not enough resources"':'') + '>'
+                + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
+                + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+                +'</button>';
+        
         return h;
     }
 
     private displayAutoCraft(crafter : ICrafter) : string {
-        let h = '<br />[';
-        if (!crafter.isAutomatable()) {
-            if (crafter.isAuto()) {
-                h += 'Auto';
-            } else {
-                h += 'Manual';
-            }
-        } else {
-            h += '<label>'
-            + '<input type="checkbox" onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
-            +   (crafter.isAuto()?' checked="checked"':'')+' />'
-            + 'Auto</label>';
+        if (crafter.isAutomatable()) {
+            return '<input type="checkbox" '
+                + 'onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
+                + 'title="Auto" '
+                + (crafter.isAuto()?' checked="checked"':'') + ' />';
         }
-        h += ']';
-        return h;
+        return '';
     }
 
     private displayTree(): string {
@@ -219,10 +205,7 @@ class DesertIslandGui {
 
     private formatProgress(percent01 : number, text : string) : string {
         var percent100 = Math.round(percent01 * 100);
-        //return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
-        return '<div class="progressBar">' +
-            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + text + '</div>' +
-            '</div>';
+        return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     }
 
     stop() {

@@ -1,22 +1,37 @@
+
+.origin-theme {
+	--background-color : #333333;
+	--dark-background-color : #222222;
+	--text-color : #00a7df;
+}
+
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10pt;
-    background-color: #222222;
-    color: #00a7df;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 table {
-    border-color: #00a7df;
+    border-color: var(--text-color);
     border-style: none;
 }
-th {
-    padding: 2px;
-}
-td {
+
+td, th {
     border: none;
-    background-color: #333333;
+    background-color: var(--dark-background-color);
     padding: 2px;
     text-align: center;
     height: 32px;
+}
+
+button {
+    border-radius: 4px;
+    border-width: 2px;
+    border-style: outset;
+    color: var(--text-color);
+    border-color: var(--background-color);
+    background-color: var(--background-color);
+
 }
 
 .titleIcon {
@@ -50,9 +65,9 @@ td {
     margin: 2px;
     border-width: 1px;
     border-style: solid;
-    border-color: #00a7df;
+    border-color: var(--text-color);
     border-radius: 5px;
-    background-color: #444444;
+    background-color: var(--background-color);
     padding: 1px;
     text-align: right;
     min-width: 60px;
@@ -84,6 +99,11 @@ td {
     padding-right: 2px;
 }
 
+progress {
+    width: 100px;
+    height: 4px;
+}
+
 .progressBar {
     border-style: solid;
     border-width: 1px;
@@ -98,6 +118,6 @@ td {
     border-style: none;
     border-width: 0px;
     border-radius: 3px;
-    background-color: #00a7df;
+    background-color: var(--text-color);
     text-align: center;
 }
