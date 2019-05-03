@@ -23,6 +23,9 @@ td, th {
     text-align: center;
     height: 32px;
 }
+th {
+    background-color: black;
+}
 
 button {
     border-radius: 4px;
