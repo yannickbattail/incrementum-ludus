@@ -50,7 +50,7 @@ class DesertIslandGui {
 
     private displayProducers(): string {
         var h = '<table border="1">';
-        h += "<tr><th>Production</th><th>Resource</th><th>When</th></tr>";
+        h += '<tr><th>Production</th><th>Resource</th></tr>';
         this.Engine.producers.forEach(
             producer => {
                 if (producer.isAuto()) {
@@ -59,15 +59,19 @@ class DesertIslandGui {
                     if (i != null) {
                         interval = i;
                     }
-                    h += "<tr><td>" + producer.getName() + "</td><td>" + this.displayQuantities(producer.getResourcesQuantity()) + "</td>"
-                        + "<td>"+ this.displayProgress(producer.getStartTime(), interval) + "</td></tr>"
+                    h += '<tr>'
+                        + '<td>' + producer.getName() + '<br />' + this.displayProgress(producer.getStartTime(), interval) + '</td>'
+                        + '<td>' + this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
+                        + '</tr>'
                 } else {
-                    h += "<tr><td>" + producer.getName() + "</td><td>" + this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
-                        + '<td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>'
+                    h += '<tr>'
+                        + '<td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">' + producer.getName() + '</button></td>'
+                        + '<td>' + this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
+                        + '</tr>'
                 }
             }
         );
-        h += "</table>";
+        h += '</table>';
         return h;
     }
     private displayCrafters(): string {

@@ -1,4 +1,4 @@
-var VERSION = "2.2";
+var VERSION = "2.3";
 function loadEngine() {
     var json = window.localStorage.getItem('DesertIsland');
     if (json != null) {
