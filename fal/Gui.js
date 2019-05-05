@@ -34,7 +34,7 @@ var Gui = (function () {
     Gui.prototype.displayProducers = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>Production</th><th>Resource</th><th>When</th></tr>";
+        h += '<tr><th>Production</th><th>Resource</th></tr>';
         this.engine.producers.forEach(function (producer) {
             if (producer.isAuto()) {
                 var i = producer.getInterval();
@@ -42,77 +42,62 @@ var Gui = (function () {
                 if (i != null) {
                     interval = i;
                 }
-                h += "<tr><td>" + producer.getName() + "</td><td>" + _this.displayQuantities(producer.getResourcesQuantity()) + "</td>"
-                    + "<td>" + _this.displayProgress(producer.getStartTime(), interval) + "</td></tr>";
+                h += '<tr>'
+                    + '<td>' + producer.getName() + '<br />' + _this.displayProgress(producer.getStartTime(), interval) + '</td>'
+                    + '<td>' + _this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
+                    + '</tr>';
             }
             else {
-                h += "<tr><td>" + producer.getName() + "</td><td>" + _this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
-                    + '<td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">Collect</button></td></tr>';
+                h += '<tr>'
+                    + '<td><button onclick="engine.collectProducer(\'' + producer.getName() + '\');">' + producer.getName() + '</button></td>'
+                    + '<td>' + _this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
+                    + '</tr>';
             }
         });
-        h += "</table>";
+        h += '</table>';
         return h;
     };
     Gui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>Crafter</th><th>Cost</th><th>It will make</th><th></th></tr>";
+        h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
         this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
     };
     Gui.prototype.displayCrafter = function (crafter) {
-        var h = "<tr>";
-        h += '<td>' + crafter.getName() + '</td>';
-        h += "<td>";
-        h += this.displayAvailableQuantities(crafter.getCost());
-        h += "</td>";
+        var h = '<tr>';
+        h += '<td>' + this.displayCraftButton(crafter) + '</td>';
         h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
-        h += '<td>' + this.displayCraftButton(crafter) + this.displayAutoCraft(crafter) + '</td>';
+        h += '<td>' + this.displayAvailableQuantities(crafter.getCost()) + '</td>';
         h += '</tr>';
         return h;
     };
     Gui.prototype.displayCraftButton = function (crafter) {
-        var h = '';
-        if (crafter.isCrafting()) {
-            h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
-        }
-        else if (!this.engine.player.hasResources(crafter.getCost())) {
-            h += 'Not enough resources';
-        }
-        else {
-            h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">'
-                + 'craft (' + this.displayTime(crafter.getDuration()) + ')</button>';
-        }
+        var h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
+            + (!this.engine.player.hasResources(crafter.getCost()) ? ' disabled="disabled" title="Not enough resources"' : '') + '>'
+            + this.displayAutoCraft(crafter) + crafter.getName() + ' (' + this.displayTime(crafter.getDuration()) + ')'
+            + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+            + '</button>';
         return h;
     };
     Gui.prototype.displayAutoCraft = function (crafter) {
-        var h = '<br />[';
-        if (!crafter.isAutomatable()) {
-            if (crafter.isAuto()) {
-                h += 'Auto';
-            }
-            else {
-                h += 'Manual';
-            }
+        if (crafter.isAutomatable()) {
+            return '<input type="checkbox" '
+                + 'onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
+                + 'title="Auto" '
+                + (crafter.isAuto() ? ' checked="checked"' : '') + ' />';
         }
-        else {
-            h += '<label>'
-                + '<input type="checkbox" onclick="engine.switchAutoCrafting(\'' + crafter.getName() + '\');" '
-                + (crafter.isAuto() ? ' checked="checked"' : '') + ' />'
-                + 'Auto</label>';
-        }
-        h += ']';
-        return h;
+        return '';
     };
     Gui.prototype.displayTree = function () {
         var h = '<table border="1">';
         h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
-        if (this.engine.triggers.length <= 0) {
+        if (this.engine.triggers.length <= 1) {
             h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
         }
         else {
-            h += this.displayBranch(this.engine.triggers);
+            h += this.displayBranch(engine.triggers);
         }
         h += "</table>";
         return h;
@@ -159,8 +144,7 @@ var Gui = (function () {
         }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() + '</div>'
-            + quantity.getResource().getName()
-            + '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">'
+            + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
             + '</div>';
     };
     Gui.prototype.displayTime = function (miliSeconds) {
@@ -190,13 +174,11 @@ var Gui = (function () {
     };
     Gui.prototype.formatProgress = function (percent01, text) {
         var percent100 = Math.round(percent01 * 100);
-        return '<div class="progressBar">' +
-            '<div class="progressBarIn" style="width:' + percent100 + 'px;">' + text + '</div>' +
-            '</div>';
+        return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     };
     Gui.prototype.stop = function () {
         window.clearInterval(this.intervalId);
-        this.engine.stop();
+        engine.stop();
     };
     Gui.eraseStorage = function () {
         window.localStorage.removeItem('Fal');
@@ -213,7 +195,7 @@ var Gui = (function () {
         }
     };
     Gui.prototype.fastMode = function () {
-        this.engine.fastMode = 1000;
+        engine.fastMode = 1000;
     };
     Gui.prototype.updateGui = function () {
         NodeUpdate.updateDiv('level', this.displayLevel());
