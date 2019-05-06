@@ -17,7 +17,7 @@ const LEVEL = new NamedStepResource("level", "level.svg", [
     "NOTHING",
     "Moldus",
     "Sympatisant",
-    "Impétrent",
+    "Impétrant",
     "Néo",
     "Parrainé",
     "Baptisable",
