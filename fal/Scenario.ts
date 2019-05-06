@@ -94,6 +94,11 @@ class Scenario {
                 .appendTrigger(
                     new Trigger("Impétrent")
                         .whenReached(Q(50, PINS_INGE))
+                        .spawnProducer(
+                            new Producer("Temps / jours")
+                                .thatProduce(Q(10, TEMPS))
+                                .every(30).seconds()
+                        )
                         .spawnCrafter(
                             new Crafter("Apéro fal de ville")
                                 .thatCraft(new RandomResource(1, PINS_INGE, 0.3))
@@ -188,7 +193,7 @@ class Scenario {
             .spawnResource(Q(1, LEVEL)) // level 7
             .spawnProducer(
                 new Producer("Temps / jours")
-                    .thatProduce(Q(30, TEMPS))
+                    .thatProduce(Q(10, TEMPS))
                     .every(30).seconds()
             )
             .spawnCrafter(
