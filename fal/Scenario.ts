@@ -84,7 +84,7 @@ class Scenario {
             new Trigger("Sympatisant")
                 .whenReached(Q(5, PINS_INGE))
                 .spawnCrafter(
-                    new Crafter("Apéro filière")
+                    new Crafter("Apéro ingé")
                         .thatCraft(new RandomRangeQuantity(2, 5, PINS_INGE))
                         .andCraft(new RandomResource(1, PINS_SCIENCES, 0.02))
                         .in(2).seconds()
@@ -100,7 +100,7 @@ class Scenario {
                                 .every(30).seconds()
                         )
                         .spawnCrafter(
-                            new Crafter("Apéro fal de ville")
+                            new Crafter("Apéro fal lyonnais")
                                 .thatCraft(new RandomResource(1, PINS_INGE, 0.3))
                                 .thatCraft(new RandomResource(1, PINS_SCIENCES, 0.3))
                                 .thatCraft(new RandomResource(1, PINS_DROIT, 0.3))
