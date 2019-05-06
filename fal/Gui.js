@@ -15,7 +15,7 @@ var Gui = (function () {
     Gui.prototype.displayStorage = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>Resource storage</th></tr>";
+        h += "<tr><th>Sac à pin's</th></tr>";
         h += "<tr><td>";
         if (this.engine.player.getStorage().length <= 1) {
             h += "no resource";
@@ -60,7 +60,7 @@ var Gui = (function () {
     Gui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
+        h += "<tr><th>Faire</th><th>Va donner</th><th>Coût</th></tr>";
         this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
@@ -92,9 +92,9 @@ var Gui = (function () {
     };
     Gui.prototype.displayTree = function () {
         var h = '<table border="1">';
-        h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
+        h += "<tr><th>Objectifs</th><th>Atteindre</th><th>Récompense</th></tr>";
         if (this.engine.triggers.length <= 0) {
-            h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
+            h += '<tr><td colspan="3"><b>Vous avez gagné!</b> Fini! (pour le moment, en attendant la prochaine évolution du jeux)</td></tr>';
         }
         else {
             h += this.displayBranch(engine.triggers);
@@ -109,9 +109,9 @@ var Gui = (function () {
             h += "<tr>"
                 + "<td>" + trig.getName() + "</td>"
                 + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                + "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Producers</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnCrafters().length) ? ' <b>Crafters</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnResources().length) ? ' <b>Resources</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
+                + "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Production</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
+                + ((trig.getSpawnCrafters().length) ? ' <b>Tâche</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
+                + ((trig.getSpawnResources().length) ? ' <b>Ressources</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
                 + "</tr>";
         });
         return h;
@@ -189,7 +189,7 @@ var Gui = (function () {
         Gui.eraseStorage();
     };
     Gui.prototype.restart = function () {
-        if (window.confirm('It will restart the game from zero. Are you sure?')) {
+        if (window.confirm('Ça va redémarrer le jeu depuis wéro. sûre?')) {
             this.stop();
             this.clearStorage();
             window.location.reload();
