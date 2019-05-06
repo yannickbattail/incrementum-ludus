@@ -29,7 +29,7 @@ const PARRAIN = new Item("parrain", "food.svg");
 const CODE_VILLE = new Item("code de ville", "etoile_or.png");
 const POULE = new Item("poule", "poule.png");
 
-const FALUCHE = new Item("adoption", "faluche.png");
+const FALUCHE = new Item("Faluche", "faluche.png");
 
 const ADOPTION_INGE = new Item("adoption ingé", "faluche.png");
 const ADOPTION_SCIENCES = new Item("adoption sciences", "faluche.png");
