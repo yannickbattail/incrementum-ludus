@@ -40,14 +40,14 @@ const ADOPTION_SAGE_POUF    = new Item("adoption sage-pouf", "faluche.png");
 const ADOPTION_PHARMA       = new Item("adoption Pharma", "faluche.png");
 const ADOPTION_MEDECINE     = new Item("adoption Médecine", "faluche.png");
 
-const PINS_INGE             = new Item("pin's ingé", "pins_gris.png");
-const PINS_SCIENCES         = new Item("pin's sciences", "pins_gris.png");
-const PINS_DROIT            = new Item("pin's droit", "pins_gris.png");
-const PINS_JAUNE            = new Item("pin's jaune", "pins_gris.png");
-const PINS_ROSE             = new Item("pin's rose", "pins_gris.png");
-const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "pins_gris.png");
-const PINS_PHARMA           = new Item("pin's Pharma", "pins_gris.png");
-const PINS_MEDECINE         = new Item("pin's Médecine", "pins_gris.png");
+const PINS_INGE             = new Item("pin's ingé", "etoile et foudre.png");
+const PINS_SCIENCES         = new Item("pin's sciences", "palmes croisees.png");
+const PINS_DROIT            = new Item("pin's droit", "balance romaine.png");
+const PINS_JAUNE            = new Item("pin's jaune", "livre ouvert et plume.png");
+const PINS_ROSE             = new Item("pin's rose", "ciseaux.png");
+const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "croix ankh.png");
+const PINS_PHARMA           = new Item("pin's Pharma", "caducee pharmacie.png");
+const PINS_MEDECINE         = new Item("pin's Médecine", "caducee medecine.png");
 
 const PINS_GRENOBLE         = new Item("pin's Grenoble", "pins.png"); // 113km
 const PINS_VALENCE          = new Item("pin's Valence", "pins.png"); // 104km
