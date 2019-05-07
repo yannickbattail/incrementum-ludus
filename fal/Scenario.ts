@@ -49,14 +49,15 @@ const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "croix ankh.png");
 const PINS_PHARMA           = new Item("pin's Pharma", "caducee pharmacie.png");
 const PINS_MEDECINE         = new Item("pin's Médecine", "caducee medecine.png");
 
-const PINS_GRENOBLE         = new Item("pin's Grenoble", "pins.png"); // 113km
-const PINS_VALENCE          = new Item("pin's Valence", "pins.png"); // 104km
-const PINS_CLERMONT         = new Item("pin's Clermont", "pins.png"); // 165km
-const PINS_DIJON            = new Item("pin's Dijon", "pins.png"); // 197km
-const PINS_MONPEUL          = new Item("pin's Monpeul", "pins.png"); // 306km
-const PINS_MARSEILLE        = new Item("pin's Marseille", "pins.png"); // 315km
-const PINS_NANCY            = new Item("pin's Nancy", "pins.png"); // 407km
-const PINS_STASBOURG        = new Item("pin's Strasbourg", "pins.png"); // 492km
+const PINS_LYON             = new Item("pin's LYON", "Lyon.png"); // 0km
+const PINS_GRENOBLE         = new Item("pin's Grenoble", "Grenoble.svg"); // 113km
+const PINS_VALENCE          = new Item("pin's Valence", "Valence.svg"); // 104km
+const PINS_CLERMONT         = new Item("pin's Clermont", "ClermontFerrand.svg"); // 165km
+const PINS_DIJON            = new Item("pin's Dijon", "Dijon.svg"); // 197km
+const PINS_MONPEUL          = new Item("pin's Monpeul", "Montpellier.svg"); // 306km
+const PINS_MARSEILLE        = new Item("pin's Marseille", "Marseille.svg"); // 315km
+const PINS_NANCY            = new Item("pin's Nancy", "Nancy.svg"); // 407km
+const PINS_STASBOURG        = new Item("pin's Strasbourg", "Strasbourg.svg"); // 492km
 
 
 let Q = (quantity : number, res : IResource) => new Quantity(quantity, res);
