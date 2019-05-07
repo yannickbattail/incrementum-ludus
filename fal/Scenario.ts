@@ -31,33 +31,33 @@ const POULE                 = new Item("poule", "poule.png");
 
 const FALUCHE               = new Item("Faluche", "faluche.png");
 
-const ADOPTION_INGE         = new Item("adoption ingé", "adopt_inge.png");
-const ADOPTION_SCIENCES     = new Item("adoption sciences", "adopt_sciences.png");
-const ADOPTION_DROIT        = new Item("adoption droit", "adopt_droit.png");
-const ADOPTION_JAUNE        = new Item("adoption jaune", "adopt_jaune.png");
-const ADOPTION_ROSE         = new Item("adoption rose", "adopt_paramed.png");
-const ADOPTION_SAGE_POUF    = new Item("adoption sage-pouf", "adopt_sage-pouf.png");
-const ADOPTION_PHARMA       = new Item("adoption Pharma", "adopt_pharma.png");
-const ADOPTION_MEDECINE     = new Item("adoption Médecine", "adopt_medecine.png");
+const ADOPTION_INGE         = new Item("adoption ingé", "filieres/adopt_inge.png");
+const ADOPTION_SCIENCES     = new Item("adoption sciences", "filieres/adopt_sciences.png");
+const ADOPTION_DROIT        = new Item("adoption droit", "filieres/adopt_droit.png");
+const ADOPTION_JAUNE        = new Item("adoption jaune", "filieres/adopt_jaune.png");
+const ADOPTION_ROSE         = new Item("adoption rose", "filieres/adopt_paramed.png");
+const ADOPTION_SAGE_POUF    = new Item("adoption sage-pouf", "filieres/adopt_sage-pouf.png");
+const ADOPTION_PHARMA       = new Item("adoption Pharma", "filieres/adopt_pharma.png");
+const ADOPTION_MEDECINE     = new Item("adoption Médecine", "filieres/adopt_medecine.png");
 
-const PINS_INGE             = new Item("pin's ingé", "etoile et foudre.png");
-const PINS_SCIENCES         = new Item("pin's sciences", "palmes croisees.png");
-const PINS_DROIT            = new Item("pin's droit", "balance romaine.png");
-const PINS_JAUNE            = new Item("pin's jaune", "livre ouvert et plume.png");
-const PINS_ROSE             = new Item("pin's rose", "ciseaux.png");
-const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "croix ankh.png");
-const PINS_PHARMA           = new Item("pin's Pharma", "caducee pharmacie.png");
-const PINS_MEDECINE         = new Item("pin's Médecine", "caducee medecine.png");
+const PINS_INGE             = new Item("pin's ingé", "filieres/etoile et foudre.png");
+const PINS_SCIENCES         = new Item("pin's sciences", "filieres/palmes croisees.png");
+const PINS_DROIT            = new Item("pin's droit", "filieres/balance romaine.png");
+const PINS_JAUNE            = new Item("pin's jaune", "filieres/livre ouvert et plume.png");
+const PINS_ROSE             = new Item("pin's rose", "filieres/ciseaux.png");
+const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "filieres/croix ankh.png");
+const PINS_PHARMA           = new Item("pin's Pharma", "filieres/caducee pharmacie.png");
+const PINS_MEDECINE         = new Item("pin's Médecine", "filieres/caducee medecine.png");
 
-const PINS_LYON             = new Item("pin's LYON", "Lyon.png"); // 0km
-const PINS_GRENOBLE         = new Item("pin's Grenoble", "Grenoble.svg"); // 113km
-const PINS_VALENCE          = new Item("pin's Valence", "Valence.svg"); // 104km
-const PINS_CLERMONT         = new Item("pin's Clermont", "ClermontFerrand.svg"); // 165km
-const PINS_DIJON            = new Item("pin's Dijon", "Dijon.svg"); // 197km
-const PINS_MONPEUL          = new Item("pin's Monpeul", "Montpellier.svg"); // 306km
-const PINS_MARSEILLE        = new Item("pin's Marseille", "Marseille.svg"); // 315km
-const PINS_NANCY            = new Item("pin's Nancy", "Nancy.svg"); // 407km
-const PINS_STASBOURG        = new Item("pin's Strasbourg", "Strasbourg.svg"); // 492km
+const PINS_LYON             = new Item("pin's LYON", "villes/Lyon.png"); // 0km
+const PINS_GRENOBLE         = new Item("pin's Grenoble", "villes/Grenoble.svg"); // 113km
+const PINS_VALENCE          = new Item("pin's Valence", "villes/Valence.svg"); // 104km
+const PINS_CLERMONT         = new Item("pin's Clermont", "villes/ClermontFerrand.svg"); // 165km
+const PINS_DIJON            = new Item("pin's Dijon", "villes/Dijon.svg"); // 197km
+const PINS_MONPEUL          = new Item("pin's Monpeul", "villes/Montpellier.svg"); // 306km
+const PINS_MARSEILLE        = new Item("pin's Marseille", "villes/Marseille.svg"); // 315km
+const PINS_NANCY            = new Item("pin's Nancy", "villes/Nancy.svg"); // 407km
+const PINS_STASBOURG        = new Item("pin's Strasbourg", "villes/Strasbourg.svg"); // 492km
 
 
 let Q = (quantity : number, res : IResource) => new Quantity(quantity, res);
