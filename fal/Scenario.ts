@@ -31,14 +31,14 @@ const POULE                 = new Item("poule", "poule.png");
 
 const FALUCHE               = new Item("Faluche", "faluche.png");
 
-const ADOPTION_INGE         = new Item("adoption ingé", "faluche.png");
-const ADOPTION_SCIENCES     = new Item("adoption sciences", "faluche.png");
-const ADOPTION_DROIT        = new Item("adoption droit", "faluche.png");
-const ADOPTION_JAUNE        = new Item("adoption jaune", "faluche.png");
-const ADOPTION_ROSE         = new Item("adoption rose", "faluche.png");
-const ADOPTION_SAGE_POUF    = new Item("adoption sage-pouf", "faluche.png");
-const ADOPTION_PHARMA       = new Item("adoption Pharma", "faluche.png");
-const ADOPTION_MEDECINE     = new Item("adoption Médecine", "faluche.png");
+const ADOPTION_INGE         = new Item("adoption ingé", "adopt_inge.png");
+const ADOPTION_SCIENCES     = new Item("adoption sciences", "adopt_sciences.png");
+const ADOPTION_DROIT        = new Item("adoption droit", "adopt_droit.png");
+const ADOPTION_JAUNE        = new Item("adoption jaune", "adopt_jaune.png");
+const ADOPTION_ROSE         = new Item("adoption rose", "adopt_paramed.png");
+const ADOPTION_SAGE_POUF    = new Item("adoption sage-pouf", "adopt_sage-pouf.png");
+const ADOPTION_PHARMA       = new Item("adoption Pharma", "adopt_pharma.png");
+const ADOPTION_MEDECINE     = new Item("adoption Médecine", "adopt_medecine.png");
 
 const PINS_INGE             = new Item("pin's ingé", "etoile et foudre.png");
 const PINS_SCIENCES         = new Item("pin's sciences", "palmes croisees.png");
