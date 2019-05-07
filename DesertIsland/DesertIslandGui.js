@@ -143,7 +143,7 @@ var DesertIslandGui = (function () {
         }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() + '</div>'
-            + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '.svg" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
             + '</div>';
     };
     DesertIslandGui.prototype.displayTime = function (miliSeconds) {

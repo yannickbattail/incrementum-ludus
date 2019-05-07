@@ -12,26 +12,26 @@
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
 
-const LEVEL = new Level("level", "level");
-const CLAY = new Material("clay", "g", "clay");
-const WATER = new Material("salt water", "cl", "water");
-const POTABLE_WATER = new Material("potable water", "cl", "water_potable");
-const WOOD = new Material("wood", "g", "wood");
-const VEGETABLE = new Material("vegetable", "g", "vegetable");
-const FOOD = new Material("food", "g", "food");
-const CHARCOAL = new Material("charcoal", "g", "charcoal");
-const IRON_ORE = new Material("iron ore", "g", "iron_ore");
-const IRON = new Material("iron", "g", "iron");
-const COPPER_ORE = new Material("copper ore", "g", "copper_ore");
-const CLAY_POT = new Item("clay pot", "clay_pot");
-const BRICK = new Item("brick", "brick");
-const TERRACOTTA_POT = new Item("terracotta pot", "terracotta_pot");
-const KNIFE = new Item("knife", "knife");
-const AXE = new Item("axe", "axe");
-const EMPTY_TRASH = new Item("empty trash", "empty_trash");
-const FULL_TRASH = new Item("full trash", "full_trash");
-const STARVATION_FOOD = new Item("starvation", "skull_grey");
-const STARVATION = new Item("starvation", "skull_white");
+const LEVEL             = new Level("level", "level.svg");
+const CLAY              = new Material("clay", "g", "clay");
+const WATER             = new Material("salt water", "cl", "water.svg");
+const POTABLE_WATER     = new Material("potable water", "cl", "water_potable.svg");
+const WOOD              = new Material("wood", "g", "wood.svg");
+const VEGETABLE         = new Material("vegetable", "g", "vegetable.svg");
+const FOOD              = new Material("food", "g", "food.svg");
+const CHARCOAL          = new Material("charcoal", "g", "charcoal.svg");
+const IRON_ORE          = new Material("iron ore", "g", "iron_ore.svg");
+const IRON              = new Material("iron", "g", "iron.svg");
+const COPPER_ORE        = new Material("copper ore", "g", "copper_ore.svg");
+const CLAY_POT          = new Item("clay pot", "clay_pot.svg");
+const BRICK             = new Item("brick", "brick.svg");
+const TERRACOTTA_POT    = new Item("terracotta pot", "terracotta_pot.svg");
+const KNIFE             = new Item("knife", "knife.svg");
+const AXE               = new Item("axe", "axe.svg");
+const EMPTY_TRASH       = new Item("empty trash", "empty_trash.svg");
+const FULL_TRASH        = new Item("full trash", "full_trash.svg");
+const STARVATION_FOOD   = new Item("starvation", "skull_grey.svg");
+const STARVATION        = new Item("starvation", "skull_white.svg");
 
 class Scenario {
     public static initEngine() : Engine {
