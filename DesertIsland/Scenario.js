@@ -1,5 +1,5 @@
 var LEVEL = new Level("level", "level.svg");
-var CLAY = new Material("clay", "g", "clay");
+var CLAY = new Material("clay", "g", "clay.svg");
 var WATER = new Material("salt water", "cl", "water.svg");
 var POTABLE_WATER = new Material("potable water", "cl", "water_potable.svg");
 var WOOD = new Material("wood", "g", "wood.svg");

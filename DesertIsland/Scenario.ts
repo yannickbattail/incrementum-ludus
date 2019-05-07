@@ -13,7 +13,7 @@
 /// <reference path="./Level.ts" />
 
 const LEVEL             = new Level("level", "level.svg");
-const CLAY              = new Material("clay", "g", "clay");
+const CLAY              = new Material("clay", "g", "clay.svg");
 const WATER             = new Material("salt water", "cl", "water.svg");
 const POTABLE_WATER     = new Material("potable water", "cl", "water_potable.svg");
 const WOOD              = new Material("wood", "g", "wood.svg");
