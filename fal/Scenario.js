@@ -1,4 +1,4 @@
-var LEVEL = new NamedStepResource("level", "level.svg", [
+var LEVEL = new Level("level", "level.svg", [
     "NOTHING",
     "Moldus",
     "Sympatisant",

@@ -6,16 +6,19 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-class Level extends Resource {
+class Level extends NamedStepResource {
     public $type : string = 'Level';
-    constructor(public name : string, public image : string){
-        super(name);
+    constructor(public name : string, public image : string, public stepNames : string[]){
+        super(name, image, stepNames);
     }
     public static load(data : any) : Level {
-        let r : Level = new Level(data.name, data.image);
+        let r : Level = new Level(data.name, data.image, data.stepNames);
         return r;
     }
     public show(quantity : number) : string {
-        return "" + quantity;
+        if (quantity < 0 || quantity >= this.stepNames.length) {
+            return "" + quantity + ": UNKOWN";
+        }
+        return "" + quantity + ": " + this.stepNames[quantity];
     }
 }

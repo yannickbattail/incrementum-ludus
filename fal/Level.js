@@ -13,20 +13,24 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Level = (function (_super) {
     __extends(Level, _super);
-    function Level(name, image) {
-        var _this = _super.call(this, name) || this;
+    function Level(name, image, stepNames) {
+        var _this = _super.call(this, name, image, stepNames) || this;
         _this.name = name;
         _this.image = image;
+        _this.stepNames = stepNames;
         _this.$type = 'Level';
         return _this;
     }
     Level.load = function (data) {
-        var r = new Level(data.name, data.image);
+        var r = new Level(data.name, data.image, data.stepNames);
         return r;
     };
     Level.prototype.show = function (quantity) {
-        return "" + quantity;
+        if (quantity < 0 || quantity >= this.stepNames.length) {
+            return "" + quantity + ": UNKOWN";
+        }
+        return "" + quantity + ": " + this.stepNames[quantity];
     };
     return Level;
-}(Resource));
+}(NamedStepResource));
 //# sourceMappingURL=Level.js.map

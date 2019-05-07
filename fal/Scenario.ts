@@ -13,7 +13,7 @@
 /// <reference path="./Item.ts" />
 /// <reference path="./Level.ts" />
 
-const LEVEL = new NamedStepResource("level", "level.svg", [
+const LEVEL = new Level("level", "level.svg", [
     "NOTHING",
     "Moldus",
     "Sympatisant",
