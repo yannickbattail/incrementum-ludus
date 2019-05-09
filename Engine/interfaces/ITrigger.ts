@@ -12,6 +12,7 @@ interface ITrigger {
     getSpawnResources(): Array<IQuantity>;
     getSpawnCrafters(): Array<ICrafter>;
     getSpawnNewTriggers(): Array<ITrigger>;
+    getCallback(): TimerHandler;
 
     // builder inferface
     whenReached(quantity : IQuantity) : ITrigger;
@@ -20,4 +21,5 @@ interface ITrigger {
     spawnResource(quantity : IQuantity) : ITrigger;
     spawnCrafter(crafter : ICrafter) : ITrigger;
     appendTrigger(trigger : ITrigger) : ITrigger;
+    execFunction(fct : Function) : ITrigger;
 }

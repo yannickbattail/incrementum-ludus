@@ -1,16 +1,18 @@
 var Trigger = (function () {
-    function Trigger(name, resourcesTrigger, spawnProducers, spawnResources, spawnCrafters, spawnNewTriggers) {
+    function Trigger(name, resourcesTrigger, spawnProducers, spawnResources, spawnCrafters, spawnNewTriggers, callback) {
         if (resourcesTrigger === void 0) { resourcesTrigger = []; }
         if (spawnProducers === void 0) { spawnProducers = []; }
         if (spawnResources === void 0) { spawnResources = []; }
         if (spawnCrafters === void 0) { spawnCrafters = []; }
         if (spawnNewTriggers === void 0) { spawnNewTriggers = []; }
+        if (callback === void 0) { callback = ""; }
         this.name = name;
         this.resourcesTrigger = resourcesTrigger;
         this.spawnProducers = spawnProducers;
         this.spawnResources = spawnResources;
         this.spawnCrafters = spawnCrafters;
         this.spawnNewTriggers = spawnNewTriggers;
+        this.callback = callback;
         this.$type = 'Trigger';
     }
     Trigger.prototype.getName = function () {
@@ -31,6 +33,9 @@ var Trigger = (function () {
     Trigger.prototype.getSpawnNewTriggers = function () {
         return this.spawnNewTriggers;
     };
+    Trigger.prototype.getCallback = function () {
+        return this.callback;
+    };
     Trigger.load = function (data) {
         var curContext = window;
         var newObj = new Trigger(data.name);
@@ -39,6 +44,7 @@ var Trigger = (function () {
         newObj.spawnResources = data.spawnResources.map(function (p) { return curContext[p.$type].load(p); });
         newObj.spawnCrafters = data.spawnCrafters.map(function (p) { return curContext[p.$type].load(p); });
         newObj.spawnNewTriggers = data.spawnNewTriggers.map(function (p) { return curContext[p.$type].load(p); });
+        newObj.callback = data.callback;
         return newObj;
     };
     Trigger.prototype.whenReached = function (quantity) {
@@ -62,6 +68,10 @@ var Trigger = (function () {
     };
     Trigger.prototype.appendTrigger = function (trigger) {
         this.spawnNewTriggers.push(trigger);
+        return this;
+    };
+    Trigger.prototype.execFunction = function (fct) {
+        this.callback = fct;
         return this;
     };
     return Trigger;

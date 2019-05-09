@@ -104,6 +104,9 @@ class Engine {
             trigger.getSpawnNewTriggers().forEach(
                 newTrigger => this.triggers.push(newTrigger)
             );
+            if (trigger.getCallback() != "") {
+                window.setTimeout(trigger.getCallback(), 1);
+            }
             // remove the trigger
             this.triggers.splice(this.triggers.indexOf(trigger), 1);
         }

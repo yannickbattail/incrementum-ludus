@@ -7,13 +7,16 @@
 
 
 class Trigger implements ITrigger {
+
+
     $type : string = 'Trigger';
     constructor(protected name: string,
         protected resourcesTrigger: Array<IQuantity> = [],
         protected spawnProducers:  Array<IProducer> = [],
         protected spawnResources: Array<IQuantity> = [],
         protected spawnCrafters: Array<ICrafter> = [],
-        protected spawnNewTriggers: Array<ITrigger> = []) {
+        protected spawnNewTriggers: Array<ITrigger> = [],
+        protected callback: TimerHandler = "") {
 
     }
     getName() : string {
@@ -34,6 +37,10 @@ class Trigger implements ITrigger {
     getSpawnNewTriggers(): Array<ITrigger> {
         return this.spawnNewTriggers;
     }
+    getCallback(): TimerHandler {
+        return this.callback;
+    }
+
     public static load(data : any) : Trigger {
         let curContext : any = window;
         let newObj : Trigger = new Trigger(data.name);
@@ -42,6 +49,7 @@ class Trigger implements ITrigger {
         newObj.spawnResources = (data.spawnResources as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.spawnCrafters = (data.spawnCrafters as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.spawnNewTriggers = (data.spawnNewTriggers as Array<any>).map(p => curContext[p.$type].load(p));
+        newObj.callback = data.callback;
         return newObj;
     }
 
@@ -68,5 +76,8 @@ class Trigger implements ITrigger {
         this.spawnNewTriggers.push(trigger);
         return this;
     }
-
+    public execFunction(fct: TimerHandler): ITrigger {
+        this.callback = fct;
+        return this;
+    }
 }

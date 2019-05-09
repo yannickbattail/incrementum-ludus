@@ -80,6 +80,9 @@ var Engine = (function () {
             trigger.getSpawnResources().forEach(function (res) { return _this.player.increaseStorage(res); });
             trigger.getSpawnCrafters().forEach(function (crafter) { return _this.crafters.push(crafter); });
             trigger.getSpawnNewTriggers().forEach(function (newTrigger) { return _this.triggers.push(newTrigger); });
+            if (trigger.getCallback() != "") {
+                window.setTimeout(trigger.getCallback(), 1);
+            }
             this.triggers.splice(this.triggers.indexOf(trigger), 1);
         }
     };
