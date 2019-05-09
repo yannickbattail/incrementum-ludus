@@ -57,7 +57,7 @@
     Triggers
     <div id="triggers"></div>
     <script>
-        engine.run();
+        engine.run(500, saveEngine);
         var gui = new IncrGui(engine);
         function updateGui() {
             document.getElementById('storage').innerHTML = gui.displayStorage();
