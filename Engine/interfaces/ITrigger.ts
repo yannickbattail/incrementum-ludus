@@ -21,5 +21,5 @@ interface ITrigger {
     spawnResource(quantity : IQuantity) : ITrigger;
     spawnCrafter(crafter : ICrafter) : ITrigger;
     appendTrigger(trigger : ITrigger) : ITrigger;
-    execFunction(fct : Function) : ITrigger;
+    execFunction(fct : TimerHandler) : ITrigger;
 }
