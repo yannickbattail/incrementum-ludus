@@ -8,13 +8,17 @@ var KNIFE = new Resource("knife");
 var BEER = new Resource("beer");
 var WASTE = new Resource("waste");
 var engine = new Engine();
-engine.Player = new Player("platypus");
-engine.Producers = [
+engine.player = new Player("platypus");
+engine.producers = [
     new Producer("iron mine", [new Quantity(2, IRON)], 500),
     new Producer("copper mine", [new Quantity(1, COPPER)], 3000),
     new Producer("tin", [new Quantity(1, TIN)])
 ];
-engine.Triggers = [
+engine.crafters = [
+    new Crafter("forge axe", 20000, [new Quantity(30, IRON), new Quantity(10, COPPER)], [new Quantity(1, AXE)], true),
+    new Crafter("forge knife", 20000, [new Quantity(10, IRON), new Quantity(6, COPPER)], [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false),
+];
+engine.triggers = [
     new Trigger("lead mine exploitation")
         .whenReached(new Quantity(20, IRON)).and(new Quantity(2, COPPER))
         .spawnProducer(new Producer("lead mine")
@@ -31,11 +35,7 @@ engine.Triggers = [
         .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
         .canBeSwitchedToAuto()))
 ];
-engine.Crafters = [
-    new Crafter("forge axe", 20000, [new Quantity(30, IRON), new Quantity(10, COPPER)], [new Quantity(1, AXE)], true),
-    new Crafter("forge knife", 20000, [new Quantity(10, IRON), new Quantity(6, COPPER)], [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false),
-];
-var VERSION = "1.2";
+var VERSION = "1.3";
 function loadEngine() {
     var json = window.localStorage.getItem('incr');
     if (json != null) {

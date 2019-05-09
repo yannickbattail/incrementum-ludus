@@ -7,15 +7,15 @@
 /// <reference path="../Engine/Engine.ts" />
 
 class IncrGui {
-    Engine: Engine;
+    engine: Engine;
     constructor(engine: Engine) {
-        this.Engine = engine;
+        this.engine = engine;
     }
 
     displayStorage(): string {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
-        this.Engine.Player.getStorage().forEach(
+        this.engine.player.getStorage().forEach(
             res => h += "<tr><td>" + res.show() + "</td></tr>"
         );
         h += "</table>";
@@ -25,7 +25,7 @@ class IncrGui {
     displayProducers(): string {
         var h = '<table border="1">';
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
-        this.Engine.Producers.forEach(
+        this.engine.producers.forEach(
             producer => {
                 if (producer.isAuto()) {
                     h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(r=>r.show()).join(', ') + "</td><td>every " + producer.getInterval() + " ms</td></tr>"
@@ -43,7 +43,7 @@ class IncrGui {
         h += '<tr><th>name</th><th>triggered when resources</th>';
         h += '<th>spwan producers</th><th>spwan resources</th>';
         h += '<th>spwan crafters</th><th>spwan triggers</th></tr>';
-        this.Engine.Triggers.forEach(
+        this.engine.triggers.forEach(
             trigger => h += this.displayTrigger(trigger)
         );
         h += "</table>";
@@ -91,7 +91,7 @@ class IncrGui {
     displayCrafters(): string {
         var h = '<table border="1">';
         h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
-        this.Engine.Crafters.forEach(
+        this.engine.crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
         h += "</table>";
@@ -122,7 +122,7 @@ class IncrGui {
         let h = '';
         if (crafter.isCrafting()) {
             h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
-        } else if (!this.Engine.Player.hasResources(crafter.getCost())) {
+        } else if (!this.engine.player.hasResources(crafter.getCost())) {
             h += 'Not enough resources';
         } else {
             h += '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');">'

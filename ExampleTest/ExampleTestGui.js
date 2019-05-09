@@ -1,18 +1,18 @@
 var IncrGui = (function () {
     function IncrGui(engine) {
-        this.Engine = engine;
+        this.engine = engine;
     }
     IncrGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
         h += "<tr><th>quantity</th><th>resource</th></tr>";
-        this.Engine.Player.getStorage().forEach(function (res) { return h += "<tr><td>" + res.show() + "</td></tr>"; });
+        this.engine.player.getStorage().forEach(function (res) { return h += "<tr><td>" + res.show() + "</td></tr>"; });
         h += "</table>";
         return h;
     };
     IncrGui.prototype.displayProducers = function () {
         var h = '<table border="1">';
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
-        this.Engine.Producers.forEach(function (producer) {
+        this.engine.producers.forEach(function (producer) {
             if (producer.isAuto()) {
                 h += "<tr><td>" + producer.getName() + "</td><td>" + producer.getResourcesQuantity().map(function (r) { return r.show(); }).join(', ') + "</td><td>every " + producer.getInterval() + " ms</td></tr>";
             }
@@ -29,7 +29,7 @@ var IncrGui = (function () {
         h += '<tr><th>name</th><th>triggered when resources</th>';
         h += '<th>spwan producers</th><th>spwan resources</th>';
         h += '<th>spwan crafters</th><th>spwan triggers</th></tr>';
-        this.Engine.Triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
+        this.engine.triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
         h += "</table>";
         return h;
     };
@@ -67,7 +67,7 @@ var IncrGui = (function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
-        this.Engine.Crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
+        this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
     };
@@ -90,7 +90,7 @@ var IncrGui = (function () {
         if (crafter.isCrafting()) {
             h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
         }
-        else if (!this.Engine.Player.hasResources(crafter.getCost())) {
+        else if (!this.engine.player.hasResources(crafter.getCost())) {
             h += 'Not enough resources';
         }
         else {

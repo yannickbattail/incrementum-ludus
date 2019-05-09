@@ -23,14 +23,26 @@ const BEER = new Resource("beer");
 const WASTE = new Resource("waste");
 
 var engine = new Engine();
-engine.Player = new Player("platypus");
-engine.Producers = [
+engine.player = new Player("platypus");
+engine.producers = [
     // initals producers
     new Producer("iron mine", [new Quantity(2, IRON)], 500/*mili sec*/),
     new Producer("copper mine", [new Quantity(1, COPPER)], 3000),
     new Producer("tin", [new Quantity(1, TIN)])
 ];
-engine.Triggers = [
+engine.crafters = [
+    new Crafter("forge axe", 20000,//duration
+        //cost
+        [new Quantity(30, IRON), new Quantity(10, COPPER)],
+        //spawn
+        [new Quantity(1, AXE)], true/*auto*/),
+    new Crafter("forge knife", 20000,//duration
+        //cost
+        [new Quantity(10, IRON), new Quantity(6, COPPER)],
+        //spawn
+        [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false/*auto*/),
+];
+engine.triggers = [
     new Trigger("lead mine exploitation")
         .whenReached(new Quantity(20, IRON)).and(new Quantity(2, COPPER))
         .spawnProducer(
@@ -56,20 +68,8 @@ engine.Triggers = [
             )
         )
 ];
-engine.Crafters = [
-    new Crafter("forge axe", 20000,//duration
-        //cost
-        [new Quantity(30, IRON), new Quantity(10, COPPER)],
-        //spawn
-        [new Quantity(1, AXE)], true/*auto*/),
-    new Crafter("forge knife", 20000,//duration
-        //cost
-        [new Quantity(10, IRON), new Quantity(6, COPPER)],
-        //spawn
-        [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false/*auto*/),
-];
 
-const VERSION = "1.2";
+const VERSION = "1.3";
 function loadEngine() : Engine | null {
 
     let json = window.localStorage.getItem('incr');
