@@ -51,6 +51,12 @@
     <div id="storage"></div>
     <div id="producers"></div>
     <div id="crafters"></div>
+    <div id="overlay">
+        <div id="die">You die!</div>
+        <div>
+            <button onclick="DesertIslandGui.eraseStorage();window.location.reload();">Retry</button>
+        </div>
+</div>
     <script>
         var gui = new DesertIslandGui(engine);
         gui.start(200);

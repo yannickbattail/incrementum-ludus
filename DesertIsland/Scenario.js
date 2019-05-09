@@ -139,7 +139,8 @@ var Scenario = (function () {
             .spawnResource(Q(-100, LEVEL))
             .spawnResource(Q(-100000, WATER))
             .spawnResource(Q(-100000, WOOD))
-            .spawnResource(Q(-100000, CLAY));
+            .spawnResource(Q(-100000, CLAY))
+            .execFunction("DesertIslandGui.youDie();");
         engine.triggers = [
             triggerStarvation,
             new Trigger("carry water in clay pot")

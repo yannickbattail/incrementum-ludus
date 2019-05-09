@@ -175,6 +175,12 @@ var DesertIslandGui = (function () {
         var percent100 = Math.round(percent01 * 100);
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     };
+    DesertIslandGui.youDie = function () {
+        var overlay = document.getElementById('overlay');
+        if (overlay) {
+            overlay.style.display = 'block';
+        }
+    };
     DesertIslandGui.prototype.stop = function () {
         window.clearInterval(this.intervalId);
         engine.stop();

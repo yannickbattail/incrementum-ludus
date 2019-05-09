@@ -212,6 +212,13 @@ class DesertIslandGui {
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     }
 
+    public static youDie() {
+        let overlay = document.getElementById('overlay');
+        if (overlay) {
+            overlay.style.display = 'block';
+        }
+    }
+
     stop() {
         window.clearInterval(this.intervalId);
         engine.stop();
