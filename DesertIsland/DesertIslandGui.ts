@@ -214,8 +214,10 @@ class DesertIslandGui {
 
     public static youDie() {
         let overlay = document.getElementById('overlay');
-        if (overlay) {
-            overlay.style.display = 'block';
+        if (overlay != null) {
+            let o = overlay;
+            o.className = 'show';
+            window.setTimeout(() => {o.className += ' shade'}, 1);
         }
     }
 

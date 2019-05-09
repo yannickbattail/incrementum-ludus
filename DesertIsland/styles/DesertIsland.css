@@ -74,9 +74,16 @@ button:active {
     z-index: 10;
     width: 100%;
     height: 100%;
-    background-color: #000000ee;
     text-align: center;
     vertical-align: middle;
+    background-color: #00000011;
+}
+#overlay.show {
+    display: block;
+}
+#overlay.shade {
+    transition: background-color 3s linear;
+    background-color: #000000ee;
 }
 #die {
     padding-top: 25%;
