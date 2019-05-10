@@ -101,7 +101,7 @@ class Scenario {
                 )
                 .spawnResource(Q(1, LEVEL)) // level 2
                 .appendTrigger(
-                    new Trigger("Impétrent")
+                    new Trigger("Impétrant")
                         .whenReached(Q(50, PINS_INGE))
                         .spawnProducer(
                             new Producer("Temps / jours")

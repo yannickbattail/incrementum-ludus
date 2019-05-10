@@ -71,7 +71,7 @@ var Scenario = (function () {
                 .andCraft(new RandomResource(1, PINS_SCIENCES, 0.02))["in"](2).seconds()
                 .atCostOf(Q(1, TEMPS)))
                 .spawnResource(Q(1, LEVEL))
-                .appendTrigger(new Trigger("Impétrent")
+                .appendTrigger(new Trigger("Impétrant")
                 .whenReached(Q(50, PINS_INGE))
                 .spawnProducer(new Producer("Temps / jours")
                 .thatProduce(Q(10, TEMPS))
