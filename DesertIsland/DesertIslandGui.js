@@ -180,7 +180,7 @@ var DesertIslandGui = (function () {
         if (overlay != null) {
             var o_1 = overlay;
             o_1.className = 'show';
-            window.setTimeout(function () { o_1.className += ' shade'; }, 1);
+            window.setTimeout(function () { o_1.className += ' shade'; }, 500);
         }
     };
     DesertIslandGui.prototype.stop = function () {

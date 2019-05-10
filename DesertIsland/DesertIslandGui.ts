@@ -217,7 +217,7 @@ class DesertIslandGui {
         if (overlay != null) {
             let o = overlay;
             o.className = 'show';
-            window.setTimeout(() => {o.className += ' shade'}, 1);
+            window.setTimeout(() => {o.className += ' shade'}, 500);
         }
     }
 
