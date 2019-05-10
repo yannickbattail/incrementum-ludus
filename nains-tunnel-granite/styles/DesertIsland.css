@@ -1,0 +1,120 @@
+
+.origin-theme {
+	--background-color : #333333;
+	--dark-background-color : #222222;
+	--text-color : #dfa500;
+}
+
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+table {
+    border-color: var(--text-color);
+    border-style: none;
+}
+
+td, th {
+    border: none;
+    background-color: var(--dark-background-color);
+    padding: 2px;
+    text-align: center;
+    height: 32px;
+}
+th {
+    background-color: black;
+}
+/*
+button {
+    border-radius: 4px;
+    border-width: 0px;
+    border-style: outset;
+    color: var(--text-color);
+    border-color: var(--background-color);
+    background-color: var(--background-color);
+    box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+}
+*/
+.titleIcon {
+    width: 24px;
+    height: 24px;
+}
+
+#storage {
+
+}
+#crafters > table > tbody > tr > th:nth-child(4),
+#producers > table > tbody > tr > th:nth-child(3) {
+    width: 110px;
+    max-width: 110px;
+}
+
+#producers {
+    display: inline-block;
+}
+#level {
+    display: inline-flex;
+    width: 110px;
+    max-width: 110px;
+}
+#level > button {
+    display: inline-block;
+}
+
+.resource {
+    display: inline-block;
+    margin: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--text-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    padding: 1px;
+    text-align: right;
+    min-width: 60px;
+}
+.availableResource {
+    color: chartreuse;
+}
+.notAvailableResource {
+    color: red;
+}
+
+.Level {
+
+}
+.Material {
+
+}
+.Item {
+
+}
+
+.resource_img {
+    width : 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+.resource_label {
+    display: inline-block;
+    padding-right: 2px;
+}
+
+progress {
+    width: 100px;
+    height: 3px;
+}
+progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+progress[value]::-webkit-progress-bar {
+    background-color: white;
+}
+progress[value]::-webkit-progress-value {
+    background-color: var(--text-color);
+}
