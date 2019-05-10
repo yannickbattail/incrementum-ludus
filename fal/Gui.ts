@@ -223,7 +223,7 @@ class Gui {
         Gui.eraseStorage();
     }
     restart() {
-        if (window.confirm('Ça va redémarrer le jeu depuis wéro. sûre?')) {
+        if (window.confirm('Ça va redémarrer le jeu depuis zéro. sûre?')) {
             this.stop();
             this.clearStorage();
             window.location.reload();

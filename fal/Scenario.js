@@ -10,6 +10,9 @@ var LEVEL = new Level("level", "level.svg", [
     "Faluchard"
 ]);
 var TEMPS = new Item("temps", "time.png");
+var DISTANCE = new Material("distance", "Km", "distance.svg");
+var TELLIGENCE = new Material("telligence", "T", "brain.svg");
+var TELLIGENCE_ARTIF = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
 var PARRAIN = new Item("parrain", "food.svg");
 var CODE_VILLE = new Item("code de ville", "etoile_or.png");
 var POULE = new Item("poule", "poule.png");
@@ -45,12 +48,15 @@ var Scenario = (function () {
     }
     Scenario.initEngine = function () {
         var engine = new Engine();
-        engine.player = new Player("Chuck Noland");
+        engine.player = new Player("dignichose");
         engine.player.increaseStorage(Q(1, LEVEL));
         engine.producers = [
             new Producer("Temps / jours")
                 .thatProduce(Q(10, TEMPS))
                 .every(30).seconds(),
+            new Producer("telligence")
+                .thatProduce(Q(1, TELLIGENCE))
+                .every(0.1).seconds(),
         ];
         engine.crafters = [
             new Crafter("Apéro potes")
@@ -148,6 +154,9 @@ var Scenario = (function () {
             .spawnProducer(new Producer("Temps / jours")
             .thatProduce(Q(10, TEMPS))
             .every(30).seconds())
+            .spawnProducer(new Producer("Km")
+            .thatProduce(Q(1, DISTANCE))
+            .every(0.5).seconds())
             .spawnCrafter(new Crafter("Soirée fal")
             .thatCraft(new RandomResource(1, PINS_GRENOBLE, 100 / 113))
             .thatCraft(new RandomResource(1, PINS_VALENCE, 100 / 104))
@@ -158,6 +167,10 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(1, PINS_NANCY, 100 / 407))
             .thatCraft(new RandomResource(1, PINS_STASBOURG, 100 / 492))["in"](3).seconds()
             .atCostOf(Q(5, TEMPS)))
+            .spawnCrafter(new Crafter("Telligence artificielle")
+            .thatCraft(Q(1, TELLIGENCE_ARTIF))["in"](10).seconds()
+            .atCostOf(Q(10000, TELLIGENCE))
+            .automaticaly())
             .appendTrigger(new Trigger("Natio")
             .whenReached(Q(1, PINS_GRENOBLE))
             .whenReached(Q(1, PINS_VALENCE))

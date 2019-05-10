@@ -188,7 +188,7 @@ var Gui = (function () {
         Gui.eraseStorage();
     };
     Gui.prototype.restart = function () {
-        if (window.confirm('Ça va redémarrer le jeu depuis wéro. sûre?')) {
+        if (window.confirm('Ça va redémarrer le jeu depuis zéro. sûre?')) {
             this.stop();
             this.clearStorage();
             window.location.reload();
