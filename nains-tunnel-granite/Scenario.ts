@@ -32,26 +32,26 @@ class Scenario {
         var engine = new Engine();
         engine.player = new Player("gurdil");
         // inital storage
-        engine.player.increaseStorage(Q(1, NAIN));
+        engine.player.increaseStorage(Q(1, LEVEL));
         engine.producers = [
             // inital producers
             new Producer("Temps / jours")
-                .thatProduce(Q(10, NAIN))
+                .thatProduce(Q(1, HEURE))
                 .every(30).seconds()
         ];
         engine.crafters = [
             // inital Crafters
-            new Crafter("Apéro potes")
+            new Crafter("Creuse")
                 .thatCraft(Q(1, TUNNEL))
                 .in(2).seconds()
                 .atCostOf(Q(1, NAIN))
         ];
 
         engine.triggers = [
-            new Trigger("Sympatisant")
+            new Trigger("biere")
                 .whenReached(Q(5, NAIN))
                 .spawnCrafter(
-                    new Crafter("Apéro ingé")
+                    new Crafter("")
                         .thatCraft(Q(5, BIERE))
                         .in(2).seconds()
                         .atCostOf(Q(1, NAIN))

@@ -29,7 +29,7 @@ class Gui {
 
     private displayStorage(): string {
         var h = '<table border="1">';
-        h += "<tr><th>Sac à pin's</th></tr>";
+        h += "<tr><th>Resources</th></tr>";
         h += "<tr><td>";
         if (this.engine.player.getStorage().length <= 1) {
             h += "no resource";
