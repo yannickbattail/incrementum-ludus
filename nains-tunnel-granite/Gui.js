@@ -176,6 +176,14 @@ var Gui = (function () {
         var percent100 = Math.round(percent01 * 100);
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     };
+    Gui.youDie = function () {
+        var overlay = document.getElementById('overlay');
+        if (overlay != null) {
+            var o_1 = overlay;
+            o_1.className = 'show';
+            window.setTimeout(function () { o_1.className += ' shade'; }, 500);
+        }
+    };
     Gui.prototype.stop = function () {
         window.clearInterval(this.intervalId);
         engine.stop();

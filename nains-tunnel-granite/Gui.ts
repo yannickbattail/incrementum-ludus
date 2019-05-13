@@ -211,6 +211,15 @@ class Gui {
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     }
 
+    public static youDie() {
+        let overlay = document.getElementById('overlay');
+        if (overlay != null) {
+            let o = overlay;
+            o.className = 'show';
+            window.setTimeout(() => {o.className += ' shade'}, 500);
+        }
+    }
+
     stop() {
         window.clearInterval(this.intervalId);
         engine.stop();

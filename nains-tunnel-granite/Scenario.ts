@@ -115,22 +115,28 @@ class Scenario {
                 .whenReached(Q(28, TUNNEL)),
             new Trigger("[perdu] Tunnel fini")
                 .whenReached(Q(48, HEURE))
-                .spawnResource(Q(-100, NAIN)),
+                .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Toutes les pioches sont cassées")
                 .whenReached(Q(10, PIOCHE_CASSÉE))
-                .spawnResource(Q(-100, NAIN)),
+                .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Complétement désorganisé")
                 .whenReached(Q(10, DÉSORGANISATION))
-                .spawnResource(Q(-100, NAIN)),
+                .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Plus de bières")
                 .whenReached(Q(10, BIÈRE_BUE))
-                .spawnResource(Q(-100, NAIN)),
+                .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Plus de lumière")
                 .whenReached(Q(10, OBSCURITÉ))
-                .spawnResource(Q(-100, NAIN)),
+                .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Trop de blessés")
                 .whenReached(Q(10, BLESSURE))
                 .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();")
         ];
         return engine;
     }
