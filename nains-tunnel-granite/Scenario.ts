@@ -31,6 +31,7 @@ class Scenario {
 
         var engine = new Engine();
         engine.player = new Player("gurdil");
+        engine.player.setPreventNegativeStorage(true);
         // inital storage
         engine.player.increaseStorage(Q(1, LEVEL));
         engine.player.increaseStorage(Q(1, NAIN));
@@ -59,7 +60,6 @@ class Scenario {
             new Crafter("Ravitaillement")
                 .thatCraft(Q(-6, BIÈRE_BUE)).andCraft(Q(1, NAIN))
                 .andCraft(Q(1, DÉSORGANISATION))
-                .andCraft(Q(2, BIÈRE_BUE))
                 .andCraft(Q(2, CHOPPE_SALE))
                 .andCraft(Q(1, OBSCURITÉ))
                 .in(baseTime).seconds()

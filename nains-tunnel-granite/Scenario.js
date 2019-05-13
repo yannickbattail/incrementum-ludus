@@ -15,6 +15,7 @@ var Scenario = (function () {
     Scenario.initEngine = function () {
         var engine = new Engine();
         engine.player = new Player("gurdil");
+        engine.player.setPreventNegativeStorage(true);
         engine.player.increaseStorage(Q(1, LEVEL));
         engine.player.increaseStorage(Q(1, NAIN));
         engine.producers = [
@@ -39,7 +40,6 @@ var Scenario = (function () {
             new Crafter("Ravitaillement")
                 .thatCraft(Q(-6, BIÈRE_BUE)).andCraft(Q(1, NAIN))
                 .andCraft(Q(1, DÉSORGANISATION))
-                .andCraft(Q(2, BIÈRE_BUE))
                 .andCraft(Q(2, CHOPPE_SALE))
                 .andCraft(Q(1, OBSCURITÉ))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
