@@ -7,11 +7,11 @@
 
 class Engine {
     $type : string = 'Engine';
-    tickInterval: number = 100;
-    player: IPlayer;
-    producers: Array<IProducer> = [];
-    triggers: Array<ITrigger> = [];
-    crafters: Array<ICrafter> = [];
+    tickInterval : number = 100;
+    player : IPlayer;
+    producers : Array<IProducer> = [];
+    triggers : Array<ITrigger> = [];
+    crafters : Array<ICrafter> = [];
     fastMode : number = 0;
     private intervalId : number;
     private saveCallback: (engine: Engine) => void;
@@ -26,6 +26,7 @@ class Engine {
         newObj.fastMode = data.fastMode;
         return newObj;
     }
+
     run(tickInterval : number, saveCallback: (engine: Engine) => void) {
         this.tickInterval = tickInterval;
         this.saveCallback = saveCallback;

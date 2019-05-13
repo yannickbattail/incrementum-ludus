@@ -5,14 +5,16 @@
 /// <reference path="../interfaces/ICrafter.ts" />
 /// <reference path="../interfaces/IPlayer.ts" />
 
-class Player implements IPlayer{
+class Player implements IPlayer {
     $type : string = 'Player';
+    protected preventNegativeStorage : boolean = false;
     protected storage: Array<Quantity> = new Array<Quantity>();
     constructor(protected name: string) {
     }
     public static load(data : any) : Player {
         let curContext : any = window;
         let player : Player = new Player(data.name);
+        player.preventNegativeStorage = data.preventNegativeStorage;
         player.storage = (data.storage as Array<any>).map(p => curContext[p.$type].load(p));
         return player;
     }
@@ -23,23 +25,48 @@ class Player implements IPlayer{
         return this.storage;
     }
 
+    public getPreventNegativeStorage() : boolean {
+        return this.preventNegativeStorage;
+    }
+
+    public setPreventNegativeStorage(preventNegativeStorage : boolean) : Player {
+        this.preventNegativeStorage = preventNegativeStorage;
+        return this;
+    }
+
     public increaseStorage(quantity: IQuantity) {
         let resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
+            if (quantity.getQuantity() < 0 && this.preventNegativeStorage) {
+                this.storage.push(new Quantity(0, quantity.getResource()));
+            } else {
+                this.storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
+            }
         } else {
-            resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
+            if ((resQ.getQuantity() + quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
+                this.storage.push(new Quantity(0, quantity.getResource()));
+            } else {
+                resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
+            }
         }
     }
+    
     public decreaseStorage(quantity: IQuantity) {
         let resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            this.storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
+            if ((-1 * quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
+                this.storage.push(new Quantity(0, quantity.getResource()));
+            } else {
+                this.storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
+            }
         } else {
-            resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
+            if ((resQ.getQuantity() + -1 * quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
+                this.storage.push(new Quantity(0, quantity.getResource()));
+            } else {
+                resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
+            }
         }
     }
-
 
     public getResourceInStorage(resourceName: string): Quantity | null {
         let res = this.storage.filter((res: Quantity) => res.getResource().getName() == resourceName);
