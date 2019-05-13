@@ -1,9 +1,10 @@
 var DesertIslandGui = (function () {
     function DesertIslandGui(engine) {
-        this.Engine = engine;
+        this.engine = engine;
+        this.engine = engine;
     }
     DesertIslandGui.prototype.displayLevel = function () {
-        var level = this.Engine.player.getResourceInStorage("level");
+        var level = this.engine.player.getResourceInStorage("level");
         var h = "XXX level";
         if (level != null) {
             h = 'Level: ' + this.displayQuantity(level);
@@ -16,11 +17,11 @@ var DesertIslandGui = (function () {
         var h = '<table border="1">';
         h += "<tr><th>Resource storage</th></tr>";
         h += "<tr><td>";
-        if (this.Engine.player.getStorage().length <= 1) {
+        if (this.engine.player.getStorage().length <= 1) {
             h += "no resource";
         }
         else {
-            this.Engine.player.getStorage().forEach(function (res) {
+            this.engine.player.getStorage().forEach(function (res) {
                 if (!(res.getResource() instanceof Level)) {
                     h += _this.displayQuantity(res);
                 }
@@ -34,7 +35,7 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '<table border="1">';
         h += '<tr><th>Production</th><th>Resource</th></tr>';
-        this.Engine.producers.forEach(function (producer) {
+        this.engine.producers.forEach(function (producer) {
             if (producer.isAuto()) {
                 var i = producer.getInterval();
                 var interval = 0;
@@ -60,7 +61,7 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
-        this.Engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
+        this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
     };
@@ -74,7 +75,7 @@ var DesertIslandGui = (function () {
     };
     DesertIslandGui.prototype.displayCraftButton = function (crafter) {
         var h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
-            + (!this.Engine.player.hasResources(crafter.getCost()) ? ' disabled="disabled" title="Not enough resources"' : '') + '>'
+            + (!this.engine.player.hasResources(crafter.getCost()) ? ' disabled="disabled" title="Not enough resources"' : '') + '>'
             + this.displayAutoCraft(crafter) + crafter.getName() + ' (' + this.displayTime(crafter.getDuration()) + ')'
             + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
             + '</button>';
@@ -92,7 +93,7 @@ var DesertIslandGui = (function () {
     DesertIslandGui.prototype.displayTree = function () {
         var h = '<table border="1">';
         h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
-        if (this.Engine.triggers.length <= 1) {
+        if (this.engine.triggers.length <= 1) {
             h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
         }
         else {
@@ -124,7 +125,7 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '';
         quantities.forEach(function (resQ) {
-            var storageRes = _this.Engine.player.getResourceInStorage(resQ.getResource().getName());
+            var storageRes = _this.engine.player.getResourceInStorage(resQ.getResource().getName());
             var cssClass = 'notAvailableResource';
             if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                 cssClass = 'availableResource';

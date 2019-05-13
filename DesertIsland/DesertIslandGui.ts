@@ -12,14 +12,13 @@
 /// <reference path="../NodeUpdate/NodeUpdate.ts" />
 
 class DesertIslandGui {
-    Engine: Engine;
     intervalId : number;
-    constructor(engine: Engine) {
-        this.Engine = engine;
+    constructor(private engine: Engine) {
+        this.engine = engine;
     }
 
     private displayLevel(): string {
-        let level = this.Engine.player.getResourceInStorage("level");
+        let level = this.engine.player.getResourceInStorage("level");
         let h = "XXX level";
         if (level != null) {
             h = 'Level: '+this.displayQuantity(level);
@@ -32,10 +31,10 @@ class DesertIslandGui {
         var h = '<table border="1">';
         h += "<tr><th>Resource storage</th></tr>";
         h += "<tr><td>";
-        if (this.Engine.player.getStorage().length <= 1) {
+        if (this.engine.player.getStorage().length <= 1) {
             h += "no resource";
         } else {
-            this.Engine.player.getStorage().forEach(
+            this.engine.player.getStorage().forEach(
                 res => {
                     if (!(res.getResource() instanceof Level)) {
                         h += this.displayQuantity(res);
@@ -51,7 +50,7 @@ class DesertIslandGui {
     private displayProducers(): string {
         var h = '<table border="1">';
         h += '<tr><th>Production</th><th>Resource</th></tr>';
-        this.Engine.producers.forEach(
+        this.engine.producers.forEach(
             producer => {
                 if (producer.isAuto()) {
                     var i = producer.getInterval();
@@ -77,7 +76,7 @@ class DesertIslandGui {
     private displayCrafters(): string {
         var h = '<table border="1">';
         h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
-        this.Engine.crafters.forEach(
+        this.engine.crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
         h += "</table>";
@@ -95,7 +94,7 @@ class DesertIslandGui {
 
     private displayCraftButton(crafter : ICrafter) : string {
         let h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
-                + (!this.Engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Not enough resources"':'') + '>'
+                + (!this.engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Not enough resources"':'') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
                 + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 +'</button>';
@@ -116,7 +115,7 @@ class DesertIslandGui {
     private displayTree(): string {
         let h = '<table border="1">';
         h += "<tr><th>Next goals</th><th>Needed resources</th><th>Reward</th></tr>";
-        if (this.Engine.triggers.length <= 1){
+        if (this.engine.triggers.length <= 1){
             h += '<tr><td colspan="3">Finish! <b>You win!</b> Wait for next version of the game.</td></tr>';
         } else {
             h += this.displayBranch(engine.triggers);
@@ -155,7 +154,7 @@ class DesertIslandGui {
         var h = '';
         quantities.forEach(
             resQ => {
-                let storageRes = this.Engine.player.getResourceInStorage(resQ.getResource().getName());
+                let storageRes = this.engine.player.getResourceInStorage(resQ.getResource().getName());
                 let cssClass = 'notAvailableResource';
                 if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                     cssClass = 'availableResource';
