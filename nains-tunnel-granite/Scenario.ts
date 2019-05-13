@@ -34,7 +34,14 @@ class Scenario {
         engine.player.setPreventNegativeStorage(true);
         // inital storage
         engine.player.increaseStorage(Q(1, LEVEL));
-        engine.player.increaseStorage(Q(1, NAIN));
+        engine.player.increaseStorage(Q(1, HEURE));
+        engine.player.increaseStorage(Q(1, TUNNEL));
+        engine.player.increaseStorage(Q(1, PIOCHE_CASSÉE));
+        engine.player.increaseStorage(Q(1, DÉSORGANISATION));
+        engine.player.increaseStorage(Q(1, BIÈRE_BUE));
+        engine.player.increaseStorage(Q(1, CHOPPE_SALE));
+        engine.player.increaseStorage(Q(1, OBSCURITÉ));
+        engine.player.increaseStorage(Q(1, BLESSURE));
         engine.producers = [
             // inital producers
             new Producer("1 heure se passe")

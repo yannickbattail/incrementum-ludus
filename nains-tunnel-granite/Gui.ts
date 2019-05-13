@@ -114,7 +114,11 @@ class Gui {
 
     private displayTree(): string {
         let h = '<table border="1">';
-        h += "<tr><th>Objectifs</th><th>Atteindre</th><th>Récompense</th></tr>";
+        h += "<tr>"
+        h += "<th>Objectifs</th>"
+        h += "<th>Atteindre</th>"
+        //h += "<th>Récompense</th>"
+        h += "</tr>";
         if (this.engine.triggers.length <= 0){
             h += '<tr><td colspan="3"><b>Vous avez gagné!</b> Fini! (pour le moment, en attendant la prochaine évolution du jeux)</td></tr>';
         } else {
@@ -131,9 +135,9 @@ class Gui {
                 h += "<tr>"
                     + "<td>" + trig.getName() + "</td>"
                     + "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                    + "<td>" + ((trig.getSpawnProducers().length)?' <b>Production</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
-                             + ((trig.getSpawnCrafters().length)?' <b>Tâche</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'')
-                             + ((trig.getSpawnResources().length)?' <b>Ressources</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>"
+                    //+ "<td>" + ((trig.getSpawnProducers().length)?' <b>Production</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
+                    //         + ((trig.getSpawnCrafters().length)?' <b>Tâche</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'')
+                    //         + ((trig.getSpawnResources().length)?' <b>Ressources</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>"
                 + "</tr>";
                 /*
                 if (trig.getSpawnNewTriggers().length) {

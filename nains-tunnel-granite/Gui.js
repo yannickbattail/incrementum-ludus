@@ -92,7 +92,10 @@ var Gui = (function () {
     };
     Gui.prototype.displayTree = function () {
         var h = '<table border="1">';
-        h += "<tr><th>Objectifs</th><th>Atteindre</th><th>Récompense</th></tr>";
+        h += "<tr>";
+        h += "<th>Objectifs</th>";
+        h += "<th>Atteindre</th>";
+        h += "</tr>";
         if (this.engine.triggers.length <= 0) {
             h += '<tr><td colspan="3"><b>Vous avez gagné!</b> Fini! (pour le moment, en attendant la prochaine évolution du jeux)</td></tr>';
         }
@@ -109,9 +112,6 @@ var Gui = (function () {
             h += "<tr>"
                 + "<td>" + trig.getName() + "</td>"
                 + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                + "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Production</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnCrafters().length) ? ' <b>Tâche</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnResources().length) ? ' <b>Ressources</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
                 + "</tr>";
         });
         return h;
