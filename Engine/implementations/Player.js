@@ -28,39 +28,27 @@ var Player = (function () {
     Player.prototype.increaseStorage = function (quantity) {
         var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            if (quantity.getQuantity() < 0 && this.preventNegativeStorage) {
-                this.storage.push(new Quantity(0, quantity.getResource()));
-            }
-            else {
-                this.storage.push(new Quantity(quantity.getQuantity(), quantity.getResource()));
-            }
+            resQ = new Quantity(0, quantity.getResource());
+            this.storage.push(resQ);
+        }
+        if ((resQ.getQuantity() + quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
+            resQ.setQuantity(0);
         }
         else {
-            if ((resQ.getQuantity() + quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
-                this.storage.push(new Quantity(0, quantity.getResource()));
-            }
-            else {
-                resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
-            }
+            resQ.setQuantity(resQ.getQuantity() + quantity.getQuantity());
         }
     };
     Player.prototype.decreaseStorage = function (quantity) {
         var resQ = this.getResourceInStorage(quantity.getResource().getName());
         if (resQ == null) {
-            if ((-1 * quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
-                this.storage.push(new Quantity(0, quantity.getResource()));
-            }
-            else {
-                this.storage.push(new Quantity(-1 * quantity.getQuantity(), quantity.getResource()));
-            }
+            resQ = new Quantity(0, quantity.getResource());
+            this.storage.push(resQ);
+        }
+        if ((resQ.getQuantity() + -1 * quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
+            resQ.setQuantity(0);
         }
         else {
-            if ((resQ.getQuantity() + -1 * quantity.getQuantity()) < 0 && this.preventNegativeStorage) {
-                this.storage.push(new Quantity(0, quantity.getResource()));
-            }
-            else {
-                resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
-            }
+            resQ.setQuantity(resQ.getQuantity() + -1 * quantity.getQuantity());
         }
     };
     Player.prototype.getResourceInStorage = function (resourceName) {
