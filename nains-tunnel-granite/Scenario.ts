@@ -120,7 +120,7 @@ class Scenario {
         engine.triggers = [
             new Trigger("[GAGNÉ!] Tunnel fini")
                 .whenReached(Q(28, TUNNEL)),
-            new Trigger("[perdu] Tunnel fini")
+            new Trigger("[perdu] Temps dépassé")
                 .whenReached(Q(48, HEURE))
                 .spawnResource(Q(-100, NAIN))
                 .execFunction("Gui.youDie();"),
