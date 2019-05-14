@@ -14,15 +14,15 @@
 /// <reference path="./Level.ts" />
 
 const LEVEL = new Level("level", "level.svg");
-const HEURE = new Material("heure", "h", "heure");
-const NAIN = new Item("nain", "nain");
-const TUNNEL = new Material("tunnel", "m", "tunnel");
-const PIOCHE_CASSÉE = new Item("pioche cassée", "pioche");
-const DÉSORGANISATION = new Item("désorganisation", "organisation");
-const BIÈRE_BUE = new Material("bière bue", "cl", "biere");
-const CHOPPE_SALE = new Item("choppe sale", "choppe");
-const OBSCURITÉ = new Item("Obscurité", "lumière");
-const BLESSURE = new Item("blessure", "soin");
+const HEURE = new Material("heure", "h", "time.png");
+const NAIN = new Item("nain", "dwarf-face.svg");
+const TUNNEL = new Material("tunnel", "m", "gold-mine.svg");
+const PIOCHE_CASSÉE = new Item("pioche cassée", "war-pick.svg");
+const DÉSORGANISATION = new Item("désorganisation", "uprising.svg");
+const BIÈRE_BUE = new Material("bière bue", "cl", "empty-beer.svg");
+const CHOPPE_SALE = new Item("choppe sale", "dirty-beer.svg");
+const OBSCURITÉ = new Item("Obscurité", "night-sky.svg");
+const BLESSURE = new Item("blessure", "cut-palm.svg");
 
 let Q = (quantity : number, res : IResource) => new Quantity(quantity, res);
 
@@ -134,6 +134,10 @@ class Scenario {
                 .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Plus de bières")
                 .whenReached(Q(10, BIÈRE_BUE))
+                .spawnResource(Q(-100, NAIN))
+                .execFunction("Gui.youDie();"),
+            new Trigger("[perdu] Plus de choppe propre")
+                .whenReached(Q(10, CHOPPE_SALE))
                 .spawnResource(Q(-100, NAIN))
                 .execFunction("Gui.youDie();"),
             new Trigger("[perdu] Plus de lumière")
