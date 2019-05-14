@@ -7,7 +7,8 @@ var LEVEL = new Level("level", "level.svg", [
     "Parrainé",
     "Baptisable",
     "Bébé fal",
-    "Faluchard"
+    "Bébé faluchard",
+    "faluchard"
 ]);
 var TEMPS = new Item("temps", "time.png");
 var DISTANCE = new Material("distance", "Km", "distance.svg");
@@ -49,6 +50,7 @@ var Scenario = (function () {
     Scenario.initEngine = function () {
         var engine = new Engine();
         engine.player = new Player("dignichose");
+        engine.player.setPreventNegativeStorage(true);
         engine.player.increaseStorage(Q(1, LEVEL));
         engine.producers = [
             new Producer("Temps / jours")
@@ -140,7 +142,7 @@ var Scenario = (function () {
         return engine;
     };
     Scenario.triggerFal = function () {
-        return new Trigger("Faluchard")
+        return new Trigger("Bébé Faluchard")
             .whenReached(Q(1, FALUCHE))
             .spawnResource(Q(1, LEVEL))
             .spawnResource(Q(0, PINS_GRENOBLE))
@@ -167,11 +169,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(1, PINS_NANCY, 100 / 407))
             .thatCraft(new RandomResource(1, PINS_STASBOURG, 100 / 492))["in"](3).seconds()
             .atCostOf(Q(5, TEMPS)))
-            .spawnCrafter(new Crafter("Telligence artificielle")
-            .thatCraft(Q(1, TELLIGENCE_ARTIF))["in"](10).seconds()
-            .atCostOf(Q(10000, TELLIGENCE))
-            .automaticaly())
-            .appendTrigger(new Trigger("Natio")
+            .appendTrigger(new Trigger("Couture")
+            .whenReached(Q(30, PINS_INGE))
             .whenReached(Q(1, PINS_GRENOBLE))
             .whenReached(Q(1, PINS_VALENCE))
             .whenReached(Q(1, PINS_CLERMONT))
