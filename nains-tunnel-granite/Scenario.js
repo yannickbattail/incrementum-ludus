@@ -18,6 +18,7 @@ var Scenario = (function () {
         engine.player.setPreventNegativeStorage(true);
         engine.player.increaseStorage(Q(1, LEVEL));
         engine.player.increaseStorage(Q(1, HEURE));
+        engine.player.increaseStorage(Q(1, NAIN));
         engine.player.increaseStorage(Q(1, TUNNEL));
         engine.player.increaseStorage(Q(1, PIOCHE_CASSÉE));
         engine.player.increaseStorage(Q(1, DÉSORGANISATION));
@@ -29,14 +30,14 @@ var Scenario = (function () {
             new Producer("1 heure se passe")
                 .thatProduce(Q(1, HEURE))
                 .every(20).seconds(),
-            new Producer("nains")
-                .thatProduce(Q(1, NAIN))
-                .every(10).seconds()
+            new Producer("renouvellement des nains")
+                .thatProduce(Q(-6, NAIN)).andProduce(Q(6, NAIN))
+                .every(20).seconds()
         ];
-        var baseTime = 3;
+        var baseTime = 1;
         engine.crafters = [
             new Crafter("Creuse")
-                .thatCraft(Q(1, TUNNEL)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(1, TUNNEL))
                 .andCraft(Q(1, PIOCHE_CASSÉE))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
@@ -45,45 +46,45 @@ var Scenario = (function () {
                 .andCraft(Q(1, BLESSURE))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Ravitaillement")
-                .thatCraft(Q(-6, BIÈRE_BUE)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-6, BIÈRE_BUE))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(2, CHOPPE_SALE))
                 .andCraft(Q(1, OBSCURITÉ))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Surveillance")
-                .thatCraft(Q(-8, DÉSORGANISATION)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-8, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
                 .andCraft(Q(1, CHOPPE_SALE))
                 .andCraft(Q(1, OBSCURITÉ))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Réparation")
-                .thatCraft(Q(-2, PIOCHE_CASSÉE)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-2, PIOCHE_CASSÉE))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
                 .andCraft(Q(1, CHOPPE_SALE))
                 .andCraft(Q(1, OBSCURITÉ))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Entretien")
-                .thatCraft(Q(-2, PIOCHE_CASSÉE)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-2, PIOCHE_CASSÉE))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
                 .andCraft(Q(1, CHOPPE_SALE))
                 .andCraft(Q(1, OBSCURITÉ))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Vaisselle")
-                .thatCraft(Q(-8, CHOPPE_SALE)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-8, CHOPPE_SALE))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
                 .andCraft(Q(1, OBSCURITÉ))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Éclairage")
-                .thatCraft(Q(-8, OBSCURITÉ)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-8, OBSCURITÉ))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
                 .andCraft(Q(1, CHOPPE_SALE))["in"](baseTime).seconds()
                 .atCostOf(Q(1, NAIN)),
             new Crafter("Soigner")
-                .thatCraft(Q(-8, BLESSURE)).andCraft(Q(1, NAIN))
+                .thatCraft(Q(-8, BLESSURE))
                 .andCraft(Q(1, DÉSORGANISATION))
                 .andCraft(Q(1, BIÈRE_BUE))
                 .andCraft(Q(1, CHOPPE_SALE))["in"](baseTime).seconds()
