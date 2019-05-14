@@ -1,5 +1,5 @@
 var LEVEL = new Level("level", "level.svg");
-var HEURE = new Material("heure", "h", "time.png");
+var HEURE = new Material("heure", "h", "clockwork.svg");
 var NAIN = new Item("nain", "dwarf-face.svg");
 var TUNNEL = new Material("tunnel", "m", "gold-mine.svg");
 var PIOCHE_CASSÉE = new Item("pioche cassée", "war-pick.svg");

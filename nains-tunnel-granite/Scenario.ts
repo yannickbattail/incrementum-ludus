@@ -14,7 +14,7 @@
 /// <reference path="./Level.ts" />
 
 const LEVEL = new Level("level", "level.svg");
-const HEURE = new Material("heure", "h", "time.png");
+const HEURE = new Material("heure", "h", "clockwork.svg");
 const NAIN = new Item("nain", "dwarf-face.svg");
 const TUNNEL = new Material("tunnel", "m", "gold-mine.svg");
 const PIOCHE_CASSÉE = new Item("pioche cassée", "war-pick.svg");
