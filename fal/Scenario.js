@@ -11,12 +11,13 @@ var LEVEL = new Level("level", "level.svg", [
     "faluchard"
 ]);
 var TEMPS = new Item("temps", "time.png");
-var DISTANCE = new Material("distance", "Km", "distance.svg");
+var DISTANCE = new Material("distance", "Km", "volant.png");
 var TELLIGENCE = new Material("telligence", "T", "brain.svg");
 var TELLIGENCE_ARTIF = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
-var PARRAIN = new Item("parrain", "food.svg");
+var PARRAIN = new Item("parrain", "parrain.png");
 var CODE_VILLE = new Item("code de ville", "etoile_or.png");
 var POULE = new Item("poule", "poule.png");
+var POINT_COUTURE = new Item("point de couture", "de-a-coudre.png");
 var FALUCHE = new Item("Faluche", "faluche.png");
 var ADOPTION_INGE = new Item("adoption ingé", "filieres/adopt_inge.png");
 var ADOPTION_SCIENCES = new Item("adoption sciences", "filieres/adopt_sciences.png");
@@ -159,6 +160,9 @@ var Scenario = (function () {
             .spawnProducer(new Producer("Km")
             .thatProduce(Q(1, DISTANCE))
             .every(0.5).seconds())
+            .spawnProducer(new Producer("Coudre")
+            .thatProduce(Q(1, POINT_COUTURE))
+            .manualy())
             .spawnCrafter(new Crafter("Soirée fal")
             .thatCraft(new RandomResource(1, PINS_GRENOBLE, 100 / 113))
             .thatCraft(new RandomResource(1, PINS_VALENCE, 100 / 104))
@@ -171,6 +175,7 @@ var Scenario = (function () {
             .atCostOf(Q(5, TEMPS)))
             .appendTrigger(new Trigger("Couture")
             .whenReached(Q(30, PINS_INGE))
+            .whenReached(Q(50, POINT_COUTURE))
             .whenReached(Q(1, PINS_GRENOBLE))
             .whenReached(Q(1, PINS_VALENCE))
             .whenReached(Q(1, PINS_CLERMONT))
@@ -185,22 +190,40 @@ var Scenario = (function () {
             .whenReached(Q(1, CODE_VILLE))
             .spawnResource(Q(1, ADOPTION_SCIENCES)))
             .appendTrigger(new Trigger("[secondaire] Adoption droit")
-            .whenReached(Q(1, CODE_VILLE)).and(Q(1, PARRAIN)).and(Q(40, PINS_DROIT))
+            .whenReached(Q(1, CODE_VILLE))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_DROIT))
+            .and(Q(20, POINT_COUTURE))
             .spawnResource(Q(1, ADOPTION_DROIT)))
             .appendTrigger(new Trigger("[secondaire] Adoption jaune")
-            .whenReached(Q(1, CODE_VILLE)).and(Q(1, PARRAIN)).and(Q(40, PINS_JAUNE))
+            .whenReached(Q(1, CODE_VILLE))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_JAUNE))
+            .and(Q(20, POINT_COUTURE))
             .spawnResource(Q(1, ADOPTION_JAUNE)))
             .appendTrigger(new Trigger("[secondaire] Adoption rose")
-            .whenReached(Q(1, CODE_VILLE)).and(Q(1, PARRAIN)).and(Q(40, PINS_ROSE))
+            .whenReached(Q(1, CODE_VILLE))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_ROSE))
+            .and(Q(20, POINT_COUTURE))
             .spawnResource(Q(1, ADOPTION_ROSE)))
             .appendTrigger(new Trigger("[secondaire] Adoption sage-pouf")
-            .whenReached(Q(1, CODE_VILLE)).and(Q(1, PARRAIN)).and(Q(40, PINS_SAGE_POUF))
+            .whenReached(Q(1, CODE_VILLE))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_SAGE_POUF))
+            .and(Q(20, POINT_COUTURE))
             .spawnResource(Q(1, ADOPTION_SAGE_POUF)))
             .appendTrigger(new Trigger("[secondaire] Adoption pharma")
-            .whenReached(Q(1, CODE_VILLE)).and(Q(1, PARRAIN)).and(Q(40, PINS_PHARMA))
+            .whenReached(Q(1, CODE_VILLE))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_PHARMA))
+            .and(Q(20, POINT_COUTURE))
             .spawnResource(Q(1, ADOPTION_PHARMA)))
             .appendTrigger(new Trigger("[secondaire] Adoption médecine")
-            .whenReached(Q(1, CODE_VILLE)).and(Q(1, PARRAIN)).and(Q(40, PINS_MEDECINE))
+            .whenReached(Q(1, CODE_VILLE))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_MEDECINE))
+            .and(Q(20, POINT_COUTURE))
             .spawnResource(Q(1, ADOPTION_MEDECINE)))
             .appendTrigger(new Trigger("[secondaire] p*te à adoption")
             .whenReached(Q(1, ADOPTION_SCIENCES))
