@@ -36,7 +36,7 @@ var PINS_ROSE = new Item("pin's rose", "filieres/ciseaux.png");
 var PINS_SAGE_POUF = new Item("pin's sage-pouf", "filieres/croix ankh.png");
 var PINS_PHARMA = new Item("pin's Pharma", "filieres/caducee pharmacie.png");
 var PINS_MEDECINE = new Item("pin's Médecine", "filieres/caducee medecine.png");
-var PINS_LYON = new Item("pin's LYON", "villes/Lyon.png");
+var PINS_LYON = new Item("pin's Lyon", "villes/Lyon.png");
 var PINS_GRENOBLE = new Item("pin's Grenoble", "villes/Grenoble.svg");
 var PINS_VALENCE = new Item("pin's Valence", "villes/Valence.svg");
 var PINS_CLERMONT = new Item("pin's Clermont", "villes/ClermontFerrand.svg");
@@ -45,6 +45,17 @@ var PINS_MONPEUL = new Item("pin's Monpeul", "villes/Montpellier.svg");
 var PINS_MARSEILLE = new Item("pin's Marseille", "villes/Marseille.svg");
 var PINS_NANCY = new Item("pin's Nancy", "villes/Nancy.svg");
 var PINS_STASBOURG = new Item("pin's Strasbourg", "villes/Strasbourg.svg");
+var villeKm = {
+    "Lyon": { "Lyon": 0, "Grenoble": 113, "Valence": 104, "Clermont": 165, "Dijon": 197, "Monpeul": 306, "Marseille": 315, "Nancy": 407, "Strasbourg": 492 },
+    "Grenoble": { "Lyon": 113, "Grenoble": 0, "Valence": 91, "Clermont": 273, "Dijon": 305, "Monpeul": 293, "Marseille": 306, "Nancy": 516, "Strasbourg": 573 },
+    "Valence": { "Lyon": 104, "Grenoble": 91, "Valence": 0, "Clermont": 263, "Dijon": 295, "Monpeul": 204, "Marseille": 214, "Nancy": 506, "Strasbourg": 592 },
+    "Clermont": { "Lyon": 165, "Grenoble": 273, "Valence": 263, "Clermont": 0, "Dijon": 333, "Monpeul": 332, "Marseille": 475, "Nancy": 516, "Strasbourg": 544 },
+    "Dijon": { "Lyon": 197, "Grenoble": 305, "Valence": 295, "Clermont": 333, "Dijon": 0, "Monpeul": 495, "Marseille": 504, "Nancy": 217, "Strasbourg": 331 },
+    "Monpeul": { "Lyon": 306, "Grenoble": 293, "Valence": 204, "Clermont": 332, "Dijon": 495, "Monpeul": 0, "Marseille": 171, "Nancy": 719, "Strasbourg": 789 },
+    "Marseille": { "Lyon": 315, "Grenoble": 306, "Valence": 214, "Clermont": 475, "Dijon": 504, "Monpeul": 171, "Marseille": 0, "Nancy": 728, "Strasbourg": 798 },
+    "Nancy": { "Lyon": 407, "Grenoble": 516, "Valence": 506, "Clermont": 516, "Dijon": 217, "Monpeul": 719, "Marseille": 728, "Nancy": 0, "Strasbourg": 160 },
+    "Strasbourg": { "Lyon": 492, "Grenoble": 573, "Valence": 592, "Clermont": 544, "Dijon": 331, "Monpeul": 789, "Marseille": 798, "Nancy": 160, "Strasbourg": 0 }
+};
 var Q = function (quantity, res) { return new Quantity(quantity, res); };
 var Scenario = (function () {
     function Scenario() {
@@ -166,14 +177,14 @@ var Scenario = (function () {
             .thatProduce(Q(1, POINT_COUTURE))
             .manualy())
             .spawnCrafter(new Crafter("Soirée fal")
-            .thatCraft(new RandomResource(1, PINS_GRENOBLE, coefDistance / 113))
-            .thatCraft(new RandomResource(1, PINS_VALENCE, coefDistance / 104))
-            .thatCraft(new RandomResource(1, PINS_CLERMONT, coefDistance / 165))
-            .thatCraft(new RandomResource(1, PINS_DIJON, coefDistance / 197))
-            .thatCraft(new RandomResource(1, PINS_MONPEUL, coefDistance / 306))
-            .thatCraft(new RandomResource(1, PINS_MARSEILLE, coefDistance / 315))
-            .thatCraft(new RandomResource(1, PINS_NANCY, coefDistance / 407))
-            .thatCraft(new RandomResource(1, PINS_STASBOURG, coefDistance / 492))["in"](3).seconds()
+            .thatCraft(new RandomResource(1, PINS_GRENOBLE, coefDistance / villeKm["Lyon"]["Grenoble"]))
+            .thatCraft(new RandomResource(1, PINS_VALENCE, coefDistance / villeKm["Lyon"]["Valence"]))
+            .thatCraft(new RandomResource(1, PINS_CLERMONT, coefDistance / villeKm["Lyon"]["Clermont"]))
+            .thatCraft(new RandomResource(1, PINS_DIJON, coefDistance / villeKm["Lyon"]["Dijon"]))
+            .thatCraft(new RandomResource(1, PINS_MONPEUL, coefDistance / villeKm["Lyon"]["Monpeul"]))
+            .thatCraft(new RandomResource(1, PINS_MARSEILLE, coefDistance / villeKm["Lyon"]["Marseille"]))
+            .thatCraft(new RandomResource(1, PINS_NANCY, coefDistance / villeKm["Lyon"]["Nancy"]))
+            .thatCraft(new RandomResource(1, PINS_STASBOURG, coefDistance / villeKm["Lyon"]["Strasbourg"]))["in"](3).seconds()
             .atCostOf(Q(5, TEMPS)))
             .appendTrigger(Scenario.triggerCouture())
             .appendTrigger(new Trigger("[secondaire] Adoption sciences")
@@ -248,41 +259,41 @@ var Scenario = (function () {
             .spawnResource(Q(1, CONGRES))
             .spawnCrafter(new Crafter("Congrès: WE AFG")
             .thatCraft(Q(5, PINS_GRENOBLE))
-            .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance / 110))
-            .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance / 273))
-            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance / 305))
-            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance / 293))
-            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / 306))
-            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / 516))
-            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / 573))["in"](1).minutes()
+            .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance / villeKm["Grenoble"]["Valence"]))
+            .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance / villeKm["Grenoble"]["Clermont"]))
+            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance / villeKm["Grenoble"]["Dijon"]))
+            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance / villeKm["Grenoble"]["Monpeul"]))
+            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Grenoble"]["Marseille"]))
+            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Grenoble"]["Nancy"]))
+            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Grenoble"]["Strasbourg"]))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
-            .atCostOf(Q(113, DISTANCE)))).appendTrigger(new Trigger("Congrès: WE FADA")
+            .atCostOf(Q(villeKm["Lyon"]["Grenoble"], DISTANCE)))).appendTrigger(new Trigger("Congrès: WE FADA")
             .whenReached(Q(10, PINS_VALENCE))
             .spawnResource(Q(1, CONGRES))
             .spawnCrafter(new Crafter("Congrès: WE FADA")
-            .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance / 110))
+            .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance / villeKm["Valence"]["Grenoble"]))
             .thatCraft(Q(5, PINS_VALENCE))
-            .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance / 263))
-            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance / 295))
-            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance / 204))
-            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / 214))
-            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / 506))
-            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / 592))["in"](1).minutes()
+            .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance / villeKm["Valence"]["Clermont"]))
+            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance / villeKm["Valence"]["Dijon"]))
+            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance / villeKm["Valence"]["Monpeul"]))
+            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Valence"]["Marseille"]))
+            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Valence"]["Nancy"]))
+            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Valence"]["Strasbourg"]))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
-            .atCostOf(Q(104, DISTANCE)))).appendTrigger(new Trigger("Congrès: Auverge")
+            .atCostOf(Q(villeKm["Lyon"]["Valence"], DISTANCE)))).appendTrigger(new Trigger("Congrès: Auverge")
             .whenReached(Q(10, PINS_CLERMONT))
             .spawnResource(Q(1, CONGRES))
             .spawnCrafter(new Crafter("Congrès: Auverge")
-            .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance / 273))
-            .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance / 263))
+            .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance / villeKm["Clermont"]["Grenoble"]))
+            .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance / villeKm["Clermont"]["Valence"]))
             .thatCraft(Q(5, PINS_CLERMONT))
-            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance / 333))
-            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance / 332))
-            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / 475))
-            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / 516))
-            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / 544))["in"](1).minutes()
+            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance / villeKm["Clermont"]["Dijon"]))
+            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance / villeKm["Clermont"]["Monpeul"]))
+            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Clermont"]["Marseille"]))
+            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Clermont"]["Nancy"]))
+            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Clermont"]["Strasbourg"]))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
-            .atCostOf(Q(165, DISTANCE)))).appendTrigger(new Trigger("fal natio")
+            .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE)))).appendTrigger(new Trigger("fal natio")
             .whenReached(Q(3, CONGRES))
             .spawnResource(Q(1, LEVEL)));
     };
