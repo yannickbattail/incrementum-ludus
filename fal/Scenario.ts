@@ -27,12 +27,13 @@ const LEVEL = new Level("level", "level.svg", [
 ]);
 const TEMPS                 = new Item("temps", "time.png");
 const DISTANCE              = new Material("distance", "Km", "volant.png");
-const TELLIGENCE            = new Material("telligence", "T", "brain.svg");
+const TELLIGENCE            = new Material("telligence", "T", "brain.png");
 const TELLIGENCE_ARTIF      = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
 const PARRAIN               = new Item("parrain", "parrain.png");
 const CODE_VILLE            = new Item("code de ville", "etoile_or.png");
 const POULE                 = new Item("poule", "poule.png");
 const POINT_COUTURE         = new Item("point de couture", "de-a-coudre.png");
+const CONGRES               = new Item("congrès", "valise.png");
 
 const FALUCHE               = new Item("Faluche", "faluche.png");
 
@@ -195,6 +196,7 @@ class Scenario {
     }
 
     private static triggerFal() : ITrigger {
+        let coefDistance = 50;
         return new Trigger("Bébé Faluchard")
             .whenReached(Q(1, FALUCHE))
             .spawnResource(Q(1, LEVEL)) // level 7
@@ -223,37 +225,19 @@ class Scenario {
             )
             .spawnCrafter(
                 new Crafter("Soirée fal")
-                    .thatCraft(new RandomResource(1, PINS_GRENOBLE, 100/113))
-                    .thatCraft(new RandomResource(1, PINS_VALENCE, 100/104))
-                    .thatCraft(new RandomResource(1, PINS_CLERMONT, 100/165))
-                    .thatCraft(new RandomResource(1, PINS_DIJON, 100/197))
-                    .thatCraft(new RandomResource(1, PINS_MONPEUL, 100/306))
-                    .thatCraft(new RandomResource(1, PINS_MARSEILLE, 100/315))
-                    .thatCraft(new RandomResource(1, PINS_NANCY, 100/407))
-                    .thatCraft(new RandomResource(1, PINS_STASBOURG, 100/492))
+                    .thatCraft(new RandomResource(1, PINS_GRENOBLE, coefDistance/113))
+                    .thatCraft(new RandomResource(1, PINS_VALENCE, coefDistance/104))
+                    .thatCraft(new RandomResource(1, PINS_CLERMONT, coefDistance/165))
+                    .thatCraft(new RandomResource(1, PINS_DIJON, coefDistance/197))
+                    .thatCraft(new RandomResource(1, PINS_MONPEUL, coefDistance/306))
+                    .thatCraft(new RandomResource(1, PINS_MARSEILLE, coefDistance/315))
+                    .thatCraft(new RandomResource(1, PINS_NANCY, coefDistance/407))
+                    .thatCraft(new RandomResource(1, PINS_STASBOURG, coefDistance/492))
                     .in(3).seconds()
                     .atCostOf(Q(5, TEMPS))
             )
-            /*.spawnCrafter(
-                new Crafter("Telligence artificielle")
-                    .thatCraft(Q(1, TELLIGENCE_ARTIF))
-                    .in(10).seconds()
-                    .atCostOf(Q(10000, TELLIGENCE))
-                    .automaticaly()
-            )*/
             .appendTrigger(
-                new Trigger("Couture")
-                    .whenReached(Q(30, PINS_INGE))
-                    .whenReached(Q(50, POINT_COUTURE))
-                    .whenReached(Q(1, PINS_GRENOBLE))
-                    .whenReached(Q(1, PINS_VALENCE))
-                    .whenReached(Q(1, PINS_CLERMONT))
-                    .whenReached(Q(1, PINS_DIJON))
-                    .whenReached(Q(1, PINS_MONPEUL))
-                    .whenReached(Q(1, PINS_MARSEILLE))
-                    .whenReached(Q(1, PINS_NANCY))
-                    .whenReached(Q(1, PINS_STASBOURG))
-                    .spawnResource(Q(1, LEVEL)) // level 8
+                Scenario.triggerCouture()
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption sciences")
@@ -322,5 +306,78 @@ class Scenario {
                     .spawnResource(Q(1, POULE))
 
             );
+    }
+
+    private static triggerCouture() : ITrigger {
+        let coefDistance = 100;
+        return new Trigger("Couture")
+            .whenReached(Q(30, PINS_INGE))
+            .and(Q(50, POINT_COUTURE))
+            .and(Q(100, DISTANCE))
+            .spawnResource(Q(1, LEVEL)) // level 8
+            .appendTrigger(
+                new Trigger("Congrès: WE AFG")
+                    .whenReached(Q(10, PINS_GRENOBLE))
+                    .spawnCrafter(
+                        new Crafter("Congrès: WE AFG")
+                            .thatCraft(Q(1, CONGRES))
+                            .thatCraft(Q(5, PINS_GRENOBLE))
+                            .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance/110)) // 91Km
+                            .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance/273))
+                            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance/305))
+                            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance/293))
+                            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance/306))
+                            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance/516))
+                            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance/573))
+                            .in(1).minutes()
+                            .atCostOf(Q(10, TEMPS))
+                            .atCostOf(Q(113, DISTANCE))
+                    ),
+            ).appendTrigger(
+                new Trigger("Congrès: WE FADA")
+                    .whenReached(Q(10, PINS_VALENCE))
+                    .spawnCrafter(
+                        new Crafter("Congrès: WE FADA")
+                            .thatCraft(Q(1, CONGRES))
+                            .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance/110)) // 91Km
+                            .thatCraft(Q(5, PINS_VALENCE))
+                            .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance/263))
+                            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance/295))
+                            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance/204))
+                            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance/214))
+                            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance/506))
+                            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance/592))
+                            .in(1).minutes()
+                            .atCostOf(Q(10, TEMPS))
+                            .atCostOf(Q(165, DISTANCE))
+                    ),
+            ).appendTrigger(
+                new Trigger("Congrès: Auverge")
+                    .whenReached(Q(10, PINS_CLERMONT))
+                    .spawnCrafter(
+                        new Crafter("Congrès: Auverge")
+                            .thatCraft(Q(1, CONGRES))
+                            .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance/273))
+                            .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance/263))
+                            .thatCraft(Q(5, PINS_CLERMONT))
+                            .thatCraft(new RandomResource(2, PINS_DIJON, coefDistance/333))
+                            .thatCraft(new RandomResource(2, PINS_MONPEUL, coefDistance/332))
+                            .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance/475))
+                            .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance/516))
+                            .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance/544))
+                            .in(1).minutes()
+                            .atCostOf(Q(10, TEMPS))
+                            .atCostOf(Q(165, DISTANCE))
+                    ),
+            );
+
+
+        /*.spawnCrafter(
+        new Crafter("Telligence artificielle")
+            .thatCraft(Q(1, TELLIGENCE_ARTIF))
+            .in(10).seconds()
+            .atCostOf(Q(10000, TELLIGENCE))
+            .automaticaly()
+        )*/
     }
 }
