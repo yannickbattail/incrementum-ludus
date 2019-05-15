@@ -7,8 +7,8 @@ var LEVEL = new Level("level", "level.svg", [
     "Parrainé",
     "Baptisable",
     "Bébé fal",
-    "Bébé faluchard",
-    "faluchard"
+    "faluchard",
+    "faluchard natio"
 ]);
 var TEMPS = new Item("temps", "time.png");
 var DISTANCE = new Material("distance", "Km", "volant.png");
@@ -178,44 +178,53 @@ var Scenario = (function () {
             .appendTrigger(Scenario.triggerCouture())
             .appendTrigger(new Trigger("[secondaire] Adoption sciences")
             .whenReached(Q(1, CODE_VILLE))
-            .whenReached(Q(1, CODE_VILLE))
-            .spawnResource(Q(1, ADOPTION_SCIENCES)))
+            .and(Q(1, PARRAIN))
+            .and(Q(40, PINS_SCIENCES))
+            .and(Q(20, POINT_COUTURE))
+            .spawnResource(Q(1, ADOPTION_DROIT))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption droit")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_DROIT))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_DROIT)))
+            .spawnResource(Q(1, ADOPTION_DROIT))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption jaune")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_JAUNE))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_JAUNE)))
+            .spawnResource(Q(1, ADOPTION_JAUNE))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption rose")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_ROSE))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_ROSE)))
+            .spawnResource(Q(1, ADOPTION_ROSE))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption sage-pouf")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_SAGE_POUF))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_SAGE_POUF)))
+            .spawnResource(Q(1, ADOPTION_SAGE_POUF))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption pharma")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_PHARMA))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_PHARMA)))
+            .spawnResource(Q(1, ADOPTION_PHARMA))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption médecine")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_MEDECINE))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_MEDECINE)))
+            .spawnResource(Q(1, ADOPTION_MEDECINE))
+            .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] p*te à adoption")
             .whenReached(Q(1, ADOPTION_SCIENCES))
             .and(Q(1, ADOPTION_DROIT))
@@ -233,6 +242,7 @@ var Scenario = (function () {
             .and(Q(50, POINT_COUTURE))
             .and(Q(100, DISTANCE))
             .spawnResource(Q(1, LEVEL))
+            .spawnResource(Q(-50, POINT_COUTURE))
             .appendTrigger(new Trigger("Congrès: WE AFG")
             .whenReached(Q(10, PINS_GRENOBLE))
             .spawnCrafter(new Crafter("Congrès: WE AFG")
@@ -272,7 +282,9 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / 516))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / 544))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
-            .atCostOf(Q(165, DISTANCE))));
+            .atCostOf(Q(165, DISTANCE)))).appendTrigger(new Trigger("fal natio")
+            .whenReached(Q(3, CONGRES))
+            .spawnResource(Q(1, LEVEL)));
     };
     return Scenario;
 }());
