@@ -327,9 +327,9 @@ class Scenario {
             .appendTrigger(
                 new Trigger("Congrès: WE AFG")
                     .whenReached(Q(10, PINS_GRENOBLE))
+                    .spawnResource(Q(1, CONGRES))
                     .spawnCrafter(
                         new Crafter("Congrès: WE AFG")
-                            .thatCraft(Q(1, CONGRES))
                             .thatCraft(Q(5, PINS_GRENOBLE))
                             .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance/110)) // 91Km
                             .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance/273))
@@ -345,9 +345,9 @@ class Scenario {
             ).appendTrigger(
                 new Trigger("Congrès: WE FADA")
                     .whenReached(Q(10, PINS_VALENCE))
+                    .spawnResource(Q(1, CONGRES))
                     .spawnCrafter(
                         new Crafter("Congrès: WE FADA")
-                            .thatCraft(Q(1, CONGRES))
                             .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance/110)) // 91Km
                             .thatCraft(Q(5, PINS_VALENCE))
                             .thatCraft(new RandomResource(2, PINS_CLERMONT, coefDistance/263))
@@ -358,14 +358,14 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance/592))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
-                            .atCostOf(Q(165, DISTANCE))
+                            .atCostOf(Q(104, DISTANCE))
                     ),
             ).appendTrigger(
                 new Trigger("Congrès: Auverge")
                     .whenReached(Q(10, PINS_CLERMONT))
+                    .spawnResource(Q(1, CONGRES))
                     .spawnCrafter(
                         new Crafter("Congrès: Auverge")
-                            .thatCraft(Q(1, CONGRES))
                             .thatCraft(new RandomResource(2, PINS_GRENOBLE, coefDistance/273))
                             .thatCraft(new RandomResource(2, PINS_VALENCE, coefDistance/263))
                             .thatCraft(Q(5, PINS_CLERMONT))
