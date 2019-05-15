@@ -181,7 +181,7 @@ var Scenario = (function () {
             .and(Q(1, PARRAIN))
             .and(Q(40, PINS_SCIENCES))
             .and(Q(20, POINT_COUTURE))
-            .spawnResource(Q(1, ADOPTION_DROIT))
+            .spawnResource(Q(1, ADOPTION_SCIENCES))
             .spawnResource(Q(-20, POINT_COUTURE)))
             .appendTrigger(new Trigger("[secondaire] Adoption droit")
             .whenReached(Q(1, CODE_VILLE))
