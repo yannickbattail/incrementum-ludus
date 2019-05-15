@@ -26,6 +26,19 @@ const BLESSURE = new Item("blessure", "cut-palm.svg");
 
 let Q = (quantity : number, res : IResource) => new Quantity(quantity, res);
 
+function resetNain() {
+    let heures = 1;
+    let heuresQ = engine.player.getResourceInStorage(HEURE.getName());
+    if (heuresQ!= null) {
+        heures = heuresQ.getQuantity();
+    }
+    let resetNain = engine.getProducerByName("renouvellement des nains");
+    if (resetNain != null) {
+        resetNain.getResourcesQuantity().length = 0;
+        resetNain.thatProduce(Q(-1*heures, NAIN)).andProduce(Q(heures, NAIN))
+    }
+}
+
 class Scenario {
     public static initEngine() : Engine {
 
@@ -49,8 +62,8 @@ class Scenario {
                 .thatProduce(Q(1, HEURE))
                 .every(20).seconds(),
             new Producer("renouvellement des nains")
-                .thatProduce(Q(-6, NAIN)).andProduce(Q(6, NAIN))
-                .every(20).seconds()
+                .thatProduce(Q(-1, NAIN)).andProduce(Q(1, NAIN))
+                .every(30).seconds()
         ];
         let baseTime = 1;
         engine.crafters = [

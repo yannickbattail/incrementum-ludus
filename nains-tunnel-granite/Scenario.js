@@ -9,6 +9,18 @@ var CHOPPE_SALE = new Item("choppe sale", "dirty-beer.svg");
 var OBSCURITÉ = new Item("Obscurité", "night-sky.svg");
 var BLESSURE = new Item("blessure", "cut-palm.svg");
 var Q = function (quantity, res) { return new Quantity(quantity, res); };
+function resetNain() {
+    var heures = 1;
+    var heuresQ = engine.player.getResourceInStorage(HEURE.getName());
+    if (heuresQ != null) {
+        heures = heuresQ.getQuantity();
+    }
+    var resetNain = engine.getProducerByName("renouvellement des nains");
+    if (resetNain != null) {
+        resetNain.getResourcesQuantity().length = 0;
+        resetNain.thatProduce(Q(-1 * heures, NAIN)).andProduce(Q(heures, NAIN));
+    }
+}
 var Scenario = (function () {
     function Scenario() {
     }
@@ -31,7 +43,7 @@ var Scenario = (function () {
                 .thatProduce(Q(1, HEURE))
                 .every(20).seconds(),
             new Producer("renouvellement des nains")
-                .thatProduce(Q(-6, NAIN)).andProduce(Q(6, NAIN))
+                .thatProduce(Q(-1, NAIN)).andProduce(Q(1, NAIN))
                 .every(20).seconds()
         ];
         var baseTime = 1;
