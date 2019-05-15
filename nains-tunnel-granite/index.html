@@ -49,6 +49,7 @@
     <div id="crafters"></div>
     <div id="overlay">
         <div id="die">You die!</div>
+        <div id="raison"></div>
         <div>
             <button onclick="Gui.eraseStorage();window.location.reload();">Retry</button>
         </div>
@@ -57,7 +58,7 @@
         var gui = new Gui(engine);
         gui.start(200);
         engine.run(100, saveEngine);
-        window.setInterval(resetNain, 30000);
+        window.setInterval(resetNain, 20000);
     </script>
     <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">

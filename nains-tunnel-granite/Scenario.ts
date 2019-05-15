@@ -63,7 +63,7 @@ class Scenario {
                 .every(20).seconds(),
             new Producer("renouvellement des nains")
                 .thatProduce(Q(-1, NAIN)).andProduce(Q(1, NAIN))
-                .every(30).seconds()
+                .every(20).seconds()
         ];
         let baseTime = 1;
         engine.crafters = [
@@ -137,31 +137,31 @@ class Scenario {
             new Trigger("[perdu] Temps dépassé")
                 .whenReached(Q(48, HEURE))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();"),
+                .execFunction("Gui.youDie('Temps dépassé');"),
             new Trigger("[perdu] Toutes les pioches sont cassées")
                 .whenReached(Q(10, PIOCHE_CASSÉE))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();"),
+                .execFunction("Gui.youDie('Toutes les pioches sont cassées');"),
             new Trigger("[perdu] Complétement désorganisé")
                 .whenReached(Q(10, DÉSORGANISATION))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();"),
+                .execFunction("Gui.youDie('Complétement désorganisé');"),
             new Trigger("[perdu] Plus de bières")
                 .whenReached(Q(10, BIÈRE_BUE))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();"),
+                .execFunction("Gui.youDie('Plus de bières');"),
             new Trigger("[perdu] Plus de choppe propre")
                 .whenReached(Q(10, CHOPPE_SALE))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();"),
+                .execFunction("Gui.youDie('Plus de choppe propre');"),
             new Trigger("[perdu] Plus de lumière")
                 .whenReached(Q(10, OBSCURITÉ))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();"),
+                .execFunction("Gui.youDie('Plus de lumière');"),
             new Trigger("[perdu] Trop de blessés")
                 .whenReached(Q(10, BLESSURE))
                 .spawnResource(Q(-100, NAIN))
-                .execFunction("Gui.youDie();")
+                .execFunction("Gui.youDie('Trop de blessés');")
         ];
         return engine;
     }
