@@ -34,6 +34,8 @@ const CODE_VILLE            = new Item("code de ville", "etoile_or.png");
 const POULE                 = new Item("poule", "poule.png");
 const POINT_COUTURE         = new Item("point de couture", "de-a-coudre.png");
 const CONGRES               = new Item("congrès", "valise.png");
+const CHANT                 = new Item("chant", "cle de fa argent.png");
+const CLE_DE_SOL            = new Item("clé de sol", "cle de sol.png");
 
 const FALUCHE               = new Item("Faluche", "faluche.png");
 
@@ -351,6 +353,12 @@ class Scenario {
             .and(Q(100, DISTANCE))
             .spawnResource(Q(1, LEVEL)) // level 8
             .spawnResource(Q(-50, POINT_COUTURE))
+            .spawnCrafter(
+                new Crafter("clé de sol")
+                    .thatCraft(Q(1, CLE_DE_SOL))
+                    .atCostOf(Q(30, CHANT))
+                    .automaticaly()
+            )
             .appendTrigger(
                 new Trigger("Congrès: WE AFG")
                     .whenReached(Q(10, PINS_GRENOBLE))
@@ -365,6 +373,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_MARSEILLE,    coefDistance/villeKm["Grenoble"]["Marseille"]))
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Grenoble"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Grenoble"]["Strasbourg"]))
+                            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
                             .atCostOf(Q(villeKm["Lyon"]["Grenoble"], DISTANCE))
@@ -383,6 +392,7 @@ class Scenario {
                         .thatCraft(new RandomResource(2, PINS_MARSEILLE,    coefDistance/villeKm["Valence"]["Marseille"]))
                         .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Valence"]["Nancy"]))
                         .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Valence"]["Strasbourg"]))
+                        .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
                         .in(1).minutes()
                         .atCostOf(Q(10, TEMPS))
                         .atCostOf(Q(villeKm["Lyon"]["Valence"], DISTANCE))
@@ -401,6 +411,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_MARSEILLE,    coefDistance/villeKm["Clermont"]["Marseille"]))
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Clermont"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Clermont"]["Strasbourg"]))
+                            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
                             .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE))
