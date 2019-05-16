@@ -357,6 +357,7 @@ class Scenario {
                 new Crafter("clé de sol")
                     .thatCraft(Q(1, CLE_DE_SOL))
                     .atCostOf(Q(30, CHANT))
+                    .in(20).seconds()
                     .automaticaly()
             )
             .appendTrigger(

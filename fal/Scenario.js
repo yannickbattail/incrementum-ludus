@@ -274,7 +274,7 @@ var Scenario = (function () {
             .spawnResource(Q(-50, POINT_COUTURE))
             .spawnCrafter(new Crafter("clé de sol")
             .thatCraft(Q(1, CLE_DE_SOL))
-            .atCostOf(Q(30, CHANT))
+            .atCostOf(Q(30, CHANT))["in"](20).seconds()
             .automaticaly())
             .appendTrigger(new Trigger("Congrès: WE AFG")
             .whenReached(Q(10, PINS_GRENOBLE))
