@@ -172,7 +172,7 @@ var Scenario = (function () {
             .every(30).seconds())
             .spawnProducer(new Producer("Km")
             .thatProduce(Q(1, DISTANCE))
-            .every(0.5).seconds())
+            .manualy())
             .spawnProducer(new Producer("Coudre")
             .thatProduce(Q(1, POINT_COUTURE))
             .manualy())
