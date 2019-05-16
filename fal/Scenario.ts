@@ -195,9 +195,11 @@ class Scenario {
                                         .appendTrigger(
                                             new Trigger("Baptême")
                                                 .whenReached(Q(1, CODE_VILLE)).and(Q(2, PARRAIN))
+                                                .spawnResource(Q(-2, PARRAIN))
+                                                .spawnResource(Q(-1, CODE_VILLE))
                                                 .spawnResource(Q(1, FALUCHE))
                                                 .spawnResource(Q(1, LEVEL)) // level 6
-                                                .appendTrigger(Scenario.triggerFal()) // level 7
+                                                .appendTrigger(Scenario.triggerFal())
                                         )
                                 )
                         )
@@ -258,6 +260,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_SCIENCES))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption droit")
@@ -267,6 +271,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_DROIT))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption jaune")
@@ -276,6 +282,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_JAUNE))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption rose")
@@ -285,6 +293,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_ROSE))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption sage-pouf")
@@ -294,6 +304,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_SAGE_POUF))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption pharma")
@@ -303,6 +315,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_PHARMA))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption médecine")
@@ -312,6 +326,8 @@ class Scenario {
                     .and(Q(20, POINT_COUTURE))
                     .spawnResource(Q(1, ADOPTION_MEDECINE))
                     .spawnResource(Q(-20, POINT_COUTURE))
+                    .spawnResource(Q(-1, CODE_VILLE))
+                    .spawnResource(Q(-1, PARRAIN))
             )
             .appendTrigger(
                 new Trigger("[secondaire] p*te à adoption")
