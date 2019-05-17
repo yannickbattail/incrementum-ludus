@@ -48,6 +48,13 @@
     <div id="storage"></div>
     <div id="producers"></div>
     <div id="crafters"></div>
+    <div id="overlay">
+        <div id="die">You die!</div>
+        <div id="raison"></div>
+        <div>
+            <button onclick="Gui.eraseStorage();window.location.reload();">Retry</button>
+        </div>
+    </div>
     <script>
         var gui = new Gui(engine);
         gui.start(200);

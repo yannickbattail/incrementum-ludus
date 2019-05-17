@@ -10,6 +10,7 @@ var LEVEL = new Level("level", "level.svg", [
     "faluchard",
     "faluchard natio"
 ]);
+var FALUCHE = new Item("Faluche", "faluche.png");
 var TEMPS = new Item("temps", "time.png");
 var DISTANCE = new Material("distance", "Km", "volant.png");
 var TELLIGENCE = new Material("telligence", "T", "brain.png");
@@ -21,7 +22,9 @@ var POINT_COUTURE = new Item("point de couture", "de-a-coudre.png");
 var CONGRES = new Item("congrès", "valise.png");
 var CHANT = new Item("chant", "cle de fa argent.png");
 var CLE_DE_SOL = new Item("clé de sol", "cle de sol.png");
-var FALUCHE = new Item("Faluche", "faluche.png");
+var CH3CH2OH = new Item("CH3CH2OH", "CH3CH2OH.png");
+var BIÈRE = new Item("chope de bière", "chope or.png");
+var VOMIT = new Material("vomit", "cl", "vomit.png");
 var ADOPTION_INGE = new Item("adoption ingé", "filieres/adopt_inge.png");
 var ADOPTION_SCIENCES = new Item("adoption sciences", "filieres/adopt_sciences.png");
 var ADOPTION_DROIT = new Item("adoption droit", "filieres/adopt_droit.png");
@@ -113,6 +116,18 @@ var Scenario = (function () {
                 .whenReached(Q(1, PINS_SAGE_POUF))
                 .whenReached(Q(1, PINS_PHARMA))
                 .whenReached(Q(1, PINS_MEDECINE))
+                .spawnResource(Q(1, LEVEL))
+                .spawnResource(Q(30, BIÈRE))
+                .spawnProducer(new Producer("Désaouler")
+                .thatProduce(Q(-1, CH3CH2OH))
+                .every(30).seconds())
+                .spawnCrafter(new Crafter("Sec")
+                .thatCraft(Q(1, CH3CH2OH))["in"](2).seconds()
+                .atCostOf(Q(1, BIÈRE)))
+                .spawnCrafter(new Crafter("VT")
+                .thatCraft(Q(100, VOMIT))["in"](10).seconds()
+                .atCostOf(Q(10, CH3CH2OH))
+                .automaticaly())
                 .spawnCrafter(new Crafter("Apéro fal hebdomadaire")
                 .thatCraft(new RandomResource(1, PINS_INGE, 0.4))
                 .thatCraft(new RandomResource(1, PINS_SCIENCES, 0.4))
@@ -134,7 +149,9 @@ var Scenario = (function () {
                 .atCostOf(Q(6, PINS_SAGE_POUF))
                 .atCostOf(Q(6, PINS_PHARMA))
                 .atCostOf(Q(6, PINS_MEDECINE)))
-                .spawnResource(Q(1, LEVEL))
+                .appendTrigger(new Trigger("[perdu] Coma")
+                .whenReached(Q(100, VOMIT))
+                .execFunction("Gui.youDie('Trop de blessés');"))
                 .appendTrigger(new Trigger("Parrainé")
                 .whenReached(Q(2, PARRAIN))
                 .spawnCrafter(new Crafter("Apprentissage du code")

@@ -25,6 +25,7 @@ const LEVEL = new Level("level", "level.svg", [
     "faluchard",
     "faluchard natio"
 ]);
+const FALUCHE               = new Item("Faluche", "faluche.png");
 const TEMPS                 = new Item("temps", "time.png");
 const DISTANCE              = new Material("distance", "Km", "volant.png");
 const TELLIGENCE            = new Material("telligence", "T", "brain.png");
@@ -36,8 +37,9 @@ const POINT_COUTURE         = new Item("point de couture", "de-a-coudre.png");
 const CONGRES               = new Item("congrès", "valise.png");
 const CHANT                 = new Item("chant", "cle de fa argent.png");
 const CLE_DE_SOL            = new Item("clé de sol", "cle de sol.png");
-
-const FALUCHE               = new Item("Faluche", "faluche.png");
+const CH3CH2OH              = new Item("CH3CH2OH", "CH3CH2OH.png");
+const BIÈRE                 = new Item("chope de bière", "chope or.png");
+const VOMIT                 = new Material("vomit",  "cl", "vomit.png");
 
 const ADOPTION_INGE         = new Item("adoption ingé", "filieres/adopt_inge.png");
 const ADOPTION_SCIENCES     = new Item("adoption sciences", "filieres/adopt_sciences.png");
@@ -149,6 +151,26 @@ class Scenario {
                                 .whenReached(Q(1, PINS_SAGE_POUF))
                                 .whenReached(Q(1, PINS_PHARMA))
                                 .whenReached(Q(1, PINS_MEDECINE))
+                                .spawnResource(Q(1, LEVEL)) // level 4
+                                .spawnResource(Q(30, BIÈRE))
+                                .spawnProducer(
+                                    new Producer("Désaouler")
+                                        .thatProduce(Q(-1, CH3CH2OH))
+                                        .every(30).seconds()
+                                )
+                                .spawnCrafter(
+                                    new Crafter("Sec")
+                                        .thatCraft(Q(1, CH3CH2OH))
+                                        .in(2).seconds()
+                                        .atCostOf(Q(1, BIÈRE))
+                                )
+                                .spawnCrafter(
+                                    new Crafter("VT")
+                                        .thatCraft(Q(100, VOMIT))
+                                        .in(10).seconds()
+                                        .atCostOf(Q(10, CH3CH2OH))
+                                        .automaticaly()
+                                )
                                 .spawnCrafter(
                                     new Crafter("Apéro fal hebdomadaire")
                                         .thatCraft(new RandomResource(1, PINS_INGE, 0.4))
@@ -176,7 +198,11 @@ class Scenario {
                                         .atCostOf(Q(6, PINS_PHARMA))
                                         .atCostOf(Q(6, PINS_MEDECINE))
                                 )
-                                .spawnResource(Q(1, LEVEL)) // level 4
+                                .appendTrigger(
+                                    new Trigger("[perdu] Coma")
+                                        .whenReached(Q(100, VOMIT))
+                                        .execFunction("Gui.youDie('Trop de blessés');")
+                                )
                                 .appendTrigger(
                                     new Trigger("Parrainé")
                                         .whenReached(Q(2, PARRAIN))
