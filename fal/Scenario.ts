@@ -137,6 +137,7 @@ class Scenario {
                                 .thatCraft(new RandomResource(1, PINS_SAGE_POUF, 0.3))
                                 .thatCraft(new RandomResource(1, PINS_PHARMA, 0.3))
                                 .thatCraft(new RandomResource(1, PINS_MEDECINE, 0.3))
+                                .thatCraft(Q(5, BIÈRE))
                                 .in(3).seconds()
                                 .atCostOf(Q(2, TEMPS))
                         )
@@ -152,7 +153,6 @@ class Scenario {
                                 .whenReached(Q(1, PINS_PHARMA))
                                 .whenReached(Q(1, PINS_MEDECINE))
                                 .spawnResource(Q(1, LEVEL)) // level 4
-                                .spawnResource(Q(30, BIÈRE))
                                 .spawnProducer(
                                     new Producer("Désaouler")
                                         .thatProduce(Q(-1, CH3CH2OH))
@@ -222,7 +222,9 @@ class Scenario {
                                         .spawnResource(Q(1, LEVEL)) // level 5
                                         .appendTrigger(
                                             new Trigger("Baptême")
-                                                .whenReached(Q(1, CODE_VILLE)).and(Q(2, PARRAIN))
+                                                .whenReached(Q(1, CODE_VILLE))
+                                                .and(Q(2, PARRAIN))
+                                                .and(Q(9, CH3CH2OH))
                                                 .spawnResource(Q(-2, PARRAIN))
                                                 .spawnResource(Q(-1, CODE_VILLE))
                                                 .spawnResource(Q(1, FALUCHE))
