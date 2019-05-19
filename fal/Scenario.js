@@ -23,7 +23,7 @@ var CONGRES = new Item("congrès", "valise.png");
 var CHANT = new Item("chant", "cle de fa argent.png");
 var CLE_DE_SOL = new Item("clé de sol", "cle de sol.png");
 var CH3CH2OH = new Item("CH3CH2OH", "CH3CH2OH.png");
-var BIÈRE = new Item("chope de bière", "chope or.png");
+var BIÈRE = new Material("bière", "cl", "chope or.png");
 var VOMIT = new Material("vomit", "cl", "vomit.png");
 var ADOPTION_INGE = new Item("adoption ingé", "filieres/adopt_inge.png");
 var ADOPTION_SCIENCES = new Item("adoption sciences", "filieres/adopt_sciences.png");
@@ -105,7 +105,7 @@ var Scenario = (function () {
                 .thatCraft(new RandomResource(1, PINS_SAGE_POUF, 0.3))
                 .thatCraft(new RandomResource(1, PINS_PHARMA, 0.3))
                 .thatCraft(new RandomResource(1, PINS_MEDECINE, 0.3))
-                .thatCraft(Q(5, BIÈRE))["in"](3).seconds()
+                .thatCraft(Q(100, BIÈRE))["in"](3).seconds()
                 .atCostOf(Q(2, TEMPS)))
                 .spawnResource(Q(1, LEVEL))
                 .appendTrigger(new Trigger("Néo")
@@ -123,7 +123,7 @@ var Scenario = (function () {
                 .every(30).seconds())
                 .spawnCrafter(new Crafter("Sec")
                 .thatCraft(Q(1, CH3CH2OH))["in"](2).seconds()
-                .atCostOf(Q(1, BIÈRE)))
+                .atCostOf(Q(50, BIÈRE)))
                 .spawnCrafter(new Crafter("VT")
                 .thatCraft(Q(100, VOMIT))["in"](10).seconds()
                 .atCostOf(Q(10, CH3CH2OH))
