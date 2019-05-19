@@ -166,8 +166,8 @@ class Scenario {
                                 )
                                 .spawnCrafter(
                                     new Crafter("VT")
-                                        .thatCraft(Q(100, VOMIT))
-                                        .in(10).seconds()
+                                        .thatCraft(Q(10, VOMIT))
+                                        .in(3).seconds()
                                         .atCostOf(Q(10, CH3CH2OH))
                                         .automaticaly()
                                 )
