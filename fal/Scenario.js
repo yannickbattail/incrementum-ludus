@@ -8,15 +8,16 @@ var LEVEL = new Level("level", "level.svg", [
     "Baptisable",
     "Bébé fal",
     "faluchard",
-    "faluchard natio"
+    "faluchard natio",
+    "ancien faluchard"
 ]);
 var FALUCHE = new Item("Faluche", "faluche.png");
 var TEMPS = new Item("temps", "time.png");
 var DISTANCE = new Material("distance", "Km", "volant.png");
 var TELLIGENCE = new Material("telligence", "T", "brain.png");
-var TELLIGENCE_ARTIF = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
 var PARRAIN = new Item("parrain", "parrain.png");
 var CODE_VILLE = new Item("code de ville", "etoile_or.png");
+var SINGE = new Item("singe", "singe.png");
 var POULE = new Item("poule", "poule.png");
 var POINT_COUTURE = new Item("point de couture", "de-a-coudre.png");
 var CONGRES = new Item("congrès", "valise.png");
@@ -25,18 +26,15 @@ var CLE_DE_SOL = new Item("clé de sol", "cle de sol.png");
 var CH3CH2OH = new Item("CH3CH2OH", "CH3CH2OH.png");
 var BIÈRE = new Material("bière", "cl", "chope or.png");
 var VOMIT = new Material("vomit", "cl", "vomit.png");
-var BETTERAVE = new Item("betterave", "x/betterave.png");
+var POIREAU = new Item("poireau/betterave", "x/poireau-betterave.png");
 var CAROTTE = new Item("carotte", "x/carotte.png");
-var CHOU_FLEUR = new Item("chou-fleur", "x/chou fleur.png");
 var NAVET = new Item("navet", "x/navet.png");
-var POIREAU = new Item("poireau", "x/poireau.png");
+var MISSIONNAIRE = new Item("missionnaire", "x/missionnaire.png");
+var POSITION69 = new Item("69", "x/69.png");
+var LEVRETTE = new Item("levrette", "x/levrette.png");
 var CAPOTTE = new Item("capotte", "x/condom.png");
-var FLECHE = new Item("flêche", "x/fleche.png");
-var ETOILES_DE_MER = new Item("étoiles de mer", "x/etoiles de mer.png");
-var FEUILLE_DE_VIGNE = new Item("feuille de vigne", "x/feuille de vigne.png");
-var ROSE = new Item("rose", "x/rose.png");
-var ORCHIDEE = new Item("orchidée", "x/orchidee.png");
-var EPEE = new Item("épée", "x/epee.png");
+var VIRGINITE = new Item("feuille de vigne/rose", "x/vigne-rose.png");
+var FIN_BAISEUR = new Item("pensée//epée", "x/fin-baiseur.png");
 var ADOPTION_INGE = new Item("adoption ingé", "filieres/adopt_inge.png");
 var ADOPTION_SCIENCES = new Item("adoption sciences", "filieres/adopt_sciences.png");
 var ADOPTION_DROIT = new Item("adoption droit", "filieres/adopt_droit.png");
@@ -132,7 +130,7 @@ var Scenario = (function () {
                 .spawnResource(Q(1, LEVEL))
                 .spawnProducer(new Producer("Désaouler")
                 .thatProduce(Q(-1, CH3CH2OH))
-                .every(30).seconds())
+                .every(10).seconds())
                 .spawnCrafter(new Crafter("Sec")
                 .thatCraft(Q(1, CH3CH2OH))["in"](2).seconds()
                 .atCostOf(Q(50, BIÈRE)))
@@ -231,7 +229,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_SCIENCES))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
             .appendTrigger(new Trigger("[secondaire] Adoption droit")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
@@ -241,7 +240,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_DROIT))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
             .appendTrigger(new Trigger("[secondaire] Adoption jaune")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
@@ -251,7 +251,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_JAUNE))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
             .appendTrigger(new Trigger("[secondaire] Adoption rose")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
@@ -261,7 +262,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_ROSE))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
             .appendTrigger(new Trigger("[secondaire] Adoption sage-pouf")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
@@ -271,7 +273,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_SAGE_POUF))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
             .appendTrigger(new Trigger("[secondaire] Adoption pharma")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
@@ -281,7 +284,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_PHARMA))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
             .appendTrigger(new Trigger("[secondaire] Adoption médecine")
             .whenReached(Q(1, CODE_VILLE))
             .and(Q(1, PARRAIN))
@@ -291,8 +295,9 @@ var Scenario = (function () {
             .spawnResource(Q(1, ADOPTION_MEDECINE))
             .spawnResource(Q(-20, POINT_COUTURE))
             .spawnResource(Q(-1, CODE_VILLE))
-            .spawnResource(Q(-1, PARRAIN)))
-            .appendTrigger(new Trigger("[secondaire] p*te à adoption")
+            .spawnResource(Q(-1, PARRAIN))
+            .spawnResource(Q(-2, CH3CH2OH)))
+            .appendTrigger(new Trigger("[secondaire] quémendeur d'insignes")
             .whenReached(Q(1, ADOPTION_SCIENCES))
             .and(Q(1, ADOPTION_DROIT))
             .and(Q(1, ADOPTION_JAUNE))
@@ -300,7 +305,8 @@ var Scenario = (function () {
             .and(Q(1, ADOPTION_SAGE_POUF))
             .and(Q(1, ADOPTION_PHARMA))
             .and(Q(1, ADOPTION_MEDECINE))
-            .spawnResource(Q(1, POULE)));
+            .spawnResource(Q(1, SINGE))
+            .spawnResource(Q(-2, CH3CH2OH)));
     };
     Scenario.triggerCouture = function () {
         var coefDistance = 100;
@@ -326,7 +332,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Grenoble"]["Marseille"]))
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Grenoble"]["Nancy"]))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Grenoble"]["Strasbourg"]))
-            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))["in"](1).minutes()
+            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
+            .thatCraft(Q(2, CAPOTTE))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
             .atCostOf(Q(villeKm["Lyon"]["Grenoble"], DISTANCE)))).appendTrigger(new Trigger("Congrès: WE FADA")
             .whenReached(Q(10, PINS_VALENCE))
@@ -340,7 +347,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Valence"]["Marseille"]))
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Valence"]["Nancy"]))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Valence"]["Strasbourg"]))
-            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))["in"](1).minutes()
+            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
+            .thatCraft(Q(2, CAPOTTE))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
             .atCostOf(Q(villeKm["Lyon"]["Valence"], DISTANCE)))).appendTrigger(new Trigger("Congrès: Auverge")
             .whenReached(Q(10, PINS_CLERMONT))
@@ -354,14 +362,41 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Clermont"]["Marseille"]))
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Clermont"]["Nancy"]))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Clermont"]["Strasbourg"]))
-            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))["in"](1).minutes()
+            .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
+            .thatCraft(Q(2, CAPOTTE))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
-            .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE)))).appendTrigger(new Trigger("Km / semaine")
+            .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE)))).appendTrigger(this.triggerAfterCongres()).appendTrigger(new Trigger("fal natio")
+            .whenReached(Q(3, CONGRES))
+            .spawnResource(Q(1, LEVEL)));
+    };
+    Scenario.triggerAfterCongres = function () {
+        return new Trigger("Km / semaine")
             .whenReached(Q(1, CONGRES))
             .spawnProducer(new Producer("Km / semaine")
-            .thatProduce(Q(5, DISTANCE))
-            .every(5).seconds())).appendTrigger(new Trigger("fal natio")
-            .whenReached(Q(3, CONGRES))
+            .thatProduce(Q(10, DISTANCE))
+            .every(5).seconds()).spawnCrafter(new Crafter("Chopper en missionaire")
+            .thatCraft(Q(1, FIN_BAISEUR))
+            .andCraft(Q(1, MISSIONNAIRE))
+            .andCraft(new RandomResource(1, CAROTTE, 0.1))["in"](42).seconds()
+            .atCostOf(Q(1, CAPOTTE))).spawnCrafter(new Crafter("Chopper en 69")
+            .thatCraft(Q(1, FIN_BAISEUR))
+            .andCraft(Q(1, POSITION69))
+            .andCraft(new RandomResource(1, POIREAU, 0.1))["in"](42).seconds()
+            .atCostOf(Q(1, CAPOTTE))).spawnCrafter(new Crafter("Chopper en levrette")
+            .thatCraft(Q(1, FIN_BAISEUR))
+            .andCraft(Q(1, LEVRETTE))
+            .andCraft(new RandomResource(1, NAVET, 0.1))["in"](42).seconds()
+            .atCostOf(Q(1, CAPOTTE))).appendTrigger(new Trigger("Dépucelage")
+            .whenReached(Q(1, FIN_BAISEUR))
+            .spawnResource(Q(1, VIRGINITE))).appendTrigger(new Trigger("Potager")
+            .whenReached(Q(2, CAROTTE))
+            .and(Q(2, POIREAU))
+            .and(Q(2, NAVET))
+            .spawnResource(Q(1, POULE))).appendTrigger(new Trigger("Ancien")
+            .whenReached(Q(1, POULE))
+            .and(Q(2, CLE_DE_SOL))
+            .and(Q(1, SINGE))
+            .spawnResource(Q(1, POULE))
             .spawnResource(Q(1, LEVEL)));
     };
     return Scenario;

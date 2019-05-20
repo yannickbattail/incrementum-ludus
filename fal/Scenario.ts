@@ -23,15 +23,17 @@ const LEVEL = new Level("level", "level.svg", [
     "Baptisable",
     "Bébé fal",
     "faluchard",
-    "faluchard natio"
+    "faluchard natio",
+    "ancien faluchard"
 ]);
 const FALUCHE               = new Item("Faluche", "faluche.png");
 const TEMPS                 = new Item("temps", "time.png");
 const DISTANCE              = new Material("distance", "Km", "volant.png");
 const TELLIGENCE            = new Material("telligence", "T", "brain.png");
-const TELLIGENCE_ARTIF      = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
+//const TELLIGENCE_ARTIF      = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
 const PARRAIN               = new Item("parrain", "parrain.png");
 const CODE_VILLE            = new Item("code de ville", "etoile_or.png");
+const SINGE                 = new Item("singe", "singe.png");
 const POULE                 = new Item("poule", "poule.png");
 const POINT_COUTURE         = new Item("point de couture", "de-a-coudre.png");
 const CONGRES               = new Item("congrès", "valise.png");
@@ -42,18 +44,23 @@ const BIÈRE                 = new Material("bière", "cl", "chope or.png");
 const VOMIT                 = new Material("vomit",  "cl", "vomit.png");
 
 // potager
-const BETTERAVE             = new Item("betterave", "x/betterave.png");
+const POIREAU               = new Item("poireau/betterave", "x/poireau-betterave.png");
 const CAROTTE               = new Item("carotte", "x/carotte.png");
-const CHOU_FLEUR            = new Item("chou-fleur", "x/chou fleur.png");
+//const CHOU_FLEUR            = new Item("chou-fleur", "x/chou fleur.png");
 const NAVET                 = new Item("navet", "x/navet.png");
-const POIREAU               = new Item("poireau", "x/poireau.png");
+
+const MISSIONNAIRE          = new Item("missionnaire", "x/missionnaire.png");
+const POSITION69            = new Item("69", "x/69.png");
+const LEVRETTE              = new Item("levrette", "x/levrette.png");
+
 const CAPOTTE               = new Item("capotte", "x/condom.png");
-const FLECHE                = new Item("flêche", "x/fleche.png");
-const ETOILES_DE_MER        = new Item("étoiles de mer", "x/etoiles de mer.png");
-const FEUILLE_DE_VIGNE      = new Item("feuille de vigne", "x/feuille de vigne.png");
-const ROSE                  = new Item("rose", "x/rose.png");
-const ORCHIDEE              = new Item("orchidée", "x/orchidee.png");
-const EPEE                  = new Item("épée", "x/epee.png");
+//const FLECHE                = new Item("flêche", "x/fleche.png");
+//const ETOILES_DE_MER        = new Item("étoiles de mer", "x/etoiles de mer.png");
+const VIRGINITE             = new Item("feuille de vigne/rose", "x/vigne-rose.png");
+//const ROSE                  = new Item("rose", "x/rose.png");
+//const ORCHIDEE              = new Item("orchidée", "x/orchidee.png");
+const FIN_BAISEUR           = new Item("pensée//epée", "x/fin-baiseur.png");
+
 
 //filières
 const ADOPTION_INGE         = new Item("adoption ingé", "filieres/adopt_inge.png");
@@ -172,7 +179,7 @@ class Scenario {
                                 .spawnProducer(
                                     new Producer("Désaouler")
                                         .thatProduce(Q(-1, CH3CH2OH))
-                                        .every(30).seconds()
+                                        .every(10).seconds()
                                 )
                                 .spawnCrafter(
                                     new Crafter("Sec")
@@ -309,6 +316,7 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption droit")
@@ -321,6 +329,7 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption jaune")
@@ -333,6 +342,7 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption rose")
@@ -345,6 +355,7 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption sage-pouf")
@@ -357,6 +368,7 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption pharma")
@@ -369,6 +381,7 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption médecine")
@@ -381,9 +394,10 @@ class Scenario {
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
+                    .spawnResource(Q(-2, CH3CH2OH))
             )
             .appendTrigger(
-                new Trigger("[secondaire] p*te à adoption")
+                new Trigger("[secondaire] quémendeur d'insignes")
                     .whenReached(Q(1, ADOPTION_SCIENCES))
                     .and(Q(1, ADOPTION_DROIT))
                     .and(Q(1, ADOPTION_JAUNE))
@@ -391,7 +405,8 @@ class Scenario {
                     .and(Q(1, ADOPTION_SAGE_POUF))
                     .and(Q(1, ADOPTION_PHARMA))
                     .and(Q(1, ADOPTION_MEDECINE))
-                    .spawnResource(Q(1, POULE))
+                    .spawnResource(Q(1, SINGE))
+                    .spawnResource(Q(-2, CH3CH2OH))
 
             );
     }
@@ -426,6 +441,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Grenoble"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Grenoble"]["Strasbourg"]))
                             .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
+                            .thatCraft(Q(2, CAPOTTE))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
                             .atCostOf(Q(villeKm["Lyon"]["Grenoble"], DISTANCE))
@@ -445,6 +461,7 @@ class Scenario {
                         .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Valence"]["Nancy"]))
                         .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Valence"]["Strasbourg"]))
                         .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
+                        .thatCraft(Q(2, CAPOTTE))
                         .in(1).minutes()
                         .atCostOf(Q(10, TEMPS))
                         .atCostOf(Q(villeKm["Lyon"]["Valence"], DISTANCE))
@@ -464,31 +481,65 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Clermont"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Clermont"]["Strasbourg"]))
                             .thatCraft(new RandomRangeQuantity(1, 10, CHANT))
+                            .thatCraft(Q(2, CAPOTTE))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
                             .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE))
                     ),
             ).appendTrigger(
-                new Trigger("Km / semaine")
-                    .whenReached(Q(1, CONGRES))
-                    .spawnProducer(
-                        new Producer("Km / semaine")
-                            .thatProduce(Q(5, DISTANCE))
-                            .every(5).seconds()
-                    )
+                this.triggerAfterCongres()
             ).appendTrigger(
                 new Trigger("fal natio")
                     .whenReached(Q(3, CONGRES))
                     .spawnResource(Q(1, LEVEL)), // level 9
             );
-
-
-        /*.spawnCrafter(
-        new Crafter("Telligence artificielle")
-            .thatCraft(Q(1, TELLIGENCE_ARTIF))
-            .in(10).seconds()
-            .atCostOf(Q(10000, TELLIGENCE))
-            .automaticaly()
-        )*/
+    }
+    
+    private static triggerAfterCongres() : ITrigger {
+        return new Trigger("Km / semaine")
+            .whenReached(Q(1, CONGRES))
+            .spawnProducer(
+                new Producer("Km / semaine")
+                    .thatProduce(Q(10, DISTANCE))
+                    .every(5).seconds()
+            ).spawnCrafter(
+                new Crafter("Chopper en missionaire")
+                    .thatCraft(Q(1, FIN_BAISEUR))
+                    .andCraft(Q(1, MISSIONNAIRE))
+                    .andCraft(new RandomResource(1, CAROTTE, 0.1))
+                    .in(42).seconds()
+                    .atCostOf(Q(1, CAPOTTE))
+            ).spawnCrafter(
+                new Crafter("Chopper en 69")
+                    .thatCraft(Q(1, FIN_BAISEUR))
+                    .andCraft(Q(1, POSITION69))
+                    .andCraft(new RandomResource(1, POIREAU, 0.1))
+                    .in(42).seconds()
+                    .atCostOf(Q(1, CAPOTTE))
+            ).spawnCrafter(
+                new Crafter("Chopper en levrette")
+                    .thatCraft(Q(1, FIN_BAISEUR))
+                    .andCraft(Q(1, LEVRETTE))
+                    .andCraft(new RandomResource(1, NAVET, 0.1))
+                    .in(42).seconds()
+                    .atCostOf(Q(1, CAPOTTE))
+            ).appendTrigger(
+                new Trigger("Dépucelage")
+                    .whenReached(Q(1, FIN_BAISEUR))
+                    .spawnResource(Q(1, VIRGINITE))
+            ).appendTrigger(
+                new Trigger("Potager")
+                    .whenReached(Q(2, CAROTTE))
+                    .and(Q(2, POIREAU))
+                    .and(Q(2, NAVET))
+                    .spawnResource(Q(1, POULE))
+            ).appendTrigger(
+                new Trigger("Ancien")
+                    .whenReached(Q(1, POULE))
+                    .and(Q(2, CLE_DE_SOL))
+                    .and(Q(1, SINGE))
+                    .spawnResource(Q(1, POULE))
+                    .spawnResource(Q(1, LEVEL)), // level 10
+            )
     }
 }
