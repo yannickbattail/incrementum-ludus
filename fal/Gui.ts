@@ -93,12 +93,20 @@ class Gui {
     }
 
     private displayCraftButton(crafter : ICrafter) : string {
-        let h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
+        let h = '';
+        if (crafter.isAuto()) {
+            h = '<div'
+                + (!this.engine.player.hasResources(crafter.getCost())?' title="Not enough resources"':'') + '>'
+                + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
+                + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+                +'</div>';
+        } else {
+            h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
                 + (!this.engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Not enough resources"':'') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
                 + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 +'</button>';
-
+        }
         return h;
     }
 
