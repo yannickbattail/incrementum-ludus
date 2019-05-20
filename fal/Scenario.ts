@@ -41,6 +41,21 @@ const CH3CH2OH              = new Item("CH3CH2OH", "CH3CH2OH.png");
 const BIÈRE                 = new Material("bière", "cl", "chope or.png");
 const VOMIT                 = new Material("vomit",  "cl", "vomit.png");
 
+// potager
+const BETTERAVE             = new Item("betterave", "x/betterave.png");
+const CAROTTE               = new Item("carotte", "x/carotte.png");
+const CHOU_FLEUR            = new Item("chou-fleur", "x/chou fleur.png");
+const NAVET                 = new Item("navet", "x/navet.png");
+const POIREAU               = new Item("poireau", "x/poireau.png");
+const CAPOTTE               = new Item("capotte", "x/condom.png");
+const FLECHE                = new Item("flêche", "x/fleche.png");
+const ETOILES_DE_MER        = new Item("étoiles de mer", "x/etoiles de mer.png");
+const FEUILLE_DE_VIGNE      = new Item("feuille de vigne", "x/feuille de vigne.png");
+const ROSE                  = new Item("rose", "x/rose.png");
+const ORCHIDEE              = new Item("orchidée", "x/orchidee.png");
+const EPEE                  = new Item("épée", "x/epee.png");
+
+//filières
 const ADOPTION_INGE         = new Item("adoption ingé", "filieres/adopt_inge.png");
 const ADOPTION_SCIENCES     = new Item("adoption sciences", "filieres/adopt_sciences.png");
 const ADOPTION_DROIT        = new Item("adoption droit", "filieres/adopt_droit.png");
@@ -59,6 +74,7 @@ const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "filieres/croix ankh.p
 const PINS_PHARMA           = new Item("pin's Pharma", "filieres/caducee pharmacie.png");
 const PINS_MEDECINE         = new Item("pin's Médecine", "filieres/caducee medecine.png");
 
+// villes
 const PINS_LYON             = new Item("pin's Lyon", "villes/Lyon.png");
 const PINS_GRENOBLE         = new Item("pin's Grenoble", "villes/Grenoble.svg");
 const PINS_VALENCE          = new Item("pin's Valence", "villes/Valence.svg");
