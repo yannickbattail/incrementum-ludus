@@ -201,7 +201,7 @@ class Scenario {
                                 .appendTrigger(
                                     new Trigger("[perdu] Coma")
                                         .whenReached(Q(100, VOMIT))
-                                        .execFunction("Gui.youDie('Trop de blessés');")
+                                        .execFunction("Gui.youDie('Trop de vomit. Coma!');")
                                 )
                                 .appendTrigger(
                                     new Trigger("Parrainé")

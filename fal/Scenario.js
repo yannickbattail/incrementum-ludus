@@ -151,7 +151,7 @@ var Scenario = (function () {
                 .atCostOf(Q(6, PINS_MEDECINE)))
                 .appendTrigger(new Trigger("[perdu] Coma")
                 .whenReached(Q(100, VOMIT))
-                .execFunction("Gui.youDie('Trop de blessés');"))
+                .execFunction("Gui.youDie('Trop de vomit. Coma!');"))
                 .appendTrigger(new Trigger("Parrainé")
                 .whenReached(Q(2, PARRAIN))
                 .spawnCrafter(new Crafter("Apprentissage du code")
