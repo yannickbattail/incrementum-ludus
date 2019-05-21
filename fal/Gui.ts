@@ -6,8 +6,8 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-/// <reference path="./Material.ts" />
-/// <reference path="./Item.ts" />
+/// <reference path="./CategorizedMaterial.ts" />
+/// <reference path="./CategorizedItem.ts" />
 /// <reference path="./Level.ts" />
 /// <reference path="../NodeUpdate/NodeUpdate.ts" />
 

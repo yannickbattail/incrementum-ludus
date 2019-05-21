@@ -11,21 +11,22 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Material = (function (_super) {
-    __extends(Material, _super);
-    function Material(name, unit, image) {
+var CategorizedMaterial = (function (_super) {
+    __extends(CategorizedMaterial, _super);
+    function CategorizedMaterial(name, unit, image, category) {
         var _this = _super.call(this, name) || this;
         _this.name = name;
         _this.unit = unit;
         _this.image = image;
-        _this.$type = 'Material';
+        _this.category = category;
+        _this.$type = 'CategorizedMaterial';
         return _this;
     }
-    Material.load = function (data) {
-        var r = new Material(data.name, data.unit, data.image);
+    CategorizedMaterial.load = function (data) {
+        var r = new CategorizedMaterial(data.name, data.unit, data.image, data.category);
         return r;
     };
-    Material.prototype.show = function (quantity) {
+    CategorizedMaterial.prototype.show = function (quantity) {
         var u = this.unit;
         var q = quantity;
         if (u == 'g') {
@@ -42,6 +43,6 @@ var Material = (function (_super) {
         }
         return q + u;
     };
-    return Material;
+    return CategorizedMaterial;
 }(Resource));
-//# sourceMappingURL=Material.js.map
+//# sourceMappingURL=CategorizedMaterial.js.map

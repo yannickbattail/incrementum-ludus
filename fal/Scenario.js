@@ -11,55 +11,55 @@ var LEVEL = new Level("level", "level.svg", [
     "faluchard natio",
     "ancien faluchard"
 ]);
-var FALUCHE = new Item("Faluche", "faluche.png");
-var TEMPS = new Item("temps", "time.png");
-var DISTANCE = new Material("distance", "Km", "volant.png");
-var TELLIGENCE = new Material("telligence", "T", "brain.png");
-var PARRAIN = new Item("parrain", "parrain.png");
-var CODE_VILLE = new Item("code de ville", "etoile_or.png");
-var SINGE = new Item("singe", "singe.png");
-var POULE = new Item("poule", "poule.png");
-var POINT_COUTURE = new Item("point de couture", "de-a-coudre.png");
-var CONGRES = new Item("congrès", "valise.png");
-var CHANT = new Item("chant", "cle de fa argent.png");
-var CLE_DE_SOL = new Item("clé de sol", "cle de sol.png");
-var CH3CH2OH = new Item("CH3CH2OH", "CH3CH2OH.png");
-var BIÈRE = new Material("bière", "cl", "chope or.png");
-var VOMIT = new Material("vomit", "cl", "vomit.png");
-var POIREAU = new Item("poireau/betterave", "x/poireau-betterave.png");
-var CAROTTE = new Item("carotte", "x/carotte.png");
-var NAVET = new Item("navet", "x/navet.png");
-var MISSIONNAIRE = new Item("missionnaire", "x/missionnaire.png");
-var POSITION69 = new Item("69", "x/69.png");
-var LEVRETTE = new Item("levrette", "x/levrette.png");
-var CAPOTTE = new Item("capotte", "x/condom.png");
-var VIRGINITE = new Item("feuille de vigne/rose", "x/vigne-rose.png");
-var FIN_BAISEUR = new Item("pensée//epée", "x/fin-baiseur.png");
-var ADOPTION_INGE = new Item("adoption ingé", "filieres/adopt_inge.png");
-var ADOPTION_SCIENCES = new Item("adoption sciences", "filieres/adopt_sciences.png");
-var ADOPTION_DROIT = new Item("adoption droit", "filieres/adopt_droit.png");
-var ADOPTION_JAUNE = new Item("adoption jaune", "filieres/adopt_jaune.png");
-var ADOPTION_ROSE = new Item("adoption rose", "filieres/adopt_paramed.png");
-var ADOPTION_SAGE_POUF = new Item("adoption sage-pouf", "filieres/adopt_sage-pouf.png");
-var ADOPTION_PHARMA = new Item("adoption Pharma", "filieres/adopt_pharma.png");
-var ADOPTION_MEDECINE = new Item("adoption Médecine", "filieres/adopt_medecine.png");
-var PINS_INGE = new Item("pin's ingé", "filieres/etoile et foudre.png");
-var PINS_SCIENCES = new Item("pin's sciences", "filieres/palmes croisees.png");
-var PINS_DROIT = new Item("pin's droit", "filieres/balance romaine.png");
-var PINS_JAUNE = new Item("pin's jaune", "filieres/livre ouvert et plume.png");
-var PINS_ROSE = new Item("pin's rose", "filieres/ciseaux.png");
-var PINS_SAGE_POUF = new Item("pin's sage-pouf", "filieres/croix ankh.png");
-var PINS_PHARMA = new Item("pin's Pharma", "filieres/caducee pharmacie.png");
-var PINS_MEDECINE = new Item("pin's Médecine", "filieres/caducee medecine.png");
-var PINS_LYON = new Item("pin's Lyon", "villes/Lyon.png");
-var PINS_GRENOBLE = new Item("pin's Grenoble", "villes/Grenoble.svg");
-var PINS_VALENCE = new Item("pin's Valence", "villes/Valence.svg");
-var PINS_CLERMONT = new Item("pin's Clermont", "villes/ClermontFerrand.svg");
-var PINS_DIJON = new Item("pin's Dijon", "villes/Dijon.svg");
-var PINS_MONPEUL = new Item("pin's Monpeul", "villes/Montpellier.svg");
-var PINS_MARSEILLE = new Item("pin's Marseille", "villes/Marseille.svg");
-var PINS_NANCY = new Item("pin's Nancy", "villes/Nancy.svg");
-var PINS_STASBOURG = new Item("pin's Strasbourg", "villes/Strasbourg.svg");
+var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
+var TEMPS = new CategorizedItem("temps", "time.png", "global");
+var DISTANCE = new CategorizedMaterial("distance", "Km", "volant.png", "global");
+var TELLIGENCE = new CategorizedMaterial("telligence", "T", "brain.png", "global");
+var PARRAIN = new CategorizedItem("parrain", "parrain.png", "global");
+var CODE_VILLE = new CategorizedItem("code de ville", "etoile_or.png", "global");
+var SINGE = new CategorizedItem("singe", "singe.png", "insigne");
+var POULE = new CategorizedItem("poule", "poule.png", "insigne");
+var POINT_COUTURE = new CategorizedItem("point de couture", "de-a-coudre.png", "insigne");
+var CONGRES = new CategorizedItem("congrès", "valise.png", "insigne");
+var CHANT = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
+var CLE_DE_SOL = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
+var CH3CH2OH = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
+var BIÈRE = new CategorizedMaterial("bière", "cl", "chope or.png", "global");
+var VOMIT = new CategorizedMaterial("vomit", "cl", "vomit.png", "global");
+var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
+var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne");
+var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne");
+var MISSIONNAIRE = new CategorizedItem("missionnaire", "x/missionnaire.png", "insigne");
+var POSITION69 = new CategorizedItem("69", "x/69.png", "insigne");
+var LEVRETTE = new CategorizedItem("levrette", "x/levrette.png", "insigne");
+var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "insigne");
+var VIRGINITE = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
+var FIN_BAISEUR = new CategorizedItem("pensée//epée", "x/fin-baiseur.png", "insigne");
+var ADOPTION_INGE = new CategorizedItem("adoption ingé", "filieres/adopt_inge.png", "emblème");
+var ADOPTION_SCIENCES = new CategorizedItem("adoption sciences", "filieres/adopt_sciences.png", "emblème");
+var ADOPTION_DROIT = new CategorizedItem("adoption droit", "filieres/adopt_droit.png", "emblème");
+var ADOPTION_JAUNE = new CategorizedItem("adoption jaune", "filieres/adopt_jaune.png", "emblème");
+var ADOPTION_ROSE = new CategorizedItem("adoption rose", "filieres/adopt_paramed.png", "emblème");
+var ADOPTION_SAGE_POUF = new CategorizedItem("adoption sage-pouf", "filieres/adopt_sage-pouf.png", "emblème");
+var ADOPTION_PHARMA = new CategorizedItem("adoption Pharma", "filieres/adopt_pharma.png", "emblème");
+var ADOPTION_MEDECINE = new CategorizedItem("adoption Médecine", "filieres/adopt_medecine.png", "emblème");
+var PINS_INGE = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "ville");
+var PINS_SCIENCES = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "ville");
+var PINS_DROIT = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "ville");
+var PINS_JAUNE = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "ville");
+var PINS_ROSE = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "ville");
+var PINS_SAGE_POUF = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "ville");
+var PINS_PHARMA = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "ville");
+var PINS_MEDECINE = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "ville");
+var PINS_LYON = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville");
+var PINS_GRENOBLE = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg", "ville");
+var PINS_VALENCE = new CategorizedItem("pin's Valence", "villes/Valence.svg", "ville");
+var PINS_CLERMONT = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.svg", "ville");
+var PINS_DIJON = new CategorizedItem("pin's Dijon", "villes/Dijon.svg", "ville");
+var PINS_MONPEUL = new CategorizedItem("pin's Monpeul", "villes/Montpellier.svg", "ville");
+var PINS_MARSEILLE = new CategorizedItem("pin's Marseille", "villes/Marseille.svg", "ville");
+var PINS_NANCY = new CategorizedItem("pin's Nancy", "villes/Nancy.svg", "ville");
+var PINS_STASBOURG = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.svg", "ville");
 var villeKm = {
     "Lyon": { "Lyon": 0, "Grenoble": 113, "Valence": 104, "Clermont": 165, "Dijon": 197, "Monpeul": 306, "Marseille": 315, "Nancy": 407, "Strasbourg": 492 },
     "Grenoble": { "Lyon": 113, "Grenoble": 0, "Valence": 91, "Clermont": 273, "Dijon": 305, "Monpeul": 293, "Marseille": 306, "Nancy": 516, "Strasbourg": 573 },
@@ -115,7 +115,7 @@ var Scenario = (function () {
                 .thatCraft(new RandomResource(1, PINS_SAGE_POUF, 0.3))
                 .thatCraft(new RandomResource(1, PINS_PHARMA, 0.3))
                 .thatCraft(new RandomResource(1, PINS_MEDECINE, 0.3))
-                .thatCraft(Q(100, BIÈRE))["in"](3).seconds()
+                .thatCraft(Q(50, BIÈRE))["in"](3).seconds()
                 .atCostOf(Q(2, TEMPS)))
                 .spawnResource(Q(1, LEVEL))
                 .appendTrigger(new Trigger("Néo")
@@ -132,7 +132,7 @@ var Scenario = (function () {
                 .thatProduce(Q(-1, CH3CH2OH))
                 .every(10).seconds())
                 .spawnCrafter(new Crafter("Sec")
-                .thatCraft(Q(1, CH3CH2OH))["in"](2).seconds()
+                .thatCraft(Q(1, CH3CH2OH))["in"](1).seconds()
                 .atCostOf(Q(50, BIÈRE)))
                 .spawnCrafter(new Crafter("VT")
                 .thatCraft(Q(10, VOMIT))["in"](3).seconds()

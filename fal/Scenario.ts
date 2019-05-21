@@ -9,8 +9,8 @@
 /// <reference path="../Engine/implementations/RandomResource.ts" />
 /// <reference path="../Engine/implementations/RandomRangeQuantity.ts" />
 /// <reference path="../Engine/implementations/NamedStepResource.ts" />
-/// <reference path="./Material.ts" />
-/// <reference path="./Item.ts" />
+/// <reference path="./CategorizedMaterial.ts" />
+/// <reference path="./CategorizedItem.ts" />
 /// <reference path="./Level.ts" />
 
 const LEVEL = new Level("level", "level.svg", [
@@ -26,71 +26,71 @@ const LEVEL = new Level("level", "level.svg", [
     "faluchard natio",
     "ancien faluchard"
 ]);
-const FALUCHE               = new Item("Faluche", "faluche.png");
-const TEMPS                 = new Item("temps", "time.png");
-const DISTANCE              = new Material("distance", "Km", "volant.png");
-const TELLIGENCE            = new Material("telligence", "T", "brain.png");
-//const TELLIGENCE_ARTIF      = new Material("telligence artificielle", "TA", "artificial-intelligence.svg");
-const PARRAIN               = new Item("parrain", "parrain.png");
-const CODE_VILLE            = new Item("code de ville", "etoile_or.png");
-const SINGE                 = new Item("singe", "singe.png");
-const POULE                 = new Item("poule", "poule.png");
-const POINT_COUTURE         = new Item("point de couture", "de-a-coudre.png");
-const CONGRES               = new Item("congrès", "valise.png");
-const CHANT                 = new Item("chant", "cle de fa argent.png");
-const CLE_DE_SOL            = new Item("clé de sol", "cle de sol.png");
-const CH3CH2OH              = new Item("CH3CH2OH", "CH3CH2OH.png");
-const BIÈRE                 = new Material("bière", "cl", "chope or.png");
-const VOMIT                 = new Material("vomit",  "cl", "vomit.png");
+const FALUCHE               = new CategorizedItem("Faluche", "faluche.png", "global");
+const TEMPS                 = new CategorizedItem("temps", "time.png", "global");
+const DISTANCE              = new CategorizedMaterial("distance", "Km", "volant.png", "global");
+const TELLIGENCE            = new CategorizedMaterial("telligence", "T", "brain.png", "global");
+//const TELLIGENCE_ARTIF      = new CategorizedMaterial("telligence artificielle", "TA", "artificial-intelligence.svg");
+const PARRAIN               = new CategorizedItem("parrain", "parrain.png", "global");
+const CODE_VILLE            = new CategorizedItem("code de ville", "etoile_or.png", "global");
+const SINGE                 = new CategorizedItem("singe", "singe.png", "insigne");
+const POULE                 = new CategorizedItem("poule", "poule.png", "insigne");
+const POINT_COUTURE         = new CategorizedItem("point de couture", "de-a-coudre.png", "insigne");
+const CONGRES               = new CategorizedItem("congrès", "valise.png", "insigne");
+const CHANT                 = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
+const CLE_DE_SOL            = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
+const CH3CH2OH              = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
+const BIÈRE                 = new CategorizedMaterial("bière", "cl", "chope or.png", "global");
+const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomit.png", "global");
 
 // potager
-const POIREAU               = new Item("poireau/betterave", "x/poireau-betterave.png");
-const CAROTTE               = new Item("carotte", "x/carotte.png");
-//const CHOU_FLEUR            = new Item("chou-fleur", "x/chou fleur.png");
-const NAVET                 = new Item("navet", "x/navet.png");
+const POIREAU               = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
+const CAROTTE               = new CategorizedItem("carotte", "x/carotte.png", "insigne");
+//const CHOU_FLEUR            = new CategorizedItem("chou-fleur", "x/chou fleur.png", "insigne");
+const NAVET                 = new CategorizedItem("navet", "x/navet.png", "insigne");
 
-const MISSIONNAIRE          = new Item("missionnaire", "x/missionnaire.png");
-const POSITION69            = new Item("69", "x/69.png");
-const LEVRETTE              = new Item("levrette", "x/levrette.png");
+const MISSIONNAIRE          = new CategorizedItem("missionnaire", "x/missionnaire.png", "insigne");
+const POSITION69            = new CategorizedItem("69", "x/69.png", "insigne");
+const LEVRETTE              = new CategorizedItem("levrette", "x/levrette.png", "insigne");
 
-const CAPOTTE               = new Item("capotte", "x/condom.png");
-//const FLECHE                = new Item("flêche", "x/fleche.png");
-//const ETOILES_DE_MER        = new Item("étoiles de mer", "x/etoiles de mer.png");
-const VIRGINITE             = new Item("feuille de vigne/rose", "x/vigne-rose.png");
-//const ROSE                  = new Item("rose", "x/rose.png");
-//const ORCHIDEE              = new Item("orchidée", "x/orchidee.png");
-const FIN_BAISEUR           = new Item("pensée//epée", "x/fin-baiseur.png");
+const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "insigne");
+//const FLECHE                = new CategorizedItem("flêche", "x/fleche.png", "insigne");
+//const ETOILES_DE_MER        = new CategorizedItem("étoiles de mer", "x/etoiles de mer.png", "insigne");
+const VIRGINITE             = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
+//const ROSE                  = new CategorizedItem("rose", "x/rose.png", "insigne");
+//const ORCHIDEE              = new CategorizedItem("orchidée", "x/orchidee.png", "insigne");
+const FIN_BAISEUR           = new CategorizedItem("pensée//epée", "x/fin-baiseur.png", "insigne");
 
 
 //filières
-const ADOPTION_INGE         = new Item("adoption ingé", "filieres/adopt_inge.png");
-const ADOPTION_SCIENCES     = new Item("adoption sciences", "filieres/adopt_sciences.png");
-const ADOPTION_DROIT        = new Item("adoption droit", "filieres/adopt_droit.png");
-const ADOPTION_JAUNE        = new Item("adoption jaune", "filieres/adopt_jaune.png");
-const ADOPTION_ROSE         = new Item("adoption rose", "filieres/adopt_paramed.png");
-const ADOPTION_SAGE_POUF    = new Item("adoption sage-pouf", "filieres/adopt_sage-pouf.png");
-const ADOPTION_PHARMA       = new Item("adoption Pharma", "filieres/adopt_pharma.png");
-const ADOPTION_MEDECINE     = new Item("adoption Médecine", "filieres/adopt_medecine.png");
+const ADOPTION_INGE         = new CategorizedItem("adoption ingé", "filieres/adopt_inge.png", "emblème");
+const ADOPTION_SCIENCES     = new CategorizedItem("adoption sciences", "filieres/adopt_sciences.png", "emblème");
+const ADOPTION_DROIT        = new CategorizedItem("adoption droit", "filieres/adopt_droit.png", "emblème");
+const ADOPTION_JAUNE        = new CategorizedItem("adoption jaune", "filieres/adopt_jaune.png", "emblème");
+const ADOPTION_ROSE         = new CategorizedItem("adoption rose", "filieres/adopt_paramed.png", "emblème");
+const ADOPTION_SAGE_POUF    = new CategorizedItem("adoption sage-pouf", "filieres/adopt_sage-pouf.png", "emblème");
+const ADOPTION_PHARMA       = new CategorizedItem("adoption Pharma", "filieres/adopt_pharma.png", "emblème");
+const ADOPTION_MEDECINE     = new CategorizedItem("adoption Médecine", "filieres/adopt_medecine.png", "emblème");
 
-const PINS_INGE             = new Item("pin's ingé", "filieres/etoile et foudre.png");
-const PINS_SCIENCES         = new Item("pin's sciences", "filieres/palmes croisees.png");
-const PINS_DROIT            = new Item("pin's droit", "filieres/balance romaine.png");
-const PINS_JAUNE            = new Item("pin's jaune", "filieres/livre ouvert et plume.png");
-const PINS_ROSE             = new Item("pin's rose", "filieres/ciseaux.png");
-const PINS_SAGE_POUF        = new Item("pin's sage-pouf", "filieres/croix ankh.png");
-const PINS_PHARMA           = new Item("pin's Pharma", "filieres/caducee pharmacie.png");
-const PINS_MEDECINE         = new Item("pin's Médecine", "filieres/caducee medecine.png");
+const PINS_INGE             = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "ville");
+const PINS_SCIENCES         = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "ville");
+const PINS_DROIT            = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "ville");
+const PINS_JAUNE            = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "ville");
+const PINS_ROSE             = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "ville");
+const PINS_SAGE_POUF        = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "ville");
+const PINS_PHARMA           = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "ville");
+const PINS_MEDECINE         = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "ville");
 
 // villes
-const PINS_LYON             = new Item("pin's Lyon", "villes/Lyon.png");
-const PINS_GRENOBLE         = new Item("pin's Grenoble", "villes/Grenoble.svg");
-const PINS_VALENCE          = new Item("pin's Valence", "villes/Valence.svg");
-const PINS_CLERMONT         = new Item("pin's Clermont", "villes/ClermontFerrand.svg");
-const PINS_DIJON            = new Item("pin's Dijon", "villes/Dijon.svg");
-const PINS_MONPEUL          = new Item("pin's Monpeul", "villes/Montpellier.svg");
-const PINS_MARSEILLE        = new Item("pin's Marseille", "villes/Marseille.svg");
-const PINS_NANCY            = new Item("pin's Nancy", "villes/Nancy.svg");
-const PINS_STASBOURG        = new Item("pin's Strasbourg", "villes/Strasbourg.svg");
+const PINS_LYON             = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville");
+const PINS_GRENOBLE         = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg", "ville");
+const PINS_VALENCE          = new CategorizedItem("pin's Valence", "villes/Valence.svg", "ville");
+const PINS_CLERMONT         = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.svg", "ville");
+const PINS_DIJON            = new CategorizedItem("pin's Dijon", "villes/Dijon.svg", "ville");
+const PINS_MONPEUL          = new CategorizedItem("pin's Monpeul", "villes/Montpellier.svg", "ville");
+const PINS_MARSEILLE        = new CategorizedItem("pin's Marseille", "villes/Marseille.svg", "ville");
+const PINS_NANCY            = new CategorizedItem("pin's Nancy", "villes/Nancy.svg", "ville");
+const PINS_STASBOURG        = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.svg", "ville");
 
 let villeKm = {
     "Lyon"            : { "Lyon":   0, "Grenoble": 113, "Valence": 104, "Clermont": 165, "Dijon": 197, "Monpeul": 306, "Marseille": 315, "Nancy": 407, "Strasbourg": 492},
@@ -160,7 +160,7 @@ class Scenario {
                                 .thatCraft(new RandomResource(1, PINS_SAGE_POUF, 0.3))
                                 .thatCraft(new RandomResource(1, PINS_PHARMA, 0.3))
                                 .thatCraft(new RandomResource(1, PINS_MEDECINE, 0.3))
-                                .thatCraft(Q(100, BIÈRE))
+                                .thatCraft(Q(50, BIÈRE))
                                 .in(3).seconds()
                                 .atCostOf(Q(2, TEMPS))
                         )
@@ -184,7 +184,7 @@ class Scenario {
                                 .spawnCrafter(
                                     new Crafter("Sec")
                                         .thatCraft(Q(1, CH3CH2OH))
-                                        .in(2).seconds()
+                                        .in(1).seconds()
                                         .atCostOf(Q(50, BIÈRE))
                                 )
                                 .spawnCrafter(

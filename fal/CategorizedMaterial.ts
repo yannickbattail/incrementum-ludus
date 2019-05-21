@@ -5,14 +5,15 @@
 /// <reference path="../Engine/interfaces/ICrafter.ts" />
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
+/// <reference path="./ICategorized.ts" />
 
-class Material extends Resource {
-    public $type : string = 'Material';
-    constructor(public name : string, public unit : string, public image : string){
+class CategorizedMaterial extends Resource implements ICategorized {
+    public $type : string = 'CategorizedMaterial';
+    constructor(public name : string, public unit : string, public image : string, public category : string){
         super(name);
     }
-    public static load(data : any) : Material {
-        let r : Material = new Material(data.name, data.unit, data.image);
+    public static load(data : any) : CategorizedMaterial {
+        let r : CategorizedMaterial = new CategorizedMaterial(data.name, data.unit, data.image, data.category);
         return r;
     }
     public show(quantity : number) : string {
