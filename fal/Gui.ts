@@ -47,6 +47,16 @@ class Gui {
         return h;
     }
 
+    private displayStorageCategory(category : string): string {
+        return this.engine.player.getStorage()
+            .filter(
+                res => ('category' in res) && (res['category'] ==  category)
+            )
+            .map(
+                res => this.displayQuantity(res)
+            ).join("");
+    }
+
     private displayProducers(): string {
         var h = '<table border="1">';
         h += '<tr><th>Production</th><th>Resource</th></tr>';

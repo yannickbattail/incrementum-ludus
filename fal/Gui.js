@@ -31,6 +31,12 @@ var Gui = (function () {
         h += "</table>";
         return h;
     };
+    Gui.prototype.displayStorageCategory = function (category) {
+        var _this = this;
+        return this.engine.player.getStorage()
+            .filter(function (res) { return ('category' in res) && (res['category'] == category); })
+            .map(function (res) { return _this.displayQuantity(res); }).join("");
+    };
     Gui.prototype.displayProducers = function () {
         var _this = this;
         var h = '<table border="1">';
