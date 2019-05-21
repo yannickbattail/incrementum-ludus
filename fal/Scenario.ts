@@ -509,24 +509,31 @@ class Scenario {
                     .andCraft(new RandomResource(1, CAROTTE, 0.1))
                     .in(42).seconds()
                     .atCostOf(Q(1, CAPOTTE))
-            ).spawnCrafter(
-                new Crafter("Chopper en 69")
-                    .thatCraft(Q(1, FIN_BAISEUR))
-                    .andCraft(Q(1, POSITION69))
-                    .andCraft(new RandomResource(1, POIREAU, 0.1))
-                    .in(42).seconds()
-                    .atCostOf(Q(1, CAPOTTE))
-            ).spawnCrafter(
-                new Crafter("Chopper en levrette")
-                    .thatCraft(Q(1, FIN_BAISEUR))
-                    .andCraft(Q(1, LEVRETTE))
-                    .andCraft(new RandomResource(1, NAVET, 0.1))
-                    .in(42).seconds()
-                    .atCostOf(Q(1, CAPOTTE))
             ).appendTrigger(
                 new Trigger("Dépucelage")
                     .whenReached(Q(1, FIN_BAISEUR))
                     .spawnResource(Q(1, VIRGINITE))
+                    .spawnCrafter(
+                        new Crafter("Chopper en 69")
+                            .thatCraft(Q(1, FIN_BAISEUR))
+                            .andCraft(Q(1, POSITION69))
+                            .andCraft(new RandomResource(1, POIREAU, 0.1))
+                            .in(42).seconds()
+                            .atCostOf(Q(1, CAPOTTE))
+                    )
+                    .appendTrigger(
+                        new Trigger("Potager")
+                            .whenReached(Q(4, FIN_BAISEUR))
+                            .and(Q(2, POSITION69))
+                            .spawnCrafter(
+                                new Crafter("Chopper en levrette")
+                                    .thatCraft(Q(1, FIN_BAISEUR))
+                                    .andCraft(Q(1, LEVRETTE))
+                                    .andCraft(new RandomResource(1, NAVET, 0.1))
+                                    .in(42).seconds()
+                                    .atCostOf(Q(1, CAPOTTE))
+                            )
+                    )
             ).appendTrigger(
                 new Trigger("Potager")
                     .whenReached(Q(2, CAROTTE))
@@ -538,7 +545,6 @@ class Scenario {
                     .whenReached(Q(1, POULE))
                     .and(Q(2, CLE_DE_SOL))
                     .and(Q(1, SINGE))
-                    .spawnResource(Q(1, POULE))
                     .spawnResource(Q(1, LEVEL)), // level 10
             )
     }
