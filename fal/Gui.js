@@ -5,11 +5,15 @@ var Gui = (function () {
     }
     Gui.prototype.displayLevel = function () {
         var level = this.engine.player.getResourceInStorage("level");
-        var h = "XXX level";
+        var h = "<strong>Level</strong>: ";
         if (level != null) {
-            h = 'Level: ' + this.displayQuantity(level);
+            var q = level.getQuantity();
+            var res = level.getResource();
+            if ('getStepName' in res) {
+                var getStepName = res['getStepName'];
+                h += q + " " + getStepName.call(res, q);
+            }
         }
-        h += '<button onclick="gui.restart()">Restart</button>';
         return h;
     };
     Gui.prototype.displayStorage = function () {
@@ -102,14 +106,15 @@ var Gui = (function () {
         var h = '';
         if (crafter.isAuto()) {
             h = '<div'
-                + (!this.engine.player.hasResources(crafter.getCost()) ? ' title="Not enough resources"' : '') + '>'
+                + (!this.engine.player.hasResources(crafter.getCost()) ? ' title="Pas assez de ressources"' : '') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' (' + this.displayTime(crafter.getDuration()) + ')'
                 + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 + '</div>';
         }
         else {
             h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
-                + (!this.engine.player.hasResources(crafter.getCost()) ? ' disabled="disabled" title="Not enough resources"' : '') + '>'
+                + (!this.engine.player.hasResources(crafter.getCost()) ? ' disabled="disabled" title="Pas assez de ressources"' : '')
+                + ((crafter.isCrafting()) ? ' disabled="disabled" title="En cours..."' : '') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' (' + this.displayTime(crafter.getDuration()) + ')'
                 + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 + '</button>';

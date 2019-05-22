@@ -50,7 +50,6 @@ button:disabled, button[disabled] {
     background-color: var(--background-color);
     border-color: var(--text-color);
     border-style: dotted;
-    border-width: 1px;
 }
 
 .titleIcon {
@@ -72,8 +71,6 @@ button:disabled, button[disabled] {
 }
 #level {
     display: inline-flex;
-    width: 110px;
-    max-width: 110px;
 }
 #level > button {
     display: inline-block;

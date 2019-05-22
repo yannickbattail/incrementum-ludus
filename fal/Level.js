@@ -26,10 +26,13 @@ var Level = (function (_super) {
         return r;
     };
     Level.prototype.show = function (quantity) {
+        return "" + quantity;
+    };
+    Level.prototype.getStepName = function (quantity) {
         if (quantity < 0 || quantity >= this.stepNames.length) {
-            return "" + quantity + ": UNKOWN";
+            return "UNKOWN";
         }
-        return "" + quantity + ": " + this.stepNames[quantity];
+        return this.stepNames[quantity];
     };
     return Level;
 }(NamedStepResource));

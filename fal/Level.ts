@@ -16,9 +16,12 @@ class Level extends NamedStepResource {
         return r;
     }
     public show(quantity : number) : string {
+        return "" + quantity;
+    }
+    public getStepName(quantity : number) : string {
         if (quantity < 0 || quantity >= this.stepNames.length) {
-            return "" + quantity + ": UNKOWN";
+            return "UNKOWN";
         }
-        return "" + quantity + ": " + this.stepNames[quantity];
+        return this.stepNames[quantity];
     }
 }

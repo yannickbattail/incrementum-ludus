@@ -19,11 +19,15 @@ class Gui {
 
     private displayLevel(): string {
         let level = this.engine.player.getResourceInStorage("level");
-        let h = "XXX level";
+        let h = "<strong>Level</strong>: ";
         if (level != null) {
-            h = 'Level: '+this.displayQuantity(level);
+            let q = level.getQuantity();
+            let res = level.getResource();
+            if ('getStepName' in res) {
+                let getStepName : Function = res['getStepName'];
+                h += q + " " + getStepName.call(res, q) ;
+            }
         }
-        h +=  '<button onclick="gui.restart()">Restart</button>';
         return h;
     }
 
@@ -128,13 +132,14 @@ class Gui {
         let h = '';
         if (crafter.isAuto()) {
             h = '<div'
-                + (!this.engine.player.hasResources(crafter.getCost())?' title="Not enough resources"':'') + '>'
+                + (!this.engine.player.hasResources(crafter.getCost())?' title="Pas assez de ressources"':'') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
                 + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 +'</div>';
         } else {
             h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
-                + (!this.engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Not enough resources"':'') + '>'
+                + (!this.engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Pas assez de ressources"':'')
+                + ((crafter.isCrafting())?' disabled="disabled" title="En cours..."':'') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
                 + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 +'</button>';
