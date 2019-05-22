@@ -31,10 +31,29 @@ var Gui = (function () {
         h += "</table>";
         return h;
     };
-    Gui.prototype.displayStorageCategory = function (category) {
+    Gui.prototype.displayStorageCategory = function (title, category) {
+        var content = this.displayStorageCategoryContent(category);
+        if (content != "") {
+            return this.displayStorageBox(title, content);
+        }
+        return "";
+    };
+    Gui.prototype.displayStorageBox = function (title, content) {
+        var h = '<table border="1">';
+        h += "<tr><th>" + title + "</th></tr>";
+        h += "<tr><td>";
+        h += content;
+        h += "</td></tr>";
+        h += "</table>";
+        return h;
+    };
+    Gui.prototype.displayStorageCategoryContent = function (category) {
         var _this = this;
         return this.engine.player.getStorage()
-            .filter(function (res) { return ('category' in res) && (res['category'] == category); })
+            .filter(function (resQ) {
+            var resource = resQ.getResource();
+            return ('category' in resource) && (resource['category'] == category);
+        })
             .map(function (res) { return _this.displayQuantity(res); }).join("");
     };
     Gui.prototype.displayProducers = function () {
@@ -227,7 +246,10 @@ var Gui = (function () {
     };
     Gui.prototype.updateGui = function () {
         NodeUpdate.updateDiv('level', this.displayLevel());
-        NodeUpdate.updateDiv('storage', this.displayStorage());
+        NodeUpdate.updateDiv('storageGlobal', this.displayStorageCategory("Info", "global"));
+        NodeUpdate.updateDiv('storageFal', this.displayStorageCategory("fal", "insigne"));
+        NodeUpdate.updateDiv('storageEmbleme', this.displayStorageCategory("Emblèmes de filières", "emblème"));
+        NodeUpdate.updateDiv('storageVilles', this.displayStorageCategory("Pin's de villes", "ville"));
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());

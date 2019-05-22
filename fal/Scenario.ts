@@ -28,7 +28,7 @@ const LEVEL = new Level("level", "level.svg", [
 ]);
 const FALUCHE               = new CategorizedItem("Faluche", "faluche.png", "global");
 const TEMPS                 = new CategorizedItem("temps", "time.png", "global");
-const DISTANCE              = new CategorizedMaterial("distance", "Km", "volant.png", "global");
+const DISTANCE              = new CategorizedMaterial("distance", "Km", "volant.png", "insigne");
 const TELLIGENCE            = new CategorizedMaterial("telligence", "T", "brain.png", "global");
 //const TELLIGENCE_ARTIF      = new CategorizedMaterial("telligence artificielle", "TA", "artificial-intelligence.svg");
 const PARRAIN               = new CategorizedItem("parrain", "parrain.png", "global");
@@ -72,14 +72,14 @@ const ADOPTION_SAGE_POUF    = new CategorizedItem("adoption sage-pouf", "filiere
 const ADOPTION_PHARMA       = new CategorizedItem("adoption Pharma", "filieres/adopt_pharma.png", "emblème");
 const ADOPTION_MEDECINE     = new CategorizedItem("adoption Médecine", "filieres/adopt_medecine.png", "emblème");
 
-const PINS_INGE             = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "ville");
-const PINS_SCIENCES         = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "ville");
-const PINS_DROIT            = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "ville");
-const PINS_JAUNE            = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "ville");
-const PINS_ROSE             = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "ville");
-const PINS_SAGE_POUF        = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "ville");
-const PINS_PHARMA           = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "ville");
-const PINS_MEDECINE         = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "ville");
+const PINS_INGE             = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "emblème");
+const PINS_SCIENCES         = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "emblème");
+const PINS_DROIT            = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "emblème");
+const PINS_JAUNE            = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "emblème");
+const PINS_ROSE             = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "emblème");
+const PINS_SAGE_POUF        = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "emblème");
+const PINS_PHARMA           = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "emblème");
+const PINS_MEDECINE         = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "emblème");
 
 // villes
 const PINS_LYON             = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville");
@@ -144,7 +144,7 @@ class Scenario {
                 .spawnResource(Q(1, LEVEL)) // level 2
                 .appendTrigger(
                     new Trigger("Impétrant")
-                        .whenReached(Q(50, PINS_INGE))
+                        .whenReached(Q(30, PINS_INGE))
                         .spawnProducer(
                             new Producer("Temps / jours")
                                 .thatProduce(Q(10, TEMPS))

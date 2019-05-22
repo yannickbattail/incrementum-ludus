@@ -13,7 +13,7 @@ var LEVEL = new Level("level", "level.svg", [
 ]);
 var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
 var TEMPS = new CategorizedItem("temps", "time.png", "global");
-var DISTANCE = new CategorizedMaterial("distance", "Km", "volant.png", "global");
+var DISTANCE = new CategorizedMaterial("distance", "Km", "volant.png", "insigne");
 var TELLIGENCE = new CategorizedMaterial("telligence", "T", "brain.png", "global");
 var PARRAIN = new CategorizedItem("parrain", "parrain.png", "global");
 var CODE_VILLE = new CategorizedItem("code de ville", "etoile_or.png", "global");
@@ -43,14 +43,14 @@ var ADOPTION_ROSE = new CategorizedItem("adoption rose", "filieres/adopt_paramed
 var ADOPTION_SAGE_POUF = new CategorizedItem("adoption sage-pouf", "filieres/adopt_sage-pouf.png", "emblème");
 var ADOPTION_PHARMA = new CategorizedItem("adoption Pharma", "filieres/adopt_pharma.png", "emblème");
 var ADOPTION_MEDECINE = new CategorizedItem("adoption Médecine", "filieres/adopt_medecine.png", "emblème");
-var PINS_INGE = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "ville");
-var PINS_SCIENCES = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "ville");
-var PINS_DROIT = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "ville");
-var PINS_JAUNE = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "ville");
-var PINS_ROSE = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "ville");
-var PINS_SAGE_POUF = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "ville");
-var PINS_PHARMA = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "ville");
-var PINS_MEDECINE = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "ville");
+var PINS_INGE = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "emblème");
+var PINS_SCIENCES = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "emblème");
+var PINS_DROIT = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "emblème");
+var PINS_JAUNE = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "emblème");
+var PINS_ROSE = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "emblème");
+var PINS_SAGE_POUF = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "emblème");
+var PINS_PHARMA = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "emblème");
+var PINS_MEDECINE = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "emblème");
 var PINS_LYON = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville");
 var PINS_GRENOBLE = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg", "ville");
 var PINS_VALENCE = new CategorizedItem("pin's Valence", "villes/Valence.svg", "ville");
@@ -102,7 +102,7 @@ var Scenario = (function () {
                 .atCostOf(Q(1, TEMPS)))
                 .spawnResource(Q(1, LEVEL))
                 .appendTrigger(new Trigger("Impétrant")
-                .whenReached(Q(50, PINS_INGE))
+                .whenReached(Q(30, PINS_INGE))
                 .spawnProducer(new Producer("Temps / jours")
                 .thatProduce(Q(10, TEMPS))
                 .every(30).seconds())

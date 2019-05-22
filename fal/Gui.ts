@@ -47,10 +47,32 @@ class Gui {
         return h;
     }
 
-    private displayStorageCategory(category : string): string {
+    private displayStorageCategory(title : string, category : string): string {
+        let content = this.displayStorageCategoryContent(category);
+        if (content != "") {
+            return this.displayStorageBox(title, content);
+        }
+        return "";
+    }
+
+    private displayStorageBox(title : string, content : string): string {
+        var h = '<table border="1">';
+        h += "<tr><th>"+title+"</th></tr>";
+        h += "<tr><td>";
+        h += content;
+        h += "</td></tr>";
+        h += "</table>";
+        return h;
+    }
+
+    private displayStorageCategoryContent(category : string): string {
         return this.engine.player.getStorage()
             .filter(
-                res => ('category' in res) && (res['category'] ==  category)
+                resQ =>
+                {   
+                    let resource = resQ.getResource();
+                    return ('category' in resource) && (resource['category'] ==  category);
+                }
             )
             .map(
                 res => this.displayQuantity(res)
@@ -262,7 +284,11 @@ class Gui {
 
     private updateGui() {
         NodeUpdate.updateDiv('level', this.displayLevel());
-        NodeUpdate.updateDiv('storage', this.displayStorage());
+        //NodeUpdate.updateDiv('storage', this.displayStorage());
+        NodeUpdate.updateDiv('storageGlobal', this.displayStorageCategory("Info", "global"));
+        NodeUpdate.updateDiv('storageFal', this.displayStorageCategory("fal", "insigne"));
+        NodeUpdate.updateDiv('storageEmbleme', this.displayStorageCategory("Emblèmes de filières", "emblème"));
+        NodeUpdate.updateDiv('storageVilles', this.displayStorageCategory("Pin's de villes", "ville"));
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());
