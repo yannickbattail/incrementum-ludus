@@ -11,7 +11,7 @@
 /// <reference path="./Level.ts" />
 /// <reference path="./Scenario.ts" />
 
-const VERSION = "2.2";
+const VERSION = "2.3";
 
 function loadEngine() : Engine | null {
 

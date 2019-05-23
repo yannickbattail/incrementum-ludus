@@ -8,35 +8,62 @@
 
 class AdaptativeQuantity implements IQuantity {
     $type : string = 'AdaptativeQuantity';
-    constructor(protected quantity: number,
-                protected resource: IResource,
-                protected resourceDependencyName: string,
-                protected quanityStep: number) {
+    protected quantityIfYes: Quantity;
+    protected quantityIfNot: Quantity;
+    protected quantityStep: Quantity;
+    protected showQuantityIfNot: boolean;
+
+    constructor() {
     }
+
     public static load(data : any) : AdaptativeQuantity {
         let curContext : any = window;
-        let res = curContext[data.resource.$type].load(data.resource);
-        let rq : AdaptativeQuantity = new AdaptativeQuantity(data.quantity, res, data.resourceDependencyName, data.quanityStep);
+        let rq : AdaptativeQuantity = new AdaptativeQuantity();
+        rq.quantityIfYes = curContext[data.quantityIfYes.$type].load(data.quantityIfYes);
+        rq.quantityIfNot = curContext[data.quantityIfNot.$type].load(data.quantityIfNot);
+        rq.quantityStep = curContext[data.quantityStep.$type].load(data.quantityStep);
+        rq.showQuantityIfNot = data.showQuantityIfNot;
         return rq;
     }
     getQuantity() : number {
         let e : Engine = engine;
-        let res = e.player.getResourceInStorage(this.resourceDependencyName);
-        if (res == null) {
-            return 0;
+        if (e.player.hasResources([this.quantityStep])) {
+            return this.quantityIfYes.getQuantity();
         }
-        if (res.getQuantity() < this.quanityStep) {
-            return 0;
-        }
-        return this.quantity;
-    }
-    setQuantity(quantity : number) : void {
-        this.quantity = quantity;
+        return this.quantityIfNot.getQuantity();
     }
     getResource() : IResource{
-        return this.resource;
+        let e : Engine = engine;
+        if (e.player.hasResources([this.quantityStep])) {
+            return this.quantityIfYes.getResource();
+        }
+        return this.quantityIfNot.getResource();
     }
-    show() : string{
-        return '?' + this.resource.show(this.quantity);
+    show() : string {
+        if (this.showQuantityIfNot) {
+            return '?' + this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
+        }
+        return '?' + this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
     }
+
+    // builder methods
+    ifHas(quantityStep : Quantity) : AdaptativeQuantity {
+        this.quantityStep = quantityStep;
+        return this;
+    }
+
+    give(quantityIfYes : Quantity) : AdaptativeQuantity {
+        this.quantityIfYes = quantityIfYes;
+        return this;
+    }
+    
+    elseGive(quantityIfNot : Quantity) : AdaptativeQuantity {
+        this.quantityIfNot = quantityIfNot;
+        return this;
+    }
+    showTheQuantityIfNot() {
+        this.showQuantityIfNot = true;
+        return this;
+    }
+
 }

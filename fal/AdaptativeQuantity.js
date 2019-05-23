@@ -1,36 +1,51 @@
 var AdaptativeQuantity = (function () {
-    function AdaptativeQuantity(quantity, resource, resourceDependencyName, quanityStep) {
-        this.quantity = quantity;
-        this.resource = resource;
-        this.resourceDependencyName = resourceDependencyName;
-        this.quanityStep = quanityStep;
+    function AdaptativeQuantity() {
         this.$type = 'AdaptativeQuantity';
     }
     AdaptativeQuantity.load = function (data) {
         var curContext = window;
-        var res = curContext[data.resource.$type].load(data.resource);
-        var rq = new AdaptativeQuantity(data.quantity, res, data.resourceDependencyName, data.quanityStep);
+        var rq = new AdaptativeQuantity();
+        rq.quantityIfYes = curContext[data.quantityIfYes.$type].load(data.quantityIfYes);
+        rq.quantityIfNot = curContext[data.quantityIfNot.$type].load(data.quantityIfNot);
+        rq.quantityStep = curContext[data.quantityStep.$type].load(data.quantityStep);
+        rq.showQuantityIfNot = data.showQuantityIfNot;
         return rq;
     };
     AdaptativeQuantity.prototype.getQuantity = function () {
         var e = engine;
-        var res = e.player.getResourceInStorage(this.resourceDependencyName);
-        if (res == null) {
-            return 0;
+        if (e.player.hasResources([this.quantityStep])) {
+            return this.quantityIfYes.getQuantity();
         }
-        if (res.getQuantity() < this.quanityStep) {
-            return 0;
-        }
-        return this.quantity;
-    };
-    AdaptativeQuantity.prototype.setQuantity = function (quantity) {
-        this.quantity = quantity;
+        return this.quantityIfNot.getQuantity();
     };
     AdaptativeQuantity.prototype.getResource = function () {
-        return this.resource;
+        var e = engine;
+        if (e.player.hasResources([this.quantityStep])) {
+            return this.quantityIfYes.getResource();
+        }
+        return this.quantityIfNot.getResource();
     };
     AdaptativeQuantity.prototype.show = function () {
-        return '?' + this.resource.show(this.quantity);
+        if (this.showQuantityIfNot) {
+            return '?' + this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
+        }
+        return '?' + this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+    };
+    AdaptativeQuantity.prototype.ifHas = function (quantityStep) {
+        this.quantityStep = quantityStep;
+        return this;
+    };
+    AdaptativeQuantity.prototype.give = function (quantityIfYes) {
+        this.quantityIfYes = quantityIfYes;
+        return this;
+    };
+    AdaptativeQuantity.prototype.elseGive = function (quantityIfNot) {
+        this.quantityIfNot = quantityIfNot;
+        return this;
+    };
+    AdaptativeQuantity.prototype.showTheQuantityIfNot = function () {
+        this.showQuantityIfNot = true;
+        return this;
     };
     return AdaptativeQuantity;
 }());
