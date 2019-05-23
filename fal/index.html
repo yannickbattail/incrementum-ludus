@@ -40,9 +40,10 @@
 <body id="body" class="origin-theme">
     <h3>IncrementFal</h3>
     <div>
-        Le jeu minimaliste de type Incremental game.<br />
-        La vie dans la fal, d'un étudiant ingé Lyon.<br />
-        Un pin's représente les rencontres faites lors d'événement fal.
+        Le jeu minimaliste de type Incremental Game.<br />
+        Thème: la vie d'un étudiant ingé Lyon qui découvre la fal.<br />
+        Commencez à participer à des événements et réalisez les objectifs pour progresser.<br />
+        <i>Un pin's représente une rencontres faites lors d'événement fal.</i>
     </div>
     <br />
     <div id="level">lvl</div><button onclick="gui.restart();">Recommencer</button>
@@ -57,7 +58,7 @@
         <div id="die">You die!</div>
         <div id="raison"></div>
         <div>
-            <button onclick="Gui.eraseStorage();window.location.reload();">Retry</button>
+            <button onclick="gui.restart();">Retry</button>
         </div>
     </div>
     <script>

@@ -272,15 +272,18 @@ class Gui {
     static eraseStorage() {
         window.localStorage.removeItem('Fal');
         window.localStorage.removeItem('FalVersion');
+        console.log('eraseStorage');
     }
     clearStorage() {
         Gui.eraseStorage();
     }
     restart() {
         if (window.confirm('Ça va redémarrer le jeu depuis zéro. sûre?')) {
-            this.stop();
-            this.clearStorage();
+            Gui.eraseStorage();
             window.location.reload();
+            Gui.eraseStorage();
+            this.stop();
+            Gui.eraseStorage();
         }
     }
     fastMode() {

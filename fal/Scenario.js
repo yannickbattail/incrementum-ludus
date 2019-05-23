@@ -86,9 +86,9 @@ var Scenario = (function () {
             new Producer("Temps / jours")
                 .thatProduce(Q(10, TEMPS))
                 .every(30).seconds(),
-            new Producer("telligence")
+            new Producer("Telligence storming")
                 .thatProduce(Q(1, TELLIGENCE))
-                .every(0.1).seconds(),
+                .every(0.5).seconds(),
         ];
         engine.crafters = [
             new Crafter("Apéro potes")
@@ -223,7 +223,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(1, PINS_MONPEUL, coefDistance / villeKm["Lyon"]["Monpeul"]))
             .thatCraft(new RandomResource(1, PINS_MARSEILLE, coefDistance / villeKm["Lyon"]["Marseille"]))
             .thatCraft(new RandomResource(1, PINS_NANCY, coefDistance / villeKm["Lyon"]["Nancy"]))
-            .thatCraft(new RandomResource(1, PINS_STASBOURG, coefDistance / villeKm["Lyon"]["Strasbourg"]))["in"](3).seconds()
+            .thatCraft(new RandomResource(1, PINS_STASBOURG, coefDistance / villeKm["Lyon"]["Strasbourg"]))
+            .thatCraft(Q(50, BIÈRE))["in"](3).seconds()
             .atCostOf(Q(5, TEMPS)))
             .spawnCrafter(new Crafter("Chanter")
             .thatCraft(new AdaptativeQuantity().ifHas(Q(4, CH3CH2OH)).give(Q(-3, CHANT)).elseGive(Q(1, CHANT)).showTheQuantityIfNot())["in"](5).seconds())

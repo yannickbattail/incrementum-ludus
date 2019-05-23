@@ -235,15 +235,18 @@ var Gui = (function () {
     Gui.eraseStorage = function () {
         window.localStorage.removeItem('Fal');
         window.localStorage.removeItem('FalVersion');
+        console.log('eraseStorage');
     };
     Gui.prototype.clearStorage = function () {
         Gui.eraseStorage();
     };
     Gui.prototype.restart = function () {
         if (window.confirm('Ça va redémarrer le jeu depuis zéro. sûre?')) {
-            this.stop();
-            this.clearStorage();
+            Gui.eraseStorage();
             window.location.reload();
+            Gui.eraseStorage();
+            this.stop();
+            Gui.eraseStorage();
         }
     };
     Gui.prototype.fastMode = function () {
