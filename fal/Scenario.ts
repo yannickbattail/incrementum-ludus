@@ -34,6 +34,7 @@ const TELLIGENCE            = new CategorizedMaterial("telligence", "T", "brain.
 const PARRAIN               = new CategorizedItem("parrain", "parrain.png", "global");
 const CODE_VILLE            = new CategorizedItem("code de ville", "etoile_or.png", "global");
 const SINGE                 = new CategorizedItem("singe", "singe.png", "insigne");
+const BACCHUS               = new CategorizedItem("bacchus", "bacchus.png", "insigne");
 const POULE                 = new CategorizedItem("poule", "poule.png", "insigne");
 const POINT_COUTURE         = new CategorizedItem("point de couture", "de-a-coudre.png", "insigne");
 const CONGRES               = new CategorizedItem("congrès", "valise.png", "insigne");
@@ -227,6 +228,11 @@ class Scenario {
                                         .execFunction("Gui.youDie('Trop de vomit. Coma!');")
                                 )
                                 .appendTrigger(
+                                    new Trigger("Dignité dans l'ivresse")
+                                        .whenReached(Q(10, VOMIT))
+                                        .spawnResource(Q(-1, BACCHUS))
+                                )
+                                .appendTrigger(
                                     new Trigger("Parrainé")
                                         .whenReached(Q(2, PARRAIN))
                                         .spawnCrafter(
@@ -250,6 +256,7 @@ class Scenario {
                                                 .and(Q(9, CH3CH2OH))
                                                 .spawnResource(Q(-2, PARRAIN))
                                                 .spawnResource(Q(-1, CODE_VILLE))
+                                                .spawnResource(Q(1, BACCHUS))
                                                 .spawnResource(Q(1, FALUCHE))
                                                 .spawnResource(Q(1, LEVEL)) // level 6
                                                 .appendTrigger(Scenario.triggerFal())
