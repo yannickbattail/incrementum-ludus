@@ -43,8 +43,8 @@ button:hover {
     border-color: var(--text-color);
 }
 button:active {
-    background-color: white;
-    border-color: white;
+    border-style: inset;
+    background-color: var(--background-color);
 }
 button:disabled, button[disabled] {
     background-color: var(--background-color);
