@@ -23,6 +23,8 @@
     "../Engine/implementations/Trigger.ts",
     "../Engine/implementations/Player.ts",
     "../Engine/Engine.ts",
+    
+    "AdaptativeQuantity.ts",
     "Level.ts",
     "ICategorized.ts",
     "CategorizedMaterial.ts",

@@ -35,7 +35,8 @@ var POSITION69 = new CategorizedItem("69", "x/69.png", "insigne");
 var LEVRETTE = new CategorizedItem("levrette", "x/levrette.png", "insigne");
 var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "insigne");
 var VIRGINITE = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
-var FIN_BAISEUR = new CategorizedItem("pensée//epée", "x/fin-baiseur.png", "insigne");
+var FIN_BAISEUR = new CategorizedItem("pensée/epée", "x/fin-baiseur.png", "insigne");
+var LIME = new CategorizedItem("lime", "x/lime.png", "insigne");
 var ADOPTION_INGE = new CategorizedItem("adoption ingé", "filieres/adopt_inge.png", "emblème");
 var ADOPTION_SCIENCES = new CategorizedItem("adoption sciences", "filieres/adopt_sciences.png", "emblème");
 var ADOPTION_DROIT = new CategorizedItem("adoption droit", "filieres/adopt_droit.png", "emblème");
@@ -382,6 +383,7 @@ var Scenario = (function () {
             .every(5).seconds()).spawnCrafter(new Crafter("Chopper en missionaire")
             .thatCraft(Q(1, FIN_BAISEUR))
             .andCraft(Q(1, MISSIONNAIRE))
+            .andCraft(new AdaptativeQuantity(1, LIME, 'CH3CH2OH', 5))
             .andCraft(new RandomResource(1, CAROTTE, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE))).appendTrigger(new Trigger("Dépucelage")
             .whenReached(Q(1, FIN_BAISEUR))
@@ -389,6 +391,7 @@ var Scenario = (function () {
             .spawnCrafter(new Crafter("Chopper en 69")
             .thatCraft(Q(1, FIN_BAISEUR))
             .andCraft(Q(1, POSITION69))
+            .andCraft(new AdaptativeQuantity(1, LIME, 'CH3CH2OH', 5))
             .andCraft(new RandomResource(1, POIREAU, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE)))
             .appendTrigger(new Trigger("Potager")
@@ -397,6 +400,7 @@ var Scenario = (function () {
             .spawnCrafter(new Crafter("Chopper en levrette")
             .thatCraft(Q(1, FIN_BAISEUR))
             .andCraft(Q(1, LEVRETTE))
+            .andCraft(new AdaptativeQuantity(1, LIME, 'CH3CH2OH', 5))
             .andCraft(new RandomResource(1, NAVET, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE))))).appendTrigger(new Trigger("Potager")
             .whenReached(Q(2, CAROTTE))

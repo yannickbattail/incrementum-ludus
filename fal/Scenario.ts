@@ -60,7 +60,8 @@ const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "in
 const VIRGINITE             = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
 //const ROSE                  = new CategorizedItem("rose", "x/rose.png", "insigne");
 //const ORCHIDEE              = new CategorizedItem("orchidée", "x/orchidee.png", "insigne");
-const FIN_BAISEUR           = new CategorizedItem("pensée//epée", "x/fin-baiseur.png", "insigne");
+const FIN_BAISEUR           = new CategorizedItem("pensée/epée", "x/fin-baiseur.png", "insigne");
+const LIME                  = new CategorizedItem("lime", "x/lime.png", "insigne");
 
 
 //filières
@@ -513,6 +514,7 @@ class Scenario {
                 new Crafter("Chopper en missionaire")
                     .thatCraft(Q(1, FIN_BAISEUR))
                     .andCraft(Q(1, MISSIONNAIRE))
+                    .andCraft(new AdaptativeQuantity(1, LIME, 'CH3CH2OH', 5))
                     .andCraft(new RandomResource(1, CAROTTE, 0.1))
                     .in(42).seconds()
                     .atCostOf(Q(1, CAPOTTE))
@@ -524,6 +526,7 @@ class Scenario {
                         new Crafter("Chopper en 69")
                             .thatCraft(Q(1, FIN_BAISEUR))
                             .andCraft(Q(1, POSITION69))
+                            .andCraft(new AdaptativeQuantity(1, LIME, 'CH3CH2OH', 5))
                             .andCraft(new RandomResource(1, POIREAU, 0.1))
                             .in(42).seconds()
                             .atCostOf(Q(1, CAPOTTE))
@@ -536,6 +539,7 @@ class Scenario {
                                 new Crafter("Chopper en levrette")
                                     .thatCraft(Q(1, FIN_BAISEUR))
                                     .andCraft(Q(1, LEVRETTE))
+                                    .andCraft(new AdaptativeQuantity(1, LIME, 'CH3CH2OH', 5))
                                     .andCraft(new RandomResource(1, NAVET, 0.1))
                                     .in(42).seconds()
                                     .atCostOf(Q(1, CAPOTTE))
