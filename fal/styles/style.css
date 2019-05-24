@@ -7,7 +7,7 @@
 
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 10pt;
+    font-size: 8pt;
     background-color: var(--background-color);
     color: var(--text-color);
 }
@@ -30,8 +30,8 @@ th {
 
 button {
     color: var(--text-color);
-    padding: 8px;
-    margin: 5px;
+    padding: 5px;
+    margin: 3px;
     background-color: black;
     border-color: var(--text-color);
     border-radius: 5px;

@@ -148,7 +148,7 @@ class Scenario {
                     new Trigger("Impétrant")
                         .whenReached(Q(30, PINS_INGE))
                         .spawnProducer(
-                            new Producer("Temps / jours")
+                            new Producer("Plus de temps")
                                 .thatProduce(Q(10, TEMPS))
                                 .every(30).seconds()
                         )
@@ -283,7 +283,7 @@ class Scenario {
             .spawnResource(Q(0, PINS_NANCY))
             .spawnResource(Q(0, PINS_STASBOURG))
             .spawnProducer(
-                new Producer("Temps / jours")
+                new Producer("Encore plus de temps")
                     .thatProduce(Q(10, TEMPS))
                     .every(30).seconds()
             )
