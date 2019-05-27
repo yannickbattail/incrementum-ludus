@@ -38,10 +38,10 @@
     <script src="Gui.js"></script>
 </head>
 <body id="body" class="origin-theme">
-    <h3><img src="images/pins-ordi.png">IncrementFal<button onclick="gui.restart();">X</button></h3>
-    <div id="level">lvl</div>
+    <h3>IncrementFal</h3>
+    <div id="level">lvl</div><button onclick="gui.restart();">Recommencer</button>
     <div id="tabs">
-        <div id="gameTab" onclick="GuiTabs.selectTab(this.id)" class="selectedTab">Intro</div>
+        <div id="gameTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Intro</div>
         <div id="treeTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Objectifs</div>
         <div id="storageGlobalTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Resources</div>
         <div id="storageFalTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">fal</div>
