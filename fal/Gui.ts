@@ -51,6 +51,14 @@ class Gui {
         return h;
     }
 
+    private displayFal(title : string, category : string): string {
+        let content = this.displayStorageCategoryContent(category);
+        if (content != "") {
+            return '<div id="fal">' + content + '</div>';
+        }
+        return "";
+    }
+
     private displayStorageCategory(title : string, category : string): string {
         let content = this.displayStorageCategoryContent(category);
         if (content != "") {
@@ -294,7 +302,7 @@ class Gui {
         NodeUpdate.updateDiv('level', this.displayLevel());
         //NodeUpdate.updateDiv('storage', this.displayStorage());
         NodeUpdate.updateDiv('storageGlobal', this.displayStorageCategory("Info", "global"));
-        NodeUpdate.updateDiv('storageFal', this.displayStorageCategory("fal", "insigne"));
+        NodeUpdate.updateDiv('storageFal', this.displayFal("fal", "insigne"));
         NodeUpdate.updateDiv('storageEmbleme', this.displayStorageCategory("Emblèmes de filières", "emblème"));
         NodeUpdate.updateDiv('storageVilles', this.displayStorageCategory("Pin's de villes", "ville"));
         NodeUpdate.updateDiv('producers', this.displayProducers());
@@ -306,37 +314,3 @@ class Gui {
         this.intervalId = window.setInterval(() => this.updateGui(), refreshInterval);
     }
 }
-
-class GuiTabs {
-    static gebi(id : string) : HTMLElement {
-        let elem = document.getElementById(id);
-        if (elem == null) {
-            throw "no such tag with id = 'tabs'";
-        }
-        return elem;
-    }
-    static getTabList() : Array<string> {
-        let tabChildren = GuiTabs.gebi('tabs').children;
-        let tabs : string[] = [];
-        for (let index = 0; index <  tabChildren.length; index++) {
-            const element =  tabChildren[index];
-            tabs.push(element.id);
-        }
-        return tabs;
-    }
-
-    static selectTab(selectedTab : string) {
-        GuiTabs.getTabList().forEach(element => {
-            let contentTab : string = element.substring(0, element.length-3);
-            if (element == selectedTab) {
-                GuiTabs.gebi(element).className = 'selectedTab';
-                GuiTabs.gebi(contentTab).className = 'shownTabContent';
-            } else {
-                GuiTabs.gebi(element).className = 'deselectedTab';
-                GuiTabs.gebi(contentTab).className = 'hiddenTabContent';
-            }
-        });
-    }
-
-}
-

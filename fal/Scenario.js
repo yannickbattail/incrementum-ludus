@@ -408,7 +408,7 @@ var Scenario = (function () {
             .and(Q(2, NAVET))
             .spawnResource(Q(1, POULE))).appendTrigger(new Trigger("Ancien")
             .whenReached(Q(1, POULE))
-            .and(Q(2, CLE_DE_SOL))
+            .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(1, SINGE))
             .spawnResource(Q(1, LEVEL)));
     };

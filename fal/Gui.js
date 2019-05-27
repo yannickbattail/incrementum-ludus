@@ -35,6 +35,13 @@ var Gui = (function () {
         h += "</table>";
         return h;
     };
+    Gui.prototype.displayFal = function (title, category) {
+        var content = this.displayStorageCategoryContent(category);
+        if (content != "") {
+            return '<div id="fal">' + content + '</div>';
+        }
+        return "";
+    };
     Gui.prototype.displayStorageCategory = function (title, category) {
         var content = this.displayStorageCategoryContent(category);
         if (content != "") {
@@ -255,7 +262,7 @@ var Gui = (function () {
     Gui.prototype.updateGui = function () {
         NodeUpdate.updateDiv('level', this.displayLevel());
         NodeUpdate.updateDiv('storageGlobal', this.displayStorageCategory("Info", "global"));
-        NodeUpdate.updateDiv('storageFal', this.displayStorageCategory("fal", "insigne"));
+        NodeUpdate.updateDiv('storageFal', this.displayFal("fal", "insigne"));
         NodeUpdate.updateDiv('storageEmbleme', this.displayStorageCategory("Emblèmes de filières", "emblème"));
         NodeUpdate.updateDiv('storageVilles', this.displayStorageCategory("Pin's de villes", "ville"));
         NodeUpdate.updateDiv('producers', this.displayProducers());
@@ -267,39 +274,5 @@ var Gui = (function () {
         this.intervalId = window.setInterval(function () { return _this.updateGui(); }, refreshInterval);
     };
     return Gui;
-}());
-var GuiTabs = (function () {
-    function GuiTabs() {
-    }
-    GuiTabs.gebi = function (id) {
-        var elem = document.getElementById(id);
-        if (elem == null) {
-            throw "no such tag with id = 'tabs'";
-        }
-        return elem;
-    };
-    GuiTabs.getTabList = function () {
-        var tabChildren = GuiTabs.gebi('tabs').children;
-        var tabs = [];
-        for (var index = 0; index < tabChildren.length; index++) {
-            var element = tabChildren[index];
-            tabs.push(element.id);
-        }
-        return tabs;
-    };
-    GuiTabs.selectTab = function (selectedTab) {
-        GuiTabs.getTabList().forEach(function (element) {
-            var contentTab = element.substring(0, element.length - 3);
-            if (element == selectedTab) {
-                GuiTabs.gebi(element).className = 'selectedTab';
-                GuiTabs.gebi(contentTab).className = 'shownTabContent';
-            }
-            else {
-                GuiTabs.gebi(element).className = 'deselectedTab';
-                GuiTabs.gebi(contentTab).className = 'hiddenTabContent';
-            }
-        });
-    };
-    return GuiTabs;
 }());
 //# sourceMappingURL=Gui.js.map
