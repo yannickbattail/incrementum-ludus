@@ -95,7 +95,7 @@ class Gui {
                         interval = i;
                     }
                     h += '<tr>'
-                        + '<td>' + producer.getName() + '<br />' + this.displayProgress(producer.getStartTime(), interval) + '</td>'
+                        + '<td>' + producer.getName() + ' ' + this.displayProgress(producer.getStartTime(), interval) + '</td>'
                         + '<td>' + this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
                         + '</tr>'
                 } else {
@@ -134,14 +134,14 @@ class Gui {
             h = '<div'
                 + (!this.engine.player.hasResources(crafter.getCost())?' title="Pas assez de ressources"':'') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
-                + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+                + ' ' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 +'</div>';
         } else {
             h = '<button onclick="engine.startCrafting(\'' + crafter.getName() + '\');"'
                 + (!this.engine.player.hasResources(crafter.getCost())?' disabled="disabled" title="Pas assez de ressources"':'')
                 + ((crafter.isCrafting())?' disabled="disabled" title="En cours..."':'') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' ('+this.displayTime(crafter.getDuration())+')'
-                + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+                + ' ' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 +'</button>';
         }
         return h;

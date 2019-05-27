@@ -30,7 +30,9 @@ th {
 
 button {
     color: var(--text-color);
-    padding: 5px;
+    font-size: 8pt;
+    text-align: center;
+    padding: 2px;
     margin: 3px;
     background-color: black;
     border-color: var(--text-color);
@@ -57,20 +59,30 @@ button:disabled, button[disabled] {
     height: 24px;
 }
 
-.toggleShow {
+.toggleBlock {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--text-color);
+    border-radius: 4px 4px 0px 0px;
+    margin: 4px;
+}
+.toggleShow, .toggleHide {
     cursor: pointer;
+
+}
+
+.toggleShow {
 }
 .toggleShow::before {
-    content: "▼";
+    content: "▼ ";
 }
 .toggleShow + div {
     display: block;
 }
 .toggleHide {
-    cursor: pointer;
 }
 .toggleHide::before {
-    content: "►";
+    content: "▶ ";
 }
 .toggleHide + div {
     display: none;
@@ -155,8 +167,12 @@ button:disabled, button[disabled] {
 }
 
 progress {
-    width: 100px;
-    height: 3px;
+    display: block;
+    width: 80px;
+    height: 2px;
+    margin-top: 4px;
+    border-style: none;
+    border-width: 0px;
 }
 progress[value] {
     /* Reset the default appearance */

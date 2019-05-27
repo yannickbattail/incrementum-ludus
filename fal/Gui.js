@@ -72,7 +72,7 @@ var Gui = (function () {
                     interval = i;
                 }
                 h += '<tr>'
-                    + '<td>' + producer.getName() + '<br />' + _this.displayProgress(producer.getStartTime(), interval) + '</td>'
+                    + '<td>' + producer.getName() + ' ' + _this.displayProgress(producer.getStartTime(), interval) + '</td>'
                     + '<td>' + _this.displayQuantities(producer.getResourcesQuantity()) + '</td>'
                     + '</tr>';
             }
@@ -108,7 +108,7 @@ var Gui = (function () {
             h = '<div'
                 + (!this.engine.player.hasResources(crafter.getCost()) ? ' title="Pas assez de ressources"' : '') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' (' + this.displayTime(crafter.getDuration()) + ')'
-                + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+                + ' ' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 + '</div>';
         }
         else {
@@ -116,7 +116,7 @@ var Gui = (function () {
                 + (!this.engine.player.hasResources(crafter.getCost()) ? ' disabled="disabled" title="Pas assez de ressources"' : '')
                 + ((crafter.isCrafting()) ? ' disabled="disabled" title="En cours..."' : '') + '>'
                 + this.displayAutoCraft(crafter) + crafter.getName() + ' (' + this.displayTime(crafter.getDuration()) + ')'
-                + '<br />' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
+                + ' ' + this.displayProgress(crafter.getStartTime(), crafter.getDuration())
                 + '</button>';
         }
         return h;

@@ -51,8 +51,8 @@
     <h3>IncrementFal</h3>
     <div id="level">lvl</div><button onclick="gui.restart();">Recommencer</button>
     <div>
-        <div>
-            <div class="toggleShow" onclick="toggle()">Intro</div>
+        <div class="toggleBlock">
+            <div class="toggleShow" onclick="toggle()">Introduction</div>
             <div id="game">
                 Le jeu minimaliste de type Incremental Game.<br />
                 Thème: la vie d'un étudiant ingé Lyon qui découvre la fal.<br />
@@ -60,31 +60,31 @@
                 <i>Un pin's représente une rencontres faites lors d'événement fal.</i>
             </div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">Objectifs</div>
             <div id="tree"></div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">Resources</div>
             <div id="storageGlobal"></div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">fal</div>
             <div id="storageFal"></div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">Emblèmes de filières</div>
             <div id="storageEmbleme"></div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">Villes</div>
             <div id="storageVilles"></div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">Production</div>
             <div id="producers"></div>
         </div>
-        <div>
+        <div class="toggleBlock">
             <div class="toggleShow" onclick="toggle()">Actions</div>
             <div id="crafters"></div>
         </div>
@@ -106,7 +106,7 @@
     <div id="debugMode" style="display: none;">
         <div onclick="gui.stop()">stop</div>
         <div onclick="Gui.eraseStorage()">clear</div>
-        <div onclick="gui.fastMode()">fast mode</div>
+        <!--<div onclick="gui.fastMode()">fast mode</div>-->
         PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
     </div>
 </body>
