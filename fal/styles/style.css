@@ -60,9 +60,8 @@ button:disabled, button[disabled] {
 #tabs {
 
 }
-#tabs > div {
+.selectedTab {
     display: inline-block;
-    background-color: var(--dark-background-color);
     padding: 5px;
     border-style: solid;
     border-width: 1px;
@@ -71,15 +70,34 @@ button:disabled, button[disabled] {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     border-bottom-style: none;
-}
-.selectedTab {
     background-color: var(--background-color);
+}
+.deselectedTab {
+    display: inline-block;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--text-color);
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-style: none;
+    /*background-color: var(--dark-background-color);*/
+    background-color: black;
 }
 
 #tabContent {
     padding: 5px;
     border-style: solid;
     border-width: 1px;
+}
+
+.shownTabContent {
+    display: block;
+}
+
+.hiddenTabContent {
+    display: none;
 }
 
 
@@ -93,9 +111,6 @@ button:disabled, button[disabled] {
     max-width: 110px;
 }
 
-#producers {
-    display: inline-block;
-}
 #level {
     display: inline-flex;
 }

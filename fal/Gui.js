@@ -268,4 +268,38 @@ var Gui = (function () {
     };
     return Gui;
 }());
+var GuiTabs = (function () {
+    function GuiTabs() {
+    }
+    GuiTabs.gebi = function (id) {
+        var elem = document.getElementById(id);
+        if (elem == null) {
+            throw "no such tag with id = 'tabs'";
+        }
+        return elem;
+    };
+    GuiTabs.getTabList = function () {
+        var tabChildren = GuiTabs.gebi('tabs').children;
+        var tabs = [];
+        for (var index = 0; index < tabChildren.length; index++) {
+            var element = tabChildren[index];
+            tabs.push(element.id);
+        }
+        return tabs;
+    };
+    GuiTabs.selectTab = function (selectedTab) {
+        GuiTabs.getTabList().forEach(function (element) {
+            var contentTab = element.substring(0, element.length - 3);
+            if (element == selectedTab) {
+                GuiTabs.gebi(element).className = 'selectedTab';
+                GuiTabs.gebi(contentTab).className = 'shownTabContent';
+            }
+            else {
+                GuiTabs.gebi(element).className = 'deselectedTab';
+                GuiTabs.gebi(contentTab).className = 'hiddenTabContent';
+            }
+        });
+    };
+    return GuiTabs;
+}());
 //# sourceMappingURL=Gui.js.map

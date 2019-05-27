@@ -306,3 +306,37 @@ class Gui {
         this.intervalId = window.setInterval(() => this.updateGui(), refreshInterval);
     }
 }
+
+class GuiTabs {
+    static gebi(id : string) : HTMLElement {
+        let elem = document.getElementById(id);
+        if (elem == null) {
+            throw "no such tag with id = 'tabs'";
+        }
+        return elem;
+    }
+    static getTabList() : Array<string> {
+        let tabChildren = GuiTabs.gebi('tabs').children;
+        let tabs : string[] = [];
+        for (let index = 0; index <  tabChildren.length; index++) {
+            const element =  tabChildren[index];
+            tabs.push(element.id);
+        }
+        return tabs;
+    }
+
+    static selectTab(selectedTab : string) {
+        GuiTabs.getTabList().forEach(element => {
+            let contentTab : string = element.substring(0, element.length-3);
+            if (element == selectedTab) {
+                GuiTabs.gebi(element).className = 'selectedTab';
+                GuiTabs.gebi(contentTab).className = 'shownTabContent';
+            } else {
+                GuiTabs.gebi(element).className = 'deselectedTab';
+                GuiTabs.gebi(contentTab).className = 'hiddenTabContent';
+            }
+        });
+    }
+
+}
+
