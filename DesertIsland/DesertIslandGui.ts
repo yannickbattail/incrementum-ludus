@@ -77,7 +77,7 @@ class DesertIslandGui {
         var h = '<table border="1">';
         h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
         this.engine.crafters.forEach(
-            trigger => h += this.displayCrafter(trigger)
+            crafter => h += this.displayCrafter(crafter)
         );
         h += "</table>";
         return h;

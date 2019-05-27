@@ -47,13 +47,31 @@
     </div>
     <br />
     <div id="level">lvl</div><button onclick="gui.restart();">Recommencer</button>
-    <div id="tree"></div>
-    <div id="storageGlobal"></div>
-    <div id="storageFal"></div>
-    <div id="storageEmbleme"></div>
-    <div id="storageVilles"></div>
-    <div id="producers"></div>
-    <div id="crafters"></div>
+    <script>
+        function getTabList() {
+            let divTab = document.getElementById('tabs');
+            divTab.children
+        }
+    </script>
+    <div id="tabs">
+        <div id="treeTab">Objectifs</div>
+        <div id="storageGlobalTab">Info</div>
+        <div id="storageFalTab">fal</div>
+        <div id="storageEmblemeTab">Emblèmes de filières</div>
+        <div id="storageVillesTab">Villes</div>
+        <div id="producersTab">Production</div>
+        <div id="craftersTab">Actions</div>
+    </div>
+    <div id="tabContent">
+        <div id="tree"></div>
+        <div id="storageGlobal"></div>
+        <div id="storageFal"></div>
+        <div id="storageEmbleme"></div>
+        <div id="storageVilles"></div>
+        <div id="producers"></div>
+        <div id="crafters"></div>
+    </div>
+
     <div id="overlay">
         <div id="die">You die!</div>
         <div id="raison"></div>
