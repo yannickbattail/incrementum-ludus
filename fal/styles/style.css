@@ -19,12 +19,12 @@ table {
 td, th {
     border: none;
     background-color: var(--dark-background-color);
-    padding: 2px;
+    padding: 4px;
     text-align: center;
-    height: 32px;
 }
 th {
     background-color: black;
+    padding: 2px;
 }
 
 
@@ -57,54 +57,26 @@ button:disabled, button[disabled] {
     height: 24px;
 }
 
-#tabs {
-
+.toggleShow {
+    cursor: pointer;
 }
-.selectedTab {
-    display: inline-block;
-    padding: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--text-color);
-    border-radius: 5px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-style: none;
-    background-color: var(--background-color);
+.toggleShow::before {
+    content: "▼";
 }
-.deselectedTab {
-    display: inline-block;
-    padding: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--text-color);
-    border-radius: 5px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-style: none;
-    /*background-color: var(--dark-background-color);*/
-    background-color: black;
-}
-
-#tabContent {
-    padding: 5px;
-    border-style: solid;
-    border-width: 1px;
-}
-
-.shownTabContent {
+.toggleShow + div {
     display: block;
 }
-
-.hiddenTabContent {
+.toggleHide {
+    cursor: pointer;
+}
+.toggleHide::before {
+    content: "►";
+}
+.toggleHide + div {
     display: none;
 }
 
 
-
-#storage {
-
-}
 #crafters > table > tbody > tr > th:nth-child(4),
 #producers > table > tbody > tr > th:nth-child(3) {
     width: 110px;

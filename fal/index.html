@@ -36,34 +36,58 @@
     <script src="App.js"></script>
     <script src="../NodeUpdate/NodeUpdate.js"></script>
     <script src="Gui.js"></script>
+    <script>
+    function toggle() {
+        event.srcElement
+        if (event.srcElement.className == "toggleShow") {
+            event.srcElement.className = "toggleHide";
+        } else {
+            event.srcElement.className = "toggleShow";
+        }
+    }
+    </script>
 </head>
 <body id="body" class="origin-theme">
     <h3>IncrementFal</h3>
     <div id="level">lvl</div><button onclick="gui.restart();">Recommencer</button>
-    <div id="tabs">
-        <div id="gameTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Intro</div>
-        <div id="treeTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Objectifs</div>
-        <div id="storageGlobalTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Resources</div>
-        <div id="storageFalTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">fal</div>
-        <div id="storageEmblemeTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Emblèmes de filières</div>
-        <div id="storageVillesTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Villes</div>
-        <div id="producersTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Production</div>
-        <div id="craftersTab" onclick="GuiTabs.selectTab(this.id)" class="deselectedTab">Actions</div>
-    </div>
-    <div id="tabContent">
-        <div id="game" class="shownTabContent">
+    <div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Intro</div>
+            <div id="game">
                 Le jeu minimaliste de type Incremental Game.<br />
                 Thème: la vie d'un étudiant ingé Lyon qui découvre la fal.<br />
                 Commencez à participer à des événements (dans l'onglet Actions) et réalisez les objectifs pour progresser.<br />
                 <i>Un pin's représente une rencontres faites lors d'événement fal.</i>
+            </div>
         </div>
-        <div id="tree" class="hiddenTabContent"></div>
-        <div id="storageGlobal" class="hiddenTabContent"></div>
-        <div id="storageFal" class="hiddenTabContent"></div>
-        <div id="storageEmbleme" class="hiddenTabContent"></div>
-        <div id="storageVilles" class="hiddenTabContent"></div>
-        <div id="producers" class="hiddenTabContent"></div>
-        <div id="crafters" class="hiddenTabContent"></div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Objectifs</div>
+            <div id="tree"></div>
+        </div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Resources</div>
+            <div id="storageGlobal"></div>
+        </div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">fal</div>
+            <div id="storageFal"></div>
+        </div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Emblèmes de filières</div>
+            <div id="storageEmbleme"></div>
+        </div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Villes</div>
+            <div id="storageVilles"></div>
+        </div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Production</div>
+            <div id="producers"></div>
+        </div>
+        <div>
+            <div class="toggleShow" onclick="toggle()">Actions</div>
+            <div id="crafters"></div>
+        </div>
     </div>
 
     <div id="overlay">
