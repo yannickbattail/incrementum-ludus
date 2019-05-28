@@ -96,7 +96,13 @@ var Gui = (function () {
     Gui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
-        h += "<tr><th>Faire</th><th>Va donner</th><th>Coût</th></tr>";
+        h += "<tr>";
+        h += "<th>Faire</th>";
+        if (!this.getSimple()) {
+            h += "<th>Va donner</th>";
+        }
+        h += "<th>Coût</th>";
+        h += "</tr>";
         this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
         h += "</table>";
         return h;
@@ -104,7 +110,9 @@ var Gui = (function () {
     Gui.prototype.displayCrafter = function (crafter) {
         var h = '<tr>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
-        h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
+        if (!this.getSimple()) {
+            h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
+        }
         h += '<td>' + this.displayAvailableQuantities(crafter.getCost()) + '</td>';
         h += '</tr>';
         return h;
@@ -139,7 +147,13 @@ var Gui = (function () {
     };
     Gui.prototype.displayTree = function () {
         var h = '<table border="1">';
-        h += "<tr><th>Objectifs</th><th>Atteindre</th><th>Débloque</th></tr>";
+        h += "<tr>";
+        h += "<th>Objectifs</th>";
+        h += "<th>Atteindre</th>";
+        if (!this.getSimple()) {
+            h += "<th>Débloque</th>";
+        }
+        h += "</tr>";
         if (this.engine.triggers.length <= 0) {
             h += '<tr><td colspan="3"><b>Vous avez gagné!</b> Fini! (pour le moment, en attendant la prochaine évolution du jeux)</td></tr>';
         }
@@ -153,13 +167,15 @@ var Gui = (function () {
         var _this = this;
         var h = '';
         triggers.forEach(function (trig) {
-            h += "<tr>"
-                + "<td>" + trig.getName() + "</td>"
-                + "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                + "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Production</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnCrafters().length) ? ' <b>Objectif</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
-                + ((trig.getSpawnResources().length) ? ' <b>Ressources</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>"
-                + "</tr>";
+            h += "<tr>";
+            h += "<td>" + trig.getName() + "</td>";
+            h += "<td>" + _this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>";
+            if (!_this.getSimple()) {
+                h += "<td>" + ((trig.getSpawnProducers().length) ? ' <b>Production</b>:' + trig.getSpawnProducers().map(function (p) { return p.getName(); }).join(', ') : '')
+                    + ((trig.getSpawnCrafters().length) ? ' <b>Objectif</b>:' + trig.getSpawnCrafters().map(function (p) { return p.getName(); }).join(', ') : '')
+                    + ((trig.getSpawnResources().length) ? ' <b>Ressources</b>:' + _this.displayQuantities(trig.getSpawnResources()) : '') + "</td>";
+            }
+            h += "</tr>";
         });
         return h;
     };
@@ -222,6 +238,13 @@ var Gui = (function () {
     Gui.prototype.formatProgress = function (percent01, text) {
         var percent100 = Math.round(percent01 * 100);
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
+    };
+    Gui.prototype.getSimple = function () {
+        var checkbox = document.getElementById('simple');
+        if (checkbox != null && ('checked' in checkbox) && checkbox['checked']) {
+            return true;
+        }
+        return false;
     };
     Gui.youDie = function (raison) {
         var raisonDiv = document.getElementById('raison');

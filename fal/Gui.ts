@@ -119,7 +119,13 @@ class Gui {
     }
     private displayCrafters(): string {
         var h = '<table border="1">';
-        h += "<tr><th>Faire</th><th>Va donner</th><th>Coût</th></tr>";
+        h += "<tr>";
+        h += "<th>Faire</th>";
+        if(!this.getSimple()) {
+            h += "<th>Va donner</th>";
+        }
+        h += "<th>Coût</th>";
+        h += "</tr>";
         this.engine.crafters.forEach(
             trigger => h += this.displayCrafter(trigger)
         );
@@ -130,7 +136,9 @@ class Gui {
     private displayCrafter(crafter : ICrafter) : string {
         let h = '<tr>';
         h += '<td>' + this.displayCraftButton(crafter) + '</td>';
-        h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
+        if(!this.getSimple()) {
+            h += '<td>' + this.displayQuantities(crafter.getCraftedResources()) + '</td>';
+        }
         h += '<td>' + this.displayAvailableQuantities(crafter.getCost()) + '</td>';
         h += '</tr>';
         return h;
@@ -167,7 +175,13 @@ class Gui {
 
     private displayTree(): string {
         let h = '<table border="1">';
-        h += "<tr><th>Objectifs</th><th>Atteindre</th><th>Débloque</th></tr>";
+        h += "<tr>";
+        h += "<th>Objectifs</th>"
+        h += "<th>Atteindre</th>";
+        if (!this.getSimple()) {
+            h += "<th>Débloque</th>";
+        }
+        h += "</tr>";
         if (this.engine.triggers.length <= 0){
             h += '<tr><td colspan="3"><b>Vous avez gagné!</b> Fini! (pour le moment, en attendant la prochaine évolution du jeux)</td></tr>';
         } else {
@@ -181,13 +195,15 @@ class Gui {
         let h = '';
         triggers.forEach(
             trig => {
-                h += "<tr>"
-                    + "<td>" + trig.getName() + "</td>"
-                    + "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>"
-                    + "<td>" + ((trig.getSpawnProducers().length)?' <b>Production</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
+                h += "<tr>";
+                h += "<td>" + trig.getName() + "</td>";
+                h += "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>";
+                if (!this.getSimple()) {
+                    h += "<td>" + ((trig.getSpawnProducers().length)?' <b>Production</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')
                              + ((trig.getSpawnCrafters().length)?' <b>Objectif</b>:'+trig.getSpawnCrafters().map(p => p.getName()).join(', '):'')
-                             + ((trig.getSpawnResources().length)?' <b>Ressources</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>"
-                + "</tr>";
+                             + ((trig.getSpawnResources().length)?' <b>Ressources</b>:'+this.displayQuantities(trig.getSpawnResources()):'') + "</td>";
+                }
+                h += "</tr>";
             }
         );
         return h;
@@ -258,6 +274,14 @@ class Gui {
     private formatProgress(percent01 : number, text : string) : string {
         var percent100 = Math.round(percent01 * 100);
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
+    }
+
+    private getSimple() : boolean {
+        let checkbox = document.getElementById('simple');
+        if (checkbox != null && ('checked' in checkbox) && checkbox['checked']) {
+            return true;
+        }
+        return false;
     }
 
     public static youDie(raison : string) {
