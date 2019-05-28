@@ -12,11 +12,11 @@ var LEVEL = new Level("level", "level.svg", [
     "ancien faluchard"
 ]);
 var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
-var TEMPS = new CategorizedItem("temps", "time.png", "global");
+var TEMPS = new CategorizedItem("temps", "clockwork.svg", "global");
 var DISTANCE = new CategorizedMaterial("distance", "Km", "volant.png", "insigne");
 var TELLIGENCE = new CategorizedMaterial("telligence", "T", "brain.png", "global");
 var PARRAIN = new CategorizedItem("parrain", "parrain.png", "global");
-var CODE_VILLE = new CategorizedItem("code de ville", "etoile_or.png", "global");
+var CODE_VILLE = new CategorizedItem("code de ville", "code.svg", "global");
 var SINGE = new CategorizedItem("singe", "singe.png", "insigne");
 var BACCHUS = new CategorizedItem("bacchus", "bacchus.png", "insigne");
 var POULE = new CategorizedItem("poule", "poule.png", "insigne");

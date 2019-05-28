@@ -27,12 +27,12 @@ const LEVEL = new Level("level", "level.svg", [
     "ancien faluchard"
 ]);
 const FALUCHE               = new CategorizedItem("Faluche", "faluche.png", "global");
-const TEMPS                 = new CategorizedItem("temps", "time.png", "global");
+const TEMPS                 = new CategorizedItem("temps", "clockwork.svg", "global");
 const DISTANCE              = new CategorizedMaterial("distance", "Km", "volant.png", "insigne");
 const TELLIGENCE            = new CategorizedMaterial("telligence", "T", "brain.png", "global");
 //const TELLIGENCE_ARTIF      = new CategorizedMaterial("telligence artificielle", "TA", "artificial-intelligence.svg");
 const PARRAIN               = new CategorizedItem("parrain", "parrain.png", "global");
-const CODE_VILLE            = new CategorizedItem("code de ville", "etoile_or.png", "global");
+const CODE_VILLE            = new CategorizedItem("code de ville", "code.svg", "global");
 const SINGE                 = new CategorizedItem("singe", "singe.png", "insigne");
 const BACCHUS               = new CategorizedItem("bacchus", "bacchus.png", "insigne");
 const POULE                 = new CategorizedItem("poule", "poule.png", "insigne");
