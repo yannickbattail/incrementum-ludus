@@ -25,7 +25,7 @@ var RandomRangeQuantity = (function () {
         return this.resource.show(this.minQuantity) + ' à ' + this.resource.show(this.maxQuantity);
     };
     RandomRangeQuantity.prototype.getDetails = function () {
-        return '<div class="chanceOf">random ' + this.resource.show(this.minQuantity) + '-' + this.resource.show(this.maxQuantity) + ']</div>';
+        return '<div class="chanceOf">random [' + this.resource.show(this.minQuantity) + '-' + this.resource.show(this.maxQuantity) + ']</div>';
     };
     return RandomRangeQuantity;
 }());
