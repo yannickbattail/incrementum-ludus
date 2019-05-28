@@ -42,7 +42,7 @@ const CHANT                 = new CategorizedItem("chant", "cle de fa argent.png
 const CLE_DE_SOL            = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
 const CH3CH2OH              = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
 const BIÈRE                 = new CategorizedMaterial("bière", "cl", "chope or.png", "global");
-const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomit.png", "global");
+const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomiting.svg", "global");
 
 // potager
 const POIREAU               = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
