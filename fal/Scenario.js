@@ -402,12 +402,11 @@ var Scenario = (function () {
             .andCraft(Q(1, LEVRETTE))
             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, NAVET, 0.1))["in"](42).seconds()
-            .atCostOf(Q(1, CAPOTTE))))).appendTrigger(new Trigger("Potager")
+            .atCostOf(Q(1, CAPOTTE))))).appendTrigger(new Trigger("[secondaire] Potager")
             .whenReached(Q(2, CAROTTE))
             .and(Q(2, POIREAU))
             .and(Q(2, NAVET))
             .spawnResource(Q(1, POULE))).appendTrigger(new Trigger("Ancien")
-            .whenReached(Q(1, POULE))
             .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(1, SINGE))
             .spawnResource(Q(1, LEVEL)));

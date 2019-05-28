@@ -27,9 +27,12 @@ var AdaptativeQuantity = (function () {
     };
     AdaptativeQuantity.prototype.show = function () {
         if (this.showQuantityIfNot) {
-            return '?' + this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
+            return this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
         }
-        return '?' + this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+        return this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+    };
+    AdaptativeQuantity.prototype.getDetails = function () {
+        return '<div class="chanceOf">mais pas toujours</div>';
     };
     AdaptativeQuantity.prototype.ifHas = function (quantityStep) {
         this.quantityStep = quantityStep;

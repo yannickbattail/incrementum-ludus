@@ -41,9 +41,13 @@ class AdaptativeQuantity implements IQuantity {
     }
     show() : string {
         if (this.showQuantityIfNot) {
-            return '?' + this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
+            return this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
         }
-        return '?' + this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+        return this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+    }
+
+    getDetails() : string {
+        return '<div class="chanceOf">mais pas toujours</div>';
     }
 
     // builder methods

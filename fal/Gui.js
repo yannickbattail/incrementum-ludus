@@ -205,9 +205,14 @@ var Gui = (function () {
         if ('image' in res) {
             image = res.image;
         }
+        var details = null;
+        if ('getDetails' in quantity) {
+            details = quantity['getDetails'];
+        }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
             + '<div class="resource_label">' + quantity.show() + '</div>'
             + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + ((details != null) ? details.call(quantity) : '')
             + '</div>';
     };
     Gui.prototype.displayTime = function (miliSeconds) {

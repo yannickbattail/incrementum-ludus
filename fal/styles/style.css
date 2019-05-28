@@ -150,7 +150,7 @@ button:disabled, button[disabled] {
     background-color: var(--background-color);
     padding: 1px;
     text-align: right;
-    min-width: 60px;
+    min-width: 50px;
 }
 .availableResource {
     color: chartreuse;
@@ -158,7 +158,9 @@ button:disabled, button[disabled] {
 .notAvailableResource {
     color: red;
 }
-
+.chanceOf {
+    font-size: 7px;
+}
 #fal .resource {
     background-color: transparent;
     border-width: 0px;
