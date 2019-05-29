@@ -260,6 +260,8 @@ class Scenario {
                                                 .and(Q(9, CH3CH2OH))
                                                 .spawnResource(Q(-2, PARRAIN))
                                                 .spawnResource(Q(-1, CODE_VILLE))
+                                                .spawnResource(Q(-2, CH3CH2OH))
+                                                .spawnResource(Q(-15, SEC))
                                                 .spawnResource(Q(1, BACCHUS))
                                                 .spawnResource(Q(1, FALUCHE))
                                                 .spawnResource(Q(1, LEVEL)) // level 6
@@ -334,6 +336,7 @@ class Scenario {
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
                     .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption droit")
@@ -345,8 +348,9 @@ class Scenario {
                     .spawnResource(Q(1, ADOPTION_DROIT))
                     .spawnResource(Q(-20, POINT_COUTURE))
                     .spawnResource(Q(-1, CODE_VILLE))
-                    .spawnResource(Q(-1, PARRAIN))
-                    .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-1, PARRAIN))  
+                    .spawnResource(Q(-2, CH3CH2OH))                 
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption jaune")
@@ -360,6 +364,7 @@ class Scenario {
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
                     .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption rose")
@@ -373,6 +378,7 @@ class Scenario {
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
                     .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption sage-pouf")
@@ -386,6 +392,7 @@ class Scenario {
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
                     .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption pharma")
@@ -399,6 +406,7 @@ class Scenario {
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
                     .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] Adoption médecine")
@@ -412,6 +420,7 @@ class Scenario {
                     .spawnResource(Q(-1, CODE_VILLE))
                     .spawnResource(Q(-1, PARRAIN))
                     .spawnResource(Q(-2, CH3CH2OH))
+                    .spawnResource(Q(-15, SEC))
             )
             .appendTrigger(
                 new Trigger("[secondaire] quémendeur d'insignes")
@@ -423,8 +432,6 @@ class Scenario {
                     .and(Q(1, ADOPTION_PHARMA))
                     .and(Q(1, ADOPTION_MEDECINE))
                     .spawnResource(Q(1, SINGE))
-                    .spawnResource(Q(-2, CH3CH2OH))
-
             );
     }
 
