@@ -193,13 +193,14 @@ var Gui = (function () {
             if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                 cssClass = 'availableResource';
             }
-            h += _this.displayQuantity(resQ, cssClass);
+            h += _this.displayQuantity(resQ, cssClass, storageRes);
         });
         h += '';
         return h;
     };
-    Gui.prototype.displayQuantity = function (quantity, optionnalCss) {
+    Gui.prototype.displayQuantity = function (quantity, optionnalCss, storageRes) {
         if (optionnalCss === void 0) { optionnalCss = ''; }
+        if (storageRes === void 0) { storageRes = null; }
         var res = quantity.getResource();
         var image = '';
         if ('image' in res) {
@@ -210,7 +211,10 @@ var Gui = (function () {
             details = quantity['getDetails'];
         }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
-            + '<div class="resource_label">' + quantity.show() + '</div>'
+            + '<div class="resource_label">'
+            + ((storageRes != null) ? '<span>' + storageRes.show() + '</span>/' : '')
+            + quantity.show()
+            + '</div>'
             + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
             + ((details != null) ? details.call(quantity) : '')
             + '</div>';

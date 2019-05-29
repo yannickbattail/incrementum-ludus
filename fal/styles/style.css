@@ -152,10 +152,10 @@ button:disabled, button[disabled] {
     text-align: right;
     min-width: 50px;
 }
-.availableResource {
+.availableResource > div > span {
     color: chartreuse;
 }
-.notAvailableResource {
+.notAvailableResource > div > span {
     color: red;
 }
 .chanceOf {
