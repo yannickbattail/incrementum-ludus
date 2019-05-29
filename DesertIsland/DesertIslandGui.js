@@ -61,7 +61,7 @@ var DesertIslandGui = (function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>Craft</th><th>It will make</th><th>Cost</th></tr>";
-        this.engine.crafters.forEach(function (trigger) { return h += _this.displayCrafter(trigger); });
+        this.engine.crafters.forEach(function (crafter) { return h += _this.displayCrafter(crafter); });
         h += "</table>";
         return h;
     };
@@ -130,21 +130,30 @@ var DesertIslandGui = (function () {
             if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                 cssClass = 'availableResource';
             }
-            h += _this.displayQuantity(resQ, cssClass);
+            h += _this.displayQuantity(resQ, cssClass, storageRes);
         });
         h += '';
         return h;
     };
-    DesertIslandGui.prototype.displayQuantity = function (quantity, optionnalCss) {
+    DesertIslandGui.prototype.displayQuantity = function (quantity, optionnalCss, storageRes) {
         if (optionnalCss === void 0) { optionnalCss = ''; }
+        if (storageRes === void 0) { storageRes = null; }
         var res = quantity.getResource();
         var image = '';
         if ('image' in res) {
             image = res.image;
         }
+        var details = null;
+        if ('getDetails' in quantity) {
+            details = quantity['getDetails'];
+        }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
-            + '<div class="resource_label">' + quantity.show() + '</div>'
+            + '<div class="resource_label">'
+            + ((storageRes != null) ? '<span>' + storageRes.show() + '</span>/' : '')
+            + quantity.show()
+            + '</div>'
             + ((image == '') ? quantity.getResource().getName() : '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + ((details != null) ? details.call(quantity) : '')
             + '</div>';
     };
     DesertIslandGui.prototype.displayTime = function (miliSeconds) {

@@ -159,22 +159,30 @@ class DesertIslandGui {
                 if (storageRes != null && storageRes.getQuantity() >= resQ.getQuantity()) {
                     cssClass = 'availableResource';
                 }
-                h += this.displayQuantity(resQ, cssClass)
+                h += this.displayQuantity(resQ, cssClass, storageRes)
             }
         );
         h += '';
         return h;
     }
 
-    private displayQuantity(quantity : IQuantity, optionnalCss : string = '') : string {
+    private displayQuantity(quantity : IQuantity, optionnalCss : string = '', storageRes : IQuantity | null = null) : string {
         let res : any = quantity.getResource();
         let image : string = '';
         if ('image' in res) {
             image = res.image;
         }
+        let details : any = null;
+        if ('getDetails' in quantity) {
+            details = quantity['getDetails'];
+        }
         return '<div class="resource ' + quantity.getResource().$type + ' ' + optionnalCss + '">'
-            + '<div class="resource_label">' + quantity.show() +  '</div>'
+        + '<div class="resource_label">'
+        + ((storageRes!=null)?'<span>'+storageRes.show()+'</span>/':'')
+        + quantity.show()
+        + '</div>'
             + ((image=='')?quantity.getResource().getName() : '<img src="images/' + image + '" title="' + quantity.getResource().getName() + '" alt="' + quantity.getResource().getName() + '" class="resource_img">')
+            + ((details != null)?details.call(quantity) : '')
             + '</div>';
     }
 

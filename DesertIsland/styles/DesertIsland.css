@@ -103,11 +103,14 @@ button:active {
     text-align: right;
     min-width: 60px;
 }
-.availableResource {
+.availableResource > div > span {
     color: chartreuse;
 }
-.notAvailableResource {
+.notAvailableResource > div > span {
     color: red;
+}
+.chanceOf {
+    font-size: 7px;
 }
 
 .Level {
