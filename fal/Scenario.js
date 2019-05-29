@@ -25,15 +25,17 @@ var CONGRES = new CategorizedItem("congrès", "valise.png", "insigne");
 var CHANT = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
 var CLE_DE_SOL = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
 var CH3CH2OH = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
-var BIÈRE = new CategorizedMaterial("bière", "cl", "chope or.png", "global");
+var BIÈRE = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
+var SEC = new CategorizedItem("sec", "chope or.png", "global");
 var VOMIT = new CategorizedMaterial("vomit", "cl", "vomiting.svg", "global");
+var TRAQUENARD = new CategorizedItem("traquenard", "panda.png", "global");
+var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "global");
 var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
 var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne");
 var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne");
 var MISSIONNAIRE = new CategorizedItem("missionnaire", "x/missionnaire.png", "insigne");
 var POSITION69 = new CategorizedItem("69", "x/69.png", "insigne");
 var LEVRETTE = new CategorizedItem("levrette", "x/levrette.png", "insigne");
-var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "insigne");
 var VIRGINITE = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
 var FIN_BAISEUR = new CategorizedItem("pensée/epée", "x/fin-baiseur.png", "insigne");
 var LIME = new CategorizedItem("lime", "x/lime.png", "insigne");
@@ -133,8 +135,9 @@ var Scenario = (function () {
                 .spawnProducer(new Producer("Désaouler")
                 .thatProduce(Q(-1, CH3CH2OH))
                 .every(10).seconds())
-                .spawnCrafter(new Crafter("Sec")
-                .thatCraft(Q(1, CH3CH2OH))["in"](1).seconds()
+                .spawnCrafter(new Crafter("Prendre un sec")
+                .thatCraft(Q(1, CH3CH2OH))
+                .andCraft(Q(1, SEC))["in"](1).seconds()
                 .atCostOf(Q(50, BIÈRE)))
                 .spawnCrafter(new Crafter("VT")
                 .thatCraft(Q(10, VOMIT))["in"](3).seconds()
@@ -341,7 +344,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Grenoble"]["Marseille"]))
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Grenoble"]["Nancy"]))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Grenoble"]["Strasbourg"]))
-            .thatCraft(Q(2, CAPOTTE))["in"](1).minutes()
+            .thatCraft(Q(2, CAPOTTE))
+            .thatCraft(Q(1, TRAQUENARD))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
             .atCostOf(Q(villeKm["Lyon"]["Grenoble"], DISTANCE)))).appendTrigger(new Trigger("Congrès: WE FADA")
             .whenReached(Q(10, PINS_VALENCE))
@@ -355,7 +359,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Valence"]["Marseille"]))
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Valence"]["Nancy"]))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Valence"]["Strasbourg"]))
-            .thatCraft(Q(2, CAPOTTE))["in"](1).minutes()
+            .thatCraft(Q(2, CAPOTTE))
+            .thatCraft(Q(1, TRAQUENARD))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
             .atCostOf(Q(villeKm["Lyon"]["Valence"], DISTANCE)))).appendTrigger(new Trigger("Congrès: Auverge")
             .whenReached(Q(10, PINS_CLERMONT))
@@ -369,7 +374,8 @@ var Scenario = (function () {
             .thatCraft(new RandomResource(2, PINS_MARSEILLE, coefDistance / villeKm["Clermont"]["Marseille"]))
             .thatCraft(new RandomResource(2, PINS_NANCY, coefDistance / villeKm["Clermont"]["Nancy"]))
             .thatCraft(new RandomResource(2, PINS_STASBOURG, coefDistance / villeKm["Clermont"]["Strasbourg"]))
-            .thatCraft(Q(2, CAPOTTE))["in"](1).minutes()
+            .thatCraft(Q(2, CAPOTTE))
+            .thatCraft(Q(1, TRAQUENARD))["in"](1).minutes()
             .atCostOf(Q(10, TEMPS))
             .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE)))).appendTrigger(this.triggerAfterCongres()).appendTrigger(new Trigger("fal natio")
             .whenReached(Q(3, CONGRES))
@@ -381,16 +387,14 @@ var Scenario = (function () {
             .spawnProducer(new Producer("Km / semaine")
             .thatProduce(Q(10, DISTANCE))
             .every(5).seconds()).spawnCrafter(new Crafter("Chopper en missionaire")
-            .thatCraft(Q(1, FIN_BAISEUR))
-            .andCraft(Q(1, MISSIONNAIRE))
+            .thatCraft(Q(1, MISSIONNAIRE))
             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, CAROTTE, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE))).appendTrigger(new Trigger("Dépucelage")
             .whenReached(Q(1, FIN_BAISEUR))
             .spawnResource(Q(1, VIRGINITE))
             .spawnCrafter(new Crafter("Chopper en 69")
-            .thatCraft(Q(1, FIN_BAISEUR))
-            .andCraft(Q(1, POSITION69))
+            .thatCraft(Q(1, POSITION69))
             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, POIREAU, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE)))
@@ -398,8 +402,7 @@ var Scenario = (function () {
             .whenReached(Q(4, FIN_BAISEUR))
             .and(Q(2, POSITION69))
             .spawnCrafter(new Crafter("Chopper en levrette")
-            .thatCraft(Q(1, FIN_BAISEUR))
-            .andCraft(Q(1, LEVRETTE))
+            .thatCraft(Q(1, LEVRETTE))
             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, NAVET, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE))))).appendTrigger(new Trigger("[secondaire] Potager")
@@ -408,6 +411,7 @@ var Scenario = (function () {
             .and(Q(2, NAVET))
             .spawnResource(Q(1, POULE))).appendTrigger(new Trigger("Ancien")
             .whenReached(Q(2, CLE_DE_SOL))
+            .and(Q(40, TRAQUENARD))
             .and(Q(1, SINGE))
             .spawnResource(Q(1, LEVEL)));
     };

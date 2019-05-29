@@ -41,8 +41,11 @@ const CONGRES               = new CategorizedItem("congrès", "valise.png", "ins
 const CHANT                 = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
 const CLE_DE_SOL            = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
 const CH3CH2OH              = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
-const BIÈRE                 = new CategorizedMaterial("bière", "cl", "chope or.png", "global");
+const BIÈRE                 = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
+const SEC                   = new CategorizedItem("sec", "chope or.png", "global");
 const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomiting.svg", "global");
+const TRAQUENARD            = new CategorizedItem("traquenard",  "panda.png", "global");
+const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "global");
 
 // potager
 const POIREAU               = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
@@ -54,7 +57,6 @@ const MISSIONNAIRE          = new CategorizedItem("missionnaire", "x/missionnair
 const POSITION69            = new CategorizedItem("69", "x/69.png", "insigne");
 const LEVRETTE              = new CategorizedItem("levrette", "x/levrette.png", "insigne");
 
-const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "insigne");
 //const FLECHE                = new CategorizedItem("flêche", "x/fleche.png", "insigne");
 //const ETOILES_DE_MER        = new CategorizedItem("étoiles de mer", "x/etoiles de mer.png", "insigne");
 const VIRGINITE             = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
@@ -184,8 +186,9 @@ class Scenario {
                                         .every(10).seconds()
                                 )
                                 .spawnCrafter(
-                                    new Crafter("Sec")
+                                    new Crafter("Prendre un sec")
                                         .thatCraft(Q(1, CH3CH2OH))
+                                        .andCraft(Q(1, SEC))
                                         .in(1).seconds()
                                         .atCostOf(Q(50, BIÈRE))
                                 )
@@ -455,6 +458,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Grenoble"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Grenoble"]["Strasbourg"]))
                             .thatCraft(Q(2, CAPOTTE))
+                            .thatCraft(Q(1, TRAQUENARD))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
                             .atCostOf(Q(villeKm["Lyon"]["Grenoble"], DISTANCE))
@@ -474,6 +478,7 @@ class Scenario {
                         .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Valence"]["Nancy"]))
                         .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Valence"]["Strasbourg"]))
                         .thatCraft(Q(2, CAPOTTE))
+                        .thatCraft(Q(1, TRAQUENARD))
                         .in(1).minutes()
                         .atCostOf(Q(10, TEMPS))
                         .atCostOf(Q(villeKm["Lyon"]["Valence"], DISTANCE))
@@ -493,6 +498,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Clermont"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Clermont"]["Strasbourg"]))
                             .thatCraft(Q(2, CAPOTTE))
+                            .thatCraft(Q(1, TRAQUENARD))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
                             .atCostOf(Q(villeKm["Lyon"]["Clermont"], DISTANCE))
@@ -515,8 +521,7 @@ class Scenario {
                     .every(5).seconds()
             ).spawnCrafter(
                 new Crafter("Chopper en missionaire")
-                    .thatCraft(Q(1, FIN_BAISEUR))
-                    .andCraft(Q(1, MISSIONNAIRE))
+                    .thatCraft(Q(1, MISSIONNAIRE))
                     .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
                     .andCraft(new RandomResource(1, CAROTTE, 0.1))
                     .in(42).seconds()
@@ -527,8 +532,7 @@ class Scenario {
                     .spawnResource(Q(1, VIRGINITE))
                     .spawnCrafter(
                         new Crafter("Chopper en 69")
-                            .thatCraft(Q(1, FIN_BAISEUR))
-                            .andCraft(Q(1, POSITION69))
+                            .thatCraft(Q(1, POSITION69))
                             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
                             .andCraft(new RandomResource(1, POIREAU, 0.1))
                             .in(42).seconds()
@@ -540,8 +544,7 @@ class Scenario {
                             .and(Q(2, POSITION69))
                             .spawnCrafter(
                                 new Crafter("Chopper en levrette")
-                                    .thatCraft(Q(1, FIN_BAISEUR))
-                                    .andCraft(Q(1, LEVRETTE))
+                                    .thatCraft(Q(1, LEVRETTE))
                                     .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
                                     .andCraft(new RandomResource(1, NAVET, 0.1))
                                     .in(42).seconds()
@@ -558,6 +561,7 @@ class Scenario {
                 new Trigger("Ancien")
                     //.whenReached(Q(1, POULE))
                     .whenReached(Q(2, CLE_DE_SOL))
+                    .and(Q(40, TRAQUENARD))
                     .and(Q(1, SINGE))
                     .spawnResource(Q(1, LEVEL)), // level 10
             )
