@@ -196,7 +196,13 @@ class Gui {
         triggers.forEach(
             trig => {
                 h += "<tr>";
-                h += "<td>" + trig.getName() + "</td>";
+                if (trig.getChangeEngineStatus() == EngineStatus.WIN) {
+                    h += '<td>[<span class="win" title="Atteindre cet objectif et c\'est gagné.">Gagné</span>] ' + trig.getName() + "</td>";
+                } else if (trig.getChangeEngineStatus() == EngineStatus.LOOSE) {
+                    h += '<td>[<span class="loose" title="Perdu, si cet objectif est atteint.">Perdu</span>] ' + trig.getName() + "</td>";
+                } else {
+                    h += '<td>' + trig.getName() + "</td>";
+                }
                 h += "<td>" + this.displayAvailableQuantities(trig.getResourcesTrigger()) + "</td>";
                 if (!this.getSimple()) {
                     h += "<td>" + ((trig.getSpawnProducers().length)?' <b>Production</b>:'+trig.getSpawnProducers().map(p => p.getName()).join(', '):'')

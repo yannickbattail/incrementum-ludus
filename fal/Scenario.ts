@@ -227,8 +227,8 @@ class Scenario {
                                         .atCostOf(Q(6, PINS_MEDECINE))
                                 )
                                 .appendTrigger(
-                                    new Trigger("[perdu] Coma")
-                                        .whenReached(Q(20, VOMIT))
+                                    new Trigger("Coma")
+                                        .whenReached(Q(100, VOMIT))
                                         .thenLoose()
                                 )
                                 .appendTrigger(
