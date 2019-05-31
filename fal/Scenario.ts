@@ -21,10 +21,11 @@ const LEVEL = new Level("level", "level.svg", [
     "Néo",
     "Parrainé",
     "Baptisable",
-    "Bébé fal",
-    "faluchard",
-    "faluchard natio",
-    "ancien faluchard"
+    "Bébé faluchard",
+    "Faluchard",
+    "Faluchard natio",
+    "Ancien faluchard",
+    "Hypothétique",
 ]);
 const FALUCHE               = new CategorizedItem("Faluche", "faluche.png", "global");
 const TEMPS                 = new CategorizedItem("temps", "clockwork.svg", "global");
@@ -444,11 +445,21 @@ class Scenario {
             .spawnResource(Q(1, LEVEL)) // level 8
             .spawnResource(Q(-50, POINT_COUTURE))
             .spawnCrafter(
-                new Crafter("clé de sol")
+                new Crafter("Clé de sol")
                     .thatCraft(Q(1, CLE_DE_SOL))
                     .atCostOf(Q(30, CHANT))
                     .in(20).seconds()
                     .automaticaly()
+            )
+            .spawnCrafter(
+                new Crafter("Rachat de Bacchus")
+                    .thatCraft(Q(1, BACCHUS))
+                    .andCraft(Q(20, VOMIT))
+                    .atCostOf(Q(40, SEC))
+                    .atCostOf(Q(8, CH3CH2OH))
+                    .atCostOf(Q(1, PARRAIN))
+                    .atCostOf(Q(1, CLE_DE_SOL))
+                    .in(1).minutes()
             )
             .appendTrigger(
                 new Trigger("Congrès: WE AFG")
@@ -565,12 +576,23 @@ class Scenario {
                     .and(Q(2, NAVET))
                     .spawnResource(Q(1, POULE))
             ).appendTrigger(
-                new Trigger("Ancien")
-                    //.whenReached(Q(1, POULE))
-                    .whenReached(Q(2, CLE_DE_SOL))
-                    .and(Q(40, TRAQUENARD))
-                    .and(Q(1, SINGE))
-                    .spawnResource(Q(1, LEVEL)) // level 10
+                this.triggerAncien()
+            )
+    }
+
+    private static triggerAncien() : ITrigger {
+        return new Trigger("Ancien")
+            .whenReached(Q(2, CLE_DE_SOL))
+            .and(Q(40, TRAQUENARD))
+            .and(Q(1, SINGE))
+            .spawnResource(Q(1, LEVEL)) // level 10
+            .appendTrigger(
+                new Trigger('Hypothétique')
+                    .whenReached(Q(1, BACCHUS))
+                    .and(Q(50, TRAQUENARD))
+                    .and(Q(1, VIRGINITE))
+                    .and(Q(100, POINT_COUTURE))
+                    .spawnResource(Q(1, LEVEL)) // level 11
                     .thenWin()
             )
     }

@@ -6,10 +6,11 @@ var LEVEL = new Level("level", "level.svg", [
     "Néo",
     "Parrainé",
     "Baptisable",
-    "Bébé fal",
-    "faluchard",
-    "faluchard natio",
-    "ancien faluchard"
+    "Bébé faluchard",
+    "Faluchard",
+    "Faluchard natio",
+    "Ancien faluchard",
+    "Hypothétique",
 ]);
 var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
 var TEMPS = new CategorizedItem("temps", "clockwork.svg", "global");
@@ -336,10 +337,17 @@ var Scenario = (function () {
             .and(Q(100, DISTANCE))
             .spawnResource(Q(1, LEVEL))
             .spawnResource(Q(-50, POINT_COUTURE))
-            .spawnCrafter(new Crafter("clé de sol")
+            .spawnCrafter(new Crafter("Clé de sol")
             .thatCraft(Q(1, CLE_DE_SOL))
             .atCostOf(Q(30, CHANT))["in"](20).seconds()
             .automaticaly())
+            .spawnCrafter(new Crafter("Rachat de Bacchus")
+            .thatCraft(Q(1, BACCHUS))
+            .andCraft(Q(20, VOMIT))
+            .atCostOf(Q(40, SEC))
+            .atCostOf(Q(8, CH3CH2OH))
+            .atCostOf(Q(1, PARRAIN))
+            .atCostOf(Q(1, CLE_DE_SOL))["in"](1).minutes())
             .appendTrigger(new Trigger("Congrès: WE AFG")
             .whenReached(Q(10, PINS_GRENOBLE))
             .spawnResource(Q(1, CONGRES))
@@ -417,10 +425,19 @@ var Scenario = (function () {
             .whenReached(Q(2, CAROTTE))
             .and(Q(2, POIREAU))
             .and(Q(2, NAVET))
-            .spawnResource(Q(1, POULE))).appendTrigger(new Trigger("Ancien")
+            .spawnResource(Q(1, POULE))).appendTrigger(this.triggerAncien());
+    };
+    Scenario.triggerAncien = function () {
+        return new Trigger("Ancien")
             .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(40, TRAQUENARD))
             .and(Q(1, SINGE))
+            .spawnResource(Q(1, LEVEL))
+            .appendTrigger(new Trigger('Hypothétique')
+            .whenReached(Q(1, BACCHUS))
+            .and(Q(50, TRAQUENARD))
+            .and(Q(1, VIRGINITE))
+            .and(Q(100, POINT_COUTURE))
             .spawnResource(Q(1, LEVEL))
             .thenWin());
     };
