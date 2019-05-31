@@ -1,6 +1,7 @@
 var Gui = (function () {
     function Gui(engine) {
         this.engine = engine;
+        this.engineStatus = EngineStatus.NOT_YET_STARTED;
         this.engine = engine;
     }
     Gui.prototype.displayLevel = function () {
@@ -255,16 +256,51 @@ var Gui = (function () {
         }
         return false;
     };
-    Gui.youDie = function (raison) {
+    Gui.prototype.loose = function () {
+        if (this.engine.status == EngineStatus.LOOSE
+            && this.engineStatus != EngineStatus.LOOSE) {
+            this.endGame(false, "Tu as trop vomis c'est pas bien!! Tu aura plus de chance le(a) prochain(e) foie(s).");
+            this.engineStatus = this.engine.status;
+        }
+        if (this.engine.status == EngineStatus.WIN
+            && this.engineStatus != EngineStatus.WIN) {
+            this.endGame(true, "C'est bien tu as gagné! Mais guète les prochaines évolution du jeux.");
+            this.engineStatus = this.engine.status;
+        }
+    };
+    Gui.prototype.endGame = function (win, raison) {
         var raisonDiv = document.getElementById('raison');
         if (raisonDiv != null) {
             raisonDiv.innerHTML = raison;
+        }
+        var overlayTitle = document.getElementById('overlayTitle');
+        if (overlayTitle != null) {
+            if (win) {
+                overlayTitle.innerText = "Et c'est gagné!";
+                overlayTitle.className = 'win';
+            }
+            else {
+                overlayTitle.innerText = "Perdu!";
+                overlayTitle.className = 'loose';
+            }
         }
         var overlay = document.getElementById('overlay');
         if (overlay != null) {
             var o_1 = overlay;
             o_1.className = 'show';
             window.setTimeout(function () { o_1.className += ' shade'; }, 500);
+        }
+    };
+    Gui.youWin = function (raison) {
+        var raisonDiv = document.getElementById('raison');
+        if (raisonDiv != null) {
+            raisonDiv.innerHTML = raison;
+        }
+        var overlay = document.getElementById('overlay');
+        if (overlay != null) {
+            var o_2 = overlay;
+            o_2.className = 'show';
+            window.setTimeout(function () { o_2.className += ' shade'; }, 500);
         }
     };
     Gui.prototype.stop = function () {
@@ -300,6 +336,7 @@ var Gui = (function () {
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());
+        this.loose();
     };
     Gui.prototype.start = function (refreshInterval) {
         var _this = this;

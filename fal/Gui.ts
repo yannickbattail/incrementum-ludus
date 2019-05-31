@@ -292,7 +292,46 @@ class Gui {
         return false;
     }
 
-    public static youDie(raison : string) {
+
+    private engineStatus : EngineStatus = EngineStatus.NOT_YET_STARTED;
+
+    loose() {
+        if (this.engine.status == EngineStatus.LOOSE 
+            && this.engineStatus != EngineStatus.LOOSE) {
+                this.endGame(false, "Tu as trop vomis c'est pas bien!! Tu aura plus de chance le(a) prochain(e) foie(s).");
+                this.engineStatus = this.engine.status;
+        }
+        if (this.engine.status == EngineStatus.WIN
+            && this.engineStatus != EngineStatus.WIN) {
+                this.endGame(true, "C'est bien tu as gagné! Mais guète les prochaines évolution du jeux.");
+                this.engineStatus = this.engine.status;
+        }
+    }
+
+    public endGame(win : boolean, raison : string) {
+        let raisonDiv = document.getElementById('raison');
+        if (raisonDiv != null) {
+            raisonDiv.innerHTML = raison;
+        }
+        let overlayTitle = document.getElementById('overlayTitle');
+        if (overlayTitle != null) {
+            if (win) {
+                overlayTitle.innerText = "Et c'est gagné!";
+                overlayTitle.className = 'win';
+            } else {
+                overlayTitle.innerText = "Perdu!";
+                overlayTitle.className = 'loose';
+            }
+        }
+        let overlay = document.getElementById('overlay');
+        if (overlay != null) {
+            let o = overlay;
+            o.className = 'show';
+            window.setTimeout(() => {o.className += ' shade'}, 500);
+        }
+    }
+
+    public static youWin(raison : string) {
         let raisonDiv = document.getElementById('raison');
         if (raisonDiv != null) {
             raisonDiv.innerHTML = raison;
@@ -340,6 +379,7 @@ class Gui {
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());
+        this.loose();
     }
 
     start(refreshInterval : number) {

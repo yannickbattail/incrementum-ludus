@@ -134,10 +134,15 @@ button:disabled, button[disabled] {
     transition: background-color 3s linear;
     background-color: #000000ee;
 }
-#die {
+#overlayTitle {
     padding-top: 25%;
-    color: red;
     font-size: 80px;
+}
+.loose {
+    color: red;
+}
+.win {
+    color: chartreuse;
 }
 
 .resource {

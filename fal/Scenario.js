@@ -100,6 +100,7 @@ var Scenario = (function () {
         engine.triggers = [
             new Trigger("Sympatisant")
                 .whenReached(Q(5, PINS_INGE))
+                .thenLoose()
                 .spawnCrafter(new Crafter("Apéro ingé")
                 .thatCraft(new RandomRangeQuantity(2, 5, PINS_INGE))
                 .andCraft(new RandomResource(1, PINS_SCIENCES, 0.02))["in"](2).seconds()
@@ -165,8 +166,8 @@ var Scenario = (function () {
                 .atCostOf(Q(6, PINS_PHARMA))
                 .atCostOf(Q(6, PINS_MEDECINE)))
                 .appendTrigger(new Trigger("[perdu] Coma")
-                .whenReached(Q(100, VOMIT))
-                .execFunction("Gui.youDie('Trop de vomit. Coma!');"))
+                .whenReached(Q(20, VOMIT))
+                .thenLoose())
                 .appendTrigger(new Trigger("Dignité dans l'ivresse")
                 .whenReached(Q(10, VOMIT))
                 .spawnResource(Q(-1, BACCHUS)))
@@ -421,7 +422,8 @@ var Scenario = (function () {
             .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(40, TRAQUENARD))
             .and(Q(1, SINGE))
-            .spawnResource(Q(1, LEVEL)));
+            .spawnResource(Q(1, LEVEL))
+            .thenWin());
     };
     return Scenario;
 }());

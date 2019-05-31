@@ -228,8 +228,8 @@ class Scenario {
                                 )
                                 .appendTrigger(
                                     new Trigger("[perdu] Coma")
-                                        .whenReached(Q(100, VOMIT))
-                                        .execFunction("Gui.youDie('Trop de vomit. Coma!');")
+                                        .whenReached(Q(20, VOMIT))
+                                        .thenLoose()
                                 )
                                 .appendTrigger(
                                     new Trigger("Dignité dans l'ivresse")
@@ -570,7 +570,8 @@ class Scenario {
                     .whenReached(Q(2, CLE_DE_SOL))
                     .and(Q(40, TRAQUENARD))
                     .and(Q(1, SINGE))
-                    .spawnResource(Q(1, LEVEL)), // level 10
+                    .spawnResource(Q(1, LEVEL)) // level 10
+                    .thenWin()
             )
     }
 }
