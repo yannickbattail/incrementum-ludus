@@ -100,7 +100,6 @@ var Scenario = (function () {
         engine.triggers = [
             new Trigger("Sympatisant")
                 .whenReached(Q(5, PINS_INGE))
-                .thenLoose()
                 .spawnCrafter(new Crafter("Apéro ingé")
                 .thatCraft(new RandomRangeQuantity(2, 5, PINS_INGE))
                 .andCraft(new RandomResource(1, PINS_SCIENCES, 0.02))["in"](2).seconds()
