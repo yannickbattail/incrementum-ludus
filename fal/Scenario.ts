@@ -575,10 +575,10 @@ class Scenario {
                                     .atCostOf(Q(5, MISSIONNAIRE))
                                     .and(Q(5, POSITION69))
                                     .and(Q(5, LEVRETTE))
-                                    .and(Q(4, PINS_INGE))
+                                    .and(Q(1, PINS_INGE))
                             ).spawnCrafter(
                                 new Crafter("Rachat de lime")
-                                    .thatCraft(Q(1, LIME))
+                                    .thatCraft(Q(-1, LIME))
                                     .in(42).seconds()
                                     .atCostOf(Q(3, FIN_BAISEUR))
                                     .atCostOf(Q(1, CAPOTTE))
@@ -602,15 +602,15 @@ class Scenario {
         return new Trigger("Ancien")
             .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(40, TRAQUENARD))
-            .and(Q(1, SINGE))
+            .and(Q(1, VIRGINITE))
+            .and(Q(1, FIN_BAISEUR))
             .spawnResource(Q(1, LEVEL)) // level 10
             .appendTrigger(
                 new Trigger('Hypothétique')
                     .whenReached(Q(1, BACCHUS))
                     .and(Q(50, TRAQUENARD))
-                    .and(Q(1, VIRGINITE))
-                    .and(Q(100, POINT_COUTURE))
-                    .and(Q(1, FIN_BAISEUR))
+                    .and(Q(3, PARRAIN))
+                    .and(Q(200, POINT_COUTURE))
                     .spawnResource(Q(1, LEVEL)) // level 11
                     .thenWin()
             )

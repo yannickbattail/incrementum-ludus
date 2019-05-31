@@ -1,4 +1,4 @@
-var VERSION = "2.6";
+var VERSION = "2.7";
 function loadEngine() {
     var json = window.localStorage.getItem('Fal');
     if (json != null) {
