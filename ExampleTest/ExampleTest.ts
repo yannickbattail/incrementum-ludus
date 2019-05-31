@@ -22,6 +22,10 @@ const KNIFE = new Resource("knife");
 const BEER = new Resource("beer");
 const WASTE = new Resource("waste");
 
+function testCallback() : void {
+    window.alert("testCallback when water source triggered.");
+}
+
 var engine = new Engine();
 engine.player = new Player("platypus");
 engine.producers = [
@@ -59,8 +63,7 @@ engine.triggers = [
         .appendTrigger(
             new Trigger("win")
                 .whenReached(new Quantity(30, WATER))
-                .execFunction('win()')
-            
+                .thenWin()
         )
         .appendTrigger(
             new Trigger("beer brewering")
@@ -73,6 +76,7 @@ engine.triggers = [
                         .canBeSwitchedToAuto()
             )
         )
+        .execFunction(testCallback)
 ];
 
 function win() {

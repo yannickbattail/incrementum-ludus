@@ -13,6 +13,7 @@ interface ITrigger {
     getSpawnCrafters(): Array<ICrafter>;
     getSpawnNewTriggers(): Array<ITrigger>;
     getCallback(): TimerHandler;
+    getChangeEngineStatus(): EngineStatus | null ;
 
     // builder inferface
     whenReached(quantity : IQuantity) : ITrigger;
@@ -22,4 +23,6 @@ interface ITrigger {
     spawnCrafter(crafter : ICrafter) : ITrigger;
     appendTrigger(trigger : ITrigger) : ITrigger;
     execFunction(fct : TimerHandler) : ITrigger;
+    thenWin(): ITrigger;
+    thenLoose(): ITrigger;
 }

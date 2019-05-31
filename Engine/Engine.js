@@ -101,6 +101,10 @@ var Engine = (function () {
             if (trigger.getCallback() != "") {
                 window.setTimeout(trigger.getCallback(), 1);
             }
+            var newStatus = trigger.getChangeEngineStatus();
+            if (newStatus != null) {
+                this.status = newStatus;
+            }
             this.triggers.splice(this.triggers.indexOf(trigger), 1);
         }
     };

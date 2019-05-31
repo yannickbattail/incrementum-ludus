@@ -48,6 +48,8 @@
     <script src="ExampleTestGui.js"></script>
 </head>
 <body id="body">
+    status
+    <div id="status"></div>
     Storage
     <div id="storage"></div>
     Producers
@@ -60,6 +62,7 @@
         engine.run(500, saveEngine);
         var gui = new IncrGui(engine);
         function updateGui() {
+            document.getElementById('status').innerHTML = gui.displayStatus();
             document.getElementById('storage').innerHTML = gui.displayStorage();
             document.getElementById('sources').innerHTML = gui.displayProducers();
             document.getElementById('crafters').innerHTML = gui.displayCrafters();

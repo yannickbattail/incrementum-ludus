@@ -12,9 +12,19 @@ class IncrGui {
         this.engine = engine;
     }
 
+    displayStatus() : string {
+        if (this.engine.status == EngineStatus.WIN) {
+            return "<b>YOU WIN!!! 😁</b>";
+        } else if (this.engine.status == EngineStatus.LOOSE) {
+            return "<b>YOU LOOSE! 😢</b>";
+        } else {
+            return "<b>in progress 😉</b>";
+        }
+    }
+
     displayStorage(): string {
         var h = '<table border="1">';
-        h += "<tr><th>quantity</th><th>resource</th></tr>";
+        h += "<tr><th>resource</th></tr>";
         this.engine.player.getStorage().forEach(
             res => h += "<tr><td>" + res.show() + "</td></tr>"
         );
@@ -42,7 +52,7 @@ class IncrGui {
         var h = '<table border="1">';
         h += '<tr><th>name</th><th>triggered when resources</th>';
         h += '<th>spwan producers</th><th>spwan resources</th>';
-        h += '<th>spwan crafters</th><th>spwan triggers</th></tr>';
+        h += '<th>spwan crafters</th><th>spwan triggers</th><th>callback and win/loose</th></tr>';
         this.engine.triggers.forEach(
             trigger => h += this.displayTrigger(trigger)
         );
@@ -85,6 +95,18 @@ class IncrGui {
             trig => h += '<li>' + trig.getName() +'</li>'
         );
         h += "</ul></td>";
+        h += "<td>";
+        let status = trigger.getChangeEngineStatus();
+        if (status == EngineStatus.WIN) {
+            h += "WIN!";
+        }
+        if (status == EngineStatus.LOOSE) {
+            h += "LOOSE!";
+        }
+        if (trigger.getCallback() != null && trigger.getCallback() != "") {
+            h += " Callback: " + trigger.getCallback();
+        }
+        h += "</td>";
         h += '</tr>';
         return h;
     }

@@ -127,6 +127,10 @@ class Engine {
                 //use window.setTimeout() to start the callback in an other thread
                 window.setTimeout(trigger.getCallback(), 1);
             }
+            let newStatus = trigger.getChangeEngineStatus();
+            if (newStatus != null) {
+                this.status = newStatus;
+            }
             // remove the trigger
             this.triggers.splice(this.triggers.indexOf(trigger), 1);
         }

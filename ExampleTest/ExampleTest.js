@@ -7,6 +7,9 @@ var AXE = new Resource("axe");
 var KNIFE = new Resource("knife");
 var BEER = new Resource("beer");
 var WASTE = new Resource("waste");
+function testCallback() {
+    window.alert("testCallback when water source triggered.");
+}
 var engine = new Engine();
 engine.player = new Player("platypus");
 engine.producers = [
@@ -30,13 +33,14 @@ engine.triggers = [
         .spawnResource(new Quantity(10, WATER))
         .appendTrigger(new Trigger("win")
         .whenReached(new Quantity(30, WATER))
-        .execFunction('win()'))
+        .thenWin())
         .appendTrigger(new Trigger("beer brewering")
         .whenReached(new Quantity(20, WATER))
         .spawnCrafter(new Crafter("brewery")
         .thatCraft(new Quantity(1, BEER))["in"](20).seconds()
         .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
         .canBeSwitchedToAuto()))
+        .execFunction(testCallback)
 ];
 function win() {
     engine.status = EngineStatus.WIN;

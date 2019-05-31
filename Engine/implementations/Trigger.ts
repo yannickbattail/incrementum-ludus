@@ -5,9 +5,7 @@
 /// <reference path="../interfaces/ICrafter.ts" />
 /// <reference path="../interfaces/IPlayer.ts" />
 
-
 class Trigger implements ITrigger {
-
 
     $type : string = 'Trigger';
     constructor(protected name: string,
@@ -16,7 +14,8 @@ class Trigger implements ITrigger {
         protected spawnResources: Array<IQuantity> = [],
         protected spawnCrafters: Array<ICrafter> = [],
         protected spawnNewTriggers: Array<ITrigger> = [],
-        protected callback: TimerHandler = "") {
+        protected callback: TimerHandler = "",
+        protected changeEngineStatus: EngineStatus | null = null) {
 
     }
     getName() : string {
@@ -40,6 +39,9 @@ class Trigger implements ITrigger {
     getCallback(): TimerHandler {
         return this.callback;
     }
+    getChangeEngineStatus(): EngineStatus | null {
+        return this.changeEngineStatus;
+    }
 
     public static load(data : any) : Trigger {
         let curContext : any = window;
@@ -50,6 +52,7 @@ class Trigger implements ITrigger {
         newObj.spawnCrafters = (data.spawnCrafters as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.spawnNewTriggers = (data.spawnNewTriggers as Array<any>).map(p => curContext[p.$type].load(p));
         newObj.callback = data.callback;
+        newObj.changeEngineStatus = data.changeEngineStatus;
         return newObj;
     }
 
@@ -78,6 +81,14 @@ class Trigger implements ITrigger {
     }
     public execFunction(fct: TimerHandler): ITrigger {
         this.callback = fct;
+        return this;
+    }
+    public thenWin(): ITrigger {
+        this.changeEngineStatus = EngineStatus.WIN;
+        return this;
+    }
+    public thenLoose(): ITrigger {
+        this.changeEngineStatus = EngineStatus.LOOSE;
         return this;
     }
 }

@@ -2,9 +2,20 @@ var IncrGui = (function () {
     function IncrGui(engine) {
         this.engine = engine;
     }
+    IncrGui.prototype.displayStatus = function () {
+        if (this.engine.status == EngineStatus.WIN) {
+            return "<b>YOU WIN!!! 😁</b>";
+        }
+        else if (this.engine.status == EngineStatus.LOOSE) {
+            return "<b>YOU LOOSE! 😢</b>";
+        }
+        else {
+            return "<b>in progress 😉</b>";
+        }
+    };
     IncrGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
-        h += "<tr><th>quantity</th><th>resource</th></tr>";
+        h += "<tr><th>resource</th></tr>";
         this.engine.player.getStorage().forEach(function (res) { return h += "<tr><td>" + res.show() + "</td></tr>"; });
         h += "</table>";
         return h;
@@ -28,7 +39,7 @@ var IncrGui = (function () {
         var h = '<table border="1">';
         h += '<tr><th>name</th><th>triggered when resources</th>';
         h += '<th>spwan producers</th><th>spwan resources</th>';
-        h += '<th>spwan crafters</th><th>spwan triggers</th></tr>';
+        h += '<th>spwan crafters</th><th>spwan triggers</th><th>callback and win/loose</th></tr>';
         this.engine.triggers.forEach(function (trigger) { return h += _this.displayTrigger(trigger); });
         h += "</table>";
         return h;
@@ -60,6 +71,18 @@ var IncrGui = (function () {
         h += "<td><ul>";
         trigger.getSpawnNewTriggers().forEach(function (trig) { return h += '<li>' + trig.getName() + '</li>'; });
         h += "</ul></td>";
+        h += "<td>";
+        var status = trigger.getChangeEngineStatus();
+        if (status == EngineStatus.WIN) {
+            h += "WIN!";
+        }
+        if (status == EngineStatus.LOOSE) {
+            h += "LOOSE!";
+        }
+        if (trigger.getCallback() != null && trigger.getCallback() != "") {
+            h += " Callback: " + trigger.getCallback();
+        }
+        h += "</td>";
         h += '</tr>';
         return h;
     };
