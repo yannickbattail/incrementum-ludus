@@ -1,7 +1,15 @@
+var EngineStatus;
+(function (EngineStatus) {
+    EngineStatus[EngineStatus["NOT_YET_STARTED"] = 0] = "NOT_YET_STARTED";
+    EngineStatus[EngineStatus["IN_PROGRESS"] = 1] = "IN_PROGRESS";
+    EngineStatus[EngineStatus["LOOSE"] = 2] = "LOOSE";
+    EngineStatus[EngineStatus["WIN"] = 3] = "WIN";
+})(EngineStatus || (EngineStatus = {}));
 var Engine = (function () {
     function Engine() {
         this.$type = 'Engine';
         this.tickInterval = 100;
+        this.status = EngineStatus.NOT_YET_STARTED;
         this.producers = [];
         this.triggers = [];
         this.crafters = [];
@@ -11,6 +19,7 @@ var Engine = (function () {
         var curContext = window;
         var newObj = new Engine();
         newObj.tickInterval = data.tickInterval;
+        newObj.status = data.status;
         newObj.player = curContext[data.player.$type].load(data.player);
         newObj.producers = data.producers.map(function (p) { return curContext[p.$type].load(p); });
         newObj.triggers = data.triggers.map(function (p) { return curContext[p.$type].load(p); });
@@ -22,6 +31,9 @@ var Engine = (function () {
         var _this = this;
         this.tickInterval = tickInterval;
         this.saveCallback = saveCallback;
+        if (this.status == EngineStatus.NOT_YET_STARTED) {
+            this.status = EngineStatus.IN_PROGRESS;
+        }
         this.intervalId = window.setInterval(function () { return _this.onTick(); }, this.tickInterval);
     };
     Engine.prototype.stop = function () {
@@ -29,6 +41,10 @@ var Engine = (function () {
     };
     Engine.prototype.onTick = function () {
         var _this = this;
+        if (this.status == EngineStatus.LOOSE || this.status == EngineStatus.WIN) {
+            console.log("Status is " + this.status + ", STOP");
+            this.stop();
+        }
         this.producers.forEach(function (producer) {
             if (producer.isAuto) {
                 _this.autoCollectProducer(producer);
@@ -56,7 +72,9 @@ var Engine = (function () {
     };
     Engine.prototype.collectManualProducer = function (producer) {
         var _this = this;
-        producer.getResourcesQuantity().forEach(function (res) { return _this.player.increaseStorage(res); });
+        if (this.status == EngineStatus.IN_PROGRESS) {
+            producer.getResourcesQuantity().forEach(function (res) { return _this.player.increaseStorage(res); });
+        }
     };
     Engine.prototype.collectProducer = function (producerName) {
         var producer = this.getProducerByName(producerName);
@@ -114,17 +132,21 @@ var Engine = (function () {
     };
     Engine.prototype.startManualCrafting = function (crafter) {
         var _this = this;
-        if (!crafter.isAuto() && !crafter.isCrafting() && this.player.hasResources(crafter.getCost())) {
-            crafter.initStartTime();
-            crafter.getCost().forEach(function (resourceQty) { return _this.player.decreaseStorage(resourceQty); });
-            return true;
+        if (this.status == EngineStatus.IN_PROGRESS) {
+            if (!crafter.isAuto() && !crafter.isCrafting() && this.player.hasResources(crafter.getCost())) {
+                crafter.initStartTime();
+                crafter.getCost().forEach(function (resourceQty) { return _this.player.decreaseStorage(resourceQty); });
+                return true;
+            }
         }
         return false;
     };
     Engine.prototype.switchAutoCrafting = function (crafterName) {
-        var crafter = this.getCrafterByName(crafterName);
-        if (crafter != null) {
-            crafter.setAuto(!crafter.isAuto());
+        if (this.status == EngineStatus.IN_PROGRESS) {
+            var crafter = this.getCrafterByName(crafterName);
+            if (crafter != null) {
+                crafter.setAuto(!crafter.isAuto());
+            }
         }
     };
     Engine.prototype.getCrafterByName = function (crafterName) {
