@@ -29,11 +29,12 @@ var CH3CH2OH = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global")
 var BIÈRE = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
 var SEC = new CategorizedItem("sec", "chope or.png", "global");
 var VOMIT = new CategorizedMaterial("vomit", "cl", "vomiting.svg", "global");
-var TRAQUENARD = new CategorizedItem("traquenard", "panda.png", "global");
+var TRAQUENARD = new CategorizedItem("traquenard", "panda.png", "insigne");
 var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "global");
 var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
 var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne");
 var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne");
+var SESQUE = new CategorizedItem("sesque", "x/flying.png", "insigne");
 var MISSIONNAIRE = new CategorizedItem("missionnaire", "x/missionnaire.png", "insigne");
 var POSITION69 = new CategorizedItem("69", "x/69.png", "insigne");
 var LEVRETTE = new CategorizedItem("levrette", "x/levrette.png", "insigne");
@@ -404,24 +405,35 @@ var Scenario = (function () {
             .thatProduce(Q(10, DISTANCE))
             .every(5).seconds()).spawnCrafter(new Crafter("Chopper en missionaire")
             .thatCraft(Q(1, MISSIONNAIRE))
-            .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
+            .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, CAROTTE, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE))).appendTrigger(new Trigger("Dépucelage")
-            .whenReached(Q(1, FIN_BAISEUR))
+            .whenReached(Q(1, SESQUE))
             .spawnResource(Q(1, VIRGINITE))
             .spawnCrafter(new Crafter("Chopper en 69")
             .thatCraft(Q(1, POSITION69))
-            .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
+            .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, POIREAU, 0.1))["in"](42).seconds()
             .atCostOf(Q(1, CAPOTTE)))
             .appendTrigger(new Trigger("Potager")
-            .whenReached(Q(4, FIN_BAISEUR))
+            .whenReached(Q(4, SESQUE))
             .and(Q(2, POSITION69))
             .spawnCrafter(new Crafter("Chopper en levrette")
             .thatCraft(Q(1, LEVRETTE))
-            .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, FIN_BAISEUR)).showTheQuantityIfNot())
+            .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, NAVET, 0.1))["in"](42).seconds()
-            .atCostOf(Q(1, CAPOTTE))))).appendTrigger(new Trigger("[secondaire] Potager")
+            .atCostOf(Q(1, CAPOTTE))).spawnCrafter(new Crafter("Expert(e)")
+            .thatCraft(new RandomRangeQuantity(0, 1, FIN_BAISEUR))["in"](30).seconds()
+            .atCostOf(Q(5, MISSIONNAIRE))
+            .and(Q(5, POSITION69))
+            .and(Q(5, LEVRETTE))
+            .and(Q(4, PINS_INGE))).spawnCrafter(new Crafter("Rachat de lime")
+            .thatCraft(Q(1, LIME))["in"](42).seconds()
+            .atCostOf(Q(3, FIN_BAISEUR))
+            .atCostOf(Q(1, CAPOTTE))
+            .atCostOf(Q(5, CHANT))
+            .atCostOf(Q(10, BIÈRE))
+            .atCostOf(Q(17, SEC))))).appendTrigger(new Trigger("[secondaire] Potager")
             .whenReached(Q(2, CAROTTE))
             .and(Q(2, POIREAU))
             .and(Q(2, NAVET))
@@ -438,6 +450,7 @@ var Scenario = (function () {
             .and(Q(50, TRAQUENARD))
             .and(Q(1, VIRGINITE))
             .and(Q(100, POINT_COUTURE))
+            .and(Q(1, FIN_BAISEUR))
             .spawnResource(Q(1, LEVEL))
             .thenWin());
     };
