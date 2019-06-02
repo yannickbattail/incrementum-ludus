@@ -79,7 +79,6 @@ button:disabled, button[disabled] {
 }
 .toggleShow + div {
     display: block;
-    display: flex;
 }
 .toggleHide {
 }
