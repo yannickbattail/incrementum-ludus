@@ -90,7 +90,8 @@ var Scenario = (function () {
             .spawnResource(Q(1, EMPTY_TRASH)))
             .appendTrigger(new Trigger("viking age")
             .whenReached(Q(1, AXE))
-            .spawnResource(Q(1, LEVEL)))));
+            .spawnResource(Q(1, LEVEL))
+            .thenWin())));
         var triggerLevel5 = new Trigger("pottery")
             .whenReached(Q(20, BRICK))
             .spawnResource(Q(1, LEVEL))
@@ -136,11 +137,7 @@ var Scenario = (function () {
             .appendTrigger(triggerLevel7))));
         var triggerStarvation = new Trigger("Don't starve or DIE!")
             .whenReached(Q(10, STARVATION))
-            .spawnResource(Q(-100, LEVEL))
-            .spawnResource(Q(-100000, WATER))
-            .spawnResource(Q(-100000, WOOD))
-            .spawnResource(Q(-100000, CLAY))
-            .execFunction("DesertIslandGui.youDie();");
+            .thenLoose();
         engine.triggers = [
             triggerStarvation,
             new Trigger("carry water in clay pot")

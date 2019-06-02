@@ -128,6 +128,7 @@ class Scenario {
                                 new Trigger("viking age")
                                     .whenReached(Q(1, AXE))
                                     .spawnResource(Q(1, LEVEL)) // level 9
+                                    .thenWin()
                             )
                     )
             );
@@ -208,11 +209,7 @@ class Scenario {
 
         let triggerStarvation = new Trigger("Don't starve or DIE!")
             .whenReached(Q(10, STARVATION))
-            .spawnResource(Q(-100, LEVEL))
-            .spawnResource(Q(-100000, WATER))
-            .spawnResource(Q(-100000, WOOD))
-            .spawnResource(Q(-100000, CLAY))
-            .execFunction("DesertIslandGui.youDie();");
+            .thenLoose();
 
         engine.triggers = [
             triggerStarvation,
