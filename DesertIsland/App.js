@@ -1,4 +1,4 @@
-var VERSION = "2.4";
+var VERSION = "2.5";
 function loadEngine() {
     var json = window.localStorage.getItem('DesertIsland');
     if (json != null) {
@@ -26,4 +26,4 @@ if (!e) {
 else {
     engine = e;
 }
-//# sourceMappingURL=DesertIsland.js.map
+//# sourceMappingURL=App.js.map

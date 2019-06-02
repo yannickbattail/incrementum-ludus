@@ -23,11 +23,13 @@
     "../Engine/implementations/Trigger.ts",
     "../Engine/implementations/Player.ts",
     "../Engine/Engine.ts",
-    "Level.ts",
-    "Material.ts",
     "../NodeUpdate/NodeUpdate.ts",
+    "Level.ts",
+    "ICategorized.ts",
+    "CategorizedItem.ts",
+    "CategorizedMaterial.ts",
     "Gui.ts",
     "Scenario.ts",
-    "DesertIsland.ts"
+    "App.ts"
   ]
 }

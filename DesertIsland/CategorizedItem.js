@@ -11,22 +11,23 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Item = (function (_super) {
-    __extends(Item, _super);
-    function Item(name, image) {
+var CategorizedItem = (function (_super) {
+    __extends(CategorizedItem, _super);
+    function CategorizedItem(name, image, category) {
         var _this = _super.call(this, name) || this;
         _this.name = name;
         _this.image = image;
-        _this.$type = 'Item';
+        _this.category = category;
+        _this.$type = 'CategorizedItem';
         return _this;
     }
-    Item.load = function (data) {
-        var r = new Item(data.name, data.image);
+    CategorizedItem.load = function (data) {
+        var r = new CategorizedItem(data.name, data.image, data.category);
         return r;
     };
-    Item.prototype.show = function (quantity) {
+    CategorizedItem.prototype.show = function (quantity) {
         return "" + quantity;
     };
-    return Item;
+    return CategorizedItem;
 }(Resource));
-//# sourceMappingURL=Item.js.map
+//# sourceMappingURL=CategorizedItem.js.map

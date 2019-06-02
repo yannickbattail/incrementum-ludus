@@ -6,12 +6,12 @@
 /// <reference path="../Engine/interfaces/IPlayer.ts" />
 /// <reference path="../Engine/Engine.ts" />
 
-/// <reference path="./Material.ts" />
-/// <reference path="./Item.ts" />
+/// <reference path="./CategorizedMaterial.ts" />
+/// <reference path="./CategorizedItem.ts" />
 /// <reference path="./Level.ts" />
 /// <reference path="./Scenario.ts" />
 
-const VERSION = "2.4";
+const VERSION = "2.5";
 
 function loadEngine() : Engine | null {
 

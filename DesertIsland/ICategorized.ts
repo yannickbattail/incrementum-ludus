@@ -1,0 +1,3 @@
+interface ICategorized {
+    category : string;
+}

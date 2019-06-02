@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <title>Desert Island : Incremental game</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js" integrity="sha256-fD5k74TlKQ/u8+bmlDxGGM07YJmVtte95uiYsGu/XVo=" crossorigin="anonymous"></script>
+    <script src="../json3.min.js" integrity="sha256-fD5k74TlKQ/u8+bmlDxGGM07YJmVtte95uiYsGu/XVo=" crossorigin="anonymous"></script>
     <script src="../Engine/implementations/Resource.js"></script>
     <script src="../Engine/implementations/Quantity.js"></script>
     <script src="../Engine/implementations/RandomResource.js"></script>
@@ -28,45 +28,87 @@
     <script src="../Engine/Engine.js"></script>
 
     <script src="Level.js"></script>
-    <script src="Item.js"></script>
-    <script src="Material.js"></script>
+    <script src="CategorizedItem.js"></script>
+    <script src="CategorizedMaterial.js"></script>
     <script src="Scenario.js"></script>
-    <script src="DesertIsland.js"></script>
+    <script src="App.js"></script>
     <script src="../NodeUpdate/NodeUpdate.js"></script>
-    <script src="DesertIslandGui.js"></script>
+    <script src="Gui.js"></script>
+    <script>
+    function toggle() {
+        event.srcElement
+        if (event.srcElement.className == "toggleShow") {
+            event.srcElement.className = "toggleHide";
+        } else {
+            event.srcElement.className = "toggleShow";
+        }
+    }
+    </script>
 </head>
 <body id="body" class="origin-theme">
     <h1><img src="images/DesertIsland.svg" title="Desert island" alt="Desert island" class="titleIcon"/>
-    Desert island</h1>
-    <div>
-        Your boat has sinked. You manage to swim to an island.<br />
-        You are alone and the island is uninhabited.<br />
-        You need to survive!<br />
-        Start <b>collecting</b> some resources and <b>craft</b> items to improve your life.<br />
-        And watch out not to die of starvation! (Don't forget to produce potable water and drink it)
-        </div>
-    <br />
-    <div id="level">If it do not work: <button onclick="DesertIslandGui.eraseStorage();window.location.reload();">Force reload</button></div>
-    <div id="tree"></div>
-    <div id="storage"></div>
-    <div id="producers"></div>
-    <div id="crafters"></div>
-    <div id="overlay">
-        <div id="die">You die!</div>
+        Desert island</h1>
+        <div id="level">lvl</div>
+        <button onclick="gui.restart();">Restart</button>
+        <input type="checkbox" id="simple" style="vertical-align: middle;"/><label for="simple">Interface simplifiée</label>
         <div>
-            <button onclick="DesertIslandGui.eraseStorage();window.location.reload();">Retry</button>
+        <div class="toggleBlock">
+            <div class="toggleShow" onclick="toggle()">Introduction</div>
+            <div id="game">
+                Your boat has sinked. You manage to swim to an island.<br />
+                You are alone and the island is uninhabited.<br />
+                You need to survive!<br />
+                Start <b>collecting</b> some resources and <b>craft</b> items to improve your life.<br />
+                And watch out not to die of starvation! (Don't forget to produce potable water and drink it)
+            </div>
         </div>
-</div>
+        <div class="toggleBlock">
+            <div class="toggleShow" onclick="toggle()">Goals</div>
+            <div id="tree"></div>
+        </div>
+        <div class="toggleBlock">
+            <div class="toggleShow" onclick="toggle()">Resources</div>
+            <div id="storageGlobal"></div>
+        </div>
+        <div class="toggleBlock">
+            <div class="toggleShow" onclick="toggle()">Production</div>
+            <div id="producers"></div>
+        </div>
+        <div class="toggleBlock">
+            <div class="toggleShow" onclick="toggle()">Actions</div>
+            <div id="crafters"></div>
+        </div>
+        <div class="toggleBlock">
+            <div class="toggleHide" onclick="toggle()">Relase notes</div>
+            <div id="releaseNotes">
+                <p>
+                    <ul>
+                        <li>
+                            Version 2.5 : get the improvement form the game fal
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay">
+        <div id="overlayTitle">You windie!</div>
+        <div id="raison"></div>
+        <div>
+            <button onclick="gui.restart();">C'est bien, essaye encore.</button>
+        </div>
+    </div>
     <script>
-        var gui = new DesertIslandGui(engine);
+        var gui = new Gui(engine);
         gui.start(200);
         engine.run(100, saveEngine);
     </script>
     <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
     <div id="debugMode" style="display: none;">
         <div onclick="gui.stop()">stop</div>
-        <div onclick="DesertIslandGui.eraseStorage()">clear</div>
-        <div onclick="gui.fastMode()">fast mode</div>
+        <div onclick="Gui.eraseStorage()">clear</div>
+        <!--<div onclick="gui.fastMode()">fast mode</div>-->
         PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
     </div>
 </body>

@@ -8,30 +8,30 @@
 
 /// <reference path="../Engine/implementations/RandomResource.ts" />
 /// <reference path="../Engine/implementations/RandomRangeQuantity.ts" />
-/// <reference path="./Material.ts" />
-/// <reference path="./Item.ts" />
+/// <reference path="./CategorizedMaterial.ts" />
+/// <reference path="./CategorizedItem.ts" />
 /// <reference path="./Level.ts" />
 
 const LEVEL             = new Level("level", "level.svg");
-const CLAY              = new Material("clay", "g", "clay.svg");
-const WATER             = new Material("salt water", "cl", "water.svg");
-const POTABLE_WATER     = new Material("potable water", "cl", "water_potable.svg");
-const WOOD              = new Material("wood", "g", "wood.svg");
-const VEGETABLE         = new Material("vegetable", "g", "vegetable.svg");
-const FOOD              = new Material("food", "g", "food.svg");
-const CHARCOAL          = new Material("charcoal", "g", "charcoal.svg");
-const IRON_ORE          = new Material("iron ore", "g", "iron_ore.svg");
-const IRON              = new Material("iron", "g", "iron.svg");
-const COPPER_ORE        = new Material("copper ore", "g", "copper_ore.svg");
-const CLAY_POT          = new Item("clay pot", "clay_pot.svg");
-const BRICK             = new Item("brick", "brick.svg");
-const TERRACOTTA_POT    = new Item("terracotta pot", "terracotta_pot.svg");
-const KNIFE             = new Item("knife", "knife.svg");
-const AXE               = new Item("axe", "axe.svg");
-const EMPTY_TRASH       = new Item("empty trash", "empty_trash.svg");
-const FULL_TRASH        = new Item("full trash", "full_trash.svg");
-const STARVATION_FOOD   = new Item("starvation", "skull_grey.svg");
-const STARVATION        = new Item("starvation", "skull_white.svg");
+const CLAY              = new CategorizedMaterial("clay", "g", "clay.svg", "global");
+const WATER             = new CategorizedMaterial("salt water", "cl", "water.svg", "global");
+const POTABLE_WATER     = new CategorizedMaterial("potable water", "cl", "water_potable.svg", "global");
+const WOOD              = new CategorizedMaterial("wood", "g", "wood.svg", "global");
+const VEGETABLE         = new CategorizedMaterial("vegetable", "g", "vegetable.svg", "global");
+const FOOD              = new CategorizedMaterial("food", "g", "food.svg", "global");
+const CHARCOAL          = new CategorizedMaterial("charcoal", "g", "charcoal.svg", "global");
+const IRON_ORE          = new CategorizedMaterial("iron ore", "g", "iron_ore.svg", "global");
+const IRON              = new CategorizedMaterial("iron", "g", "iron.svg", "global");
+const COPPER_ORE        = new CategorizedMaterial("copper ore", "g", "copper_ore.svg", "global");
+const CLAY_POT          = new CategorizedItem("clay pot", "clay_pot.svg", "global");
+const BRICK             = new CategorizedItem("brick", "brick.svg", "global");
+const TERRACOTTA_POT    = new CategorizedItem("terracotta pot", "terracotta_pot.svg", "global");
+const KNIFE             = new CategorizedItem("knife", "knife.svg", "global");
+const AXE               = new CategorizedItem("axe", "axe.svg", "global");
+const EMPTY_TRASH       = new CategorizedItem("empty trash", "empty_trash.svg", "global");
+const FULL_TRASH        = new CategorizedItem("full trash", "full_trash.svg", "global");
+const STARVATION_FOOD   = new CategorizedItem("starvation", "skull_grey.svg", "global");
+const STARVATION        = new CategorizedItem("starvation", "skull_white.svg", "global");
 
 class Scenario {
     public static initEngine() : Engine {
