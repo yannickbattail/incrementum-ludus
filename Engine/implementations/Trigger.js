@@ -1,3 +1,4 @@
+"use strict";
 var Trigger = (function () {
     function Trigger(name, resourcesTrigger, spawnProducers, spawnResources, spawnCrafters, spawnNewTriggers, callback, changeEngineStatus) {
         if (resourcesTrigger === void 0) { resourcesTrigger = []; }

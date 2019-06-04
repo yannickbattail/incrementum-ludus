@@ -1,3 +1,4 @@
+"use strict";
 var EngineStatus;
 (function (EngineStatus) {
     EngineStatus[EngineStatus["NOT_YET_STARTED"] = 0] = "NOT_YET_STARTED";
@@ -10,10 +11,13 @@ var Engine = (function () {
         this.$type = 'Engine';
         this.tickInterval = 100;
         this.status = EngineStatus.NOT_YET_STARTED;
+        this.player = new Player("");
         this.producers = [];
         this.triggers = [];
         this.crafters = [];
         this.fastMode = 0;
+        this.intervalId = 0;
+        this.saveCallback = function () { };
     }
     Engine.load = function (data) {
         var curContext = window;

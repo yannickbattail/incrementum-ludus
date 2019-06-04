@@ -1,3 +1,4 @@
+"use strict";
 var Resource = (function () {
     function Resource(name) {
         this.name = name;

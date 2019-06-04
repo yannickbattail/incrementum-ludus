@@ -7,7 +7,7 @@
 
 class Crafter implements ICrafter {
     $type : string = 'Crafter';
-    public startTime: Date | null;
+    public startTime: Date | null = null;
     constructor(protected name: string,
                 protected duration: number = 0,
                 protected cost: Array<IQuantity> = [],

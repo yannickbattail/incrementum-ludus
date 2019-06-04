@@ -1,3 +1,4 @@
+"use strict";
 var Quantity = (function () {
     function Quantity(quantity, resource) {
         this.quantity = quantity;

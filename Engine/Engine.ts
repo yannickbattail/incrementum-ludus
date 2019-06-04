@@ -16,13 +16,13 @@ class Engine {
     $type : string = 'Engine';
     tickInterval : number = 100;
     status : EngineStatus = EngineStatus.NOT_YET_STARTED;
-    player : IPlayer;
+    player : IPlayer = new Player("");
     producers : Array<IProducer> = [];
     triggers : Array<ITrigger> = [];
     crafters : Array<ICrafter> = [];
     fastMode : number = 0;
-    private intervalId : number;
-    private saveCallback: (engine: Engine) => void;
+    private intervalId : number = 0;
+    private saveCallback: (engine: Engine) => void = function () {};
     public static load(data : any) : Engine {
         let curContext : any = window;
         let newObj : Engine = new Engine();

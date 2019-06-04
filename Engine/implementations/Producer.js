@@ -1,3 +1,4 @@
+"use strict";
 var Producer = (function () {
     function Producer(name, resourcesQuantity, interval) {
         if (resourcesQuantity === void 0) { resourcesQuantity = []; }

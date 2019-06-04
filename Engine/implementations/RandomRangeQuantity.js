@@ -1,3 +1,4 @@
+"use strict";
 var RandomRangeQuantity = (function () {
     function RandomRangeQuantity(minQuantity, maxQuantity, resource) {
         this.minQuantity = minQuantity;

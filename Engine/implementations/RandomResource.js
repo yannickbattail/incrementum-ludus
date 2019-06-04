@@ -1,3 +1,4 @@
+"use strict";
 var RandomResource = (function () {
     function RandomResource(quantity, resource, probability) {
         this.quantity = quantity;

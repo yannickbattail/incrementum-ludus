@@ -1,3 +1,4 @@
+"use strict";
 var Crafter = (function () {
     function Crafter(name, duration, cost, craftedResources, autoCrafting, automatable) {
         if (duration === void 0) { duration = 0; }
@@ -12,6 +13,7 @@ var Crafter = (function () {
         this.autoCrafting = autoCrafting;
         this.automatable = automatable;
         this.$type = 'Crafter';
+        this.startTime = null;
     }
     Crafter.load = function (data) {
         var curContext = window;
