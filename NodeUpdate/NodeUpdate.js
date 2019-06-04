@@ -1,3 +1,4 @@
+"use strict";
 var NodeUpdate = (function () {
     function NodeUpdate() {
     }
