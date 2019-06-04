@@ -1,3 +1,4 @@
+"use strict";
 var LEVEL = new Level("level", "level.svg", [
     "NOTHING",
     "Moldus",

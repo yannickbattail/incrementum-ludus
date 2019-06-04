@@ -8,10 +8,10 @@
 
 class AdaptativeQuantity implements IQuantity {
     $type : string = 'AdaptativeQuantity';
-    protected quantityIfYes: Quantity;
-    protected quantityIfNot: Quantity;
-    protected quantityStep: Quantity;
-    protected showQuantityIfNot: boolean;
+    protected quantityIfYes: Quantity = EMPTY_QUANTITY;
+    protected quantityIfNot: Quantity = EMPTY_QUANTITY;
+    protected quantityStep: Quantity = EMPTY_QUANTITY;
+    protected showQuantityIfNot: boolean = true;
 
     constructor() {
     }

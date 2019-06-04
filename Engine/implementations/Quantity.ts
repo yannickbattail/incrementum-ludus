@@ -29,4 +29,4 @@ class Quantity implements IQuantity{
         return this.resource.show(this.quantity);
     }
 }
-const EMPTY_QUANTITY : IQuantity = new Quantity(0, new Resource("nothing"));
+const EMPTY_QUANTITY = new Quantity(0, new Resource("nothing"));

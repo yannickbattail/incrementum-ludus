@@ -1,3 +1,4 @@
+"use strict";
 var VERSION = "2.7";
 function loadEngine() {
     var json = window.localStorage.getItem('Fal');

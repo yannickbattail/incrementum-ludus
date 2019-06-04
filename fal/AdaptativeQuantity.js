@@ -1,6 +1,11 @@
+"use strict";
 var AdaptativeQuantity = (function () {
     function AdaptativeQuantity() {
         this.$type = 'AdaptativeQuantity';
+        this.quantityIfYes = EMPTY_QUANTITY;
+        this.quantityIfNot = EMPTY_QUANTITY;
+        this.quantityStep = EMPTY_QUANTITY;
+        this.showQuantityIfNot = true;
     }
     AdaptativeQuantity.load = function (data) {
         var curContext = window;
