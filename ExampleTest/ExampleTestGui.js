@@ -1,3 +1,4 @@
+"use strict";
 var IncrGui = (function () {
     function IncrGui(engine) {
         this.engine = engine;

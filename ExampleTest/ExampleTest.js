@@ -1,3 +1,4 @@
+"use strict";
 var IRON = new Resource("iron");
 var COPPER = new Resource("copper");
 var LEAD = new Resource("lead");
