@@ -12,7 +12,7 @@
 /// <reference path="../NodeUpdate/NodeUpdate.ts" />
 
 class Gui {
-    intervalId : number;
+    intervalId : number = 0;
     constructor(private engine: Engine) {
         this.engine = engine;
     }

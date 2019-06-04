@@ -1,3 +1,4 @@
+"use strict";
 var VERSION = "1.2";
 function loadEngine() {
     var json = window.localStorage.getItem('NainTunnelGranite');

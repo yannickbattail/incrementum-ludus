@@ -1,6 +1,8 @@
+"use strict";
 var Gui = (function () {
     function Gui(engine) {
         this.engine = engine;
+        this.intervalId = 0;
         this.engine = engine;
     }
     Gui.prototype.displayLevel = function () {

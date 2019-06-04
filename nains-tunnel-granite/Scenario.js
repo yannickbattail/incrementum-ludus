@@ -1,3 +1,4 @@
+"use strict";
 var LEVEL = new Level("level", "level.svg");
 var HEURE = new Material("heure", "h", "clockwork.svg");
 var NAIN = new Item("nain", "dwarf-face.svg");
