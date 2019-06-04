@@ -1,3 +1,4 @@
+"use strict";
 var LEVEL = new Level("level", "level.svg");
 var CLAY = new CategorizedMaterial("clay", "g", "clay.svg", "global");
 var WATER = new CategorizedMaterial("salt water", "cl", "water.svg", "global");

@@ -1,6 +1,8 @@
+"use strict";
 var Gui = (function () {
     function Gui(engine) {
         this.engine = engine;
+        this.intervalId = 0;
         this.engineStatus = EngineStatus.NOT_YET_STARTED;
         this.engine = engine;
     }
