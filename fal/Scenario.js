@@ -26,6 +26,7 @@ var POINT_COUTURE = new CategorizedItem("point de couture", "de-a-coudre.png", "
 var CONGRES = new CategorizedItem("congrès", "valise.png", "insigne");
 var CHANT = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
 var CLE_DE_SOL = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
+var CASSEROLE = new CategorizedItem("casserole", "casserole.png", "insigne");
 var CH3CH2OH = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
 var BIÈRE = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
 var SEC = new CategorizedItem("sec", "chope or.png", "global");
@@ -235,7 +236,7 @@ var Scenario = (function () {
             .thatCraft(Q(50, BIÈRE))["in"](3).seconds()
             .atCostOf(Q(5, TEMPS)))
             .spawnCrafter(new Crafter("Chanter")
-            .thatCraft(new AdaptativeQuantity().ifHas(Q(4, CH3CH2OH)).give(Q(-3, CHANT)).elseGive(Q(1, CHANT)).showTheQuantityIfNot())["in"](5).seconds())
+            .thatCraft(new AdaptativeQuantity().ifHas(Q(4, CH3CH2OH)).give(Q(1, CASSEROLE)).elseGive(Q(1, CHANT)).showTheQuantityIfNot())["in"](5).seconds())
             .appendTrigger(Scenario.triggerCouture())
             .appendTrigger(new Trigger("[secondaire] Adoption sciences")
             .whenReached(Q(1, CODE_VILLE))

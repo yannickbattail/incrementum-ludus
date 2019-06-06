@@ -41,6 +41,7 @@ const POINT_COUTURE         = new CategorizedItem("point de couture", "de-a-coud
 const CONGRES               = new CategorizedItem("congrès", "valise.png", "insigne");
 const CHANT                 = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
 const CLE_DE_SOL            = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
+const CASSEROLE             = new CategorizedItem("casserole", "casserole.png", "insigne");
 const CH3CH2OH              = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
 const BIÈRE                 = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
 const SEC                   = new CategorizedItem("sec", "chope or.png", "global");
@@ -320,7 +321,7 @@ class Scenario {
             )
             .spawnCrafter(
                 new Crafter("Chanter")
-                    .thatCraft(new AdaptativeQuantity().ifHas(Q(4, CH3CH2OH)).give(Q(-3, CHANT)).elseGive(Q(1, CHANT)).showTheQuantityIfNot())
+                    .thatCraft(new AdaptativeQuantity().ifHas(Q(4, CH3CH2OH)).give(Q(1, CASSEROLE)).elseGive(Q(1, CHANT)).showTheQuantityIfNot())
                     .in(5).seconds()
             )
             .appendTrigger(
