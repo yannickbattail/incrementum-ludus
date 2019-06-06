@@ -16,25 +16,21 @@ var AdaptativeQuantity = (function () {
         rq.showQuantityIfNot = data.showQuantityIfNot;
         return rq;
     };
-    AdaptativeQuantity.prototype.getQuantity = function () {
+    AdaptativeQuantity.prototype.getVariableQuanity = function () {
         var e = engine;
         if (e.player.hasResources([this.quantityStep])) {
-            return this.quantityIfYes.getQuantity();
+            return this.quantityIfYes;
         }
-        return this.quantityIfNot.getQuantity();
+        return this.quantityIfNot;
+    };
+    AdaptativeQuantity.prototype.getQuantity = function () {
+        return this.getVariableQuanity().getQuantity();
     };
     AdaptativeQuantity.prototype.getResource = function () {
-        var e = engine;
-        if (e.player.hasResources([this.quantityStep])) {
-            return this.quantityIfYes.getResource();
-        }
-        return this.quantityIfNot.getResource();
+        return this.getVariableQuanity().getResource();
     };
     AdaptativeQuantity.prototype.show = function () {
-        if (this.showQuantityIfNot) {
-            return this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
-        }
-        return this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+        return this.getResource().show(this.getQuantity());
     };
     AdaptativeQuantity.prototype.getDetails = function () {
         return '<div class="chanceOf">mais pas toujours</div>';

@@ -25,25 +25,27 @@ class AdaptativeQuantity implements IQuantity {
         rq.showQuantityIfNot = data.showQuantityIfNot;
         return rq;
     }
-    getQuantity() : number {
+    private getVariableQuanity() : Quantity {
         let e : Engine = engine;
         if (e.player.hasResources([this.quantityStep])) {
-            return this.quantityIfYes.getQuantity();
+            return this.quantityIfYes;
         }
-        return this.quantityIfNot.getQuantity();
+        return this.quantityIfNot;
+    }
+    getQuantity() : number {
+        return this.getVariableQuanity().getQuantity();
     }
     getResource() : IResource{
-        let e : Engine = engine;
-        if (e.player.hasResources([this.quantityStep])) {
-            return this.quantityIfYes.getResource();
-        }
-        return this.quantityIfNot.getResource();
+        return this.getVariableQuanity().getResource();
     }
     show() : string {
+        return this.getResource().show(this.getQuantity());
+        /*
         if (this.showQuantityIfNot) {
             return this.quantityIfNot.getResource().show(this.quantityIfNot.getQuantity());
         }
         return this.quantityIfYes.getResource().show(this.quantityIfYes.getQuantity());
+        */
     }
 
     getDetails() : string {
