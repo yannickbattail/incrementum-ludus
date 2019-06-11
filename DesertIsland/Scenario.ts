@@ -39,6 +39,7 @@ class Scenario {
 
         var engine = new Engine();
         engine.player = new Player("Chuck Noland");
+        engine.player.getPreventNegativeStorage();
         // inital storage
         engine.player.increaseStorage(Q(-1, STARVATION));
         engine.player.increaseStorage(Q(1, LEVEL));

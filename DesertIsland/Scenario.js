@@ -26,6 +26,7 @@ var Scenario = (function () {
         var Q = function (quantity, res) { return new Quantity(quantity, res); };
         var engine = new Engine();
         engine.player = new Player("Chuck Noland");
+        engine.player.getPreventNegativeStorage();
         engine.player.increaseStorage(Q(-1, STARVATION));
         engine.player.increaseStorage(Q(1, LEVEL));
         engine.player.increaseStorage(Q(0, WATER));
