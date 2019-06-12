@@ -49,6 +49,8 @@ const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomiting.
 const TRAQUENARD            = new CategorizedItem("traquenard",  "panda.png", "insigne");
 const PACHY                 = new CategorizedMaterial("subtilitruc", "g",  "pachy.png", "insigne");
 const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "global");
+const ANNEAU                = new CategorizedItem("anneau", "anneau.png", "insigne");
+const PENDU                 = new CategorizedItem("pendu", "pendu.png", "insigne");
 
 // potager
 const POIREAU               = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
@@ -618,13 +620,41 @@ class Scenario {
             )
             .spawnCrafter(
                 new Crafter("blagum")
-                    .thatCraft(Q(1000, PACHY))
+                    .thatCraft(Q(1010, PACHY))
                     .andCraft(Q(1, TELLIGENCE))
                     .in(7).seconds()
                     .atCostOf(Q(1, CHANT))
                     .atCostOf(Q(1, BIÈRE))
                     .atCostOf(Q(1, SEC))
+                    .atCostOf(Q(1, PINS_INGE))
                     .atCostOf(Q(1, TELLIGENCE))
+            )
+            .spawnCrafter(
+                new Crafter("Mariage, se jurer infidélité")
+                    .thatCraft(Q(1, ANNEAU))
+                    .in(1).minutes()
+                    .atCostOf(Q(5, CAPOTTE))
+                    .atCostOf(Q(5, MISSIONNAIRE))
+                    .atCostOf(Q(2, BIÈRE))
+                    .atCostOf(Q(5, SEC))
+                    .atCostOf(Q(1, PINS_INGE))
+            )
+            .appendTrigger(
+                new Trigger('Frodon sacquet de la comté')
+                    .whenReached(Q(1, ANNEAU))
+                    .appendTrigger(
+                        new Trigger('Audi')
+                            .whenReached(Q(5, ANNEAU))
+                            .appendTrigger(
+                                new Trigger('Sonic le hérisson')
+                                    .whenReached(Q(10, ANNEAU))
+                                    .spawnResource(Q(1, PENDU))
+                            )
+                    )
+            )
+            .appendTrigger(
+                new Trigger('Cédibiliquoi?')
+                    .whenReached(Q(1000*1000, PACHY))
             )
             .appendTrigger(
                 new Trigger('Hypothétique')

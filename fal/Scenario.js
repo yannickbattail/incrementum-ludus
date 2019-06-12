@@ -34,6 +34,8 @@ var VOMIT = new CategorizedMaterial("vomit", "cl", "vomiting.svg", "global");
 var TRAQUENARD = new CategorizedItem("traquenard", "panda.png", "insigne");
 var PACHY = new CategorizedMaterial("subtilitruc", "g", "pachy.png", "insigne");
 var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "global");
+var ANNEAU = new CategorizedItem("anneau", "anneau.png", "insigne");
+var PENDU = new CategorizedItem("pendu", "pendu.png", "insigne");
 var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
 var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne");
 var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne");
@@ -456,12 +458,29 @@ var Scenario = (function () {
             .atCostOf(Q(17, SEC))
             .and(Q(10, POINT_COUTURE)))
             .spawnCrafter(new Crafter("blagum")
-            .thatCraft(Q(1000, PACHY))
+            .thatCraft(Q(1010, PACHY))
             .andCraft(Q(1, TELLIGENCE))["in"](7).seconds()
             .atCostOf(Q(1, CHANT))
             .atCostOf(Q(1, BIÈRE))
             .atCostOf(Q(1, SEC))
+            .atCostOf(Q(1, PINS_INGE))
             .atCostOf(Q(1, TELLIGENCE)))
+            .spawnCrafter(new Crafter("Mariage, se jurer infidélité")
+            .thatCraft(Q(1, ANNEAU))["in"](1).minutes()
+            .atCostOf(Q(5, CAPOTTE))
+            .atCostOf(Q(5, MISSIONNAIRE))
+            .atCostOf(Q(2, BIÈRE))
+            .atCostOf(Q(5, SEC))
+            .atCostOf(Q(1, PINS_INGE)))
+            .appendTrigger(new Trigger('Frodon sacquet de la comté')
+            .whenReached(Q(1, ANNEAU))
+            .appendTrigger(new Trigger('Audi')
+            .whenReached(Q(5, ANNEAU))
+            .appendTrigger(new Trigger('Sonic le hérisson')
+            .whenReached(Q(10, ANNEAU))
+            .spawnResource(Q(1, PENDU)))))
+            .appendTrigger(new Trigger('Cédibiliquoi?')
+            .whenReached(Q(1000 * 1000, PACHY)))
             .appendTrigger(new Trigger('Hypothétique')
             .whenReached(Q(1, BACCHUS))
             .and(Q(50, TRAQUENARD))
