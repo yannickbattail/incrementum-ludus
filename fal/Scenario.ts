@@ -47,6 +47,7 @@ const BIÈRE                 = new CategorizedMaterial("bière", "cl", "beer.svg
 const SEC                   = new CategorizedItem("sec", "chope or.png", "global");
 const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomiting.svg", "global");
 const TRAQUENARD            = new CategorizedItem("traquenard",  "panda.png", "insigne");
+const PACHY                 = new CategorizedMaterial("subtilitruc", "g",  "pachy.png", "insigne");
 const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "global");
 
 // potager
@@ -606,6 +607,25 @@ class Scenario {
             .and(Q(1, VIRGINITE))
             .and(Q(1, FIN_BAISEUR))
             .spawnResource(Q(1, LEVEL)) // level 10
+            .spawnCrafter(
+                new Crafter("Rachat de casserole")
+                    .thatCraft(Q(-1, CASSEROLE))
+                    .in(42).seconds()
+                    .atCostOf(Q(5, CHANT))
+                    .atCostOf(Q(10, BIÈRE))
+                    .atCostOf(Q(17, SEC))
+                    .and(Q(10, POINT_COUTURE))
+            )
+            .spawnCrafter(
+                new Crafter("blagum")
+                    .thatCraft(Q(1000, PACHY))
+                    .andCraft(Q(1, TELLIGENCE))
+                    .in(7).seconds()
+                    .atCostOf(Q(1, CHANT))
+                    .atCostOf(Q(1, BIÈRE))
+                    .atCostOf(Q(1, SEC))
+                    .atCostOf(Q(1, TELLIGENCE))
+            )
             .appendTrigger(
                 new Trigger('Hypothétique')
                     .whenReached(Q(1, BACCHUS))
