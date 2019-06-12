@@ -488,7 +488,7 @@ var Scenario = (function () {
             .appendTrigger(new Trigger('Hypothétique')
             .whenReached(Q(1, BACCHUS))
             .and(Q(50, TRAQUENARD))
-            .and(Q(50, PENDU))
+            .and(Q(1, PENDU))
             .and(Q(3, PARRAIN))
             .and(Q(200, POINT_COUTURE))
             .spawnResource(Q(1, LEVEL))
