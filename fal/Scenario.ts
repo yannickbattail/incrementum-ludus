@@ -645,9 +645,13 @@ class Scenario {
                     .appendTrigger(
                         new Trigger('Audi')
                             .whenReached(Q(5, ANNEAU))
+                            .and(Q(10, LEVRETTE))
+                            .spawnResource(Q(-10, LEVRETTE))
                             .appendTrigger(
                                 new Trigger('Sonic le hérisson')
                                     .whenReached(Q(10, ANNEAU))
+                                    .and(Q(10, POSITION69))
+                                    .spawnResource(Q(-10, POSITION69))
                                     .spawnResource(Q(1, PENDU))
                             )
                     )
@@ -660,6 +664,7 @@ class Scenario {
                 new Trigger('Hypothétique')
                     .whenReached(Q(1, BACCHUS))
                     .and(Q(50, TRAQUENARD))
+                    .and(Q(50, PENDU))
                     .and(Q(3, PARRAIN))
                     .and(Q(200, POINT_COUTURE))
                     .spawnResource(Q(1, LEVEL)) // level 11
