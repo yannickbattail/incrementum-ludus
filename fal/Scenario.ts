@@ -618,6 +618,7 @@ class Scenario {
                     .atCostOf(Q(17, SEC))
                     .and(Q(10, POINT_COUTURE))
             )
+            /*
             .spawnCrafter(
                 new Crafter("blagum")
                     .thatCraft(Q(1010, PACHY))
@@ -629,13 +630,14 @@ class Scenario {
                     .atCostOf(Q(1, PINS_INGE))
                     .atCostOf(Q(1, TELLIGENCE))
             )
+            */
             .spawnCrafter(
                 new Crafter("Mariage, se jurer infidélité")
                     .thatCraft(Q(1, ANNEAU))
                     .in(1).minutes()
-                    .atCostOf(Q(5, CAPOTTE))
-                    .atCostOf(Q(5, MISSIONNAIRE))
-                    .atCostOf(Q(2, BIÈRE))
+                    .atCostOf(Q(1, PARRAIN))
+                    .atCostOf(Q(1, CAPOTTE))
+                    .atCostOf(Q(3, MISSIONNAIRE))
                     .atCostOf(Q(5, SEC))
                     .atCostOf(Q(1, PINS_INGE))
             )
@@ -643,7 +645,7 @@ class Scenario {
                 new Trigger('Frodon sacquet de la comté')
                     .whenReached(Q(1, ANNEAU))
                     .appendTrigger(
-                        new Trigger('Audi')
+                        new Trigger('Anneaux olympépics')
                             .whenReached(Q(5, ANNEAU))
                             .and(Q(10, LEVRETTE))
                             .spawnResource(Q(-10, LEVRETTE))
@@ -656,10 +658,12 @@ class Scenario {
                             )
                     )
             )
+            /*
             .appendTrigger(
-                new Trigger('Cédibiliquoi?')
+                new Trigger('[Secondaire] Crédibiliquoi?')
                     .whenReached(Q(1000*1000, PACHY))
             )
+            */
             .appendTrigger(
                 new Trigger('Hypothétique')
                     .whenReached(Q(1, BACCHUS))
