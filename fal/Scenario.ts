@@ -26,6 +26,7 @@ const LEVEL = new Level("level", "level.svg", [
     "Faluchard natio",
     "Ancien faluchard",
     "Hypothétique",
+    "Grand Maistre",
 ]);
 const FALUCHE               = new CategorizedItem("Faluche", "faluche.png", "global");
 const TEMPS                 = new CategorizedItem("temps", "clockwork.svg", "global");
@@ -51,6 +52,7 @@ const PACHY                 = new CategorizedMaterial("subtilitruc", "g",  "pach
 const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "global");
 const ANNEAU                = new CategorizedItem("anneau", "anneau.png", "insigne");
 const PENDU                 = new CategorizedItem("pendu", "pendu.png", "insigne");
+const CROIX_GM              = new CategorizedItem("Croix de GM", "croix_GM.png", "insigne");
 
 // potager
 const POIREAU               = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
@@ -630,6 +632,10 @@ class Scenario {
                     .atCostOf(Q(1, PINS_INGE))
                     .atCostOf(Q(1, TELLIGENCE))
             )
+            .appendTrigger(
+                new Trigger('[Secondaire] Crédibiliquoi?')
+                    .whenReached(Q(1000*1000, PACHY))
+            )
             */
             .spawnCrafter(
                 new Crafter("Mariage, se jurer infidélité")
@@ -658,21 +664,40 @@ class Scenario {
                             )
                     )
             )
-            /*
-            .appendTrigger(
-                new Trigger('[Secondaire] Crédibiliquoi?')
-                    .whenReached(Q(1000*1000, PACHY))
-            )
-            */
             .appendTrigger(
                 new Trigger('Hypothétique')
                     .whenReached(Q(1, BACCHUS))
                     .and(Q(50, TRAQUENARD))
                     .and(Q(1, PENDU))
-                    .and(Q(3, PARRAIN))
                     .and(Q(200, POINT_COUTURE))
                     .spawnResource(Q(1, LEVEL)) // level 11
-                    .thenWin()
+                    .appendTrigger(
+                        new Trigger('Intronisation')
+                            .whenReached(Q(8, CODE_VILLE))
+                            .and(Q(3, PARRAIN))
+                            .and(Q(9, SEC))
+                            .and(Q(30, CH3CH2OH))
+                            .and(Q(100, PINS_INGE))
+                            .and(Q(61, PINS_SCIENCES))
+                            .and(Q(60, PINS_DROIT))
+                            .and(Q(60, PINS_JAUNE))
+                            .and(Q(40, PINS_ROSE))
+                            .and(Q(40, PINS_SAGE_POUF))
+                            .and(Q(40, PINS_PHARMA))
+                            .and(Q(40, PINS_MEDECINE))
+                            .and(Q(30, PINS_GRENOBLE))
+                            .and(Q(30, PINS_VALENCE))
+                            .and(Q(30, PINS_CLERMONT))
+                            .and(Q(30, PINS_DIJON))
+                            .and(Q(30, PINS_MONPEUL))
+                            .and(Q(30, PINS_MARSEILLE))
+                            .and(Q(30, PINS_NANCY))
+                            .and(Q(30, PINS_STASBOURG))
+                            .and(Q(1, CAPOTTE))
+                            .spawnResource(Q(1, CROIX_GM)) // level 12
+                            .spawnResource(Q(1, LEVEL)) // level 12
+                            .thenWin()
+                        )
             )
     }
 }

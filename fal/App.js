@@ -1,5 +1,5 @@
 "use strict";
-var VERSION = "2.10";
+var VERSION = "2.11";
 function loadEngine() {
     var json = window.localStorage.getItem('Fal');
     if (json != null) {

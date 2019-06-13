@@ -12,6 +12,7 @@ var LEVEL = new Level("level", "level.svg", [
     "Faluchard natio",
     "Ancien faluchard",
     "Hypothétique",
+    "Grand Maistre",
 ]);
 var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
 var TEMPS = new CategorizedItem("temps", "clockwork.svg", "global");
@@ -36,6 +37,7 @@ var PACHY = new CategorizedMaterial("subtilitruc", "g", "pachy.png", "insigne");
 var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "global");
 var ANNEAU = new CategorizedItem("anneau", "anneau.png", "insigne");
 var PENDU = new CategorizedItem("pendu", "pendu.png", "insigne");
+var CROIX_GM = new CategorizedItem("Croix de GM", "croix_GM.png", "insigne");
 var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
 var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne");
 var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne");
@@ -479,10 +481,33 @@ var Scenario = (function () {
             .whenReached(Q(1, BACCHUS))
             .and(Q(50, TRAQUENARD))
             .and(Q(1, PENDU))
-            .and(Q(3, PARRAIN))
             .and(Q(200, POINT_COUTURE))
             .spawnResource(Q(1, LEVEL))
-            .thenWin());
+            .appendTrigger(new Trigger('Intronisation')
+            .whenReached(Q(8, CODE_VILLE))
+            .and(Q(3, PARRAIN))
+            .and(Q(9, SEC))
+            .and(Q(30, CH3CH2OH))
+            .and(Q(100, PINS_INGE))
+            .and(Q(61, PINS_SCIENCES))
+            .and(Q(60, PINS_DROIT))
+            .and(Q(60, PINS_JAUNE))
+            .and(Q(40, PINS_ROSE))
+            .and(Q(40, PINS_SAGE_POUF))
+            .and(Q(40, PINS_PHARMA))
+            .and(Q(40, PINS_MEDECINE))
+            .and(Q(30, PINS_GRENOBLE))
+            .and(Q(30, PINS_VALENCE))
+            .and(Q(30, PINS_CLERMONT))
+            .and(Q(30, PINS_DIJON))
+            .and(Q(30, PINS_MONPEUL))
+            .and(Q(30, PINS_MARSEILLE))
+            .and(Q(30, PINS_NANCY))
+            .and(Q(30, PINS_STASBOURG))
+            .and(Q(1, CAPOTTE))
+            .spawnResource(Q(1, CROIX_GM))
+            .spawnResource(Q(1, LEVEL))
+            .thenWin()));
     };
     return Scenario;
 }());
