@@ -45,6 +45,7 @@ const CLE_DE_SOL            = new CategorizedItem("clé de sol", "cle de sol.png
 const CASSEROLE             = new CategorizedItem("casserole", "casserole.png", "insigne");
 const CH3CH2OH              = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
 const BIÈRE                 = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
+const VIN                   = new CategorizedMaterial("Vin", "cl", "verre_de_vin.png", "global");
 const SEC                   = new CategorizedItem("sec", "chope or.png", "global");
 const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomiting.svg", "global");
 const TRAQUENARD            = new CategorizedItem("traquenard",  "panda.png", "insigne");
@@ -611,13 +612,25 @@ class Scenario {
             .and(Q(1, VIRGINITE))
             .and(Q(1, FIN_BAISEUR))
             .spawnResource(Q(1, LEVEL)) // level 10
+            .spawnProducer(
+                new Producer("Cubi de rouge")
+                    .thatProduce(Q(1, VIN))
+                    .every(2).seconds(),
+            )
+            .spawnCrafter(
+                new Crafter("Sec de vin")
+                    .thatCraft(Q(3, CH3CH2OH))
+                    .andCraft(Q(5, SEC))
+                    .in(1).seconds()
+                    .atCostOf(Q(20, VIN))
+            )
             .spawnCrafter(
                 new Crafter("Rachat de casserole")
                     .thatCraft(Q(-1, CASSEROLE))
                     .in(42).seconds()
                     .atCostOf(Q(5, CHANT))
                     .atCostOf(Q(10, BIÈRE))
-                    .atCostOf(Q(17, SEC))
+                    .atCostOf(Q(30, SEC))
                     .and(Q(10, POINT_COUTURE))
             )
             /*
