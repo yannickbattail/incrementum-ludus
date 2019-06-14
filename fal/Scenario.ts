@@ -615,7 +615,7 @@ class Scenario {
             .spawnProducer(
                 new Producer("Cubi de rouge")
                     .thatProduce(Q(1, VIN))
-                    .every(2).seconds(),
+                    .every(1).seconds(),
             )
             .spawnCrafter(
                 new Crafter("Sec de vin")
@@ -683,6 +683,7 @@ class Scenario {
                     .and(Q(50, TRAQUENARD))
                     .and(Q(1, PENDU))
                     .and(Q(200, POINT_COUTURE))
+                    .and(Q(200, VIN))
                     .spawnResource(Q(1, LEVEL)) // level 11
                     .appendTrigger(
                         new Trigger('Intronisation')
