@@ -274,7 +274,7 @@ var Gui = (function () {
         }
         if (this.engine.status == EngineStatus.WIN
             && this.engineStatus != EngineStatus.WIN) {
-            this.endGame(true, "C'est bien tu as gagné! Mais guète les prochaines évolution du jeux.");
+            this.endGame(true, "C'est bien, tu as gagné ! Mais guette les prochaines évolutions du jeu.");
             this.engineStatus = this.engine.status;
         }
     };

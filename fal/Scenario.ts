@@ -651,7 +651,7 @@ class Scenario {
             )
             */
             .spawnCrafter(
-                new Crafter("Mariage, se jurer infidélité")
+                new Crafter("Mariage fal, se jurer infidélité")
                     .thatCraft(Q(1, ANNEAU))
                     .in(1).minutes()
                     .atCostOf(Q(1, PARRAIN))
@@ -661,21 +661,13 @@ class Scenario {
                     .atCostOf(Q(1, PINS_INGE))
             )
             .appendTrigger(
-                new Trigger('Frodon sacquet de la comté')
-                    .whenReached(Q(1, ANNEAU))
-                    .appendTrigger(
-                        new Trigger('Anneaux olympépics')
-                            .whenReached(Q(5, ANNEAU))
-                            .and(Q(10, LEVRETTE))
-                            .spawnResource(Q(-10, LEVRETTE))
-                            .appendTrigger(
-                                new Trigger('Sonic le hérisson')
-                                    .whenReached(Q(10, ANNEAU))
-                                    .and(Q(10, POSITION69))
-                                    .spawnResource(Q(-10, POSITION69))
-                                    .spawnResource(Q(1, PENDU))
-                            )
-                    )
+                new Trigger('Sonic le hérisson')
+                    .whenReached(Q(10, ANNEAU))
+                    .and(Q(10, LEVRETTE))
+                    .and(Q(10, POSITION69))
+                    .spawnResource(Q(-10, LEVRETTE))
+                    .spawnResource(Q(-10, POSITION69))
+                    .spawnResource(Q(1, PENDU))
             )
             .appendTrigger(
                 new Trigger('Hypothétique')
