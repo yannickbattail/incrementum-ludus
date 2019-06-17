@@ -241,7 +241,7 @@ class Scenario {
                                         .thenLoose()
                                 )
                                 .appendTrigger(
-                                    new Trigger("Dignité dans l'ivresse")
+                                    new Trigger("Indignité dans l'ivresse")
                                         .whenReached(Q(10, VOMIT))
                                         .spawnResource(Q(-1, BACCHUS))
                                 )

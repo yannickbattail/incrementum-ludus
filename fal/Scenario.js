@@ -177,7 +177,7 @@ var Scenario = (function () {
                 .appendTrigger(new Trigger("Coma")
                 .whenReached(Q(100, VOMIT))
                 .thenLoose())
-                .appendTrigger(new Trigger("Dignité dans l'ivresse")
+                .appendTrigger(new Trigger("Indignité dans l'ivresse")
                 .whenReached(Q(10, VOMIT))
                 .spawnResource(Q(-1, BACCHUS)))
                 .appendTrigger(new Trigger("Parrainé")
