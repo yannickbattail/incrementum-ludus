@@ -1,18 +1,18 @@
 "use strict";
 var LEVEL = new Level("level", "level.svg", [
     "NOTHING",
-    "Moldus",
-    "Sympatisant",
-    "Impétrant",
+    "Moldu(e)",
+    "Sympatisant(e)",
+    "Impétrant(e)",
     "Néo",
-    "Parrainé",
+    "Parrainé(e)",
     "Baptisable",
-    "Bébé faluchard",
-    "Faluchard",
-    "Faluchard natio",
-    "Ancien faluchard",
+    "Bébé faluchard(e)",
+    "Faluchard(e)",
+    "Faluchard(e) natio",
+    "Ancien(ne) faluchard(e)",
     "Hypothétique",
-    "Grand Maistre",
+    "Grand(e) Maistre(sse)",
 ]);
 var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
 var TEMPS = new CategorizedItem("temps", "clockwork.svg", "global");
@@ -108,14 +108,14 @@ var Scenario = (function () {
                 .atCostOf(Q(1, TEMPS))
         ];
         engine.triggers = [
-            new Trigger("Sympatisant")
+            new Trigger("Sympatisant(e)")
                 .whenReached(Q(5, PINS_INGE))
                 .spawnCrafter(new Crafter("Apéro ingé")
                 .thatCraft(new RandomRangeQuantity(2, 5, PINS_INGE))
                 .andCraft(new RandomResource(1, PINS_SCIENCES, 0.02))["in"](2).seconds()
                 .atCostOf(Q(1, TEMPS)))
                 .spawnResource(Q(1, LEVEL))
-                .appendTrigger(new Trigger("Impétrant")
+                .appendTrigger(new Trigger("Impétrant(e)")
                 .whenReached(Q(30, PINS_INGE))
                 .spawnProducer(new Producer("Plus de temps")
                 .thatProduce(Q(10, TEMPS))
@@ -180,7 +180,7 @@ var Scenario = (function () {
                 .appendTrigger(new Trigger("Indignité dans l'ivresse")
                 .whenReached(Q(10, VOMIT))
                 .spawnResource(Q(-1, BACCHUS)))
-                .appendTrigger(new Trigger("Parrainé")
+                .appendTrigger(new Trigger("Parrainé(e)")
                 .whenReached(Q(2, PARRAIN))
                 .spawnCrafter(new Crafter("Apprentissage du code")
                 .thatCraft(Q(1, CODE_VILLE))["in"](30).seconds()
@@ -210,7 +210,7 @@ var Scenario = (function () {
     };
     Scenario.triggerFal = function () {
         var coefDistance = 50;
-        return new Trigger("Bébé Faluchard")
+        return new Trigger("Bébé Faluchard(e)")
             .whenReached(Q(1, FALUCHE))
             .spawnResource(Q(1, LEVEL))
             .spawnResource(Q(0, PINS_GRENOBLE))
@@ -415,7 +415,7 @@ var Scenario = (function () {
             .thatCraft(Q(1, MISSIONNAIRE))
             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
             .andCraft(new RandomResource(1, CAROTTE, 0.1))["in"](42).seconds()
-            .atCostOf(Q(1, CAPOTTE))).appendTrigger(new Trigger("Dépucelage")
+            .atCostOf(Q(1, CAPOTTE))).appendTrigger(new Trigger("Perte de virginité")
             .whenReached(Q(1, SESQUE))
             .spawnResource(Q(1, VIRGINITE))
             .spawnCrafter(new Crafter("Chopper en 69")
@@ -448,7 +448,7 @@ var Scenario = (function () {
             .spawnResource(Q(1, POULE))).appendTrigger(this.triggerAncien());
     };
     Scenario.triggerAncien = function () {
-        return new Trigger("Ancien")
+        return new Trigger("Ancien(e)")
             .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(40, TRAQUENARD))
             .and(Q(1, VIRGINITE))

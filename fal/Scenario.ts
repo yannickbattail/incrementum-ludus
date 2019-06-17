@@ -15,18 +15,18 @@
 
 const LEVEL = new Level("level", "level.svg", [
     "NOTHING",
-    "Moldus",
-    "Sympatisant",
-    "Impétrant",
+    "Moldu(e)",
+    "Sympatisant(e)",
+    "Impétrant(e)",
     "Néo",
-    "Parrainé",
+    "Parrainé(e)",
     "Baptisable",
-    "Bébé faluchard",
-    "Faluchard",
-    "Faluchard natio",
-    "Ancien faluchard",
+    "Bébé faluchard(e)",
+    "Faluchard(e)",
+    "Faluchard(e) natio",
+    "Ancien(ne) faluchard(e)",
     "Hypothétique",
-    "Grand Maistre",
+    "Grand(e) Maistre(sse)",
 ]);
 const FALUCHE               = new CategorizedItem("Faluche", "faluche.png", "global");
 const TEMPS                 = new CategorizedItem("temps", "clockwork.svg", "global");
@@ -145,7 +145,7 @@ class Scenario {
         ];
 
         engine.triggers = [
-            new Trigger("Sympatisant")
+            new Trigger("Sympatisant(e)")
                 .whenReached(Q(5, PINS_INGE))
                 .spawnCrafter(
                     new Crafter("Apéro ingé")
@@ -156,7 +156,7 @@ class Scenario {
                 )
                 .spawnResource(Q(1, LEVEL)) // level 2
                 .appendTrigger(
-                    new Trigger("Impétrant")
+                    new Trigger("Impétrant(e)")
                         .whenReached(Q(30, PINS_INGE))
                         .spawnProducer(
                             new Producer("Plus de temps")
@@ -246,7 +246,7 @@ class Scenario {
                                         .spawnResource(Q(-1, BACCHUS))
                                 )
                                 .appendTrigger(
-                                    new Trigger("Parrainé")
+                                    new Trigger("Parrainé(e)")
                                         .whenReached(Q(2, PARRAIN))
                                         .spawnCrafter(
                                             new Crafter("Apprentissage du code")
@@ -285,7 +285,7 @@ class Scenario {
 
     private static triggerFal() : ITrigger {
         let coefDistance = 50;
-        return new Trigger("Bébé Faluchard")
+        return new Trigger("Bébé Faluchard(e)")
             .whenReached(Q(1, FALUCHE))
             .spawnResource(Q(1, LEVEL)) // level 7
             .spawnResource(Q(0, PINS_GRENOBLE))
@@ -553,7 +553,7 @@ class Scenario {
                     .in(42).seconds()
                     .atCostOf(Q(1, CAPOTTE))
             ).appendTrigger(
-                new Trigger("Dépucelage")
+                new Trigger("Perte de virginité")
                     .whenReached(Q(1, SESQUE))
                     .spawnResource(Q(1, VIRGINITE))
                     .spawnCrafter(
@@ -606,7 +606,7 @@ class Scenario {
     }
 
     private static triggerAncien() : ITrigger {
-        return new Trigger("Ancien")
+        return new Trigger("Ancien(e)")
             .whenReached(Q(2, CLE_DE_SOL))
             .and(Q(40, TRAQUENARD))
             .and(Q(1, VIRGINITE))
