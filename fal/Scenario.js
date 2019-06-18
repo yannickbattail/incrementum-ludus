@@ -14,66 +14,66 @@ var LEVEL = new Level("level", "level.svg", [
     "Hypothétique",
     "Grand(e) Maistre(sse)",
 ]);
-var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global");
-var TEMPS = new CategorizedItem("temps", "clockwork.svg", "global");
-var DISTANCE = new CategorizedMaterial("distance", "Km", "volant.png", "insigne");
-var TELLIGENCE = new CategorizedMaterial("telligence", "T", "brain.png", "global");
-var PARRAIN = new CategorizedItem("parrain", "parrain.png", "global");
-var CODE_VILLE = new CategorizedItem("code de ville", "code.svg", "global");
-var SINGE = new CategorizedItem("singe", "singe.png", "insigne");
-var BACCHUS = new CategorizedItem("bacchus", "bacchus.png", "insigne");
-var POULE = new CategorizedItem("poule", "poule.png", "insigne");
-var POINT_COUTURE = new CategorizedItem("point de couture", "de-a-coudre.png", "insigne");
-var CONGRES = new CategorizedItem("congrès", "valise.png", "insigne");
-var CHANT = new CategorizedItem("chant", "cle de fa argent.png", "insigne");
-var CLE_DE_SOL = new CategorizedItem("clé de sol", "cle de sol.png", "insigne");
-var CASSEROLE = new CategorizedItem("casserole", "casserole.png", "insigne");
-var CH3CH2OH = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global");
-var BIÈRE = new CategorizedMaterial("bière", "cl", "beer.svg", "global");
-var VIN = new CategorizedMaterial("Vin", "cl", "verre_de_vin.svg", "global");
-var SEC = new CategorizedItem("sec", "chope or.png", "global");
-var VOMIT = new CategorizedMaterial("vomit", "cl", "vomiting.svg", "global");
-var TRAQUENARD = new CategorizedItem("traquenard", "panda.png", "insigne");
-var PACHY = new CategorizedMaterial("subtilitruc", "g", "pachy.png", "insigne");
-var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "global");
-var ANNEAU = new CategorizedItem("anneau", "anneau.png", "insigne");
-var PENDU = new CategorizedItem("pendu", "pendu.png", "insigne");
-var CROIX_GM = new CategorizedItem("Croix de GM", "croix_GM.png", "insigne");
-var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne");
-var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne");
-var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne");
-var SESQUE = new CategorizedItem("sesque", "x/flying.png", "insigne");
-var MISSIONNAIRE = new CategorizedItem("missionnaire", "x/missionnaire.png", "insigne");
-var POSITION69 = new CategorizedItem("69", "x/69.png", "insigne");
-var LEVRETTE = new CategorizedItem("levrette", "x/levrette.png", "insigne");
-var VIRGINITE = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne");
-var FIN_BAISEUR = new CategorizedItem("pensée/epée", "x/fin-baiseur.png", "insigne");
-var LIME = new CategorizedItem("lime", "x/lime.png", "insigne");
-var ADOPTION_INGE = new CategorizedItem("adoption ingé", "filieres/adopt_inge.png", "emblème");
-var ADOPTION_SCIENCES = new CategorizedItem("adoption sciences", "filieres/adopt_sciences.png", "emblème");
-var ADOPTION_DROIT = new CategorizedItem("adoption droit", "filieres/adopt_droit.png", "emblème");
-var ADOPTION_JAUNE = new CategorizedItem("adoption jaune", "filieres/adopt_jaune.png", "emblème");
-var ADOPTION_ROSE = new CategorizedItem("adoption rose", "filieres/adopt_paramed.png", "emblème");
-var ADOPTION_SAGE_POUF = new CategorizedItem("adoption sage-pouf", "filieres/adopt_sage-pouf.png", "emblème");
-var ADOPTION_PHARMA = new CategorizedItem("adoption Pharma", "filieres/adopt_pharma.png", "emblème");
-var ADOPTION_MEDECINE = new CategorizedItem("adoption Médecine", "filieres/adopt_medecine.png", "emblème");
-var PINS_INGE = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "emblème");
-var PINS_SCIENCES = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "emblème");
-var PINS_DROIT = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "emblème");
-var PINS_JAUNE = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "emblème");
-var PINS_ROSE = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "emblème");
-var PINS_SAGE_POUF = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "emblème");
-var PINS_PHARMA = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "emblème");
-var PINS_MEDECINE = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "emblème");
-var PINS_LYON = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville");
-var PINS_GRENOBLE = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg", "ville");
-var PINS_VALENCE = new CategorizedItem("pin's Valence", "villes/Valence.svg", "ville");
-var PINS_CLERMONT = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.svg", "ville");
-var PINS_DIJON = new CategorizedItem("pin's Dijon", "villes/Dijon.svg", "ville");
-var PINS_MONPEUL = new CategorizedItem("pin's Monpeul", "villes/Montpellier.svg", "ville");
-var PINS_MARSEILLE = new CategorizedItem("pin's Marseille", "villes/Marseille.svg", "ville");
-var PINS_NANCY = new CategorizedItem("pin's Nancy", "villes/Nancy.svg", "ville");
-var PINS_STASBOURG = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.svg", "ville");
+var FALUCHE = new CategorizedItem("Faluche", "faluche.png", "global", "chat peau");
+var TEMPS = new CategorizedItem("temps", "clockwork.svg", "global", "TIC TAC, TIC TAC");
+var DISTANCE = new CategorizedMaterial("distance", "Km", "volant.png", "insigne", "Cul-mule de km, pour les cons en grès");
+var TELLIGENCE = new CategorizedMaterial("telligence", "T", "brain.png", "global", "Facile, c'est l'intelligence c'est l'inverse de la telligence");
+var PARRAIN = new CategorizedItem("parrain", "parrain.png", "global", "Parrain, pas renne, marin, marraine ou encore témoin de jéhov... de mariage");
+var CODE_VILLE = new CategorizedItem("code de ville", "code.svg", "global", "Le code faluchard de la ville.");
+var SINGE = new CategorizedItem("singe", "singe.png", "insigne", "Monkey, quémendeur d'insignes.");
+var BACCHUS = new CategorizedItem("bacchus", "bacchus.png", "insigne", "Devant Bacchus dieu du vin, gambrinus héro du... hein quoi? sa signification? ben dignité dans hips l'ivresse");
+var POULE = new CategorizedItem("poule", "poule.png", "insigne", "Poulet poulet piou piou piou! personne chaude");
+var POINT_COUTURE = new CategorizedItem("point de couture", "de-a-coudre.png", "insigne", "oui ca existe pas dans le code gnagnagna, c'est juste pour representer des points de couture");
+var CONGRES = new CategorizedItem("congrès", "valise.png", "insigne", "haa la valise de congrès. Y en a une qui pop à chaque fois qu'on débloque un congrès.");
+var CHANT = new CategorizedItem("chant", "cle de fa argent.png", "insigne", "un chant, dont les thèmes récurrents sont : la consomation d'éthanol et la pratique du coïte.");
+var CLE_DE_SOL = new CategorizedItem("clé de sol", "cle de sol.png", "insigne", "Digne chanteur de paille hard. (faut 30 chants pour avoir ça)");
+var CASSEROLE = new CategorizedItem("casserole", "casserole.png", "insigne", "[malus] Ivre, virgule, il chante comme une ");
+var CH3CH2OH = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global", "C'est un liquide incolore, volatil, inflammable et miscible à l'eau en toutes proportions. C'est un psychotrope, et l'une des plus anciennes drogues récréatives, sous la forme de boisson alcoolisée. L'éthanol est utilisé par l'industrie agroalimentaire gnagna etc mes couilles sur ton front ça fai");
+var BIÈRE = new CategorizedMaterial("bière", "cl", "beer.svg", "global", "La bière est une boisson alcoolisée obtenue par fermentation alcoolique d'un moût de produits végétaux amylacés ... ho shit! amy quoi? bon gogole: amylacé. ha mais ouiii!.");
+var VIN = new CategorizedMaterial("Vin", "cl", "verre_de_vin.svg", "global", "Vin: boisson alcoolisée ... qui le fait gagné +3g de CH3CH2OH et 5 secs (hey ça a un meilleur rapport qualité cuite que la bière ce truc)");
+var SEC = new CategorizedItem("sec", "chope or.png", "global", "le Sec, devise monétaire en cours pour les rachats d'insigne divers. VERRE!");
+var VOMIT = new CategorizedMaterial("vomit", "cl", "vomiting.svg", "global", "[malus] Le vomit (en centilitres). Bon je vais pas te faire un dessin... ha mais en fait si je vais t'en faire un. <a href=\"https://tiny.cc/d4ze8y\">Voilà</a>... pardon");
+var TRAQUENARD = new CategorizedItem("traquenard", "panda.png", "insigne", "Panda: Personne se faisant un peu trop facilement traquenader. (1 par congrès participé)");
+var PACHY = new CategorizedMaterial("subtilitruc", "g", "pachy.png", "insigne", "le pachy, pour les gens ont pas la ... , oui ce machin là, la subtilitruc");
+var CAPOTTE = new CategorizedItem("capotte", "x/condom.png", "global", "Le sesque c'est bien, avec une capotte c'est mieux, avec 2 capottes ... non vous êtes pas prêts.");
+var ANNEAU = new CategorizedItem("anneau", "anneau.png", "insigne", "la bague ou l'anneau, représentant les liens sacrés du mariage faluchard, ou 2 personnes (ou +) se jure infidélité jusqu'à ce que la mo.. le PLS les sépare.");
+var PENDU = new CategorizedItem("pendu", "pendu.png", "insigne", "Le(a) pendu(e): Marié(e)");
+var CROIX_GM = new CategorizedItem("Croix de GM", "croix_GM.png", "insigne", "la croix de grand maistre");
+var POIREAU = new CategorizedItem("poireau/betterave", "x/poireau-betterave.png", "insigne", "Se faire prendre en train de faire des bisous là où on fait pipi.");
+var CAROTTE = new CategorizedItem("carotte", "x/carotte.png", "insigne", "Se faire prendre en train de copuler");
+var NAVET = new CategorizedItem("navet", "x/navet.png", "insigne", "Se faire prendre en train de jouer le sphincter anal d'autrui.");
+var SESQUE = new CategorizedItem("sesque", "x/flying.png", "insigne", "le sesque, ben à chaque fois que tu choppes tu gagnes cet insigne. Pourquoi? Ben fallait bien un moyen pour compter combien de fois tu as choppé.");
+var MISSIONNAIRE = new CategorizedItem("missionnaire", "x/missionnaire.png", "insigne", "Position sescuelle (non pas SQL) la seule tolérée pas l'Église.");
+var POSITION69 = new CategorizedItem("69", "x/69.png", "insigne", "la position 69: poils aux dents!");
+var LEVRETTE = new CategorizedItem("levrette", "x/levrette.png", "insigne", "La levrette: femelle du levrier");
+var VIRGINITE = new CategorizedItem("feuille de vigne/rose", "x/vigne-rose.png", "insigne", "perte de la viriginité");
+var FIN_BAISEUR = new CategorizedItem("pensée/epée", "x/fin-baiseur.png", "insigne", "fin(e) baiseur(se) ou expert(e)");
+var LIME = new CategorizedItem("lime", "x/lime.png", "insigne", "[malus] Ivre, virgule, il/elle essaye de baiser. Acte laborieux");
+var ADOPTION_INGE = new CategorizedItem("adoption ingé", "filieres/adopt_inge.png", "emblème", "Adopfion ");
+var ADOPTION_SCIENCES = new CategorizedItem("adoption sciences", "filieres/adopt_sciences.png", "emblème", "Adopfion sciences");
+var ADOPTION_DROIT = new CategorizedItem("adoption droit", "filieres/adopt_droit.png", "emblème", "Adopfion droit");
+var ADOPTION_JAUNE = new CategorizedItem("adoption jaune", "filieres/adopt_jaune.png", "emblème", "Adopfion jaune");
+var ADOPTION_ROSE = new CategorizedItem("adoption rose", "filieres/adopt_paramed.png", "emblème", "Adopfion rose");
+var ADOPTION_SAGE_POUF = new CategorizedItem("adoption sage-pouf", "filieres/adopt_sage-pouf.png", "emblème", "Adopfion sage-pouf");
+var ADOPTION_PHARMA = new CategorizedItem("adoption pharma", "filieres/adopt_pharma.png", "emblème", "Adopfion pharma");
+var ADOPTION_MEDECINE = new CategorizedItem("adoption médecine", "filieres/adopt_medecine.png", "emblème", "Adopfion médecine");
+var PINS_INGE = new CategorizedItem("pin's ingé", "filieres/etoile et foudre.png", "emblème", "pin's ingé");
+var PINS_SCIENCES = new CategorizedItem("pin's sciences", "filieres/palmes croisees.png", "emblème", "pin's sciences");
+var PINS_DROIT = new CategorizedItem("pin's droit", "filieres/balance romaine.png", "emblème", "pin's droit");
+var PINS_JAUNE = new CategorizedItem("pin's jaune", "filieres/livre ouvert et plume.png", "emblème", "pin's jaune");
+var PINS_ROSE = new CategorizedItem("pin's rose", "filieres/ciseaux.png", "emblème", "pin's rose");
+var PINS_SAGE_POUF = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh.png", "emblème", "pin's sage-pouf");
+var PINS_PHARMA = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "emblème", "pin's Pharma");
+var PINS_MEDECINE = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "emblème", "pin's Médecine");
+var PINS_LYON = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville", "pin's Lyon");
+var PINS_GRENOBLE = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg", "ville", "pin's Grenoble");
+var PINS_VALENCE = new CategorizedItem("pin's Valence", "villes/Valence.svg", "ville", "pin's Valence");
+var PINS_CLERMONT = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.svg", "ville", "pin's Clermont");
+var PINS_DIJON = new CategorizedItem("pin's Dijon", "villes/Dijon.svg", "ville", "pin's Dijon");
+var PINS_MONPEUL = new CategorizedItem("pin's Monpeul", "villes/Montpellier.svg", "ville", "pin's Monpeul");
+var PINS_MARSEILLE = new CategorizedItem("pin's Marseille", "villes/Marseille.svg", "ville", "pin's Marseille");
+var PINS_NANCY = new CategorizedItem("pin's Nancy", "villes/Nancy.svg", "ville", "pin's Nancy");
+var PINS_STASBOURG = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.svg", "ville", "pin's Strasbourg");
 var villeKm = {
     "Lyon": { "Lyon": 0, "Grenoble": 113, "Valence": 104, "Clermont": 165, "Dijon": 197, "Monpeul": 306, "Marseille": 315, "Nancy": 407, "Strasbourg": 492 },
     "Grenoble": { "Lyon": 113, "Grenoble": 0, "Valence": 91, "Clermont": 273, "Dijon": 305, "Monpeul": 293, "Marseille": 306, "Nancy": 516, "Strasbourg": 573 },
@@ -85,6 +85,14 @@ var villeKm = {
     "Nancy": { "Lyon": 407, "Grenoble": 516, "Valence": 506, "Clermont": 516, "Dijon": 217, "Monpeul": 719, "Marseille": 728, "Nancy": 0, "Strasbourg": 160 },
     "Strasbourg": { "Lyon": 492, "Grenoble": 573, "Valence": 592, "Clermont": 544, "Dijon": 331, "Monpeul": 789, "Marseille": 798, "Nancy": 160, "Strasbourg": 0 }
 };
+var resourceList = [
+    FALUCHE, TEMPS, DISTANCE, TELLIGENCE, PARRAIN, CODE_VILLE, SINGE, BACCHUS, POULE,
+    POINT_COUTURE, CONGRES, CHANT, CLE_DE_SOL, CASSEROLE, CH3CH2OH, BIÈRE, VIN, SEC, VOMIT, TRAQUENARD, PACHY, CAPOTTE, ANNEAU, PENDU, CROIX_GM,
+    POIREAU, CAROTTE, NAVET, SESQUE, MISSIONNAIRE, POSITION69, LEVRETTE, VIRGINITE, FIN_BAISEUR, LIME,
+    ADOPTION_INGE, ADOPTION_SCIENCES, ADOPTION_DROIT, ADOPTION_JAUNE, ADOPTION_ROSE, ADOPTION_SAGE_POUF, ADOPTION_PHARMA, ADOPTION_MEDECINE,
+    PINS_INGE, PINS_SCIENCES, PINS_DROIT, PINS_JAUNE, PINS_ROSE, PINS_SAGE_POUF, PINS_PHARMA, PINS_MEDECINE,
+    PINS_LYON, PINS_GRENOBLE, PINS_VALENCE, PINS_CLERMONT, PINS_DIJON, PINS_MONPEUL, PINS_MARSEILLE, PINS_NANCY, PINS_STASBOURG
+];
 var Q = function (quantity, res) { return new Quantity(quantity, res); };
 var Scenario = (function () {
     function Scenario() {

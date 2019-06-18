@@ -14,16 +14,17 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var CategorizedItem = (function (_super) {
     __extends(CategorizedItem, _super);
-    function CategorizedItem(name, image, category) {
+    function CategorizedItem(name, image, category, description) {
         var _this = _super.call(this, name) || this;
         _this.name = name;
         _this.image = image;
         _this.category = category;
+        _this.description = description;
         _this.$type = 'CategorizedItem';
         return _this;
     }
     CategorizedItem.load = function (data) {
-        var r = new CategorizedItem(data.name, data.image, data.category);
+        var r = new CategorizedItem(data.name, data.image, data.category, data.description);
         return r;
     };
     CategorizedItem.prototype.show = function (quantity) {

@@ -14,17 +14,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var CategorizedMaterial = (function (_super) {
     __extends(CategorizedMaterial, _super);
-    function CategorizedMaterial(name, unit, image, category) {
+    function CategorizedMaterial(name, unit, image, category, description) {
         var _this = _super.call(this, name) || this;
         _this.name = name;
         _this.unit = unit;
         _this.image = image;
         _this.category = category;
+        _this.description = description;
         _this.$type = 'CategorizedMaterial';
         return _this;
     }
     CategorizedMaterial.load = function (data) {
-        var r = new CategorizedMaterial(data.name, data.unit, data.image, data.category);
+        var r = new CategorizedMaterial(data.name, data.unit, data.image, data.category, data.description);
         return r;
     };
     CategorizedMaterial.prototype.show = function (quantity) {

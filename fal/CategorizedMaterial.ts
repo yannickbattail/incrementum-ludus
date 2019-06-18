@@ -9,11 +9,11 @@
 
 class CategorizedMaterial extends Resource implements ICategorized {
     public $type : string = 'CategorizedMaterial';
-    constructor(public name : string, public unit : string, public image : string, public category : string){
+    constructor(public name : string, public unit : string, public image : string, public category : string, public description : string){
         super(name);
     }
     public static load(data : any) : CategorizedMaterial {
-        let r : CategorizedMaterial = new CategorizedMaterial(data.name, data.unit, data.image, data.category);
+        let r : CategorizedMaterial = new CategorizedMaterial(data.name, data.unit, data.image, data.category, data.description);
         return r;
     }
     public show(quantity : number) : string {
