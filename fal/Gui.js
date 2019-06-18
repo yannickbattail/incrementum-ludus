@@ -259,6 +259,28 @@ var Gui = (function () {
         var percent100 = Math.round(percent01 * 100);
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     };
+    Gui.prototype.displayDoc = function () {
+        var h = '<table border="1">';
+        h += "<tr><th></th><th>Nom</th><th>Catégorie</th><th>Desciption</th></tr>";
+        resourceList.forEach(function (res) {
+            h += "<tr>";
+            h += "<td>";
+            h += '<img src="images/' + res.image + '" title="' + res.getName() + '" alt="' + res.getName() + '" class="resource_img">';
+            h += "</td>";
+            h += "<td>";
+            h += res.getName();
+            h += "</td>";
+            h += "<td>";
+            h += res.category;
+            h += "</td>";
+            h += "<td>";
+            h += res.description;
+            h += "</td>";
+            h += "</tr>";
+        });
+        h += "</table>";
+        return h;
+    };
     Gui.prototype.getSimple = function () {
         var checkbox = document.getElementById('simple');
         if (checkbox != null && ('checked' in checkbox) && checkbox['checked']) {
@@ -346,6 +368,7 @@ var Gui = (function () {
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());
+        NodeUpdate.updateDiv('doc', this.displayDoc());
         this.loose();
     };
     Gui.prototype.start = function (refreshInterval) {

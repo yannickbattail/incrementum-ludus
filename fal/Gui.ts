@@ -290,6 +290,35 @@ class Gui {
         return '<progress value="' + percent100 + '" max="100">' + text + '</progress>';
     }
 
+
+    private displayDoc(): string {
+        var h = '<table border="1">';
+        h += "<tr><th></th><th>Nom</th><th>Catégorie</th><th>Desciption</th></tr>";
+
+        resourceList.forEach(
+            res => {
+                h += "<tr>";
+                    h += "<td>";
+                        h += '<img src="images/' + res.image + '" title="' + res.getName() + '" alt="' + res.getName() + '" class="resource_img">'
+                    h += "</td>";
+                    h += "<td>";
+                        h += res.getName()
+                    h += "</td>";
+                    h += "<td>";
+                        h += res.category
+                    h += "</td>";
+                    h += "<td>";
+                        h += res.description
+                    h += "</td>";
+                h += "</tr>";
+            }
+        );
+        h += "</table>";
+        return h;
+    }
+
+
+
     private getSimple() : boolean {
         let checkbox = document.getElementById('simple');
         if (checkbox != null && ('checked' in checkbox) && checkbox['checked']) {
@@ -385,6 +414,7 @@ class Gui {
         NodeUpdate.updateDiv('producers', this.displayProducers());
         NodeUpdate.updateDiv('crafters', this.displayCrafters());
         NodeUpdate.updateDiv('tree', this.displayTree());
+        NodeUpdate.updateDiv('doc', this.displayDoc());
         this.loose();
     }
 
