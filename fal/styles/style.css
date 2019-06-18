@@ -94,6 +94,9 @@ button:disabled, button[disabled] {
     width: 110px;
     max-width: 110px;
 }
+#doc > table > tbody > tr > td:nth-child(4) {
+    text-align: left;
+}
 
 #fal {
     width: 100%;
