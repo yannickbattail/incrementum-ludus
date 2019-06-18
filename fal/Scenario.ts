@@ -35,8 +35,8 @@ const TELLIGENCE            = new CategorizedMaterial("telligence", "T", "brain.
 //const TELLIGENCE_ARTIF      = new CategorizedMaterial("telligence artificielle", "TA", "artificial-intelligence.svg");
 const PARRAIN               = new CategorizedItem("parrain", "parrain.png", "global", "Parrain, pas renne, marin, marraine ou encore témoin de jéhov... de mariage");
 const CODE_VILLE            = new CategorizedItem("code de ville", "code.svg", "global", "Le code faluchard de la ville.");
-const SINGE                 = new CategorizedItem("singe", "singe.png", "insigne", "Monkey, quémendeur d'insignes. Ou p*te à pin's ça marche aussi.");
-const BACCHUS               = new CategorizedItem("bacchus", "bacchus.png", "insigne", "Devant Bacchus dieu du vin, gambrinus héro du... hein quoi? sa signification? ben dignité dans hips l'ivresse");
+const SINGE                 = new CategorizedItem("singe", "singe.png", "insigne", "Monkey, quémandeur d'insignes. Ou p*te à pin's ça marche aussi.");
+const BACCHUS               = new CategorizedItem("bacchus", "bacchus.png", "insigne", "Devant Bacchus dieu du vin, gambrinus héroa du... hein quoi? sa signification? ben dignité dans hips l'ivresse");
 const POULE                 = new CategorizedItem("poule", "poule.png", "insigne", "Poule: personne chaude. Poulet poulet piou piou piou!");
 const POINT_COUTURE         = new CategorizedItem("point de couture", "de-a-coudre.png", "insigne", "Oui ça existe pas dans le code gnagnagna, c'est juste pour representer des points de couture.");
 const CONGRES               = new CategorizedItem("congrès", "valise.png", "insigne", "haa la valise de congrès, sa tente, ses souvenirs et ses paillette Ha non pas les paillettes! Y en a une qui pop à chaque fois qu'on débloque un congrès.");
@@ -45,12 +45,12 @@ const CLE_DE_SOL            = new CategorizedItem("clé de sol", "cle de sol.png
 const CASSEROLE             = new CategorizedItem("casserole", "casserole.png", "insigne", "[malus] Ivre, virgule, il chante comme une ");
 const CH3CH2OH              = new CategorizedMaterial("CH3CH2OH", "", "CH3CH2OH.png", "global", "C'est un liquide incolore, volatil, inflammable et miscible à l'eau en toutes proportions. C'est un psychotrope, et l'une des plus anciennes drogues récréatives, sous la forme de boisson alcoolisée. L'éthanol est utilisé par l'industrie agroalimentaire gnagna etc mes couilles sur ton front ça fai...<br />Bon ce qui compte c'est de ne pas dépasser les 10, sinon ton appareil digestif (gestif!) va fonctionner en sens inverse et ça ... c'est pas bien <img src=\"images/vomiting.svg\" class=\"resource_img\" />");
 const BIÈRE                 = new CategorizedMaterial("bière", "cl", "beer.svg", "global", "La bière est une boisson alcoolisée obtenue par fermentation alcoolique d'un moût de produits végétaux amylacés ... ho shit! amy quoi? bon gogole ==&gt; amylacé. ha mais ouiii!.<br />+1g de CH3CH2OH et +1secs");
-const VIN                   = new CategorizedMaterial("Vin", "cl", "verre_de_vin.svg", "global", "Vin: boisson alcoolisée ... qui fait gagné +3g de CH3CH2OH et +5secs (hey ça a un meilleur rapport qualité cuite que la bière ce truc)");
+const VIN                   = new CategorizedMaterial("Vin", "cl", "verre_de_vin.svg", "global", "Vin: boisson alcoolisée ... qui fait gagner +3g de CH3CH2OH et +5secs (hey ça a un meilleur rapport qualité cuite que la bière ce truc)");
 const SEC                   = new CategorizedItem("sec", "chope or.png", "global", "Le Sec, devise monétaire en cours pour les rachats d'insigne divers. VERRE!");
-const VOMIT                 = new CategorizedMaterial("vomit",  "cl", "vomiting.svg", "global", "[malus] Le vomit (en centilitres). Bon je vais pas te faire un dessin... ha mais si je vais t'en faire un. <a href=\"https://tiny.cc/d4ze8y\">Voilà</a>... pardon aux familles toussa toussa.<br>Et surtout il ne faut pas dépacer 1litron de vomit (à un rythme de 100cl de vomit par VT c'est vite arrivé) sinon c'est le Mort.");
+const VOMI                  = new CategorizedMaterial("vomi",  "cl", "vomiting.svg", "global", "[malus] Le vomi (en centilitres). Bon je vais pas te faire un dessin... ha mais si je vais t'en faire un. <a href=\"https://tiny.cc/d4ze8y\">Voilà</a>... pardon aux familles toussa toussa.<br>Et surtout il ne faut pas dépacer 1litron de vomi (à un rythme de 100cl de vomi par VT c'est vite arrivé) sinon c'est le Mort.");
 const TRAQUENARD            = new CategorizedItem("traquenard",  "panda.png", "insigne", "Panda: Personne se faisant traquenader un peu trop facilement. (+1 par congrès participé)");
 const PACHY                 = new CategorizedMaterial("subtilitruc", "g",  "pachy.png", "insigne", "le pachy, pour les gens qui n'ont pas la ... , oui ce machin là, la subtilitruc");
-const CAPOTTE               = new CategorizedItem("capotte", "x/condom.png", "global", "Le sesque c'est bien, avec une capotte c'est mieux, avec 2 capottes ... non vous êtes pas prêts. Capotte: permet de sexer une fois.");
+const CAPOTE               = new CategorizedItem("capote", "x/condom.png", "global", "Le sesque c'est bien, avec une capote c'est mieux, avec 2 capotes ... non vous êtes pas prêts. Capotte: permet de sexer une fois.");
 const ANNEAU                = new CategorizedItem("anneau", "anneau.png", "insigne", "la bague ou l'anneau, représentant les liens sacrés du mariage faluchard, où 2 personnes (ou +) se jurent infidélité jusqu'à ce que la mo.. le PLS les sépare.");
 const PENDU                 = new CategorizedItem("pendu", "pendu.png", "insigne", "Le(a) pendu(e): Marié(e)");
 const CROIX_GM              = new CategorizedItem("Croix de GM", "croix_GM.png", "insigne", "la croix de grand maistre");
@@ -119,7 +119,7 @@ let villeKm = {
 
 const resourceList : Array<CategorizedItem | CategorizedMaterial> = [
     FALUCHE, TEMPS, DISTANCE, TELLIGENCE, PARRAIN, CODE_VILLE, SINGE, BACCHUS, POULE,
-    POINT_COUTURE, CONGRES, CHANT, CLE_DE_SOL, CASSEROLE, CH3CH2OH, BIÈRE, VIN, SEC, VOMIT, TRAQUENARD, PACHY, CAPOTTE, ANNEAU, PENDU, CROIX_GM,
+    POINT_COUTURE, CONGRES, CHANT, CLE_DE_SOL, CASSEROLE, CH3CH2OH, BIÈRE, VIN, SEC, VOMI, TRAQUENARD, PACHY, CAPOTE, ANNEAU, PENDU, CROIX_GM,
     POIREAU, CAROTTE, NAVET, SESQUE, MISSIONNAIRE, POSITION69, LEVRETTE, VIRGINITE, FIN_BAISEUR, LIME,
     ADOPTION_INGE, ADOPTION_SCIENCES, ADOPTION_DROIT, ADOPTION_JAUNE, ADOPTION_ROSE, ADOPTION_SAGE_POUF, ADOPTION_PHARMA, ADOPTION_MEDECINE, 
     PINS_INGE, PINS_SCIENCES, PINS_DROIT, PINS_JAUNE, PINS_ROSE, PINS_SAGE_POUF, PINS_PHARMA, PINS_MEDECINE,
@@ -212,7 +212,7 @@ class Scenario {
                                 )
                                 .spawnCrafter(
                                     new Crafter("VT")
-                                        .thatCraft(Q(10, VOMIT))
+                                        .thatCraft(Q(10, VOMI))
                                         .in(3).seconds()
                                         .atCostOf(Q(10, CH3CH2OH))
                                         .automaticaly()
@@ -246,12 +246,12 @@ class Scenario {
                                 )
                                 .appendTrigger(
                                     new Trigger("Coma")
-                                        .whenReached(Q(100, VOMIT))
+                                        .whenReached(Q(100, VOMI))
                                         .thenLoose()
                                 )
                                 .appendTrigger(
                                     new Trigger("Indignité dans l'ivresse")
-                                        .whenReached(Q(10, VOMIT))
+                                        .whenReached(Q(10, VOMI))
                                         .spawnResource(Q(-1, BACCHUS))
                                 )
                                 .appendTrigger(
@@ -471,7 +471,7 @@ class Scenario {
             .spawnCrafter(
                 new Crafter("Rachat de Bacchus")
                     .thatCraft(Q(1, BACCHUS))
-                    .andCraft(Q(20, VOMIT))
+                    .andCraft(Q(20, VOMI))
                     .atCostOf(Q(40, SEC))
                     .atCostOf(Q(8, CH3CH2OH))
                     .atCostOf(Q(1, PARRAIN))
@@ -492,7 +492,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_MARSEILLE,    coefDistance/villeKm["Grenoble"]["Marseille"]))
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Grenoble"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Grenoble"]["Strasbourg"]))
-                            .thatCraft(Q(2, CAPOTTE))
+                            .thatCraft(Q(2, CAPOTE))
                             .thatCraft(Q(1, TRAQUENARD))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
@@ -512,7 +512,7 @@ class Scenario {
                         .thatCraft(new RandomResource(2, PINS_MARSEILLE,    coefDistance/villeKm["Valence"]["Marseille"]))
                         .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Valence"]["Nancy"]))
                         .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Valence"]["Strasbourg"]))
-                        .thatCraft(Q(2, CAPOTTE))
+                        .thatCraft(Q(2, CAPOTE))
                         .thatCraft(Q(1, TRAQUENARD))
                         .in(1).minutes()
                         .atCostOf(Q(10, TEMPS))
@@ -532,7 +532,7 @@ class Scenario {
                             .thatCraft(new RandomResource(2, PINS_MARSEILLE,    coefDistance/villeKm["Clermont"]["Marseille"]))
                             .thatCraft(new RandomResource(2, PINS_NANCY,        coefDistance/villeKm["Clermont"]["Nancy"]))
                             .thatCraft(new RandomResource(2, PINS_STASBOURG,    coefDistance/villeKm["Clermont"]["Strasbourg"]))
-                            .thatCraft(Q(2, CAPOTTE))
+                            .thatCraft(Q(2, CAPOTE))
                             .thatCraft(Q(1, TRAQUENARD))
                             .in(1).minutes()
                             .atCostOf(Q(10, TEMPS))
@@ -560,7 +560,7 @@ class Scenario {
                     .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
                     .andCraft(new RandomResource(1, CAROTTE, 0.1))
                     .in(42).seconds()
-                    .atCostOf(Q(1, CAPOTTE))
+                    .atCostOf(Q(1, CAPOTE))
             ).appendTrigger(
                 new Trigger("Perte de virginité")
                     .whenReached(Q(1, SESQUE))
@@ -571,7 +571,7 @@ class Scenario {
                             .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
                             .andCraft(new RandomResource(1, POIREAU, 0.1))
                             .in(42).seconds()
-                            .atCostOf(Q(1, CAPOTTE))
+                            .atCostOf(Q(1, CAPOTE))
                     )
                     .appendTrigger(
                         new Trigger("Potager")
@@ -583,7 +583,7 @@ class Scenario {
                                     .andCraft(new AdaptativeQuantity().ifHas(Q(5, CH3CH2OH)).give(Q(1, LIME)).elseGive(Q(1, SESQUE)).showTheQuantityIfNot())
                                     .andCraft(new RandomResource(1, NAVET, 0.1))
                                     .in(42).seconds()
-                                    .atCostOf(Q(1, CAPOTTE))
+                                    .atCostOf(Q(1, CAPOTE))
                             ).spawnCrafter(
                                 new Crafter("Expert(e)")
                                     .thatCraft(new RandomRangeQuantity(0, 1, FIN_BAISEUR))
@@ -597,7 +597,7 @@ class Scenario {
                                     .thatCraft(Q(-1, LIME))
                                     .in(42).seconds()
                                     .atCostOf(Q(3, FIN_BAISEUR))
-                                    .atCostOf(Q(1, CAPOTTE))
+                                    .atCostOf(Q(1, CAPOTE))
                                     .atCostOf(Q(5, CHANT))
                                     .atCostOf(Q(10, BIÈRE))
                                     .atCostOf(Q(17, SEC))
@@ -664,7 +664,7 @@ class Scenario {
                     .thatCraft(Q(1, ANNEAU))
                     .in(1).minutes()
                     .atCostOf(Q(1, PARRAIN))
-                    .atCostOf(Q(1, CAPOTTE))
+                    .atCostOf(Q(1, CAPOTE))
                     .atCostOf(Q(3, MISSIONNAIRE))
                     .atCostOf(Q(5, SEC))
                     .atCostOf(Q(1, PINS_INGE))
@@ -708,7 +708,7 @@ class Scenario {
                             .and(Q(40, PINS_MARSEILLE))
                             .and(Q(30, PINS_NANCY))
                             .and(Q(20, PINS_STASBOURG))
-                            .and(Q(1, CAPOTTE))
+                            .and(Q(1, CAPOTE))
                             .spawnResource(Q(1, CROIX_GM)) // level 12
                             .spawnResource(Q(1, LEVEL)) // level 12
                             .thenWin()
