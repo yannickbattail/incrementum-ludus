@@ -1,2 +1,5 @@
 *.map
 .vs
+
+fal/temp_dir
+fal/incrementFal.zip
