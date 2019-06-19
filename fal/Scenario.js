@@ -66,14 +66,14 @@ var PINS_SAGE_POUF = new CategorizedItem("pin's sage-pouf", "filieres/croix ankh
 var PINS_PHARMA = new CategorizedItem("pin's Pharma", "filieres/caducee pharmacie.png", "emblème", "pin's Pharma");
 var PINS_MEDECINE = new CategorizedItem("pin's Médecine", "filieres/caducee medecine.png", "emblème", "pin's Médecine");
 var PINS_LYON = new CategorizedItem("pin's Lyon", "villes/Lyon.png", "ville", "pin's Lyon");
-var PINS_GRENOBLE = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg", "ville", "pin's Grenoble");
-var PINS_VALENCE = new CategorizedItem("pin's Valence", "villes/Valence.svg", "ville", "pin's Valence");
-var PINS_CLERMONT = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.svg", "ville", "pin's Clermont");
-var PINS_DIJON = new CategorizedItem("pin's Dijon", "villes/Dijon.svg", "ville", "pin's Dijon");
-var PINS_MONPEUL = new CategorizedItem("pin's Monpeul", "villes/Montpellier.svg", "ville", "pin's Monpeul");
-var PINS_MARSEILLE = new CategorizedItem("pin's Marseille", "villes/Marseille.svg", "ville", "pin's Marseille");
-var PINS_NANCY = new CategorizedItem("pin's Nancy", "villes/Nancy.svg", "ville", "pin's Nancy");
-var PINS_STASBOURG = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.svg", "ville", "pin's Strasbourg");
+var PINS_GRENOBLE = new CategorizedItem("pin's Grenoble", "villes/Grenoble.png", "ville", "pin's Grenoble");
+var PINS_VALENCE = new CategorizedItem("pin's Valence", "villes/Valence.png", "ville", "pin's Valence");
+var PINS_CLERMONT = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.png", "ville", "pin's Clermont");
+var PINS_DIJON = new CategorizedItem("pin's Dijon", "villes/Dijon.png", "ville", "pin's Dijon");
+var PINS_MONPEUL = new CategorizedItem("pin's Monpeul", "villes/Montpellier.png", "ville", "pin's Monpeul");
+var PINS_MARSEILLE = new CategorizedItem("pin's Marseille", "villes/Marseille.png", "ville", "pin's Marseille");
+var PINS_NANCY = new CategorizedItem("pin's Nancy", "villes/Nancy.png", "ville", "pin's Nancy");
+var PINS_STASBOURG = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.png", "ville", "pin's Strasbourg");
 var villeKm = {
     "Lyon": { "Lyon": 0, "Grenoble": 113, "Valence": 104, "Clermont": 165, "Dijon": 197, "Monpeul": 306, "Marseille": 315, "Nancy": 407, "Strasbourg": 492 },
     "Grenoble": { "Lyon": 113, "Grenoble": 0, "Valence": 91, "Clermont": 273, "Dijon": 305, "Monpeul": 293, "Marseille": 306, "Nancy": 516, "Strasbourg": 573 },

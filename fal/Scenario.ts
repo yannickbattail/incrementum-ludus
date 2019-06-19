@@ -96,14 +96,14 @@ const PINS_MEDECINE         = new CategorizedItem("pin's Médecine", "filieres/c
 
 // villes
 const PINS_LYON             = new CategorizedItem("pin's Lyon", "villes/Lyon.png",                  "ville",  "pin's Lyon");
-const PINS_GRENOBLE         = new CategorizedItem("pin's Grenoble", "villes/Grenoble.svg",          "ville",  "pin's Grenoble");
-const PINS_VALENCE          = new CategorizedItem("pin's Valence", "villes/Valence.svg",            "ville",  "pin's Valence");
-const PINS_CLERMONT         = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.svg",   "ville",  "pin's Clermont");
-const PINS_DIJON            = new CategorizedItem("pin's Dijon", "villes/Dijon.svg",                "ville",  "pin's Dijon");
-const PINS_MONPEUL          = new CategorizedItem("pin's Monpeul", "villes/Montpellier.svg",        "ville",  "pin's Monpeul");
-const PINS_MARSEILLE        = new CategorizedItem("pin's Marseille", "villes/Marseille.svg",        "ville",  "pin's Marseille");
-const PINS_NANCY            = new CategorizedItem("pin's Nancy", "villes/Nancy.svg",                "ville",  "pin's Nancy");
-const PINS_STASBOURG        = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.svg",      "ville",  "pin's Strasbourg");
+const PINS_GRENOBLE         = new CategorizedItem("pin's Grenoble", "villes/Grenoble.png",          "ville",  "pin's Grenoble");
+const PINS_VALENCE          = new CategorizedItem("pin's Valence", "villes/Valence.png",            "ville",  "pin's Valence");
+const PINS_CLERMONT         = new CategorizedItem("pin's Clermont", "villes/ClermontFerrand.png",   "ville",  "pin's Clermont");
+const PINS_DIJON            = new CategorizedItem("pin's Dijon", "villes/Dijon.png",                "ville",  "pin's Dijon");
+const PINS_MONPEUL          = new CategorizedItem("pin's Monpeul", "villes/Montpellier.png",        "ville",  "pin's Monpeul");
+const PINS_MARSEILLE        = new CategorizedItem("pin's Marseille", "villes/Marseille.png",        "ville",  "pin's Marseille");
+const PINS_NANCY            = new CategorizedItem("pin's Nancy", "villes/Nancy.png",                "ville",  "pin's Nancy");
+const PINS_STASBOURG        = new CategorizedItem("pin's Strasbourg", "villes/Strasbourg.png",      "ville",  "pin's Strasbourg");
 
 let villeKm = {
     "Lyon"            : { "Lyon":   0, "Grenoble": 113, "Valence": 104, "Clermont": 165, "Dijon": 197, "Monpeul": 306, "Marseille": 315, "Nancy": 407, "Strasbourg": 492},

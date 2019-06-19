@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm -Rf temp_dir
+rm incrementFal.zip
 mkdir temp_dir
 
 mkdir temp_dir/fal
