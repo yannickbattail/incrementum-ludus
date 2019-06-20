@@ -1,10 +1,10 @@
-/// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IQuantity.ts" />
-/// <reference path="../Engine/interfaces/IProducer.ts" />
-/// <reference path="../Engine/interfaces/ITrigger.ts" />
-/// <reference path="../Engine/interfaces/ICrafter.ts" />
-/// <reference path="../Engine/interfaces/IPlayer.ts" />
-/// <reference path="../Engine/Engine.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IResource.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IQuantity.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IProducer.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ITrigger.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ICrafter.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IPlayer.ts" />
+/// <reference path="../IncrementumLudus/IncrementumLudus.ts" />
 
 class Item extends Resource {
     public $type : string = 'Item';
