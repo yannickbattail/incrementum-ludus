@@ -35,15 +35,15 @@
             font-family: Times;
         }
     </style>
-    <title>incr</title>
-    <script src="../Engine/implementations/Resource.js"></script>
-    <script src="../Engine/implementations/Quantity.js"></script>
-    <script src="../Engine/implementations/Producer.js"></script>
-    <script src="../Engine/implementations/Producer.js"></script>
-    <script src="../Engine/implementations/Trigger.js"></script>
-    <script src="../Engine/implementations/Crafter.js"></script>
-    <script src="../Engine/implementations/Player.js"></script>
-    <script src="../Engine/Engine.js"></script>
+    <title>ExampleTest</title>
+    <script src="../IncrementumLudus/implementations/Resource.js"></script>
+    <script src="../IncrementumLudus/implementations/Quantity.js"></script>
+    <script src="../IncrementumLudus/implementations/Producer.js"></script>
+    <script src="../IncrementumLudus/implementations/Producer.js"></script>
+    <script src="../IncrementumLudus/implementations/Trigger.js"></script>
+    <script src="../IncrementumLudus/implementations/Crafter.js"></script>
+    <script src="../IncrementumLudus/implementations/Player.js"></script>
+    <script src="../IncrementumLudus/IncrementumLudus.js"></script>
     <script src="ExampleTest.js"></script>
     <script src="ExampleTestGui.js"></script>
 </head>
@@ -59,30 +59,27 @@
     Triggers
     <div id="triggers"></div>
     <script>
-        engine.run(500, saveEngine);
-        var gui = new IncrGui(engine);
+        engine.run(500, saveIncrementumLudus);
+        var gui = new ExampleTestGui(engine);
         function updateGui() {
             document.getElementById('status').innerHTML = gui.displayStatus();
             document.getElementById('storage').innerHTML = gui.displayStorage();
             document.getElementById('sources').innerHTML = gui.displayProducers();
             document.getElementById('crafters').innerHTML = gui.displayCrafters();
             document.getElementById('triggers').innerHTML = gui.displayTriggers();
-            saveEngine(engine);
+            saveIncrementumLudus(engine);
         }
         function stop() {
             window.clearInterval(interval);
         }
         function clearStorage() {
-            window.localStorage.removeItem('incr');
-            window.localStorage.removeItem('incrVersion');
+            window.localStorage.removeItem('ExampleTest');
+            window.localStorage.removeItem('ExampleTestVersion');
         }
         function restart() {
             stop();
             clearStorage();
             window.location.reload();
-        }
-        function fastMode() {
-            engine.FastMode=1000;
         }
         var interval = window.setInterval(updateGui, 1000);
 
@@ -90,6 +87,5 @@
     <button onclick="restart()">Restart</button>
     <div onclick="stop()">stop</div>
     <div onclick="clearStorage()">clear</div>
-    <div onclick="fastMode()">fast mode</div>
 </body>
 </html>

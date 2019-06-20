@@ -1,21 +1,21 @@
-/// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IQuantity.ts" />
-/// <reference path="../Engine/interfaces/IProducer.ts" />
-/// <reference path="../Engine/interfaces/ITrigger.ts" />
-/// <reference path="../Engine/interfaces/ICrafter.ts" />
-/// <reference path="../Engine/interfaces/IPlayer.ts" />
-/// <reference path="../Engine/Engine.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IResource.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IQuantity.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IProducer.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ITrigger.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ICrafter.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IPlayer.ts" />
+/// <reference path="../IncrementumLudus/IncrementumLudus.ts" />
 
-class IncrGui {
-    engine: Engine;
-    constructor(engine: Engine) {
-        this.engine = engine;
+class ExampleTestGui {
+    engine: IncrementumLudus;
+    constructor(IncrementumLudus: IncrementumLudus) {
+        this.engine = IncrementumLudus;
     }
 
     displayStatus() : string {
-        if (this.engine.status == EngineStatus.WIN) {
+        if (this.engine.status == IncrementumLudusStatus.WIN) {
             return "<b>YOU WIN!!! 😁</b>";
-        } else if (this.engine.status == EngineStatus.LOOSE) {
+        } else if (this.engine.status == IncrementumLudusStatus.LOOSE) {
             return "<b>YOU LOOSE! 😢</b>";
         } else {
             return "<b>in progress 😉</b>";
@@ -97,10 +97,10 @@ class IncrGui {
         h += "</ul></td>";
         h += "<td>";
         let status = trigger.getChangeEngineStatus();
-        if (status == EngineStatus.WIN) {
+        if (status == IncrementumLudusStatus.WIN) {
             h += "WIN!";
         }
-        if (status == EngineStatus.LOOSE) {
+        if (status == IncrementumLudusStatus.LOOSE) {
             h += "LOOSE!";
         }
         if (trigger.getCallback() != null && trigger.getCallback() != "") {
