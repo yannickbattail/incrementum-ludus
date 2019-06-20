@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <!--
@@ -11,107 +11,12 @@
     -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/png" href="images/DesertIsland.svg" />
-    <link rel="stylesheet" href="styles/style.css">
     <title>Desert Island : Incremental game</title>
-
-    <script src="../json3.min.js"></script>
-    <script src="../Engine/implementations/Resource.js"></script>
-    <script src="../Engine/implementations/Quantity.js"></script>
-    <script src="../Engine/implementations/RandomResource.js"></script>
-    <script src="../Engine/implementations/RandomRangeQuantity.js"></script>
-    <script src="../Engine/implementations/Producer.js"></script>
-    <script src="../Engine/implementations/Producer.js"></script>
-    <script src="../Engine/implementations/Trigger.js"></script>
-    <script src="../Engine/implementations/Crafter.js"></script>
-    <script src="../Engine/implementations/Player.js"></script>
-    <script src="../Engine/Engine.js"></script>
-
-    <script src="Level.js"></script>
-    <script src="CategorizedItem.js"></script>
-    <script src="CategorizedMaterial.js"></script>
-    <script src="Scenario.js"></script>
-    <script src="App.js"></script>
-    <script src="../NodeUpdate/NodeUpdate.js"></script>
-    <script src="Gui.js"></script>
-    <script>
-    function toggle() {
-        event.srcElement
-        if (event.srcElement.className == "toggleShow") {
-            event.srcElement.className = "toggleHide";
-        } else {
-            event.srcElement.className = "toggleShow";
-        }
-    }
-    </script>
 </head>
 <body id="body" class="origin-theme">
-    <h1>
-        <img src="images/DesertIsland.svg" title="Desert island" alt="Desert island" class="titleIcon"/>
-        Desert island
-    </h1>
-    <div id="level">lvl</div>
-        <button onclick="gui.restart();">Restart</button>
-        <input type="checkbox" id="simple" style="vertical-align: middle;"/><label for="simple">Simplified interface (for mobile)</label>
-    <div>
-        <div class="toggleBlock">
-            <div class="toggleShow" onclick="toggle()">Introduction</div>
-            <div id="game">
-                Your boat has sinked. You manage to swim to an island.<br />
-                You are alone and the island is uninhabited.<br />
-                You need to survive!<br />
-                Start <strong>collecting</strong> some resources and <strong>craft</strong> items to improve your life.<br />
-                And watch out not to die of starvation! (Don't forget to produce potable water and drink it)
-            </div>
-        </div>
-        <div class="toggleBlock">
-            <div class="toggleShow" onclick="toggle()">Goals</div>
-            <div id="tree"></div>
-        </div>
-        <div class="toggleBlock">
-            <div class="toggleShow" onclick="toggle()">Resources</div>
-            <div id="storageGlobal"></div>
-        </div>
-        <div class="toggleBlock">
-            <div class="toggleShow" onclick="toggle()">Production</div>
-            <div id="producers"></div>
-        </div>
-        <div class="toggleBlock">
-            <div class="toggleShow" onclick="toggle()">Crafter</div>
-            <div id="crafters"></div>
-        </div>
-        <div class="toggleBlock">
-            <div class="toggleHide" onclick="toggle()">Relase notes</div>
-            <div id="releaseNotes">
-                <p>
-                    <ul>
-                        <li>
-                            Version 2.5 : get GUI improvements from the other game incrementFal
-                        </li>
-                    </ul>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="overlay">
-        <div id="overlayTitle">You windie!</div>
-        <div id="raison"></div>
-        <div>
-            <button onclick="gui.restart();">Try again</button>
-        </div>
-    </div>
-    <script>
-        var gui = new Gui(engine);
-        gui.start(200);
-        engine.run(100, saveEngine);
-    </script>
-    <div onclick="document.getElementById('debugMode').style.display='block';"><script>document.write(VERSION);</script></div>
-    <div id="debugMode" style="display: none;">
-        <div onclick="gui.stop()">stop</div>
-        <div onclick="Gui.eraseStorage()">clear</div>
-        <!--<div onclick="gui.fastMode()">fast mode</div>-->
-        PS: you just <a href="http://www.perdu.com">lost</a> The <a href="https://en.wikipedia.org/wiki/The_Game_(mind_game)">Game</a>.
-    </div>
-</body>
+    <h3>Desert Island</h3>
+  The project has moved to its own repo.<br />
+	It is available here now: <a href="https://yannickbattail.github.io/DesertIsland/index.html">https://yannickbattail.github.io/DesertIsland/index.html</a><br />
+	Sources are here : <a href="https://github.com/yannickbattail/DesertIsland">https://github.com/yannickbattail/DesertIsland</a>
+	</body>
 </html>
