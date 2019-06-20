@@ -15,7 +15,7 @@ class Trigger implements ITrigger {
         protected spawnCrafters: Array<ICrafter> = [],
         protected spawnNewTriggers: Array<ITrigger> = [],
         protected callback: TimerHandler = "",
-        protected changeEngineStatus: EngineStatus | null = null) {
+        protected changeEngineStatus: IncrementumLudusStatus | null = null) {
 
     }
     getName() : string {
@@ -39,7 +39,7 @@ class Trigger implements ITrigger {
     getCallback(): TimerHandler {
         return this.callback;
     }
-    getChangeEngineStatus(): EngineStatus | null {
+    getChangeEngineStatus(): IncrementumLudusStatus | null {
         return this.changeEngineStatus;
     }
 
@@ -84,11 +84,11 @@ class Trigger implements ITrigger {
         return this;
     }
     public thenWin(): ITrigger {
-        this.changeEngineStatus = EngineStatus.WIN;
+        this.changeEngineStatus = IncrementumLudusStatus.WIN;
         return this;
     }
     public thenLoose(): ITrigger {
-        this.changeEngineStatus = EngineStatus.LOOSE;
+        this.changeEngineStatus = IncrementumLudusStatus.LOOSE;
         return this;
     }
 }

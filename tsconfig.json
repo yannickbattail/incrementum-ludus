@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "strict": true,
+  },
+  "files": [
+    "IncrementumLudus/interfaces/ICrafter.ts",
+    "IncrementumLudus/interfaces/IPlayer.ts",
+    "IncrementumLudus/interfaces/IProducer.ts",
+    "IncrementumLudus/interfaces/IResource.ts",
+    "IncrementumLudus/interfaces/IQuantity.ts",
+    "IncrementumLudus/interfaces/ITrigger.ts",
+    "IncrementumLudus/implementations/Resource.ts",
+    "IncrementumLudus/implementations/Quantity.ts",
+    "IncrementumLudus/implementations/NamedStepResource.ts",
+    "IncrementumLudus/implementations/RandomRangeQuantity.ts",
+    "IncrementumLudus/implementations/RandomResource.ts",
+    "IncrementumLudus/implementations/Crafter.ts",
+    "IncrementumLudus/implementations/Producer.ts",
+    "IncrementumLudus/implementations/Trigger.ts",
+    "IncrementumLudus/implementations/Player.ts",
+    "IncrementumLudus/IncrementumLudus.ts"
+  ]
+}

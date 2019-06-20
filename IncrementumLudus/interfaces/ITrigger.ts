@@ -13,7 +13,7 @@ interface ITrigger {
     getSpawnCrafters(): Array<ICrafter>;
     getSpawnNewTriggers(): Array<ITrigger>;
     getCallback(): TimerHandler;
-    getChangeEngineStatus(): EngineStatus | null ;
+    getChangeEngineStatus(): IncrementumLudusStatus | null ;
 
     // builder inferface
     whenReached(quantity : IQuantity) : ITrigger;
