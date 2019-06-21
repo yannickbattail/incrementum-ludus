@@ -1,14 +1,14 @@
-/// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IQuantity.ts" />
-/// <reference path="../Engine/interfaces/IProducer.ts" />
-/// <reference path="../Engine/interfaces/ITrigger.ts" />
-/// <reference path="../Engine/interfaces/ICrafter.ts" />
-/// <reference path="../Engine/interfaces/IPlayer.ts" />
-/// <reference path="../Engine/Engine.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IResource.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IQuantity.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IProducer.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ITrigger.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ICrafter.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IPlayer.ts" />
+/// <reference path="../IncrementumLudus/IncrementumLudus.ts" />
 
-/// <reference path="../Engine/implementations/RandomResource.ts" />
-/// <reference path="../Engine/implementations/RandomRangeQuantity.ts" />
-/// <reference path="../Engine/implementations/NamedStepResource.ts" />
+/// <reference path="../IncrementumLudus/implementations/RandomResource.ts" />
+/// <reference path="../IncrementumLudus/implementations/RandomRangeQuantity.ts" />
+/// <reference path="../IncrementumLudus/implementations/NamedStepResource.ts" />
 /// <reference path="./Item.ts" />
 /// <reference path="./Material.ts" />
 /// <reference path="./Level.ts" />
@@ -40,9 +40,9 @@ function resetNain() {
 }
 
 class Scenario {
-    public static initEngine() : Engine {
+    public static initEngine() : IncrementumLudus {
 
-        var engine = new Engine();
+        var engine = new IncrementumLudus();
         engine.player = new Player("gurdil");
         engine.player.setPreventNegativeStorage(true);
         // inital storage

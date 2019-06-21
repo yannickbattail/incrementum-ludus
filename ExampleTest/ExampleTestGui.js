@@ -1,27 +1,27 @@
 "use strict";
-var IncrGui = (function () {
-    function IncrGui(engine) {
-        this.engine = engine;
+var ExampleTestGui = (function () {
+    function ExampleTestGui(IncrementumLudus) {
+        this.engine = IncrementumLudus;
     }
-    IncrGui.prototype.displayStatus = function () {
-        if (this.engine.status == EngineStatus.WIN) {
+    ExampleTestGui.prototype.displayStatus = function () {
+        if (this.engine.status == IncrementumLudusStatus.WIN) {
             return "<b>YOU WIN!!! 😁</b>";
         }
-        else if (this.engine.status == EngineStatus.LOOSE) {
+        else if (this.engine.status == IncrementumLudusStatus.LOOSE) {
             return "<b>YOU LOOSE! 😢</b>";
         }
         else {
             return "<b>in progress 😉</b>";
         }
     };
-    IncrGui.prototype.displayStorage = function () {
+    ExampleTestGui.prototype.displayStorage = function () {
         var h = '<table border="1">';
         h += "<tr><th>resource</th></tr>";
         this.engine.player.getStorage().forEach(function (res) { return h += "<tr><td>" + res.show() + "</td></tr>"; });
         h += "</table>";
         return h;
     };
-    IncrGui.prototype.displayProducers = function () {
+    ExampleTestGui.prototype.displayProducers = function () {
         var h = '<table border="1">';
         h += "<tr><th>producer name</th><th>resource</th><th>when</th></tr>";
         this.engine.producers.forEach(function (producer) {
@@ -35,7 +35,7 @@ var IncrGui = (function () {
         h += "</table>";
         return h;
     };
-    IncrGui.prototype.displayTriggers = function () {
+    ExampleTestGui.prototype.displayTriggers = function () {
         var _this = this;
         var h = '<table border="1">';
         h += '<tr><th>name</th><th>triggered when resources</th>';
@@ -45,7 +45,7 @@ var IncrGui = (function () {
         h += "</table>";
         return h;
     };
-    IncrGui.prototype.displayTrigger = function (trigger) {
+    ExampleTestGui.prototype.displayTrigger = function (trigger) {
         var _this = this;
         var h = "<tr>";
         h += '<td>' + trigger.getName() + '</td>';
@@ -74,10 +74,10 @@ var IncrGui = (function () {
         h += "</ul></td>";
         h += "<td>";
         var status = trigger.getChangeEngineStatus();
-        if (status == EngineStatus.WIN) {
+        if (status == IncrementumLudusStatus.WIN) {
             h += "WIN!";
         }
-        if (status == EngineStatus.LOOSE) {
+        if (status == IncrementumLudusStatus.LOOSE) {
             h += "LOOSE!";
         }
         if (trigger.getCallback() != null && trigger.getCallback() != "") {
@@ -87,7 +87,7 @@ var IncrGui = (function () {
         h += '</tr>';
         return h;
     };
-    IncrGui.prototype.displayCrafters = function () {
+    ExampleTestGui.prototype.displayCrafters = function () {
         var _this = this;
         var h = '<table border="1">';
         h += "<tr><th>name</th><th>remaining time</th><th>cost</th><th>will craft</th><th>craft</th></tr>";
@@ -95,7 +95,7 @@ var IncrGui = (function () {
         h += "</table>";
         return h;
     };
-    IncrGui.prototype.displayCrafter = function (crafter) {
+    ExampleTestGui.prototype.displayCrafter = function (crafter) {
         var h = "<tr>";
         h += '<td>' + crafter.getName() + '</td>';
         h += '<td>' + this.displayRemainingTime(crafter.getStartTime()) + "/" + this.displayTime(crafter.getDuration()) + '</td>';
@@ -109,7 +109,7 @@ var IncrGui = (function () {
         h += '</tr>';
         return h;
     };
-    IncrGui.prototype.displayCraftButton = function (crafter) {
+    ExampleTestGui.prototype.displayCraftButton = function (crafter) {
         var h = '';
         if (crafter.isCrafting()) {
             h += this.displayProgress(crafter.getStartTime(), crafter.getDuration());
@@ -123,7 +123,7 @@ var IncrGui = (function () {
         }
         return h;
     };
-    IncrGui.prototype.displayAutoCraft = function (crafter) {
+    ExampleTestGui.prototype.displayAutoCraft = function (crafter) {
         var h = '<br />[';
         if (!crafter.isAutomatable()) {
             if (crafter.isAuto()) {
@@ -142,17 +142,17 @@ var IncrGui = (function () {
         h += ']';
         return h;
     };
-    IncrGui.prototype.displayProgress = function (startTime, duration) {
+    ExampleTestGui.prototype.displayProgress = function (startTime, duration) {
         var progress = this.calculateProgress(startTime);
         return this.displayTime(progress) + '/' + this.displayTime(duration);
     };
-    IncrGui.prototype.calculateProgress = function (startTime) {
+    ExampleTestGui.prototype.calculateProgress = function (startTime) {
         if (startTime == null) {
             return 0;
         }
         return (new Date().getTime() - startTime.getTime());
     };
-    IncrGui.prototype.displayTime = function (miliSeconds) {
+    ExampleTestGui.prototype.displayTime = function (miliSeconds) {
         if (miliSeconds == null) {
             return '';
         }
@@ -167,12 +167,12 @@ var IncrGui = (function () {
         time += Math.round(miliSeconds / 1000) + 's';
         return time;
     };
-    IncrGui.prototype.displayRemainingTime = function (startTime) {
+    ExampleTestGui.prototype.displayRemainingTime = function (startTime) {
         if (startTime == null) {
             return ' - ';
         }
         return this.displayTime(new Date().getTime() - startTime.getTime());
     };
-    return IncrGui;
+    return ExampleTestGui;
 }());
 //# sourceMappingURL=ExampleTestGui.js.map

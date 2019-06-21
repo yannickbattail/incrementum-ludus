@@ -4,7 +4,7 @@
 /// <reference path="../interfaces/ITrigger.ts" />
 /// <reference path="../interfaces/ICrafter.ts" />
 /// <reference path="../interfaces/IPlayer.ts" />
-/// <reference path="../Engine.ts" />
+/// <reference path="../IncrementumLudus.ts" />
 /// <reference path="./Resource.ts" />
 
 class NamedStepResource extends Resource {

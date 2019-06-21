@@ -1,16 +1,16 @@
 "use strict";
-var EngineStatus;
-(function (EngineStatus) {
-    EngineStatus[EngineStatus["NOT_YET_STARTED"] = 0] = "NOT_YET_STARTED";
-    EngineStatus[EngineStatus["IN_PROGRESS"] = 1] = "IN_PROGRESS";
-    EngineStatus[EngineStatus["LOOSE"] = 2] = "LOOSE";
-    EngineStatus[EngineStatus["WIN"] = 3] = "WIN";
-})(EngineStatus || (EngineStatus = {}));
-var Engine = (function () {
-    function Engine() {
-        this.$type = 'Engine';
+var IncrementumLudusStatus;
+(function (IncrementumLudusStatus) {
+    IncrementumLudusStatus[IncrementumLudusStatus["NOT_YET_STARTED"] = 0] = "NOT_YET_STARTED";
+    IncrementumLudusStatus[IncrementumLudusStatus["IN_PROGRESS"] = 1] = "IN_PROGRESS";
+    IncrementumLudusStatus[IncrementumLudusStatus["LOOSE"] = 2] = "LOOSE";
+    IncrementumLudusStatus[IncrementumLudusStatus["WIN"] = 3] = "WIN";
+})(IncrementumLudusStatus || (IncrementumLudusStatus = {}));
+var IncrementumLudus = (function () {
+    function IncrementumLudus() {
+        this.$type = 'IncrementumLudus';
         this.tickInterval = 100;
-        this.status = EngineStatus.NOT_YET_STARTED;
+        this.status = IncrementumLudusStatus.NOT_YET_STARTED;
         this.player = new Player("");
         this.producers = [];
         this.triggers = [];
@@ -19,9 +19,9 @@ var Engine = (function () {
         this.intervalId = 0;
         this.saveCallback = function () { };
     }
-    Engine.load = function (data) {
+    IncrementumLudus.load = function (data) {
         var curContext = window;
-        var newObj = new Engine();
+        var newObj = new IncrementumLudus();
         newObj.tickInterval = data.tickInterval;
         newObj.status = data.status;
         newObj.player = curContext[data.player.$type].load(data.player);
@@ -31,21 +31,21 @@ var Engine = (function () {
         newObj.fastMode = data.fastMode;
         return newObj;
     };
-    Engine.prototype.run = function (tickInterval, saveCallback) {
+    IncrementumLudus.prototype.run = function (tickInterval, saveCallback) {
         var _this = this;
         this.tickInterval = tickInterval;
         this.saveCallback = saveCallback;
-        if (this.status == EngineStatus.NOT_YET_STARTED) {
-            this.status = EngineStatus.IN_PROGRESS;
+        if (this.status == IncrementumLudusStatus.NOT_YET_STARTED) {
+            this.status = IncrementumLudusStatus.IN_PROGRESS;
         }
         this.intervalId = window.setInterval(function () { return _this.onTick(); }, this.tickInterval);
     };
-    Engine.prototype.stop = function () {
+    IncrementumLudus.prototype.stop = function () {
         window.clearInterval(this.intervalId);
     };
-    Engine.prototype.onTick = function () {
+    IncrementumLudus.prototype.onTick = function () {
         var _this = this;
-        if (this.status == EngineStatus.LOOSE || this.status == EngineStatus.WIN) {
+        if (this.status == IncrementumLudusStatus.LOOSE || this.status == IncrementumLudusStatus.WIN) {
             console.log("Status is " + this.status + ", STOP");
             this.stop();
         }
@@ -58,7 +58,7 @@ var Engine = (function () {
         this.crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
         this.saveCallback(this);
     };
-    Engine.prototype.autoCollectProducer = function (producer) {
+    IncrementumLudus.prototype.autoCollectProducer = function (producer) {
         var _this = this;
         if (producer.isAuto()) {
             var interval = 6666666;
@@ -74,13 +74,13 @@ var Engine = (function () {
             }
         }
     };
-    Engine.prototype.collectManualProducer = function (producer) {
+    IncrementumLudus.prototype.collectManualProducer = function (producer) {
         var _this = this;
-        if (this.status == EngineStatus.IN_PROGRESS) {
+        if (this.status == IncrementumLudusStatus.IN_PROGRESS) {
             producer.getResourcesQuantity().forEach(function (res) { return _this.player.increaseStorage(res); });
         }
     };
-    Engine.prototype.collectProducer = function (producerName) {
+    IncrementumLudus.prototype.collectProducer = function (producerName) {
         var producer = this.getProducerByName(producerName);
         if (producer != null) {
             if (!producer.isAuto()) {
@@ -88,14 +88,14 @@ var Engine = (function () {
             }
         }
     };
-    Engine.prototype.getProducerByName = function (producerName) {
+    IncrementumLudus.prototype.getProducerByName = function (producerName) {
         var producers = this.producers.filter(function (src) { return src.getName() == producerName; });
         if (producers.length == 0) {
             return null;
         }
         return producers[0];
     };
-    Engine.prototype.checkTrigger = function (trigger) {
+    IncrementumLudus.prototype.checkTrigger = function (trigger) {
         var _this = this;
         if (this.player.hasResources(trigger.getResourcesTrigger())) {
             trigger.getSpawnProducers().forEach(function (pawnProducer) { return _this.producers.push(pawnProducer); });
@@ -112,11 +112,11 @@ var Engine = (function () {
             this.triggers.splice(this.triggers.indexOf(trigger), 1);
         }
     };
-    Engine.prototype.checkCrafter = function (crafter) {
+    IncrementumLudus.prototype.checkCrafter = function (crafter) {
         this.checkFinishedCrafting(crafter);
         this.checkStartAutoCrafting(crafter);
     };
-    Engine.prototype.checkFinishedCrafting = function (crafter) {
+    IncrementumLudus.prototype.checkFinishedCrafting = function (crafter) {
         var _this = this;
         var duration = this.fastMode ? this.fastMode : crafter.getDuration();
         var startTime = crafter.getStartTime();
@@ -125,22 +125,22 @@ var Engine = (function () {
             crafter.getCraftedResources().forEach(function (resourceQty) { return _this.player.increaseStorage(resourceQty); });
         }
     };
-    Engine.prototype.checkStartAutoCrafting = function (crafter) {
+    IncrementumLudus.prototype.checkStartAutoCrafting = function (crafter) {
         var _this = this;
         if (crafter.isAuto() && crafter.getStartTime() == null && this.player.hasResources(crafter.getCost())) {
             crafter.initStartTime();
             crafter.getCost().forEach(function (resourceQty) { return _this.player.decreaseStorage(resourceQty); });
         }
     };
-    Engine.prototype.startCrafting = function (crafterName) {
+    IncrementumLudus.prototype.startCrafting = function (crafterName) {
         var crafter = this.getCrafterByName(crafterName);
         if (crafter != null) {
             this.startManualCrafting(crafter);
         }
     };
-    Engine.prototype.startManualCrafting = function (crafter) {
+    IncrementumLudus.prototype.startManualCrafting = function (crafter) {
         var _this = this;
-        if (this.status == EngineStatus.IN_PROGRESS) {
+        if (this.status == IncrementumLudusStatus.IN_PROGRESS) {
             if (!crafter.isAuto() && !crafter.isCrafting() && this.player.hasResources(crafter.getCost())) {
                 crafter.initStartTime();
                 crafter.getCost().forEach(function (resourceQty) { return _this.player.decreaseStorage(resourceQty); });
@@ -149,21 +149,21 @@ var Engine = (function () {
         }
         return false;
     };
-    Engine.prototype.switchAutoCrafting = function (crafterName) {
-        if (this.status == EngineStatus.IN_PROGRESS) {
+    IncrementumLudus.prototype.switchAutoCrafting = function (crafterName) {
+        if (this.status == IncrementumLudusStatus.IN_PROGRESS) {
             var crafter = this.getCrafterByName(crafterName);
             if (crafter != null) {
                 crafter.setAuto(!crafter.isAuto());
             }
         }
     };
-    Engine.prototype.getCrafterByName = function (crafterName) {
+    IncrementumLudus.prototype.getCrafterByName = function (crafterName) {
         var crafters = this.crafters.filter(function (src) { return src.getName() == crafterName; });
         if (crafters.length == 0) {
             return null;
         }
         return crafters[0];
     };
-    return Engine;
+    return IncrementumLudus;
 }());
-//# sourceMappingURL=Engine.js.map
+//# sourceMappingURL=IncrementumLudus.js.map

@@ -1,10 +1,10 @@
-/// <reference path="../Engine/interfaces/IResource.ts" />
-/// <reference path="../Engine/interfaces/IQuantity.ts" />
-/// <reference path="../Engine/interfaces/IProducer.ts" />
-/// <reference path="../Engine/interfaces/ITrigger.ts" />
-/// <reference path="../Engine/interfaces/ICrafter.ts" />
-/// <reference path="../Engine/interfaces/IPlayer.ts" />
-/// <reference path="../Engine/Engine.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IResource.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IQuantity.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IProducer.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ITrigger.ts" />
+/// <reference path="../IncrementumLudus/interfaces/ICrafter.ts" />
+/// <reference path="../IncrementumLudus/interfaces/IPlayer.ts" />
+/// <reference path="../IncrementumLudus/IncrementumLudus.ts" />
 
 /// <reference path="./Material.ts" />
 /// <reference path="./Item.ts" />
@@ -13,13 +13,13 @@
 
 const VERSION = "1.2";
 
-function loadEngine() : Engine | null {
+function loadEngine() : IncrementumLudus | null {
 
     let json = window.localStorage.getItem('NainTunnelGranite');
     if (json != null) {
         if ((window.localStorage.getItem('NainTunnelGraniteVersion') != null)
             || (window.localStorage.getItem('NainTunnelGraniteVersion') == VERSION)) {
-            let obj : Engine = JSON.parse(json);
+            let obj : IncrementumLudus = JSON.parse(json);
             console.log('load engine');
             let curContext : any = window;
             return curContext[obj.$type].load(obj);
@@ -29,12 +29,12 @@ function loadEngine() : Engine | null {
     console.log('no engine');
     return null;
 }
-function saveEngine(engine : Engine) {
+function saveEngine(engine : IncrementumLudus) {
     window.localStorage.setItem('NainTunnelGranite', JSON.stringify(engine));
     window.localStorage.setItem('NainTunnelGraniteVersion', VERSION);
 }
 
-var engine : Engine;
+var engine : IncrementumLudus;
 let e = loadEngine();
 if (!e) {
     engine = Scenario.initEngine();

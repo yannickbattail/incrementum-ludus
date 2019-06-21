@@ -82,11 +82,11 @@ var Trigger = (function () {
         return this;
     };
     Trigger.prototype.thenWin = function () {
-        this.changeEngineStatus = EngineStatus.WIN;
+        this.changeEngineStatus = IncrementumLudusStatus.WIN;
         return this;
     };
     Trigger.prototype.thenLoose = function () {
-        this.changeEngineStatus = EngineStatus.LOOSE;
+        this.changeEngineStatus = IncrementumLudusStatus.LOOSE;
         return this;
     };
     return Trigger;

@@ -11,64 +11,72 @@ var WASTE = new Resource("waste");
 function testCallback() {
     window.alert("testCallback when water source triggered.");
 }
-var engine = new Engine();
-engine.player = new Player("platypus");
-engine.producers = [
-    new Producer("iron mine", [new Quantity(2, IRON)], 500),
-    new Producer("copper mine", [new Quantity(1, COPPER)], 3000),
-    new Producer("tin", [new Quantity(1, TIN)])
-];
-engine.crafters = [
-    new Crafter("forge axe", 20000, [new Quantity(30, IRON), new Quantity(10, COPPER)], [new Quantity(1, AXE)], true),
-    new Crafter("forge knife", 20000, [new Quantity(10, IRON), new Quantity(6, COPPER)], [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false),
-];
-engine.triggers = [
-    new Trigger("lead mine exploitation")
-        .whenReached(new Quantity(20, IRON)).and(new Quantity(2, COPPER))
-        .spawnProducer(new Producer("lead mine")
-        .thatProduce(new Quantity(1, LEAD)).every(5).seconds()),
-    new Trigger("water source")
-        .whenReached(new Quantity(10, TIN))
-        .spawnProducer(new Producer("water source")
-        .thatProduce(new Quantity(1, WATER)))
-        .spawnResource(new Quantity(10, WATER))
-        .appendTrigger(new Trigger("win")
-        .whenReached(new Quantity(30, WATER))
-        .thenWin())
-        .appendTrigger(new Trigger("beer brewering")
-        .whenReached(new Quantity(20, WATER))
-        .spawnCrafter(new Crafter("brewery")
-        .thatCraft(new Quantity(1, BEER))["in"](20).seconds()
-        .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
-        .canBeSwitchedToAuto()))
-        .execFunction(testCallback)
-];
-function win() {
-    engine.status = EngineStatus.WIN;
-    alert('you win');
+function initEngine() {
+    var engine = new IncrementumLudus();
+    engine.player = new Player("platypus");
+    engine.producers = [
+        new Producer("iron mine", [new Quantity(2, IRON)], 500),
+        new Producer("copper mine", [new Quantity(1, COPPER)], 3000),
+        new Producer("tin", [new Quantity(1, TIN)])
+    ];
+    engine.crafters = [
+        new Crafter("forge axe", 20000, [new Quantity(30, IRON), new Quantity(10, COPPER)], [new Quantity(1, AXE)], true),
+        new Crafter("forge knife", 20000, [new Quantity(10, IRON), new Quantity(6, COPPER)], [new Quantity(1, KNIFE), new Quantity(2, WASTE)], false),
+    ];
+    engine.triggers = [
+        new Trigger("lead mine exploitation")
+            .whenReached(new Quantity(20, IRON)).and(new Quantity(2, COPPER))
+            .spawnProducer(new Producer("lead mine")
+            .thatProduce(new Quantity(1, LEAD)).every(5).seconds()),
+        new Trigger("water source")
+            .whenReached(new Quantity(10, TIN))
+            .spawnProducer(new Producer("water source")
+            .thatProduce(new Quantity(1, WATER)))
+            .spawnResource(new Quantity(10, WATER))
+            .appendTrigger(new Trigger("win")
+            .whenReached(new Quantity(30, WATER))
+            .thenWin())
+            .appendTrigger(new Trigger("beer brewering")
+            .whenReached(new Quantity(20, WATER))
+            .spawnCrafter(new Crafter("brewery")
+            .thatCraft(new Quantity(1, BEER))["in"](20).seconds()
+            .atCostOf(new Quantity(20, WATER)).and(new Quantity(1, TIN))
+            .canBeSwitchedToAuto()))
+            .execFunction(testCallback)
+    ];
+    return engine;
 }
-var VERSION = "1.3";
-function loadEngine() {
-    var json = window.localStorage.getItem('incr');
+var VERSION = "1.4";
+function loadIncrementumLudus() {
+    var json = window.localStorage.getItem('ExampleTest');
     if (json != null) {
-        if ((window.localStorage.getItem('incrVersion') != null)
-            || (window.localStorage.getItem('incrVersion') == VERSION)) {
+        if ((window.localStorage.getItem('ExampleTestVersion') != null)
+            || (window.localStorage.getItem('ExampleTestVersion') == VERSION)) {
             var obj = JSON.parse(json);
-            console.log('load engine');
+            console.log('load IncrementumLudus');
             var curContext = window;
             return curContext[obj.$type].load(obj);
         }
         console.log('wrong version');
     }
-    console.log('no engine');
+    console.log('no IncrementumLudus');
     return null;
 }
-function saveEngine(engine) {
-    window.localStorage.setItem('incr', JSON.stringify(engine));
-    window.localStorage.setItem('incrVersion', VERSION);
+function saveIncrementumLudus(IncrementumLudus) {
+    window.localStorage.setItem('ExampleTest', JSON.stringify(IncrementumLudus));
+    window.localStorage.setItem('ExampleTestVersion', VERSION);
 }
-var engine2 = loadEngine();
-if (engine2) {
+var engine = initEngine();
+var engine2 = loadIncrementumLudus();
+if (engine2 != null) {
     engine = engine2;
+}
+var engine;
+var e = loadIncrementumLudus();
+if (!e) {
+    engine = initEngine();
+}
+else {
+    engine = e;
 }
 //# sourceMappingURL=ExampleTest.js.map

@@ -5,27 +5,27 @@
 /// <reference path="interfaces/ICrafter.ts" />
 /// <reference path="interfaces/IPlayer.ts" />
 
-enum EngineStatus {
+enum IncrementumLudusStatus {
     NOT_YET_STARTED,
     IN_PROGRESS,
     LOOSE,
     WIN
 }
 
-class Engine {
-    $type : string = 'Engine';
+class IncrementumLudus {
+    $type : string = 'IncrementumLudus';
     tickInterval : number = 100;
-    status : EngineStatus = EngineStatus.NOT_YET_STARTED;
+    status : IncrementumLudusStatus = IncrementumLudusStatus.NOT_YET_STARTED;
     player : IPlayer = new Player("");
     producers : Array<IProducer> = [];
     triggers : Array<ITrigger> = [];
     crafters : Array<ICrafter> = [];
     fastMode : number = 0;
     private intervalId : number = 0;
-    private saveCallback: (engine: Engine) => void = function () {};
-    public static load(data : any) : Engine {
+    private saveCallback: (engine: IncrementumLudus) => void = function () {};
+    public static load(data : any) : IncrementumLudus {
         let curContext : any = window;
-        let newObj : Engine = new Engine();
+        let newObj : IncrementumLudus = new IncrementumLudus();
         newObj.tickInterval = data.tickInterval;
         newObj.status = data.status;
         newObj.player = curContext[data.player.$type].load(data.player);
@@ -36,11 +36,11 @@ class Engine {
         return newObj;
     }
 
-    run(tickInterval : number, saveCallback: (engine: Engine) => void) {
+    run(tickInterval : number, saveCallback: (engine: IncrementumLudus) => void) {
         this.tickInterval = tickInterval;
         this.saveCallback = saveCallback;
-        if (this.status == EngineStatus.NOT_YET_STARTED) {
-            this.status = EngineStatus.IN_PROGRESS;
+        if (this.status == IncrementumLudusStatus.NOT_YET_STARTED) {
+            this.status = IncrementumLudusStatus.IN_PROGRESS;
         }
         this.intervalId = window.setInterval(() => this.onTick(), this.tickInterval);
     }
@@ -48,7 +48,7 @@ class Engine {
         window.clearInterval(this.intervalId);
     }
     private onTick() {
-        if (this.status == EngineStatus.LOOSE || this.status == EngineStatus.WIN) {
+        if (this.status == IncrementumLudusStatus.LOOSE || this.status == IncrementumLudusStatus.WIN) {
             console.log("Status is "+this.status+", STOP");
             this.stop();
         }
@@ -85,7 +85,7 @@ class Engine {
         }
     }
     public collectManualProducer(producer: IProducer) {
-        if (this.status == EngineStatus.IN_PROGRESS) {
+        if (this.status == IncrementumLudusStatus.IN_PROGRESS) {
             producer.getResourcesQuantity().forEach(
                 res => this.player.increaseStorage(res)
             );
@@ -165,7 +165,7 @@ class Engine {
         }
     }
     public startManualCrafting(crafter: ICrafter) : boolean {
-        if (this.status == EngineStatus.IN_PROGRESS) {
+        if (this.status == IncrementumLudusStatus.IN_PROGRESS) {
             if (!crafter.isAuto() && !crafter.isCrafting() && this.player.hasResources(crafter.getCost())) {
                 crafter.initStartTime();
                 crafter.getCost().forEach(
@@ -178,7 +178,7 @@ class Engine {
     }
 
     public switchAutoCrafting(crafterName: string) {
-        if (this.status == EngineStatus.IN_PROGRESS) {
+        if (this.status == IncrementumLudusStatus.IN_PROGRESS) {
             let crafter = this.getCrafterByName(crafterName);
             if (crafter != null) {
                 crafter.setAuto(!crafter.isAuto());
