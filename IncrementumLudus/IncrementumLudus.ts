@@ -53,11 +53,7 @@ class IncrementumLudus {
             this.stop();
         }
         this.producers.forEach(
-            producer => {
-                 if (producer.isAuto) {
-                   this.autoCollectProducer(producer);
-                 }
-            }
+            producer => this.autoCollectProducer(producer)
         );
         this.triggers.forEach(
             trigger => this.checkTrigger(trigger)

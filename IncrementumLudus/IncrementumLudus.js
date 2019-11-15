@@ -49,11 +49,7 @@ var IncrementumLudus = (function () {
             console.log("Status is " + this.status + ", STOP");
             this.stop();
         }
-        this.producers.forEach(function (producer) {
-            if (producer.isAuto) {
-                _this.autoCollectProducer(producer);
-            }
-        });
+        this.producers.forEach(function (producer) { return _this.autoCollectProducer(producer); });
         this.triggers.forEach(function (trigger) { return _this.checkTrigger(trigger); });
         this.crafters.forEach(function (crafter) { return _this.checkCrafter(crafter); });
         this.saveCallback(this);
